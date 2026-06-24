@@ -204,14 +204,14 @@ export default function QuestionForm() {
               )}
             </div>
 
-            {/* <div className="flex justify-center">
+            <div className="flex justify-center">
               <ReCAPTCHA
                 ref={captchaRef}
                 sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                 onChange={setCaptchaValue}
                 onExpired={() => setCaptchaValue(null)}
               />
-            </div> */}
+            </div>
 
             <button
               type="submit"
