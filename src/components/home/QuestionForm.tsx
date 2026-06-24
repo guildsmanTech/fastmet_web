@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import { Send, MessageCircleQuestion } from "lucide-react";
+import React, {useRef, useState} from "react";
+import {Send, MessageCircleQuestion} from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { inquirySchema } from "@/schemas/inquiry";
-import { API_URL } from "@/helper/constant";
+import {inquirySchema} from "@/schemas/inquiry";
+import {API_URL} from "@/helper/constant";
 
 interface InquiryFormData {
   name: string;
@@ -26,9 +26,9 @@ export default function QuestionForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    const {name, value} = e.target;
+    setFormData((prev) => ({...prev, [name]: value}));
+    if (errors[name]) setErrors((prev) => ({...prev, [name]: ""}));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +51,7 @@ export default function QuestionForm() {
 
     // 2. Captcha check
     if (!captchaValue) {
-      setErrors({ form: "Please complete the captcha." });
+      setErrors({form: "Please complete the captcha."});
       return;
     }
 
@@ -60,8 +60,8 @@ export default function QuestionForm() {
     try {
       const res = await fetch(`${API_URL}/api/inquiry/submit`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, captcha: captchaValue }),
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({...formData, captcha: captchaValue}),
       });
 
       const data = await res.json();
@@ -71,12 +71,12 @@ export default function QuestionForm() {
         if (data.fields) {
           const backendErrors: Record<string, string> = {};
           data.fields.forEach(
-            (f: { field: string; message: string }) =>
+            (f: {field: string; message: string}) =>
               (backendErrors[f.field] = f.message),
           );
           setErrors(backendErrors);
         } else if (data.error) {
-          setErrors({ form: data.error });
+          setErrors({form: data.error});
         }
         captchaRef.current?.reset();
         setCaptchaValue(null);
@@ -92,7 +92,7 @@ export default function QuestionForm() {
         message = err.message;
       }
 
-      setErrors({ form: message });
+      setErrors({form: message});
       captchaRef.current?.reset();
       setCaptchaValue(null);
     } finally {
@@ -101,7 +101,7 @@ export default function QuestionForm() {
   };
 
   const handleReset = () => {
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({name: "", email: "", message: ""});
     setErrors({});
     setSubmitted(false);
     captchaRef.current?.reset();
@@ -204,14 +204,14 @@ export default function QuestionForm() {
               )}
             </div>
 
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <ReCAPTCHA
                 ref={captchaRef}
                 sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                 onChange={setCaptchaValue}
                 onExpired={() => setCaptchaValue(null)}
               />
-            </div>
+            </div> */}
 
             <button
               type="submit"

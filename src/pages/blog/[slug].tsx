@@ -1,7 +1,7 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { CalendarDays, Clock, ArrowLeft, ArrowRight, Tag } from "lucide-react";
-import type { IBlogPost } from "@/types/blog";
-import { useBlog } from "@/hooks/useBlogQueries";
+import {useParams, Link, useNavigate} from "react-router-dom";
+import {CalendarDays, Clock, ArrowLeft, ArrowRight, Tag} from "lucide-react";
+import type {IBlogPost} from "@/types/blog";
+import {useBlog} from "@/hooks/useBlogQueries";
 
 const formatDate = (d: string) =>
   new Date(d).toLocaleDateString("en-PH", {
@@ -32,7 +32,7 @@ function BlogPostSkeleton() {
             <div className="h-8 w-full bg-gray-200 rounded" />
             <div className="h-8 w-3/4 bg-gray-200 rounded" />
             <div className="space-y-2 pt-6">
-              {Array.from({ length: 8 }).map((_, i) => (
+              {Array.from({length: 8}).map((_, i) => (
                 <div
                   key={i}
                   className={`h-3 bg-gray-100 rounded ${i % 4 === 3 ? "w-2/3" : "w-full"}`}
@@ -52,7 +52,7 @@ function BlogPostSkeleton() {
 
 // ── Related post card ─────────────────────────────────────────────────────
 
-function RelatedCard({ post }: { post: IBlogPost }) {
+function RelatedCard({post}: {post: IBlogPost}) {
   return (
     <Link
       to={`/blog/${post.slug}`}
@@ -86,9 +86,9 @@ function RelatedCard({ post }: { post: IBlogPost }) {
 // ── Main ──────────────────────────────────────────────────────────────────
 
 export default function BlogPost() {
-  const { slug } = useParams<{ slug: string }>();
+  const {slug} = useParams<{slug: string}>();
   const navigate = useNavigate();
-  const { data: post, isLoading, isError } = useBlog(slug!);
+  const {data: post, isLoading, isError} = useBlog(slug!);
 
   if (isLoading)
     return (
@@ -178,7 +178,7 @@ export default function BlogPost() {
                 prose-li:marker:text-primary
                 mb-10
               "
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{__html: post.content}}
             />
 
             {/* CTA — inline on mobile */}
@@ -186,14 +186,17 @@ export default function BlogPost() {
               <div className="lg:hidden bg-gradient-to-r from-primary/10 to-orange-50 border border-primary/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
                 <div>
                   <p className="text-sm font-bold text-gray-900">
-                    Ready to get started?
+                    {post.cta.title ?? "Ready to get started?"}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    Join FastMet today and claim your early rewards.
-                  </p>
+                  {post.cta.description && (
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {post.cta.description}
+                    </p>
+                  )}
                 </div>
                 <Link
                   to={post.cta.url}
+                  target="_blank"
                   className="shrink-0 bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-colors"
                 >
                   {post.cta.label}
@@ -221,15 +224,17 @@ export default function BlogPost() {
             {/* CTA card */}
             {post.cta?.label && post.cta?.url && (
               <div className="bg-gradient-to-br from-primary/10 to-orange-50 border border-primary/20 rounded-2xl p-5">
-                <p className="text-sm font-black text-gray-900 leading-tight">
-                  Ready to get started?
+                <p className="text-sm font-black text-gray-900 leading-tight mb-2">
+                  {post.cta.title ?? "Ready to get started?"}
                 </p>
-                <p className="text-xs text-gray-500 mt-1.5 mb-4 leading-relaxed">
-                  Join FastMet today and claim exclusive early rewards before we
-                  launch.
-                </p>
+                {post.cta.description && (
+                  <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+                    {post.cta.description}
+                  </p>
+                )}
                 <Link
                   to={post.cta.url}
+                  target="_blank"
                   className="flex items-center justify-center gap-1.5 w-full bg-primary text-white text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary/90 transition-colors"
                 >
                   {post.cta.label}

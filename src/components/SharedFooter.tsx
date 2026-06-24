@@ -1,9 +1,9 @@
-import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
-import { Truck, User } from "lucide-react";
-import { SocialIcon } from "react-social-icons";
+import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
+import {Truck, User} from "lucide-react";
+import {SocialIcon} from "react-social-icons";
 
 export default function SharedFooter() {
-  const { data: counts } = useRegistrationCounts();
+  const {data: counts} = useRegistrationCounts();
 
   return (
     <footer className="bg-secondary flex flex-col items-center gap-8 w-full py-3 md:py-5">
@@ -50,15 +50,15 @@ export default function SharedFooter() {
               url="https://www.facebook.com/profile.php?id=61585768732620"
               className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                  hover:scale-110 hover:shadow-lg transition-all duration-300"
-              style={{ width: 36, height: 36 }}
+              style={{width: 36, height: 36}}
               target="_blank"
             />
 
             <SocialIcon
-              url="https://www.instagram.com/yourpage"
+              url="https://www.instagram.com/fastmetph?igsh=aDB2c2lmY2djNzUy&utm_source=qr"
               className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                  hover:scale-110 hover:shadow-lg transition-all duration-300"
-              style={{ width: 36, height: 36 }}
+              style={{width: 36, height: 36}}
               target="_blank"
             />
 
@@ -66,7 +66,7 @@ export default function SharedFooter() {
               url="https://www.tiktok.com/@yourpage"
               className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                  hover:scale-110 hover:shadow-lg transition-all duration-300"
-              style={{ width: 36, height: 36 }}
+              style={{width: 36, height: 36}}
               target="_blank"
             />
           </div>

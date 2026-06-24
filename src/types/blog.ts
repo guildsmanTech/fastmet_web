@@ -24,6 +24,8 @@ export interface IBlogPostDetail extends IBlogPost {
   cta?: {
     label: string;
     url: string;
+    title: string;
+    description: string;
   };
   relatedPosts: IBlogPost[];
 }
