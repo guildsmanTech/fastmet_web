@@ -8,14 +8,21 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { OtpCountdown } from "@/components/ui/OtpCountdown";
 
 interface OTPModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   phone: string;
-  onVerifySuccess: () => void; // parent handles what happens after success
+  onVerifySuccess: () => void;
   onResend: () => Promise<void>;
-  onVerify: (code: string) => Promise<{ success: boolean; error?: string }>;
+  onVerify: (code: string) => Promise<{
+    success: boolean;
+    error?: string;
+    rateLimitSeconds?: number;
+    locked?: boolean;
+  }>;
+  onClose?: () => void;
 }
 
 export default function OTPModal({
@@ -25,15 +32,23 @@ export default function OTPModal({
   onVerifySuccess,
   onResend,
   onVerify,
+  onClose,
 }: OTPModalProps) {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [otpError, setOtpError] = useState("");
   const [otpLoading, setOtpLoading] = useState(false);
   const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  const [resendCooldown, setResendCooldown] = useState<number | null>(null);
+  const [verifyRateLimit, setVerifyRateLimit] = useState<number | null>(null);
+  const [isLocked, setIsLocked] = useState(false);
+
   const reset = () => {
     setOtp(["", "", "", "", "", ""]);
     setOtpError("");
+    setResendCooldown(null);
+    setVerifyRateLimit(null);
+    setIsLocked(false);
   };
 
   const handleOtpInput = (index: number, value: string) => {
@@ -76,6 +91,13 @@ export default function OTPModal({
     if (result.success) {
       reset();
       onVerifySuccess();
+    } else if (result.rateLimitSeconds) {
+      setVerifyRateLimit(result.rateLimitSeconds);
+    } else if (result.locked) {
+      setIsLocked(true);
+      setOtpError(
+        result.error ?? "Too many failed attempts. Please request a new OTP.",
+      );
     } else {
       setOtpError(result.error ?? "Incorrect code. Try again.");
     }
@@ -87,14 +109,20 @@ export default function OTPModal({
     setOtpLoading(true);
     setOtpError("");
     await onResend();
+    setResendCooldown(60);
     reset();
     setTimeout(() => otpRefs.current[0]?.focus(), 50);
     setOtpLoading(false);
   };
 
-  const handleOpenChange = (open: boolean) => {
-    if (!open) return; // ← block any close attempt
-    onOpenChange(open);
+  const handleClose = () => {
+    reset();
+    onClose?.();
+  };
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen && !isLocked) return;
+    onOpenChange(nextOpen);
   };
 
   return (
@@ -139,35 +167,70 @@ export default function OTPModal({
           <p className="text-red-500 text-xs text-center">{otpError}</p>
         )}
 
-        <Button
-          type="button"
-          onClick={handleVerify}
-          disabled={otpLoading || otp.join("").length < 6}
-          className="w-full py-6 text-white cursor-pointer"
-        >
-          {otpLoading ? (
-            <span className="flex items-center gap-2">
-              <Loader2 className="size-4 animate-spin" />
-              Verifying…
-            </span>
-          ) : (
-            "Verify & Complete Registration"
-          )}
-        </Button>
-
-        <p className="text-xs text-center text-muted-foreground">
-          Didn't receive a code?{" "}
+        {verifyRateLimit !== null ? (
           <Button
             type="button"
-            variant="link"
-            size="sm"
-            onClick={handleResend}
-            disabled={otpLoading}
-            className="text-primary p-0 h-auto font-semibold"
+            disabled
+            className="w-full py-6 text-white cursor-not-allowed"
           >
-            Resend OTP
+            <OtpCountdown
+              seconds={verifyRateLimit}
+              label="Try again in {s}s"
+              onDone={() => setVerifyRateLimit(null)}
+            />
           </Button>
-        </p>
+        ) : (
+          <Button
+            type="button"
+            onClick={handleVerify}
+            disabled={otpLoading || otp.join("").length < 6 || isLocked}
+            className="w-full py-6 text-white cursor-pointer"
+          >
+            {otpLoading ? (
+              <span className="flex items-center gap-2">
+                <Loader2 className="size-4 animate-spin" />
+                Verifying…
+              </span>
+            ) : (
+              "Verify & Complete Registration"
+            )}
+          </Button>
+        )}
+
+        {isLocked ? (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleClose}
+            className="w-full cursor-pointer"
+          >
+            Cancel &amp; start over
+          </Button>
+        ) : (
+          <p className="text-xs text-center text-muted-foreground">
+            Didn't receive a code?{" "}
+            {resendCooldown !== null ? (
+              <span className="text-primary font-semibold text-xs">
+                <OtpCountdown
+                  seconds={resendCooldown}
+                  label="Resend in {s}s"
+                  onDone={() => setResendCooldown(null)}
+                />
+              </span>
+            ) : (
+              <Button
+                type="button"
+                variant="link"
+                size="sm"
+                onClick={handleResend}
+                disabled={otpLoading}
+                className="text-primary p-0 h-auto font-semibold"
+              >
+                Resend OTP
+              </Button>
+            )}
+          </p>
+        )}
       </DialogContent>
     </Dialog>
   );

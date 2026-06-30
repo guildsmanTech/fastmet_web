@@ -7,9 +7,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { question } from "@/constants/images";
-import { Link } from "react-router-dom";
+import {Button} from "@/components/ui/button";
+import {question} from "@/constants/images";
+import {Link} from "react-router-dom";
 
 const FAQs = [
   {
@@ -47,7 +47,7 @@ export default function GeneralFAQModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="cursor-pointer p-2 border border-primary bg-white rounded-full hover:bg-primary hover:scale-110 transition-all duration-200 flex items-center justify-center">
+        <Button className="flex justify-center items-center p-2 bg-white rounded-full border transition-all duration-200 cursor-pointer border-primary hover:bg-primary hover:scale-110">
           <img src={question} alt="question" className="size-5 sm:size-6" />
         </Button>
       </DialogTrigger>
@@ -63,24 +63,24 @@ export default function GeneralFAQModal() {
       >
         {/* HEADER */}
         <DialogHeader className="px-4 pt-5 pb-3 border-b">
-          <DialogTitle className="text-center text-primary font-bold text-base md:text-xl">
+          <DialogTitle className="text-base font-bold text-center text-primary md:text-xl">
             FastMet FAQs
           </DialogTitle>
         </DialogHeader>
 
         {/* BODY */}
-        <div className="max-h-[75vh] overflow-y-auto px-4 py-4 space-y-4 scroll-smooth">
+        <div className="max-h-[75vh] overflow-y-auto px-4 py-4 space-y-4 scroll-smooth [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
           <DialogDescription className="sr-only">
             Frequently Asked Questions
           </DialogDescription>
 
-          {FAQs.map(({ question, answer, hasLink, extra }, index) => (
+          {FAQs.map(({question, answer, hasLink, extra}, index) => (
             <div key={question} className="space-y-1">
-              <p className="font-semibold text-primary text-sm md:text-base">
+              <p className="text-sm font-semibold text-primary md:text-base">
                 {index + 1}. {question}
               </p>
 
-              <p className="text-xs md:text-sm leading-relaxed text-justify">
+              <p className="text-xs leading-relaxed text-justify md:text-sm">
                 {answer}{" "}
                 {hasLink && (
                   <DialogClose asChild>
@@ -95,7 +95,7 @@ export default function GeneralFAQModal() {
               </p>
 
               {extra && (
-                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs leading-relaxed text-gray-600 md:text-sm">
                   {extra}
                 </p>
               )}
@@ -104,7 +104,7 @@ export default function GeneralFAQModal() {
         </div>
 
         {/* FOOTER */}
-        <div className="px-4 py-3 border-t flex justify-center">
+        <div className="flex justify-center px-4 py-3 border-t">
           <DialogClose asChild>
             <Button className="bg-primary text-white px-6 py-1.5 text-sm rounded-full">
               Got It

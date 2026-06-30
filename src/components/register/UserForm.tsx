@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 import OTPModal from "../modals/OTPModal";
 import { userRegistrationSchema } from "@/schemas/userRegistration";
 import { formatPHNumber } from "@/helper/format";
+import { OtpCountdown } from "@/components/ui/OtpCountdown";
 
 interface FormData {
   firstName: string;
@@ -40,6 +41,7 @@ export default function UserForm() {
 
   // OTP modal — only open/close lives here
   const [otpModalOpen, setOtpModalOpen] = useState(false);
+  const [sendRateLimit, setSendRateLimit] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -80,7 +82,11 @@ export default function UserForm() {
         }),
       });
 
-      if (res.ok) {
+      if (res.status === 429) {
+        const raw = res.headers.get("Retry-After");
+        const secs = raw ? parseInt(raw, 10) : 60;
+        setSendRateLimit(isNaN(secs) ? 60 : secs);
+      } else if (res.ok) {
         setOtpModalOpen(true);
       } else {
         const d = await res.json();
@@ -97,7 +103,12 @@ export default function UserForm() {
 
   const handleVerify = async (
     code: string,
-  ): Promise<{ success: boolean; error?: string }> => {
+  ): Promise<{
+    success: boolean;
+    error?: string;
+    rateLimitSeconds?: number;
+    locked?: boolean;
+  }> => {
     try {
       // 1. Verify OTP
       const otpRes = await fetch(`${API_URL}/api/auth/verify-otp`, {
@@ -111,9 +122,17 @@ export default function UserForm() {
       const otpData = await otpRes.json();
 
       if (!otpRes.ok) {
+        if (otpRes.status === 429) {
+          const raw = otpRes.headers.get("Retry-After");
+          const secs = raw ? parseInt(raw, 10) : 60;
+          return { success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs };
+        }
+        const locked =
+          otpData.error?.includes("Too many failed attempts") ?? false;
         return {
           success: false,
-          error: otpData.error || "Incorrect code. Try again.",
+          error: otpData.error ?? "Incorrect code. Try again.",
+          locked,
         };
       }
 
@@ -308,27 +327,41 @@ export default function UserForm() {
               theme="light"
               size="normal"
             />
-            <button
-              type="submit"
-              disabled={loading || !captchaValue}
-              className={`
-                w-full py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200
-                ${
-                  loading || !captchaValue
-                    ? "bg-primary opacity-60 cursor-not-allowed"
-                    : "bg-primary hover:bg-orange-500 cursor-pointer"
-                }
-              `}
-            >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <Loader2 className="size-4 animate-spin" />
-                  Sending OTP…
-                </span>
-              ) : (
-                "Submit User's Pre-Registration"
-              )}
-            </button>
+            {sendRateLimit !== null ? (
+              <button
+                type="button"
+                disabled
+                className="w-full py-3 rounded-lg font-semibold text-sm text-white bg-primary opacity-60 cursor-not-allowed"
+              >
+                <OtpCountdown
+                  seconds={sendRateLimit}
+                  label="Try again in {s}s"
+                  onDone={() => setSendRateLimit(null)}
+                />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={loading || !captchaValue}
+                className={`
+                  w-full py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200
+                  ${
+                    loading || !captchaValue
+                      ? "bg-primary opacity-60 cursor-not-allowed"
+                      : "bg-primary hover:bg-orange-500 cursor-pointer"
+                  }
+                `}
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <Loader2 className="size-4 animate-spin" />
+                    Sending OTP…
+                  </span>
+                ) : (
+                  "Submit User's Pre-Registration"
+                )}
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -341,6 +374,7 @@ export default function UserForm() {
         onVerify={handleVerify}
         onVerifySuccess={handleVerifySuccess}
         onResend={handleResend}
+        onClose={() => setOtpModalOpen(false)}
       />
 
       <LoaderModal open={loading} />
