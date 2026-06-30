@@ -37,7 +37,7 @@ interface OTPModalProps {
   onOpenChange: (open: boolean) => void;
   phone: string;
   onVerifySuccess: () => void;
-  onResend: () => Promise<{ error?: string }>;
+  onResend: () => Promise<{error?: string}>;
   onVerify: (code: string) => Promise<{
     success: boolean;
     error?: string;
@@ -120,15 +120,20 @@ export default function OTPModal({
     if (result.success) {
       reset();
       onVerifySuccess();
-    } else if (result.rateLimitSeconds) {
-      setVerifyRateLimit(result.rateLimitSeconds);
-    } else if (result.locked) {
-      setIsLocked(true);
-      setOtpError(
-        result.error ?? "Too many failed attempts. Please request a new OTP.",
-      );
     } else {
-      setOtpError(result.error ?? "Incorrect code. Try again.");
+      setOtp(Array(6).fill(""));
+      setTimeout(() => otpRefs.current[0]?.focus(), 0); // focus first box
+
+      if (result.rateLimitSeconds) {
+        setVerifyRateLimit(result.rateLimitSeconds);
+      } else if (result.locked) {
+        setIsLocked(true);
+        setOtpError(
+          result.error ?? "Too many failed attempts. Please request a new OTP.",
+        );
+      } else {
+        setOtpError(result.error ?? "Incorrect code. Try again.");
+      }
     }
 
     setOtpLoading(false);
@@ -262,7 +267,7 @@ export default function OTPModal({
                 size="sm"
                 onClick={handleResend}
                 disabled={otpLoading}
-                className="p-0 h-auto font-semibold text-primary"
+                className="p-0 h-auto font-semibold cursor-pointer text-primary"
               >
                 Resend OTP
               </Button>

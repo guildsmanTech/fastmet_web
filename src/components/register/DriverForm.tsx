@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import PhoneInput from "react-phone-input-2";
 import LoaderModal from "../modals/Loader";
 import SuccessModal from "../modals/Success";
 import ReCAPTCHA from "react-google-recaptcha";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import {CheckCircle2, Loader2} from "lucide-react";
 import OTPModal from "../modals/OTPModal";
-import { driverRegistrationSchema } from "@/schemas/driverRegistration";
-import { useVehicles } from "@/hooks/useVehicleQueries";
-import { formatPHNumber } from "@/helper/format";
-import type { IVehicleType } from "@/types/vehicle";
-import { OtpCountdown } from "@/components/ui/OtpCountdown";
+import {driverRegistrationSchema} from "@/schemas/driverRegistration";
+import {useVehicles} from "@/hooks/useVehicleQueries";
+import {formatPHNumber} from "@/helper/format";
+import type {IVehicleType} from "@/types/vehicle";
+import {OtpCountdown} from "@/components/ui/OtpCountdown";
 
 interface FormData {
   firstName: string;
@@ -43,7 +43,7 @@ export default function DriverForm() {
   const [otpModalOpen, setOtpModalOpen] = useState(false);
   const [sendRateLimit, setSendRateLimit] = useState<number | null>(null);
 
-  const { data: vehiclesData } = useVehicles();
+  const {data: vehiclesData} = useVehicles();
 
   const vehicles = useMemo(() => vehiclesData ?? [], [vehiclesData]);
 
@@ -58,16 +58,16 @@ export default function DriverForm() {
   }, [selectedVehicle, vehicles]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    const {name, value} = e.target;
+    setFormData((prev) => ({...prev, [name]: value}));
+    if (errors[name]) setErrors((prev) => ({...prev, [name]: ""}));
   };
 
   const handleSelectVehicle = (vehicle: IVehicleType) => {
     const active = vehicle.variants.filter((v) => v.isActive);
     setSelectedVehicle(vehicle);
     setSelectedVariantId(active.length > 0 ? active[0]._id : "");
-    setErrors((prev) => ({ ...prev, vehicle: "", variant: "" }));
+    setErrors((prev) => ({...prev, vehicle: "", variant: ""}));
   };
 
   // ── Submit: validate → captcha → send OTP → open modal ────────────────────
@@ -100,7 +100,7 @@ export default function DriverForm() {
     }
 
     if (!captchaValue) {
-      setErrors({ form: "Please complete the captcha." });
+      setErrors({form: "Please complete the captcha."});
       return;
     }
 
@@ -127,10 +127,10 @@ export default function DriverForm() {
         setOtpModalOpen(true);
       } else {
         const d = await res.json();
-        setErrors({ form: d.error || "Failed to send OTP. Please try again." });
+        setErrors({form: d.error || "Failed to send OTP. Please try again."});
       }
     } catch {
-      setErrors({ form: "Network error. Please try again." });
+      setErrors({form: "Network error. Please try again."});
     } finally {
       setLoading(false);
     }
@@ -149,7 +149,7 @@ export default function DriverForm() {
       // 1. Verify OTP — receives a short-lived token on success
       const otpRes = await fetch(`${API_URL}/api/auth/verify-otp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           phoneNumber: formData.contactNumber,
           otpCode: code,
@@ -162,7 +162,7 @@ export default function DriverForm() {
         if (otpRes.status === 429) {
           const raw = otpRes.headers.get("Retry-After");
           const secs = raw ? parseInt(raw, 10) : 60;
-          return { success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs };
+          return {success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs};
         }
         const locked =
           otpData.error?.includes("Too many failed attempts") ?? false;
@@ -173,7 +173,7 @@ export default function DriverForm() {
         };
       }
 
-      const { verifyToken } = otpData; // short-lived JWT (10 min)
+      const {verifyToken} = otpData; // short-lived JWT (10 min)
 
       // 2. OTP passed — pre-register the driver
       //    Token is forwarded in Authorization to prove OTP was verified server-side
@@ -198,18 +198,18 @@ export default function DriverForm() {
 
       const registerData = await registerRes.json();
 
-      if (registerRes.ok) return { success: true };
+      if (registerRes.ok) return {success: true};
 
       return {
         success: false,
         error: registerData.error ?? "Server error. Please try again.",
       };
     } catch {
-      return { success: false, error: "Network error. Please try again." };
+      return {success: false, error: "Network error. Please try again."};
     }
   };
 
-  const handleResend = async (): Promise<{ error?: string }> => {
+  const handleResend = async (): Promise<{error?: string}> => {
     try {
       const res = await fetch(`${API_URL}/api/auth/resend-otp-web`, {
         method: "POST",
@@ -217,15 +217,15 @@ export default function DriverForm() {
           "Content-Type": "application/json",
           "X-User-Type": "driver",
         },
-        body: JSON.stringify({ phoneNumber: formData.contactNumber }),
+        body: JSON.stringify({phoneNumber: formData.contactNumber}),
       });
       if (!res.ok) {
         const d = await res.json();
-        return { error: d.error || "Failed to resend OTP. Please try again." };
+        return {error: d.error || "Failed to resend OTP. Please try again."};
       }
       return {};
     } catch {
-      return { error: "Network error. Please try again." };
+      return {error: "Network error. Please try again."};
     }
   };
 
@@ -258,9 +258,9 @@ export default function DriverForm() {
   const showVariants = activeVariants.length > 1;
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-full lg:flex-1 max-w-2xl mx-auto lg:mx-0 px-4 lg:px-6">
-        <p className="font-semibold text-base md:text-lg lg:text-xl text-center mb-8 text-gray-900">
+    <div className="flex justify-center items-center">
+      <div className="px-4 mx-auto w-full max-w-2xl lg:flex-1 lg:mx-0 lg:px-6">
+        <p className="mb-8 text-base font-semibold text-center text-gray-900 md:text-lg lg:text-xl">
           Driver's Pre-Registration
         </p>
 
@@ -280,7 +280,7 @@ export default function DriverForm() {
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
               {errors.firstName && (
-                <p className="text-red-500 text-xs">{errors.firstName}</p>
+                <p className="text-xs text-red-500">{errors.firstName}</p>
               )}
             </div>
             <div className="flex flex-col gap-2">
@@ -296,7 +296,7 @@ export default function DriverForm() {
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
               {errors.lastName && (
-                <p className="text-red-500 text-xs">{errors.lastName}</p>
+                <p className="text-xs text-red-500">{errors.lastName}</p>
               )}
             </div>
           </div>
@@ -311,10 +311,10 @@ export default function DriverForm() {
                 country="ph"
                 value={formData.contactNumber}
                 onChange={(value) => {
-                  setFormData((prev) => ({ ...prev, contactNumber: value }));
+                  setFormData((prev) => ({...prev, contactNumber: value}));
 
                   if (errors.contactNumber) {
-                    setErrors((prev) => ({ ...prev, contactNumber: "" }));
+                    setErrors((prev) => ({...prev, contactNumber: ""}));
                   }
                 }}
                 onlyCountries={["ph"]}
@@ -334,7 +334,7 @@ export default function DriverForm() {
                     }));
 
                     if (errors.contactNumber) {
-                      setErrors((prev) => ({ ...prev, contactNumber: "" }));
+                      setErrors((prev) => ({...prev, contactNumber: ""}));
                     }
                   },
                 }}
@@ -342,7 +342,7 @@ export default function DriverForm() {
                 buttonClass="!border !border-gray-300 !rounded-l-lg !bg-white"
               />
               {errors.contactNumber && (
-                <p className="text-red-500 text-xs">{errors.contactNumber}</p>
+                <p className="text-xs text-red-500">{errors.contactNumber}</p>
               )}
             </div>
 
@@ -359,7 +359,7 @@ export default function DriverForm() {
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
               {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
+                <p className="text-xs text-red-500">{errors.email}</p>
               )}
               <p className="text-xs text-gray-500">
                 For your onboarding discussion via Google Meet
@@ -373,12 +373,12 @@ export default function DriverForm() {
               <label className="block text-sm font-semibold text-gray-900">
                 Vehicle Type
               </label>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="mt-1 text-xs text-gray-500">
                 Select the vehicle you'll use for FastMet deliveries
               </p>
             </div>
             {vehicles.length === 0 ? (
-              <p className="text-sm text-gray-400 py-8 text-center">
+              <p className="py-8 text-sm text-center text-gray-400">
                 No vehicles available at this time.
               </p>
             ) : (
@@ -404,8 +404,8 @@ export default function DriverForm() {
                         p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer
                         ${
                           isSelected
-                            ? "border-primary bg-primary/5 shadow-md"
-                            : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
+                            ? "shadow-md border-primary bg-primary/5"
+                            : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm"
                         }
                       `}
                     >
@@ -415,9 +415,9 @@ export default function DriverForm() {
                       <img
                         src={vehicle.imageUrl}
                         alt={vehicle.name}
-                        className="h-12 w-full object-contain"
+                        className="object-contain w-full h-12"
                       />
-                      <div className="text-center w-full">
+                      <div className="w-full text-center">
                         <p
                           className={`text-xs font-bold leading-tight ${isSelected ? "text-primary" : "text-gray-800"}`}
                         >
@@ -435,7 +435,7 @@ export default function DriverForm() {
               </div>
             )}
             {errors.vehicle && (
-              <p className="text-red-500 text-xs">{errors.vehicle}</p>
+              <p className="text-xs text-red-500">{errors.vehicle}</p>
             )}
           </div>
 
@@ -446,7 +446,7 @@ export default function DriverForm() {
                 <label className="block text-sm font-semibold text-gray-900">
                   Load Capacity
                 </label>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="mt-1 text-xs text-gray-500">
                   Select the max load for your {selectedVehicle?.name}
                 </p>
               </div>
@@ -460,7 +460,7 @@ export default function DriverForm() {
                       onClick={() => {
                         setSelectedVariantId(variant._id);
                         if (errors.variant)
-                          setErrors((prev) => ({ ...prev, variant: "" }));
+                          setErrors((prev) => ({...prev, variant: ""}));
                       }}
                       className={`
                         px-3 py-2.5 rounded-lg border-2 text-xs font-semibold
@@ -478,20 +478,20 @@ export default function DriverForm() {
                 })}
               </div>
               {errors.variant && (
-                <p className="text-red-500 text-xs">{errors.variant}</p>
+                <p className="text-xs text-red-500">{errors.variant}</p>
               )}
             </div>
           )}
 
           {/* ── Form error ────────────────────────────────────────────────── */}
           {errors.form && (
-            <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-              <p className="text-red-600 text-xs text-center">{errors.form}</p>
+            <div className="px-4 py-3 bg-red-50 rounded-lg border border-red-200">
+              <p className="text-xs text-center text-red-600">{errors.form}</p>
             </div>
           )}
 
           {/* ── Captcha + Submit ──────────────────────────────────────────── */}
-          <div className="flex flex-col items-center gap-4 pt-2">
+          <div className="flex flex-col gap-4 items-center pt-2">
             <ReCAPTCHA
               ref={captchaRef}
               sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
@@ -503,7 +503,7 @@ export default function DriverForm() {
               <button
                 type="button"
                 disabled
-                className="w-full py-3 rounded-lg font-semibold text-sm text-white bg-primary opacity-60 cursor-not-allowed"
+                className="py-3 w-full text-sm font-semibold text-white rounded-lg opacity-60 cursor-not-allowed bg-primary"
               >
                 <OtpCountdown
                   seconds={sendRateLimit}
@@ -525,8 +525,8 @@ export default function DriverForm() {
                 `}
               >
                 {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <Loader2 className="size-4 animate-spin" />
+                  <span className="flex gap-2 justify-center items-center">
+                    <Loader2 className="animate-spin size-4" />
                     Sending OTP…
                   </span>
                 ) : (
