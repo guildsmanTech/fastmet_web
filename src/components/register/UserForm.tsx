@@ -161,15 +161,24 @@ export default function UserForm() {
     }
   };
 
-  const handleResend = async () => {
-    await fetch(`${API_URL}/api/auth/send-otp-web`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-User-Type": "client" },
-      body: JSON.stringify({
-        phoneNumber: formData.contactNumber,
-        captcha: captchaValue,
-      }),
-    });
+  const handleResend = async (): Promise<{ error?: string }> => {
+    try {
+      const res = await fetch(`${API_URL}/api/auth/resend-otp-web`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-User-Type": "client",
+        },
+        body: JSON.stringify({ phoneNumber: formData.contactNumber }),
+      });
+      if (!res.ok) {
+        const d = await res.json();
+        return { error: d.error || "Failed to resend OTP. Please try again." };
+      }
+      return {};
+    } catch {
+      return { error: "Network error. Please try again." };
+    }
   };
 
   const handleVerifySuccess = () => {

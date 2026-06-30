@@ -208,8 +208,14 @@ export default function QuestionForm() {
               <ReCAPTCHA
                 ref={captchaRef}
                 sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={setCaptchaValue}
-                onExpired={() => setCaptchaValue(null)}
+                onChange={(value) => {
+                  setCaptchaValue(value);
+                  if (value) setErrors((prev) => ({...prev, form: ""}));
+                }}
+                onExpired={() => {
+                  setCaptchaValue(null);
+                  setErrors({form: "Captcha expired. Please verify again."});
+                }}
               />
             </div>
 
