@@ -41,18 +41,17 @@ export default function Header() {
                 <Link
                   key={to}
                   to={to}
-                  className={`text-sm font-semibold transition-colors relative pb-0.5 ${
-                    isActive(to)
+                  className={`text-sm font-semibold transition-colors relative pb-0.5 ${isActive(to)
                       ? "text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
                       : "text-white/80 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {label}
                 </Link>
               ))}
             </div>
             <div className="flex items-center gap-4">
-              <p className="text-sm font-semibold text-white/80 hover:text-white cursor-pointer">
+              <p className="text-sm font-semibold text-white/80 cursor-pointer">
                 FAQs
               </p>
               <GeneralFAQModal />
@@ -93,11 +92,10 @@ export default function Header() {
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${
-                  isActive(to)
+                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${isActive(to)
                     ? "text-primary"
                     : "text-white/80 hover:text-white"
-                }`}
+                  }`}
               >
                 {label}
                 {isActive(to) && (
