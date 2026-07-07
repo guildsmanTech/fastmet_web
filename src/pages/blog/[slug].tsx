@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import {useParams, Link, useNavigate} from "react-router-dom";
 import {CalendarDays, Clock, ArrowLeft, ArrowRight, Tag} from "lucide-react";
 import type {IBlogPost} from "@/types/blog";
@@ -114,6 +115,16 @@ export default function BlogPost() {
 
   return (
     <section className="min-h-screen bg-gray-50 ">
+      <Helmet>
+        <title>{`${post.title} | FastMet Blog`}</title>
+        <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://fastmet.com.ph/blog/${post.slug}`} />
+        <meta property="og:title" content={`${post.title} | FastMet Blog`} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:image" content={post.heroImage} />
+        <meta property="og:url" content={`https://fastmet.com.ph/blog/${post.slug}`} />
+        <meta property="og:type" content="article" />
+      </Helmet>
       {/* ── Full-bleed hero banner ───────────────────────────────────────── */}
       <div className="relative w-full h-64 md:h-[520px] overflow-hidden">
         <img src={post.heroImage} alt={post.title} className="w-full h-full" />

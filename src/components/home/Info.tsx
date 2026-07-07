@@ -6,7 +6,7 @@ export default function Info() {
     <div className="flex flex-col gap-6 md:pl-4 lg:pl-6 items-center md:items-start xl:pl-0 xl:w-[50%]">
       <div className="flex flex-row px-4 py-2.5 bg-primary gap-4 items-center w-fit rounded-full">
         <img src={megaphone} alt="Megaphone" className="size-7" />
-        <p className="font-semibold text-white">Now in Metro Manila</p>
+        <p className="font-semibold text-white">Now in Greater Manila</p>
       </div>
       <p className="text-xl sm:text-2xl xl:text-4xl font-extrabold tracking-tight leading-tight text-center text-gray-900">
         Need it <span className="text-primary">Fast?</span>{" "}

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import DriverForm from "@/components/register/DriverForm";
 import InfoDriver from "@/components/register/InfoDriver";
 import {useEffect} from "react";
@@ -12,6 +13,14 @@ export default function DriverRegister() {
   }, []);
   return (
     <section className="flex justify-center items-center px-4 min-h-screen">
+      <Helmet>
+        <title>Driver Pre-Registration | FastMet</title>
+        <meta
+          name="description"
+          content="Pre-register as a FastMet driver in Greater Manila. Enjoy zero commission, flexible hours, and exclusive early-bird rewards when FastMet goes live."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/driver-register" />
+      </Helmet>
       <Button
         onClick={() => navigate("/")}
         variant="ghost"

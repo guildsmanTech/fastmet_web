@@ -45,7 +45,7 @@ export default function InfoDriver() {
           <span className="text-primary">Earn from day one.</span>
         </h1>
         <p className="text-sm md:text-base text-gray-500 leading-relaxed pt-1 text-center md:text-left">
-          Pre-registration is open for drivers in Metro Manila. Sign up now and
+          Pre-registration is open for drivers in Greater Manila. Sign up now and
           be among the first to earn when FastMet goes live.
         </p>
       </div>

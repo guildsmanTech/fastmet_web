@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import type { BlogTag } from "@/types/blog";
 import { useBlogs } from "@/hooks/useBlogQueries";
@@ -20,6 +21,14 @@ export default function BlogList() {
 
   return (
     <section className="min-h-screen bg-gray-50 pt-24 pb-16">
+      <Helmet>
+        <title>Blog – News, Guides & Updates | FastMet</title>
+        <meta
+          name="description"
+          content="Stay up to date with FastMet news, driver guides, user tips, and company announcements. Everything happening at FastMet — straight from the team."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/blog" />
+      </Helmet>
       <div className="w-full max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
         <div className="mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">

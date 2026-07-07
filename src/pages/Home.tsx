@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Info from "@/components/home/Info";
 import Phone from "@/components/home/Phone";
 import QuestionForm from "@/components/home/QuestionForm";
@@ -46,6 +47,24 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center flex-col">
+      <Helmet>
+        <title>FastMet – Fast & Reliable Delivery Service in Greater Manila</title>
+        <meta
+          name="description"
+          content="FastMet is a fast and reliable logistics platform connecting clients with trusted drivers across Greater Manila. Pre-register now and claim exclusive launch rewards."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "FastMet",
+          "url": "https://fastmet.com.ph",
+          "logo": "https://fastmet.com.ph/fastmet_icon.png",
+          "description": "Fast and reliable logistics platform in Greater Manila",
+          "areaServed": "Greater Manila",
+          "sameAs": []
+        })}</script>
+      </Helmet>
       <section
         className="flex relative justify-center flex-col min-h-dvh w-full"
         style={{
@@ -97,7 +116,7 @@ export default function Home() {
                   FastMet is a proudly Pinoy-made delivery platform
                 </span>{" "}
                 built for the everyday needs of Filipinos. As we launch in{" "}
-                <span className="font-semibold">Metro Manila</span>, we are
+                <span className="font-semibold">Greater Manila</span>, we are
                 bringing a smarter, faster, and more dependable way to handle
                 deliveries and errands.
                 <br />

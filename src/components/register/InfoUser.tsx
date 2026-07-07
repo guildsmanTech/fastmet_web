@@ -51,7 +51,7 @@ export default function InfoUser() {
           <span className="text-primary">Book in seconds.</span>
         </h1>
         <p className="text-sm md:text-base text-gray-500 leading-relaxed pt-1 text-center md:text-left">
-          Pre-registration is open for users in Metro Manila. Sign up now and be
+          Pre-registration is open for users in Greater Manila. Sign up now and be
           among the first to book when FastMet goes live — with exclusive early
           rewards waiting for you.
         </p>

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import {useEffect} from "react";
 import {ChevronLeft} from "lucide-react";
 import UserForm from "@/components/register/UserForm";
@@ -13,6 +14,14 @@ export default function UserRegister() {
   }, []);
   return (
     <section className="flex justify-center items-center px-4 min-h-screen">
+      <Helmet>
+        <title>User Pre-Registration | FastMet</title>
+        <meta
+          name="description"
+          content="Pre-register as a FastMet user in Greater Manila. Be among the first to book fast, reliable deliveries and unlock exclusive early rewards."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/user-register" />
+      </Helmet>
       <Button
         onClick={() => navigate("/")}
         variant="ghost"

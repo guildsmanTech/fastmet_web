@@ -2,9 +2,9 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { logo } from "@/constants/images";
-import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface LoaderModalProps {
   open: boolean;
