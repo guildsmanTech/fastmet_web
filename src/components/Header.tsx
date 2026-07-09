@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { logo } from "@/constants/images";
+import {useState} from "react";
+import {logo} from "@/constants/images";
 import GeneralFAQModal from "./modals/GeneralFAQModal";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import {Link, useLocation} from "react-router-dom";
+import {Menu, X} from "lucide-react";
 
 const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "Blog", to: "/blog" },
+  {label: "Home", to: "/"},
+  {label: "Blog", to: "/blog"},
 ];
 
 export default function Header() {
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isActive = (to: string) =>
@@ -37,23 +37,22 @@ export default function Header() {
           {/* ── Desktop nav ───────────────────────────────────────────────── */}
           <div className="hidden md:flex items-center gap-20">
             <div className="flex items-center gap-6">
-              {navLinks.map(({ label, to }) => (
+              {navLinks.map(({label, to}) => (
                 <Link
                   key={to}
                   to={to}
-                  className={`text-sm font-semibold transition-colors relative pb-0.5 ${isActive(to)
+                  className={`text-sm font-semibold transition-colors relative pb-0.5 ${
+                    isActive(to)
                       ? "text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
                       : "text-white/80 hover:text-white"
-                    }`}
+                  }`}
                 >
                   {label}
                 </Link>
               ))}
             </div>
             <div className="flex items-center gap-4">
-              <p className="text-sm font-semibold text-white/80 cursor-pointer">
-                FAQs
-              </p>
+              <p className="text-sm font-semibold text-white/80">FAQs</p>
               <GeneralFAQModal />
             </div>
           </div>
@@ -87,15 +86,16 @@ export default function Header() {
           />
           {/* Panel */}
           <div className="fixed top-[52px] left-0 right-0 z-40 bg-secondary border-t border-white/10 md:hidden px-6 py-4 space-y-1">
-            {navLinks.map(({ label, to }) => (
+            {navLinks.map(({label, to}) => (
               <Link
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${isActive(to)
+                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${
+                  isActive(to)
                     ? "text-primary"
                     : "text-white/80 hover:text-white"
-                  }`}
+                }`}
               >
                 {label}
                 {isActive(to) && (

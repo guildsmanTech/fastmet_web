@@ -63,7 +63,7 @@ export default function SharedFooter() {
             />
 
             <SocialIcon
-              url="https://www.tiktok.com/@yourpage"
+              url="https://www.tiktok.com/@fastmet0"
               className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                  hover:scale-110 hover:shadow-lg transition-all duration-300"
               style={{width: 36, height: 36}}
