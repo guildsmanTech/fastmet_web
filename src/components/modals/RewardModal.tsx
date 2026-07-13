@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,13 +7,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { gift_open, gift_close, reward_bg } from "@/constants/images";
-import { CheckCheck, Lock, Gift, ArrowLeft } from "lucide-react";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {gift_open, gift_close, reward_bg} from "@/constants/images";
+import {CheckCheck, Lock, Gift, ArrowLeft} from "lucide-react";
 
-import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
-import { useRafflePrizes, useRewardTiers } from "@/hooks/useRewardQueries";
-import type { IRafflePrize, IRewardTier } from "@/types/reward";
+import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
+import {useRafflePrizes, useRewardTiers} from "@/hooks/useRewardQueries";
+import type {IRafflePrize, IRewardTier} from "@/types/reward";
 
 const getCurrentLevelIndex = (count: number, levels: IRewardTier[]) => {
   const idx = levels.findIndex((l) => count >= l.min && count <= l.max);
@@ -31,9 +31,9 @@ const getLevelProgress = (count: number, level: IRewardTier) => {
 
 // Presentation-only — swap/extend when data comes from DB
 const rankStyles = [
-  { num: "01", accent: "text-amber-400", dot: "bg-amber-400" },
-  { num: "02", accent: "text-slate-400", dot: "bg-slate-400" },
-  { num: "03", accent: "text-orange-400", dot: "bg-orange-400" },
+  {num: "01", accent: "text-amber-400", dot: "bg-amber-400"},
+  {num: "02", accent: "text-slate-400", dot: "bg-slate-400"},
+  {num: "03", accent: "text-orange-400", dot: "bg-orange-400"},
 ];
 
 function RaffleView({
@@ -64,7 +64,7 @@ function RaffleView({
       </div>
 
       <div className="divide-y px-4 divide-gray-100">
-        {prizes.map(({ rank, winners, perks }, i) => {
+        {prizes.map(({rank, winners, perks}, i) => {
           const style = rankStyles[i] ?? {
             num: `0${i + 1}`,
             accent: "text-gray-400",
@@ -86,7 +86,7 @@ function RaffleView({
                   </span>
                 </div>
                 <div className="space-y-1.5">
-                  {perks.map(({ label, value }) => (
+                  {perks.map(({label, value}) => (
                     <div
                       key={label}
                       className="flex items-center justify-between"
@@ -168,7 +168,7 @@ function RewardPanel({
           <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-700 ${isFilled ? "bg-green-500" : "bg-primary"}`}
-              style={{ width: `${isFilled ? 100 : progress}%` }}
+              style={{width: `${isFilled ? 100 : progress}%`}}
             />
           </div>
           <div className="flex justify-between text-[10px] text-gray-400">
@@ -433,7 +433,7 @@ export function RewardTab({
 export default function RewardModal() {
   const [open, setOpen] = useState(false);
 
-  const { data: counts } = useRegistrationCounts();
+  const {data: counts} = useRegistrationCounts();
   const driverCount = counts?.drivers ?? 0;
   const userCount = counts?.users ?? 0;
 
