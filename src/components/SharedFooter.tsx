@@ -13,8 +13,8 @@ export default function SharedFooter() {
 
       <div className="flex flex-col items-center gap-8 md:flex-row md:divide-x">
         {/* Statistics */}
-        <div className="flex flex-col md:flex-row gap-5 items-center lg:gap-10">
-          <div className="grid grid-cols-2 place-items-center">
+        <div className="flex flex-col md:flex-row gap-5 items-center lg:gap-10 md:pr-5">
+          <div className="grid grid-cols-2 place-items-center gap-5">
             <div className="flex flex-col gap-2 items-center">
               <p className="text-white font-medium text-xs lg:text-sm">
                 Pre-Registered Drivers
@@ -29,7 +29,7 @@ export default function SharedFooter() {
 
             <div className="flex flex-col gap-2 items-center">
               <p className="text-white font-medium text-xs lg:text-sm">
-                App Users
+                Pre-Registered Users
               </p>
               <div className="flex items-center gap-2">
                 <div className="p-1.5 border border-primary bg-white rounded-md w-fit">

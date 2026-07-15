@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import {Helmet} from "react-helmet-async";
 import {useParams, Link, useNavigate} from "react-router-dom";
 import {CalendarDays, Clock, ArrowLeft, ArrowRight, Tag} from "lucide-react";
 import type {IBlogPost} from "@/types/blog";
@@ -114,15 +114,21 @@ export default function BlogPost() {
     );
 
   return (
-    <section className="min-h-screen bg-gray-50 ">
+    <section className="min-h-screen bg-gray-50 mt-10">
       <Helmet>
         <title>{`${post.title} | FastMet Blog`}</title>
         <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://fastmet.com.ph/blog/${post.slug}`} />
+        <link
+          rel="canonical"
+          href={`https://fastmet.com.ph/blog/${post.slug}`}
+        />
         <meta property="og:title" content={`${post.title} | FastMet Blog`} />
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:image" content={post.heroImage} />
-        <meta property="og:url" content={`https://fastmet.com.ph/blog/${post.slug}`} />
+        <meta
+          property="og:url"
+          content={`https://fastmet.com.ph/blog/${post.slug}`}
+        />
         <meta property="og:type" content="article" />
       </Helmet>
       {/* ── Full-bleed hero banner ───────────────────────────────────────── */}
@@ -135,7 +141,7 @@ export default function BlogPost() {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="absolute top-20 left-4 md:left-8 lg:left-12 flex items-center gap-1.5 text-xs font-medium text-white/80 hover:text-white transition-colors cursor-pointer bg-black/20 hover:bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full"
+          className="absolute top-12 left-2 md:left-8 lg:left-12 flex items-center gap-1.5 text-xs font-medium text-white/80 hover:text-white transition-colors cursor-pointer bg-black/20 hover:bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full"
         >
           <ArrowLeft className="size-3.5" />
           Back to Blog
