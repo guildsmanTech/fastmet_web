@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,38 +6,18 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {Button} from "@/components/ui/button";
-import {Loader2} from "lucide-react";
-import {OtpCountdown} from "@/components/ui/OtpCountdown";
-
-export function formatPHNumber(input: string) {
-  if (!input) return "";
-
-  // Strip non-digits
-  let digits = input.replace(/\D/g, "");
-
-  // Normalize to 0XXXXXXXXXX
-  if (digits.startsWith("63")) {
-    digits = "0" + digits.slice(2);
-  } else if (digits.startsWith("9") && digits.length === 10) {
-    digits = "0" + digits;
-  }
-
-  // Validate PH mobile format (11 digits starting with 09)
-  if (!/^09\d{9}$/.test(digits)) {
-    return input;
-  }
-
-  // Format: 0XXX-XXX-XXXX
-  return `${digits.slice(0, 4)}-${digits.slice(4, 7)}-${digits.slice(7)}`;
-}
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+import { OtpCountdown } from "@/components/ui/OtpCountdown";
+import { formatPHNumber } from "@/helper/format";
 
 interface OTPModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   phone: string;
+  email?: string;
   onVerifySuccess: () => void;
-  onResend: () => Promise<{error?: string}>;
+  onResend: () => Promise<{ error?: string }>;
   onVerify: (code: string) => Promise<{
     success: boolean;
     error?: string;
@@ -51,6 +31,7 @@ export default function OTPModal({
   open,
   onOpenChange,
   phone,
+  email,
   onVerifySuccess,
   onResend,
   onVerify,
@@ -181,6 +162,12 @@ export default function OTPModal({
             <span className="font-semibold text-foreground">
               {formatPHNumber(phone)}
             </span>
+            {email?.includes("@") && (
+              <>
+                {" "}and{" "}
+                <span className="font-semibold text-foreground">{email}</span>
+              </>
+            )}
           </DialogDescription>
         </DialogHeader>
 
