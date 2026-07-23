@@ -1,4 +1,8 @@
-import { z } from "zod";
+import {
+  ALLOWED_EMAIL_DOMAINS,
+  isAllowedEmailDomain,
+} from "@/helper/emailDomain";
+import {z} from "zod";
 
 export const driverRegistrationSchema = z.object({
   firstName: z
@@ -15,5 +19,7 @@ export const driverRegistrationSchema = z.object({
     .string()
     .min(1, "Contact number is required")
     .regex(/^639\d{9}$/, "Invalid PH contact number"),
-  email: z.email("Invalid email address").min(1, "Email is required"),
+  email: z.email("Invalid email address").refine(isAllowedEmailDomain, {
+    message: `Only ${ALLOWED_EMAIL_DOMAINS.join(", ")} addresses are accepted`,
+  }),
 });
