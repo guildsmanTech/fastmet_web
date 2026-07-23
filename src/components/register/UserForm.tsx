@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import PhoneInput from "react-phone-input-2";
 import LoaderModal from "../modals/Loader";
 import SuccessModal from "../modals/Success";
 import ReCAPTCHA from "react-google-recaptcha";
-import { Loader2 } from "lucide-react";
+import {Loader2} from "lucide-react";
 import OTPModal from "../modals/OTPModal";
-import { userRegistrationSchema } from "@/schemas/userRegistration";
-import { formatPHNumber } from "@/helper/format";
-import { OtpCountdown } from "@/components/ui/OtpCountdown";
+import {userRegistrationSchema} from "@/schemas/userRegistration";
+import {formatPHNumber} from "@/helper/format";
+import {OtpCountdown} from "@/components/ui/OtpCountdown";
 
 interface FormData {
   firstName: string;
@@ -17,9 +17,9 @@ interface FormData {
 }
 
 const GENDER_OPTIONS = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "prefer_not", label: "Prefer not to say" },
+  {value: "male", label: "Male"},
+  {value: "female", label: "Female"},
+  {value: "prefer_not", label: "Prefer not to say"},
 ];
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -44,9 +44,9 @@ export default function UserForm() {
   const [sendRateLimit, setSendRateLimit] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    const {name, value} = e.target;
+    setFormData((prev) => ({...prev, [name]: value}));
+    if (errors[name]) setErrors((prev) => ({...prev, [name]: ""}));
   };
 
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +64,7 @@ export default function UserForm() {
     }
 
     if (!captchaValue) {
-      setErrors({ form: "Please complete the captcha." });
+      setErrors({form: "Please complete the captcha."});
       return;
     }
 
@@ -90,10 +90,10 @@ export default function UserForm() {
         setOtpModalOpen(true);
       } else {
         const d = await res.json();
-        setErrors({ form: d.error || "Failed to send OTP. Please try again." });
+        setErrors({form: d.error || "Failed to send OTP. Please try again."});
       }
     } catch {
-      setErrors({ form: "Network error. Please try again." });
+      setErrors({form: "Network error. Please try again."});
     } finally {
       setLoading(false);
     }
@@ -113,7 +113,7 @@ export default function UserForm() {
       // 1. Verify OTP
       const otpRes = await fetch(`${API_URL}/api/auth/verify-otp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           phoneNumber: formData.contactNumber,
           otpCode: code,
@@ -125,7 +125,7 @@ export default function UserForm() {
         if (otpRes.status === 429) {
           const raw = otpRes.headers.get("Retry-After");
           const secs = raw ? parseInt(raw, 10) : 60;
-          return { success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs };
+          return {success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs};
         }
         const locked =
           otpData.error?.includes("Too many failed attempts") ?? false;
@@ -136,7 +136,7 @@ export default function UserForm() {
         };
       }
 
-      const { verifyToken } = otpData; // short-lived JWT (10 min)
+      const {verifyToken} = otpData; // short-lived JWT (10 min)
 
       // 2. OTP passed — save to DB
       const registerRes = await fetch(`${API_URL}/api/register/register-user`, {
@@ -150,18 +150,18 @@ export default function UserForm() {
 
       const registerData = await registerRes.json();
 
-      if (registerRes.ok) return { success: true };
+      if (registerRes.ok) return {success: true};
 
       return {
         success: false,
         error: registerData.error ?? "Server error. Please try again.",
       };
     } catch {
-      return { success: false, error: "Network error. Please try again." };
+      return {success: false, error: "Network error. Please try again."};
     }
   };
 
-  const handleResend = async (): Promise<{ error?: string }> => {
+  const handleResend = async (): Promise<{error?: string}> => {
     try {
       const res = await fetch(`${API_URL}/api/auth/resend-otp-web`, {
         method: "POST",
@@ -169,15 +169,15 @@ export default function UserForm() {
           "Content-Type": "application/json",
           "X-User-Type": "client",
         },
-        body: JSON.stringify({ phoneNumber: formData.contactNumber }),
+        body: JSON.stringify({phoneNumber: formData.contactNumber}),
       });
       if (!res.ok) {
         const d = await res.json();
-        return { error: d.error || "Failed to resend OTP. Please try again." };
+        return {error: d.error || "Failed to resend OTP. Please try again."};
       }
       return {};
     } catch {
-      return { error: "Network error. Please try again." };
+      return {error: "Network error. Please try again."};
     }
   };
 
@@ -195,7 +195,12 @@ export default function UserForm() {
     setErrors({});
   };
 
-  // ─────────────────────────────────────────────────────────────────────────
+  const isFormValid =
+    formData.firstName.trim() !== "" &&
+    formData.lastName.trim() !== "" &&
+    formData.contactNumber.trim() !== "" &&
+    formData.gender.trim() !== "" &&
+    captchaValue !== null;
 
   return (
     <div className="flex items-center justify-center">
@@ -298,7 +303,7 @@ export default function UserForm() {
                           gender: option.value,
                         }));
                         if (errors.gender)
-                          setErrors((prev) => ({ ...prev, gender: "" }));
+                          setErrors((prev) => ({...prev, gender: ""}));
                       }}
                       className={`
                       px-4 py-2 rounded-lg border-2 text-xs font-semibold transition-all duration-200 cursor-pointer
@@ -351,11 +356,11 @@ export default function UserForm() {
             ) : (
               <button
                 type="submit"
-                disabled={loading || !captchaValue}
+                disabled={loading || !isFormValid}
                 className={`
                   w-full py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200
                   ${
-                    loading || !captchaValue
+                    loading || !isFormValid
                       ? "bg-primary opacity-60 cursor-not-allowed"
                       : "bg-primary hover:bg-orange-500 cursor-pointer"
                   }

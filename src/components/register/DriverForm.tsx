@@ -1,15 +1,19 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import PhoneInput from "react-phone-input-2";
 import LoaderModal from "../modals/Loader";
 import SuccessModal from "../modals/Success";
 import ReCAPTCHA from "react-google-recaptcha";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import {CheckCircle2, Loader2} from "lucide-react";
 import OTPModal from "../modals/OTPModal";
-import { driverRegistrationSchema } from "@/schemas/driverRegistration";
-import { useVehicles } from "@/hooks/useVehicleQueries";
-import { formatPHNumber } from "@/helper/format";
-import type { IVehicleType } from "@/types/vehicle";
-import { OtpCountdown } from "@/components/ui/OtpCountdown";
+import {driverRegistrationSchema} from "@/schemas/driverRegistration";
+import {useVehicles} from "@/hooks/useVehicleQueries";
+import {formatPHNumber} from "@/helper/format";
+import type {IVehicleType} from "@/types/vehicle";
+import {OtpCountdown} from "@/components/ui/OtpCountdown";
+import {
+  isAllowedEmailDomain,
+  ALLOWED_EMAIL_DOMAINS,
+} from "@/helper/emailDomain";
 
 interface FormData {
   firstName: string;
@@ -43,7 +47,7 @@ export default function DriverForm() {
   const [otpModalOpen, setOtpModalOpen] = useState(false);
   const [sendRateLimit, setSendRateLimit] = useState<number | null>(null);
 
-  const { data: vehiclesData } = useVehicles();
+  const {data: vehiclesData} = useVehicles();
 
   const vehicles = useMemo(() => vehiclesData ?? [], [vehiclesData]);
 
@@ -58,16 +62,25 @@ export default function DriverForm() {
   }, [selectedVehicle, vehicles]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
+    const {name, value} = e.target;
+    setFormData((prev) => ({...prev, [name]: value}));
+    if (errors[name]) setErrors((prev) => ({...prev, [name]: ""}));
+  };
+
+  const handleEmailBlur = () => {
+    if (formData.email && !isAllowedEmailDomain(formData.email)) {
+      setErrors((prev) => ({
+        ...prev,
+        email: `Only ${ALLOWED_EMAIL_DOMAINS.join(", ")} addresses are accepted`,
+      }));
+    }
   };
 
   const handleSelectVehicle = (vehicle: IVehicleType) => {
     const active = vehicle.variants.filter((v) => v.isActive);
     setSelectedVehicle(vehicle);
     setSelectedVariantId(active.length > 0 ? active[0]._id : "");
-    setErrors((prev) => ({ ...prev, vehicle: "", variant: "" }));
+    setErrors((prev) => ({...prev, vehicle: "", variant: ""}));
   };
 
   // ── Submit: validate → captcha → send OTP → open modal ────────────────────
@@ -100,7 +113,7 @@ export default function DriverForm() {
     }
 
     if (!captchaValue) {
-      setErrors({ form: "Please complete the captcha." });
+      setErrors({form: "Please complete the captcha."});
       return;
     }
 
@@ -127,10 +140,10 @@ export default function DriverForm() {
         setOtpModalOpen(true);
       } else {
         const d = await res.json();
-        setErrors({ form: d.error || "Failed to send OTP. Please try again." });
+        setErrors({form: d.error || "Failed to send OTP. Please try again."});
       }
     } catch {
-      setErrors({ form: "Network error. Please try again." });
+      setErrors({form: "Network error. Please try again."});
     } finally {
       setLoading(false);
     }
@@ -149,7 +162,7 @@ export default function DriverForm() {
       // 1. Verify OTP — receives a short-lived token on success
       const otpRes = await fetch(`${API_URL}/api/auth/verify-otp`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           phoneNumber: formData.contactNumber,
           otpCode: code,
@@ -162,7 +175,7 @@ export default function DriverForm() {
         if (otpRes.status === 429) {
           const raw = otpRes.headers.get("Retry-After");
           const secs = raw ? parseInt(raw, 10) : 60;
-          return { success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs };
+          return {success: false, rateLimitSeconds: isNaN(secs) ? 60 : secs};
         }
         const locked =
           otpData.error?.includes("Too many failed attempts") ?? false;
@@ -173,7 +186,7 @@ export default function DriverForm() {
         };
       }
 
-      const { verifyToken } = otpData; // short-lived JWT (10 min)
+      const {verifyToken} = otpData; // short-lived JWT (10 min)
 
       // 2. OTP passed — pre-register the driver
       //    Token is forwarded in Authorization to prove OTP was verified server-side
@@ -198,18 +211,18 @@ export default function DriverForm() {
 
       const registerData = await registerRes.json();
 
-      if (registerRes.ok) return { success: true };
+      if (registerRes.ok) return {success: true};
 
       return {
         success: false,
         error: registerData.error ?? "Server error. Please try again.",
       };
     } catch {
-      return { success: false, error: "Network error. Please try again." };
+      return {success: false, error: "Network error. Please try again."};
     }
   };
 
-  const handleResend = async (): Promise<{ error?: string }> => {
+  const handleResend = async (): Promise<{error?: string}> => {
     try {
       const res = await fetch(`${API_URL}/api/auth/resend-otp-web`, {
         method: "POST",
@@ -217,15 +230,18 @@ export default function DriverForm() {
           "Content-Type": "application/json",
           "X-User-Type": "driver",
         },
-        body: JSON.stringify({ phoneNumber: formData.contactNumber, email: formData.email }),
+        body: JSON.stringify({
+          phoneNumber: formData.contactNumber,
+          email: formData.email,
+        }),
       });
       if (!res.ok) {
         const d = await res.json();
-        return { error: d.error || "Failed to resend OTP. Please try again." };
+        return {error: d.error || "Failed to resend OTP. Please try again."};
       }
       return {};
     } catch {
-      return { error: "Network error. Please try again." };
+      return {error: "Network error. Please try again."};
     }
   };
 
@@ -256,6 +272,18 @@ export default function DriverForm() {
   const activeVariants =
     selectedVehicle?.variants.filter((v) => v.isActive) ?? [];
   const showVariants = activeVariants.length > 1;
+
+  const emailIsValid =
+    formData.email !== "" && isAllowedEmailDomain(formData.email);
+
+  const isFormValid =
+    formData.firstName.trim() !== "" &&
+    formData.lastName.trim() !== "" &&
+    formData.contactNumber.trim() !== "" &&
+    emailIsValid &&
+    selectedVehicle !== null &&
+    (!showVariants || selectedVariantId !== "") &&
+    captchaValue !== null;
 
   return (
     <div className="flex justify-center items-center">
@@ -311,10 +339,10 @@ export default function DriverForm() {
                 country="ph"
                 value={formData.contactNumber}
                 onChange={(value) => {
-                  setFormData((prev) => ({ ...prev, contactNumber: value }));
+                  setFormData((prev) => ({...prev, contactNumber: value}));
 
                   if (errors.contactNumber) {
-                    setErrors((prev) => ({ ...prev, contactNumber: "" }));
+                    setErrors((prev) => ({...prev, contactNumber: ""}));
                   }
                 }}
                 onlyCountries={["ph"]}
@@ -334,7 +362,7 @@ export default function DriverForm() {
                     }));
 
                     if (errors.contactNumber) {
-                      setErrors((prev) => ({ ...prev, contactNumber: "" }));
+                      setErrors((prev) => ({...prev, contactNumber: ""}));
                     }
                   },
                 }}
@@ -353,9 +381,10 @@ export default function DriverForm() {
               <input
                 type="email"
                 name="email"
-                placeholder="juandelacruz@email.com"
+                placeholder="juandelacruz@gmail.com"
                 value={formData.email}
                 onChange={handleChange}
+                onBlur={handleEmailBlur}
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
               {errors.email && (
@@ -402,9 +431,10 @@ export default function DriverForm() {
                       className={`
                         relative flex flex-col items-center justify-start gap-2
                         p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer
-                        ${isSelected
-                          ? "shadow-md border-primary bg-primary/5"
-                          : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm"
+                        ${
+                          isSelected
+                            ? "shadow-md border-primary bg-primary/5"
+                            : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-sm"
                         }
                       `}
                     >
@@ -459,14 +489,15 @@ export default function DriverForm() {
                       onClick={() => {
                         setSelectedVariantId(variant._id);
                         if (errors.variant)
-                          setErrors((prev) => ({ ...prev, variant: "" }));
+                          setErrors((prev) => ({...prev, variant: ""}));
                       }}
                       className={`
                         px-3 py-2.5 rounded-lg border-2 text-xs font-semibold
                         transition-all duration-200 whitespace-nowrap cursor-pointer
-                        ${isSelected
-                          ? "border-primary bg-primary text-white shadow-md"
-                          : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                        ${
+                          isSelected
+                            ? "border-primary bg-primary text-white shadow-md"
+                            : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
                         }
                       `}
                     >
@@ -512,14 +543,15 @@ export default function DriverForm() {
             ) : (
               <button
                 type="submit"
-                disabled={loading || !captchaValue}
+                disabled={loading || !isFormValid}
                 className={`
-                  w-full py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200
-                  ${loading || !captchaValue
-                    ? "bg-primary opacity-60 cursor-not-allowed"
-                    : "bg-primary hover:bg-orange-500 cursor-pointer"
-                  }
-                `}
+    w-full py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200
+    ${
+      loading || !isFormValid
+        ? "bg-primary opacity-60 cursor-not-allowed"
+        : "bg-primary hover:bg-orange-500 cursor-pointer"
+    }
+  `}
               >
                 {loading ? (
                   <span className="flex gap-2 justify-center items-center">
