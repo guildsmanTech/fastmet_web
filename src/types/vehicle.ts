@@ -8,6 +8,7 @@ export interface ILoadVariant {
 
 export interface IVehicleType {
   _id: string;
+  key: string;
   name: string;
   imageUrl: string;
   variants: ILoadVariant[];

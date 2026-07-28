@@ -22,6 +22,104 @@ interface FormData {
   email: string;
 }
 
+const VEHICLE_EXAMPLES: Record<string, string[]> = {
+  "sedan_200": [
+    "Toyota Vios",
+    "Toyota Wigo",
+    "Honda City",
+    "Honda Civic",
+    "Hyundai Accent",
+    "Suzuki Swift",
+    "Nissan Almera",
+  ],
+  "subcompact_suv_300": [
+    "Toyota Raize",
+    "Toyota Yaris Cross",
+    "Hyundai Kona",
+    "Kia Seltos",
+    "Honda HR-V",
+    "Suzuki Vitara",
+    "Nissan Juke",
+  ],
+  "suv_smallvan_600": [
+    "Toyota Avanza",
+    "Toyota Innova",
+    "Toyota Fortuner",
+    "Mitsubishi Xpander",
+    "Honda CR-V",
+    "Suzuki Ertiga",
+    "Nissan Terra",
+  ],
+  "small_pickup_800": [
+    "Toyota Hi-Lux",
+    "Isuzu D-Max",
+    "Mitsubishi Strada",
+    "Nissan Navara",
+    "Ford Ranger",
+    "Foton Thunder",
+    "Dongfeng Rich 6",
+  ],
+  "l300_cargo_van_1000": [
+    "Mitsubishi L300",
+    "Toyota HiAce",
+    "Nissan Urvan",
+    "Isuzu Elf",
+    "Kia Bongo",
+    "Hyundai H100",
+    "Foton Traveller",
+  ],
+  "l300_cargo_van_2000": [
+    "Isuzu Traviz",
+    "Hyundai HD45",
+    "Foton Tornado M2.6C",
+    "FUSO Canter FE71 / FE73",
+    "Hyundai HD36L",
+    "Kia K2500 Karga",
+  ],
+
+  "closed_van_2000": [
+    "Isuzu NHR55 Aluminum Van",
+    "Isuzu Elf NKR71/77 Aluminum Van",
+    "Mitsubishi Canter FE71/FE73",
+    "Hyundai HD36L/HD45",
+    "Kia K2500",
+    "Foton Tornado 2C Aluminum Van",
+  ],
+  "closed_van_3000": [
+    "Hyundai HD78",
+    "Isuzu NMR85",
+    "Isuzu NPR85K",
+    "Foton Tornado M4.2C",
+    "FUSO Canter FE84/FE85",
+    "Hino 814i",
+    "JAC King",
+  ],
+  "closed_van_4000": ["Isuzu NPR85K", "Fuso Canter FE84"],
+  "closed_van_5000": ["Fuso Canter FE85", "Isuzu NQR75L / NQR75LS"],
+
+  "wing_van_2000": [
+    "Isuzu NHR55",
+    "Isuzu Elf NKR71/77",
+    "Mitsubishi Canter FE71/FE73",
+    "Hyundai HD36L/HD45",
+    "Kia K2500",
+  ],
+  "wing_van_3000": [
+    "Hyundai HD78",
+    "Isuzu NMR85",
+    "Isuzu NPR85K",
+    "Foton Tornado M4.2C",
+    "FUSO Canter FE84/FE85",
+    "Hino 814i",
+  ],
+  "wing_van_4000": ["Isuzu NPR85K", "Fuso Canter FE84"],
+  "wing_van_5000": ["Fuso Canter FE85", "Isuzu NQR75L / NQR75LS"],
+};
+
+function getVehicleExamples(key: string, maxLoadKg: number): string[] {
+  return VEHICLE_EXAMPLES[`${key}_${maxLoadKg}`] ?? [];
+}
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function DriverForm() {
@@ -511,6 +609,39 @@ export default function DriverForm() {
               )}
             </div>
           )}
+
+          {selectedVehicle &&
+            (!showVariants || selectedVariantId) &&
+            (() => {
+              const loadKg = showVariants
+                ? activeVariants.find((v) => v._id === selectedVariantId)
+                    ?.maxLoadKg
+                : (activeVariants[0]?.maxLoadKg ?? 0);
+
+              if (loadKg === undefined) return null;
+
+              const examples = getVehicleExamples(selectedVehicle.key, loadKg);
+              if (examples.length === 0) return null;
+
+              return (
+                <div className="rounded-md border border-gray-200 bg-gray-50 p-3">
+                  <p className="mb-2 text-xs font-medium text-gray-700">
+                    Example {selectedVehicle.name} models
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {examples.map((model) => (
+                      <span
+                        key={model}
+                        className="rounded-md bg-white px-2 py-1 text-xs text-gray-600 border border-gray-200"
+                      >
+                        {model}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
 
           {/* ── Form error ────────────────────────────────────────────────── */}
           {errors.form && (
