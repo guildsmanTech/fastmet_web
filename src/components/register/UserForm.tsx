@@ -8,11 +8,16 @@ import OTPModal from "../modals/OTPModal";
 import {userRegistrationSchema} from "@/schemas/userRegistration";
 import {formatPHNumber} from "@/helper/format";
 import {OtpCountdown} from "@/components/ui/OtpCountdown";
+import {
+  ALLOWED_EMAIL_DOMAINS,
+  isAllowedEmailDomain,
+} from "@/helper/emailDomain";
 
 interface FormData {
   firstName: string;
   lastName: string;
   contactNumber: string;
+  email: string;
   gender: string;
 }
 
@@ -29,6 +34,7 @@ export default function UserForm() {
     firstName: "",
     lastName: "",
     contactNumber: "",
+    email: "",
     gender: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -47,6 +53,15 @@ export default function UserForm() {
     const {name, value} = e.target;
     setFormData((prev) => ({...prev, [name]: value}));
     if (errors[name]) setErrors((prev) => ({...prev, [name]: ""}));
+  };
+
+  const handleEmailBlur = () => {
+    if (formData.email && !isAllowedEmailDomain(formData.email)) {
+      setErrors((prev) => ({
+        ...prev,
+        email: `Only ${ALLOWED_EMAIL_DOMAINS.join(", ")} addresses are accepted`,
+      }));
+    }
   };
 
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -79,6 +94,7 @@ export default function UserForm() {
         body: JSON.stringify({
           phoneNumber: formData.contactNumber,
           captcha: captchaValue,
+          email: formData.email,
         }),
       });
 
@@ -169,7 +185,10 @@ export default function UserForm() {
           "Content-Type": "application/json",
           "X-User-Type": "client",
         },
-        body: JSON.stringify({phoneNumber: formData.contactNumber}),
+        body: JSON.stringify({
+          phoneNumber: formData.contactNumber,
+          email: formData.email,
+        }),
       });
       if (!res.ok) {
         const d = await res.json();
@@ -188,6 +207,7 @@ export default function UserForm() {
       firstName: "",
       lastName: "",
       contactNumber: "+63",
+      email: "",
       gender: "",
     });
     captchaRef.current?.reset();
@@ -195,10 +215,14 @@ export default function UserForm() {
     setErrors({});
   };
 
+  const emailIsValid =
+    formData.email.trim() !== "" && isAllowedEmailDomain(formData.email);
+
   const isFormValid =
     formData.firstName.trim() !== "" &&
     formData.lastName.trim() !== "" &&
     formData.contactNumber.trim() !== "" &&
+    emailIsValid &&
     formData.gender.trim() !== "" &&
     captchaValue !== null;
 
@@ -288,24 +312,44 @@ export default function UserForm() {
             </div>
             <div className="flex flex-col gap-2">
               <label className="block text-sm font-semibold text-gray-900">
-                Gender
+                Email Address
               </label>
-              <div className="flex gap-2 flex-wrap">
-                {GENDER_OPTIONS.map((option) => {
-                  const isSelected = formData.gender === option.value;
-                  return (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => {
-                        setFormData((prev) => ({
-                          ...prev,
-                          gender: option.value,
-                        }));
-                        if (errors.gender)
-                          setErrors((prev) => ({...prev, gender: ""}));
-                      }}
-                      className={`
+              <input
+                type="email"
+                name="email"
+                placeholder="juandelacruz@gmail.com"
+                value={formData.email}
+                onChange={handleChange}
+                onBlur={handleEmailBlur}
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs">{errors.email}</p>
+              )}
+            </div>
+          </div>
+
+          {/* ── Gender ─────────────────────────────────────────────────────── */}
+          <div className="flex flex-col gap-2">
+            <label className="block text-sm font-semibold text-gray-900">
+              Gender
+            </label>
+            <div className="flex gap-2 flex-wrap">
+              {GENDER_OPTIONS.map((option) => {
+                const isSelected = formData.gender === option.value;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        gender: option.value,
+                      }));
+                      if (errors.gender)
+                        setErrors((prev) => ({...prev, gender: ""}));
+                    }}
+                    className={`
                       px-4 py-2 rounded-lg border-2 text-xs font-semibold transition-all duration-200 cursor-pointer
                       ${
                         isSelected
@@ -313,16 +357,15 @@ export default function UserForm() {
                           : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                       }
                     `}
-                    >
-                      {option.label}
-                    </button>
-                  );
-                })}
-              </div>
-              {errors.gender && (
-                <p className="text-red-500 text-xs">{errors.gender}</p>
-              )}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
             </div>
+            {errors.gender && (
+              <p className="text-red-500 text-xs">{errors.gender}</p>
+            )}
           </div>
 
           {/* ── Form error ────────────────────────────────────────────────── */}
@@ -385,6 +428,7 @@ export default function UserForm() {
         open={otpModalOpen}
         onOpenChange={setOtpModalOpen}
         phone={formData.contactNumber}
+        email={formData.email}
         onVerify={handleVerify}
         onVerifySuccess={handleVerifySuccess}
         onResend={handleResend}
