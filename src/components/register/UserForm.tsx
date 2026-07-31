@@ -8,10 +8,7 @@ import OTPModal from "../modals/OTPModal";
 import {userRegistrationSchema} from "@/schemas/userRegistration";
 import {formatPHNumber} from "@/helper/format";
 import {OtpCountdown} from "@/components/ui/OtpCountdown";
-import {
-  ALLOWED_EMAIL_DOMAINS,
-  isAllowedEmailDomain,
-} from "@/helper/emailDomain";
+import {useAllowedDomains} from "@/hooks/useAllowedDomains";
 
 interface FormData {
   firstName: string;
@@ -48,6 +45,9 @@ export default function UserForm() {
   // OTP modal — only open/close lives here
   const [otpModalOpen, setOtpModalOpen] = useState(false);
   const [sendRateLimit, setSendRateLimit] = useState<number | null>(null);
+  const [ipLimitReached, setIpLimitReached] = useState(false);
+
+  const allowedDomains = useAllowedDomains();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -56,11 +56,14 @@ export default function UserForm() {
   };
 
   const handleEmailBlur = () => {
-    if (formData.email && !isAllowedEmailDomain(formData.email)) {
-      setErrors((prev) => ({
-        ...prev,
-        email: `Only ${ALLOWED_EMAIL_DOMAINS.join(", ")} addresses are accepted`,
-      }));
+    if (formData.email) {
+      const domain = formData.email.split("@")[1]?.toLowerCase().trim() ?? "";
+      if (!allowedDomains.includes(domain)) {
+        setErrors((prev) => ({
+          ...prev,
+          email: `Only ${allowedDomains.join(", ")} addresses are accepted`,
+        }));
+      }
     }
   };
 
@@ -98,14 +101,19 @@ export default function UserForm() {
         }),
       });
 
-      if (res.status === 429) {
-        const raw = res.headers.get("Retry-After");
-        const secs = raw ? parseInt(raw, 10) : 60;
-        setSendRateLimit(isNaN(secs) ? 60 : secs);
-      } else if (res.ok) {
+      if (res.ok) {
         setOtpModalOpen(true);
+      } else if (res.status === 429) {
+        const d = await res.json().catch(() => ({}));
+        if (d.code === "IP_LIMIT_REACHED") {
+          setIpLimitReached(true);
+        } else {
+          const raw = res.headers.get("Retry-After");
+          const secs = raw ? parseInt(raw, 10) : 60;
+          setSendRateLimit(isNaN(secs) ? 60 : secs);
+        }
       } else {
-        const d = await res.json();
+        const d = await res.json().catch(() => ({}));
         setErrors({form: d.error || "Failed to send OTP. Please try again."});
       }
     } catch {
@@ -216,7 +224,11 @@ export default function UserForm() {
   };
 
   const emailIsValid =
-    formData.email.trim() !== "" && isAllowedEmailDomain(formData.email);
+    formData.email.trim() !== "" &&
+    (() => {
+      const domain = formData.email.split("@")[1]?.toLowerCase().trim() ?? "";
+      return domain !== "" && allowedDomains.includes(domain);
+    })();
 
   const isFormValid =
     formData.firstName.trim() !== "" &&
@@ -369,11 +381,24 @@ export default function UserForm() {
           </div>
 
           {/* ── Form error ────────────────────────────────────────────────── */}
-          {errors.form && (
+          {ipLimitReached ? (
+            <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 space-y-1">
+              <p className="text-red-600 text-xs text-center font-semibold">
+                Registration limit reached for your network.
+              </p>
+              <p className="text-red-500 text-xs text-center">
+                If you think this is a mistake,{" "}
+                <a href="/#inquiry" className="underline font-medium">
+                  message us
+                </a>{" "}
+                and we&apos;ll look into it.
+              </p>
+            </div>
+          ) : errors.form ? (
             <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
               <p className="text-red-600 text-xs text-center">{errors.form}</p>
             </div>
-          )}
+          ) : null}
 
           {/* ── Captcha + Submit ──────────────────────────────────────────── */}
           <div className="flex flex-col items-center gap-4 pt-2">

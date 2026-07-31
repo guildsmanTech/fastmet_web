@@ -10,10 +10,7 @@ import {useVehicles} from "@/hooks/useVehicleQueries";
 import {formatPHNumber} from "@/helper/format";
 import type {IVehicleType} from "@/types/vehicle";
 import {OtpCountdown} from "@/components/ui/OtpCountdown";
-import {
-  isAllowedEmailDomain,
-  ALLOWED_EMAIL_DOMAINS,
-} from "@/helper/emailDomain";
+import {useAllowedDomains} from "@/hooks/useAllowedDomains";
 
 interface FormData {
   firstName: string;
@@ -144,6 +141,9 @@ export default function DriverForm() {
   const [selectedVariantId, setSelectedVariantId] = useState("");
   const [otpModalOpen, setOtpModalOpen] = useState(false);
   const [sendRateLimit, setSendRateLimit] = useState<number | null>(null);
+  const [ipLimitReached, setIpLimitReached] = useState(false);
+
+  const allowedDomains = useAllowedDomains();
 
   const {data: vehiclesData} = useVehicles();
 
@@ -166,11 +166,14 @@ export default function DriverForm() {
   };
 
   const handleEmailBlur = () => {
-    if (formData.email && !isAllowedEmailDomain(formData.email)) {
-      setErrors((prev) => ({
-        ...prev,
-        email: `Only ${ALLOWED_EMAIL_DOMAINS.join(", ")} addresses are accepted`,
-      }));
+    if (formData.email) {
+      const domain = formData.email.split("@")[1]?.toLowerCase().trim() ?? "";
+      if (!allowedDomains.includes(domain)) {
+        setErrors((prev) => ({
+          ...prev,
+          email: `Only ${allowedDomains.join(", ")} addresses are accepted`,
+        }));
+      }
     }
   };
 
@@ -230,14 +233,19 @@ export default function DriverForm() {
         }),
       });
 
-      if (res.status === 429) {
-        const raw = res.headers.get("Retry-After");
-        const secs = raw ? parseInt(raw, 10) : 60;
-        setSendRateLimit(isNaN(secs) ? 60 : secs);
-      } else if (res.ok) {
+      if (res.ok) {
         setOtpModalOpen(true);
+      } else if (res.status === 429) {
+        const d = await res.json().catch(() => ({}));
+        if (d.code === "IP_LIMIT_REACHED") {
+          setIpLimitReached(true);
+        } else {
+          const raw = res.headers.get("Retry-After");
+          const secs = raw ? parseInt(raw, 10) : 60;
+          setSendRateLimit(isNaN(secs) ? 60 : secs);
+        }
       } else {
-        const d = await res.json();
+        const d = await res.json().catch(() => ({}));
         setErrors({form: d.error || "Failed to send OTP. Please try again."});
       }
     } catch {
@@ -372,7 +380,11 @@ export default function DriverForm() {
   const showVariants = activeVariants.length > 1;
 
   const emailIsValid =
-    formData.email !== "" && isAllowedEmailDomain(formData.email);
+    formData.email !== "" &&
+    (() => {
+      const domain = formData.email.split("@")[1]?.toLowerCase().trim() ?? "";
+      return domain !== "" && allowedDomains.includes(domain);
+    })();
 
   const isFormValid =
     formData.firstName.trim() !== "" &&
@@ -644,11 +656,27 @@ export default function DriverForm() {
             })()}
 
           {/* ── Form error ────────────────────────────────────────────────── */}
-          {errors.form && (
+          {ipLimitReached ? (
+            <div className="px-4 py-3 bg-red-50 rounded-lg border border-red-200 space-y-1">
+              <p className="text-xs text-center font-semibold text-red-600">
+                Registration limit reached for your network.
+              </p>
+              <p className="text-xs text-center text-red-500">
+                If you think this is a mistake,{" "}
+                <a
+                  href="/#inquiry"
+                  className="underline font-medium"
+                >
+                  message us
+                </a>{" "}
+                and we&apos;ll look into it.
+              </p>
+            </div>
+          ) : errors.form ? (
             <div className="px-4 py-3 bg-red-50 rounded-lg border border-red-200">
               <p className="text-xs text-center text-red-600">{errors.form}</p>
             </div>
-          )}
+          ) : null}
 
           {/* ── Captcha + Submit ──────────────────────────────────────────── */}
           <div className="flex flex-col gap-4 items-center pt-2">
