@@ -1,5 +1,4 @@
 import {z} from "zod";
-import {ALLOWED_EMAIL_DOMAINS, isAllowedEmailDomain} from "@/helper/emailDomain";
 
 export const userRegistrationSchema = z.object({
   firstName: z
@@ -16,9 +15,7 @@ export const userRegistrationSchema = z.object({
     .string()
     .min(1, "Contact number is required")
     .regex(/^639\d{9}$/, "Invalid PH contact number"),
-  email: z.email("Invalid email address").refine(isAllowedEmailDomain, {
-    message: `Only ${ALLOWED_EMAIL_DOMAINS.join(", ")} addresses are accepted`,
-  }),
+  email: z.email("Invalid email address"),
   gender: z.string().min(1, "Please select a gender"),
 });
 
