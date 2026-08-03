@@ -56,6 +56,12 @@ export default function Home() {
         <link rel="canonical" href="https://fastmet.com.ph/" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "FastMet",
+          "url": "https://fastmet.com.ph"
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
           "@type": "Organization",
           "name": "FastMet",
           "url": "https://fastmet.com.ph",
