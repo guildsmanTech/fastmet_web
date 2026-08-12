@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import {Helmet} from "react-helmet-async";
 import {useEffect} from "react";
 import {ChevronLeft} from "lucide-react";
 import UserForm from "@/components/register/UserForm";
@@ -23,7 +23,7 @@ export default function UserRegister() {
         <link rel="canonical" href="https://fastmet.com.ph/user-register" />
       </Helmet>
       <Button
-        onClick={() => navigate("/")}
+        onClick={() => navigate(-1)}
         variant="ghost"
         className="absolute left-3 top-20 z-10 cursor-pointer md:top-25"
       >

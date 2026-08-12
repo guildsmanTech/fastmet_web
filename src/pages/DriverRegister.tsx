@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import {Helmet} from "react-helmet-async";
 import DriverForm from "@/components/register/DriverForm";
 import InfoDriver from "@/components/register/InfoDriver";
 import {useEffect} from "react";
@@ -22,7 +22,7 @@ export default function DriverRegister() {
         <link rel="canonical" href="https://fastmet.com.ph/driver-register" />
       </Helmet>
       <Button
-        onClick={() => navigate("/")}
+        onClick={() => navigate(-1)}
         variant="ghost"
         className="absolute left-3 top-20 z-10 cursor-pointer md:top-25"
       >
