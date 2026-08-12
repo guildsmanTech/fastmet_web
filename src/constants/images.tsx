@@ -31,6 +31,16 @@ import smallVan from "@/assets/vehicles/small_van.png";
 import wingVan from "@/assets/vehicles/wing_van.png";
 import subcompact from "@/assets/vehicles/subcompact.png";
 
+import aboutBg from "@/assets/about_bg.png";
+import aboutBg2 from "@/assets/about_bg2.png";
+import aboutUser from "@/assets/about_user.png";
+import aboutBusiness from "@/assets/about_business.png";
+import aboutTruck from "@/assets/about_truck.png";
+import aboutTruck2 from "@/assets/about_truck2.png";
+import aboutTruck3 from "@/assets/about_truck3.png";
+import aboutRider from "@/assets/about_rider.png";
+import aboutMotor from "@/assets/about_motor.png";
+
 export {
   phone,
   phoneBG,
@@ -60,4 +70,13 @@ export {
   license,
   partnerDriverBG,
   partnerDriverPhoto,
+  aboutBg,
+  aboutBg2,
+  aboutUser,
+  aboutBusiness,
+  aboutTruck,
+  aboutTruck2,
+  aboutTruck3,
+  aboutRider,
+  aboutMotor,
 };
