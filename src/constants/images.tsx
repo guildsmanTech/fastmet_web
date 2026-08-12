@@ -1,50 +1,82 @@
-import phoneBG from "../assets/phone-bg.png";
 import phone from "../assets/phone.png";
-import phone_map from "../assets/phone-map.png";
-import single_phone from "../assets/single-phone.png";
-import motor from "../assets/vehicles/motor.png";
-import sedan from "../assets/vehicles/sedan.png";
-import pickup from "../assets/vehicles/small_pickup.png";
-import light_van from "../assets/vehicles/light_van.png";
-import closed_van from "../assets/vehicles/closed_van.png";
-import wing_van from "../assets/vehicles/wing_van.png";
-import mpv_suv from "../assets/vehicles/mpv_suv.png";
-import l300 from "../assets/vehicles/fastmet_truck.png"; //placeholder
+import phoneBG from "../assets/phone-bg.png";
 import logo from "../assets/logo.png";
 import question from "../assets/question.png";
 import reward_bg from "../assets/reward_bg.png";
-import bg_map from "../assets/bg-map.png";
 import gift_close from "../assets/gift-close.png";
 import gift_open from "../assets/gift-open.png";
+import zero from "@/assets/zero.png";
+
+import vehicleNumbers from "@/assets/vehicle_numbers.png";
+import vehicleImage from "@/assets/vehicle_image.png";
+import vehicleDocu from "@/assets/vehicle_documents.png";
+import license from "@/assets/driver-license.png";
+
+import partnerDriverBG from "@/assets/partnerdriver_bg.png";
+import partnerDriverPhoto from "@/assets/partnerdriver_photo.png";
+
+import homeBg from "@/assets/home_bg.png";
+import homeBox from "@/assets/home_box.png";
+import homeUser from "@/assets/home_user.png";
+import homeDriver from "@/assets/home_driver.png";
+import phMap from "@/assets/ph_map.png";
+import coverage from "@/assets/coverage.jpg";
+
+import closedVan from "@/assets/vehicles/closed_van.png";
+import l300 from "@/assets/vehicles/l300.png";
+import motor from "@/assets/vehicles/motor.png";
+import pickUp from "@/assets/vehicles/pick_up.png";
+import sedan from "@/assets/vehicles/sedan.png";
+import smallVan from "@/assets/vehicles/small_van.png";
+import wingVan from "@/assets/vehicles/wing_van.png";
+import subcompact from "@/assets/vehicles/subcompact.png";
+
+import aboutBg from "@/assets/about_bg.png";
+import aboutBg2 from "@/assets/about_bg2.png";
+import aboutUser from "@/assets/about_user.png";
+import aboutBusiness from "@/assets/about_business.png";
+import aboutTruck from "@/assets/about_truck.png";
+import aboutTruck2 from "@/assets/about_truck2.png";
+import aboutTruck3 from "@/assets/about_truck3.png";
+import aboutRider from "@/assets/about_rider.png";
+import aboutMotor from "@/assets/about_motor.png";
 
 export {
-  phoneBG,
   phone,
-  single_phone,
-  phone_map,
-  motor,
-  sedan,
-  pickup,
-  light_van,
-  closed_van,
-  wing_van,
-  mpv_suv,
-  l300,
+  phoneBG,
   logo,
   question,
   reward_bg,
-  bg_map,
+  zero,
+  phMap,
   gift_close,
   gift_open,
+  homeBg,
+  homeBox,
+  homeUser,
+  homeDriver,
+  coverage,
+  closedVan,
+  l300,
+  motor,
+  pickUp,
+  sedan,
+  smallVan,
+  wingVan,
+  subcompact,
+  vehicleNumbers,
+  vehicleImage,
+  vehicleDocu,
+  license,
+  partnerDriverBG,
+  partnerDriverPhoto,
+  aboutBg,
+  aboutBg2,
+  aboutUser,
+  aboutBusiness,
+  aboutTruck,
+  aboutTruck2,
+  aboutTruck3,
+  aboutRider,
+  aboutMotor,
 };
-
-export const VEHICLES = [
-  { id: "motorcycle", name: "Motorcycle", img: motor },
-  { id: "sedan", name: "Sedan", img: sedan },
-  { id: "pickup", name: "Pickup", img: pickup },
-  { id: "suv", name: "MPV/SUV", img: mpv_suv },
-  { id: "l300", name: "Truck", img: l300 },
-  { id: "light_van", name: "Light Van", img: light_van },
-  { id: "closed_van", name: "Closed Van", img: closed_van },
-  { id: "wing_van", name: "Wing Van", img: wing_van },
-];

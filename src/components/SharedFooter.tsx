@@ -7,8 +7,9 @@ export default function SharedFooter() {
 
   return (
     <footer className="bg-secondary flex flex-col items-center gap-8 w-full py-3 md:py-5">
-      <h2 className="text-primary text-sm font-semibold md:text-xl text-center">
-        "The future of your drive starts with one click. Pre-register."
+      <h2 className="text-white text-sm font-semibold md:text-xl text-center">
+        Need it <span className="text-primary">Fast</span>? Consider it{" "}
+        <span className="text-primary">Met</span>. Pre-register now!
       </h2>
 
       <div className="flex flex-col items-center gap-8 md:flex-row md:divide-x">
