@@ -16,6 +16,16 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://fastmet.com.ph/about</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://fastmet.com.ph/partner-driver</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://fastmet.com.ph/blog</loc>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>

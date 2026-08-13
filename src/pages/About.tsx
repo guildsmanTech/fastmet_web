@@ -1,3 +1,4 @@
+import {Helmet} from "react-helmet-async";
 import ConnectNeeds from "@/components/about/ConnectNeeds";
 import Coverage from "@/components/about/Coverage";
 import Founder from "@/components/about/Founder";
@@ -15,6 +16,14 @@ export default function About() {
 
   return (
     <div>
+      <Helmet>
+        <title>About FastMet | On-Demand Delivery in Greater Manila</title>
+        <meta
+          name="description"
+          content="FastMet is an on-demand delivery platform for individuals, online sellers, businesses, and partner-drivers. Learn our mission, values, and how we connect Greater Manila to nationwide deliveries."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/about" />
+      </Helmet>
       <section
         className="relative w-full min-h-dvh flex items-center bg-secondary"
         id="hero"
