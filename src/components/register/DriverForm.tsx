@@ -11,6 +11,7 @@ import {formatPHNumber} from "@/helper/format";
 import type {IVehicleType} from "@/types/vehicle";
 import {OtpCountdown} from "@/components/ui/OtpCountdown";
 import {useAllowedDomains} from "@/hooks/useAllowedDomains";
+import {useSearchParams} from "react-router-dom";
 
 interface FormData {
   firstName: string;
@@ -120,6 +121,11 @@ function getVehicleExamples(key: string, maxLoadKg: number): string[] {
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function DriverForm() {
+  const [searchParams] = useSearchParams();
+  const preselectVehicle = searchParams.get("vehicle");
+
+  console.log("preselectVehicle", preselectVehicle);
+
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -150,14 +156,30 @@ export default function DriverForm() {
   const vehicles = useMemo(() => vehiclesData ?? [], [vehiclesData]);
 
   useEffect(() => {
-    if (!selectedVehicle && vehicles.length > 0) {
+    if (vehicles.length === 0) return;
+
+    if (preselectVehicle) {
+      const vehicleData = vehicles.find((v) => v.key === preselectVehicle);
+
+      if (vehicleData) {
+        setSelectedVehicle(vehicleData);
+        setSelectedVariantId(
+          vehicleData.variants.length > 0 ? vehicleData.variants[0]._id : "",
+        );
+        return;
+      }
+    }
+
+    // No valid vehicle query parameter → use first vehicle
+    if (!selectedVehicle) {
       const first = vehicles[0];
-      const firstActive = first.variants.filter((v) => v.isActive);
 
       setSelectedVehicle(first);
-      setSelectedVariantId(firstActive.length > 0 ? firstActive[0]._id : "");
+      setSelectedVariantId(
+        first.variants.length > 0 ? first.variants[0]._id : "",
+      );
     }
-  }, [selectedVehicle, vehicles]);
+  }, [preselectVehicle, vehicles, selectedVehicle]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -663,10 +685,7 @@ export default function DriverForm() {
               </p>
               <p className="text-xs text-center text-red-500">
                 If you think this is a mistake,{" "}
-                <a
-                  href="/#inquiry"
-                  className="underline font-medium"
-                >
+                <a href="/#inquiry" className="underline font-medium">
                   message us
                 </a>{" "}
                 and we&apos;ll look into it.

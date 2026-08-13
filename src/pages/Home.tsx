@@ -41,11 +41,11 @@ export default function Home() {
     <div className="flex items-center justify-center flex-col w-full overflow-x-hidden gap-12">
       <Helmet>
         <title>
-          FastMet – Fast & Reliable Delivery Service in Greater Manila
+          FastMet – Fast & Reliable On-Demand Delivery in Greater Manila
         </title>
         <meta
           name="description"
-          content="FastMet is a fast and reliable logistics platform connecting clients with trusted drivers across Greater Manila. Pre-register now and claim exclusive launch rewards."
+          content="Book a courier in seconds. FastMet connects users and businesses with the right partner-driver and vehicle — from motorcycle to wing van — across Greater Manila and nationwide land routes. Pre-register now."
         />
         <link rel="canonical" href="https://fastmet.com.ph/" />
         <script type="application/ld+json">
@@ -64,7 +64,7 @@ export default function Home() {
             "url": "https://fastmet.com.ph",
             "logo": "https://fastmet.com.ph/fastmet_icon.png",
             "description":
-              "Fast and reliable logistics platform in Greater Manila",
+              "On-demand delivery platform in Greater Manila",
             "areaServed": "Greater Manila",
             "sameAs": [],
           })}

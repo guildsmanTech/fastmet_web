@@ -27,7 +27,7 @@ function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
           {vehicle.desc}
         </p>
         <Link
-          to="/driver-register"
+          to={`/driver-register?vehicle=${vehicle.key}`}
           className="mt-1 text-center text-[11px] md:text-xs font-semibold border border-primary text-primary hover:bg-primary hover:text-white rounded-full px-3 py-2 transition"
         >
           Pre-Register This Vehicle

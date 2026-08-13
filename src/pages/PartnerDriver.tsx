@@ -1,3 +1,4 @@
+import {Helmet} from "react-helmet-async";
 import {homeBg, zero} from "@/constants/images";
 import {
   BadgePercent,
@@ -19,6 +20,14 @@ import {FinalCTA} from "@/components/PartnerDriver/FinalCTA";
 export default function PartnerDriver() {
   return (
     <div className="flex flex-col gap-10">
+      <Helmet>
+        <title>Become a FastMet Partner-Driver | Greater Manila</title>
+        <meta
+          name="description"
+          content="Pre-register as a FastMet partner-driver. Own a motorcycle, sedan, van, or truck? Get updates on onboarding, activation, and delivery opportunities across Greater Manila."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/partner-driver" />
+      </Helmet>
       {/* ===== HERO ===== */}
       <section
         className="relative w-full min-h-dvh flex items-center bg-secondary"
