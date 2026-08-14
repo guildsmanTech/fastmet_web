@@ -1,7 +1,6 @@
 import {Helmet} from "react-helmet-async";
 import {homeBg, zero} from "@/constants/images";
 import {
-  BadgePercent,
   BellRing,
   BookOpenText,
   CalendarClock,
@@ -13,9 +12,10 @@ import {Link} from "react-router-dom";
 import {VEHICLE_TYPES} from "./Home";
 import {Requirements} from "@/components/PartnerDriver/Requirements";
 import {AcceptedVehicles} from "@/components/PartnerDriver/AcceptedVehicles";
-import {GreaterManilaBanner} from "@/components/PartnerDriver/GreaterManilaBanner";
+import {Commission} from "@/components/PartnerDriver/GreaterManilaBanner";
 import {DriverFAQ} from "@/components/PartnerDriver/Faq";
 import {FinalCTA} from "@/components/PartnerDriver/FinalCTA";
+import PageContainer from "@/components/PageContainer";
 
 export default function PartnerDriver() {
   return (
@@ -40,7 +40,7 @@ export default function PartnerDriver() {
         />
         <div className="absolute inset-0 bg-black/20" />
 
-        <div className="relative z-10 w-full px-4 md:px-12 xl:px-20 py-20 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Left: headline */}
           <div className="flex flex-col gap-5 text-white max-w-xl">
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
@@ -119,11 +119,12 @@ export default function PartnerDriver() {
             Pre-registration pa lamang ito. Official updates will be sent
             through the contact details you provide.
           </p>
-        </div>
+        </PageContainer>
       </section>
 
       {/* ===== WHY PRE-REGISTER NOW ===== */}
-      <section className="w-full px-4 md:px-12 xl:px-20 flex flex-col gap-8">
+      <section className="w-full">
+        <PageContainer className="flex flex-col gap-8">
         <h2 className="text-primary font-bold text-2xl md:text-3xl text-center">
           Why Pre-Register Now?
         </h2>
@@ -172,70 +173,65 @@ export default function PartnerDriver() {
             </div>
           </div>
         </div>
+        </PageContainer>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-12 xl:px-20">
+      <section>
+        <PageContainer className="flex flex-wrap justify-center gap-4">
         {[
           {
-            text: "Introductory 0% Commission",
-            subtext:
-              "Eligible partner-drivers can keep 100% of their delivery earnings during the introductory period.",
-            icon: BadgePercent,
-          },
-          {
-            text: "Ikaw ang May Hawak ng Oras Mo",
-            subtext:
+            title: "Ikaw ang May Hawak ng Oras Mo",
+            description:
               "Choose when you are available once delivery opportunities begin.",
             icon: Clock3,
           },
           {
-            text: "Walang Fixed Hours",
-            subtext:
+            title: "Walang Fixed Hours",
+            description:
               "FastMet offers flexible opportunities for partner-drivers.",
             icon: CalendarClock,
           },
           {
-            text: "Walang Daily Quota",
-            subtext: "No required number of deliveries per day.",
+            title: "Walang Daily Quota",
+            description: "No required number of deliveries per day.",
             icon: Target,
           },
           {
-            text: "Iba't Ibang Sasakyan, Iba't Ibang Delivery",
-            subtext:
+            title: "Iba't Ibang Sasakyan, Iba't Ibang Delivery",
+            description:
               "FastMet accepts different vehicles for different delivery needs.",
             icon: Truck,
           },
           {
-            text: "Makatanggap ng Official Updates",
-            subtext:
+            title: "Makatanggap ng Official Updates",
+            description:
               "Be among the first to receive onboarding, activation, and launch updates.",
             icon: BellRing,
           },
-        ].map(({text, subtext, icon: Icon}) => (
+        ].map(({title, description, icon: Icon}) => (
           <div
-            key={text}
-            className="flex gap-4 rounded-2xl border border-gray-200 items-center bg-white p-5 shadow-sm transition hover:border-primary/30 hover:shadow-md"
+            key={title}
+            className="group rounded-xl border w-[400px] border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
           >
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+            <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
               <Icon className="size-5" />
             </div>
 
-            <div className="min-w-0">
-              <h3 className="text-sm md:text-base font-bold text-gray-900">
-                {text}
-              </h3>
+            <h3 className="text-sm md:text-base font-bold text-gray-900">
+              {title}
+            </h3>
 
-              <p className="mt-1.5 text-xs md:text-sm leading-relaxed text-gray-500">
-                {subtext}
-              </p>
-            </div>
+            <p className="mt-2 text-xs md:text-sm leading-relaxed text-gray-600">
+              {description}
+            </p>
           </div>
         ))}
+        </PageContainer>
       </section>
 
       <AcceptedVehicles />
       <Requirements />
-      <GreaterManilaBanner />
+      <Commission />
       <DriverFAQ />
       <FinalCTA />
     </div>

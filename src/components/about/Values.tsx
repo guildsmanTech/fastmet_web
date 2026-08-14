@@ -5,6 +5,7 @@ import {
   TrendingUp,
   HeartHandshake,
 } from "lucide-react";
+import PageContainer from "@/components/PageContainer";
 
 const values = [
   {
@@ -36,7 +37,8 @@ const values = [
 
 export default function OurValues() {
   return (
-    <section className="w-full px-4 sm:px-8 md:px-12 xl:px-20 py-16 md:py-20 bg-gradient-to-r from-yellow-400 to-orange-500">
+    <section className="w-full py-16 md:py-20 bg-gradient-to-r from-yellow-400 to-orange-500">
+      <PageContainer>
       <div className="max-w-2xl mx-auto text-center flex flex-col gap-1 mb-10">
         <h2 className="text-2xl md:text-3xl font-extrabold text-white">
           Our Values
@@ -60,6 +62,7 @@ export default function OurValues() {
           </div>
         ))}
       </div>
+      </PageContainer>
     </section>
   );
 }

@@ -6,6 +6,7 @@ import {
 } from "@/constants/images";
 import {ChevronRight} from "lucide-react";
 import {Link} from "react-router-dom";
+import PageContainer from "@/components/PageContainer";
 
 const REQUIREMENTS_STEPS = [
   {
@@ -42,10 +43,8 @@ const REQUIREMENTS_STEPS = [
 
 export function Requirements() {
   return (
-    <section
-      className="w-full bg-secondary px-4 md:px-12 xl:px-20 py-10 flex flex-col gap-10"
-      id="requirements"
-    >
+    <section className="w-full bg-secondary py-10" id="requirements">
+      <PageContainer className="flex flex-col gap-10">
       <h2 className="text-primary font-bold text-2xl md:text-3xl text-center">
         Requirements to Become a FastMet Partner-Driver
       </h2>
@@ -106,6 +105,7 @@ export function Requirements() {
           Pre-Register as a Driver
         </Link>
       </div>
+      </PageContainer>
     </section>
   );
 }

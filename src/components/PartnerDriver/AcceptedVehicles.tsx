@@ -1,6 +1,24 @@
 import {useVehicles} from "@/hooks/useVehicleQueries";
 import type {IVehicleType} from "@/types/vehicle";
 import {Link} from "react-router-dom";
+import PageContainer from "@/components/PageContainer";
+
+const VEHICLE_DESCRIPTION = {
+  motorcycle:
+    "Para sa documents, food orders, small parcels, at magaang na items.",
+  sedan: "Para sa multiple packages, delicate items, at medium-sized orders.",
+  subcompact_suv:
+    "Para sa business orders, multiple boxes, at medium-sized cargo.",
+  suv_smallvan:
+    "Para sa appliances, larger boxes, supplies, at multiple orders.",
+  small_pickup: "Para sa furniture, tools, equipment, at bulky items.",
+  l300_cargo_van:
+    "Para sa inventory, appliances, equipment, at large-volume deliveries.",
+  closed_van:
+    "Para sa heavy items, commercial deliveries, at cargo na kailangang enclosed.",
+  wing_van:
+    "Para sa warehouse deliveries, palletized goods, oversized items, at large commercial cargo.",
+};
 
 function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
   const maxLoad = Math.max(...vehicle.variants.map((v) => v.maxLoadKg));
@@ -24,7 +42,9 @@ function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
           </span>
         </div>
         <p className="text-xs text-gray-600 lg:text-sm leading-relaxed flex-1">
-          {vehicle.desc}
+          {
+            VEHICLE_DESCRIPTION[vehicle.key as keyof typeof VEHICLE_DESCRIPTION]
+          }{" "}
         </p>
         <Link
           to={`/driver-register?vehicle=${vehicle.key}`}
@@ -41,10 +61,8 @@ export function AcceptedVehicles() {
   const {data, isPending, isError} = useVehicles();
 
   return (
-    <section
-      className="w-full px-4 md:px-12 xl:px-20 flex flex-col gap-8"
-      id="accepted-vehicles"
-    >
+    <section className="w-full" id="accepted-vehicles">
+      <PageContainer className="flex flex-col gap-8">
       <div className="flex flex-col items-center gap-1 text-center">
         <h2 className="text-primary font-bold text-2xl md:text-3xl">
           Accepted Vehicles
@@ -79,6 +97,7 @@ export function AcceptedVehicles() {
           ))}
         </div>
       )}
+      </PageContainer>
     </section>
   );
 }

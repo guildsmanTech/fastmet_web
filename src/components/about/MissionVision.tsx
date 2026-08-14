@@ -1,3 +1,5 @@
+import PageContainer from "@/components/PageContainer";
+
 type BlockProps = {
   title: string;
   paragraphs: string[];
@@ -34,7 +36,8 @@ function MissionVisionBlock({
 
 export default function MissionVision() {
   return (
-    <section className="w-full px-4 sm:px-8 md:px-12 xl:px-20 py-16 md:py-20 flex flex-col gap-16 md:gap-20">
+    <section className="w-full">
+      <PageContainer className="flex flex-col gap-16 md:gap-20">
       <MissionVisionBlock
         title="Our Mission"
         imageFirst
@@ -51,6 +54,7 @@ export default function MissionVision() {
           "Maging isa sa mga pinaka-pinagkakatiwalaang on-demand delivery platforms sa Pilipinas sa pamamagitan ng pagbuo ng isang komunidad kung saan ang mga user, negosyo, at partner-drivers ay sabay-sabay na umuunlad sa pamamagitan ng mabilis, patas, at maaasahang serbisyo.",
         ]}
       />
+      </PageContainer>
     </section>
   );
 }

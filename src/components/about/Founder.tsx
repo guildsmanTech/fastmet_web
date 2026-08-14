@@ -1,3 +1,5 @@
+import PageContainer from "@/components/PageContainer";
+
 const founders = [
   {name: "Joshua Estopia", quote: "Quote"},
   {name: "Dexter Junio", quote: "Quote"},
@@ -5,7 +7,8 @@ const founders = [
 
 export default function Founders() {
   return (
-    <section className="w-full px-4 sm:px-8 md:px-12 xl:px-20 py-16 md:py-20">
+    <section className="w-full">
+      <PageContainer>
       <div className="max-w-2xl mx-auto text-center flex flex-col gap-3 mb-10 md:mb-14">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-primary">
           Meet the Bright Minds Behind FastMet
@@ -34,6 +37,7 @@ export default function Founders() {
           </div>
         ))}
       </div>
+      </PageContainer>
     </section>
   );
 }
