@@ -1,22 +1,8 @@
 import {coverage} from "@/constants/images";
-import {Check, CheckCheck, CheckCircle, X} from "lucide-react";
+import {CheckCheck, X} from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 
 export default function CoverageExplainer() {
-  const ITEMS = [
-    {icon: Check, label: "Request Area", desc: "Greater Manila"},
-    {
-      icon: Check,
-      label: "Delivery Area",
-      desc: "Nationwide through land-accessible routes",
-    },
-    {
-      icon: X,
-      label: "Not Yet Covered",
-      desc: "Routes requiring ferry or sea transport",
-    },
-  ];
-
   return (
     <section className="w-full bg-white">
       <PageContainer className="flex flex-col md:flex-row items-center gap-10">
