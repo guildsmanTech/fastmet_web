@@ -1,12 +1,14 @@
 import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
 import {Truck, User} from "lucide-react";
 import {SocialIcon} from "react-social-icons";
+import PageContainer from "@/components/PageContainer";
 
 export default function SharedFooter() {
   const {data: counts} = useRegistrationCounts();
 
   return (
-    <footer className="bg-secondary flex flex-col items-center gap-8 w-full py-3 md:py-5">
+    <footer className="bg-secondary w-full py-3 md:py-5">
+      <PageContainer className="flex flex-col items-center gap-8">
       <h2 className="text-white text-sm font-semibold md:text-xl text-center">
         Need it <span className="text-primary">Fast</span>? Consider it{" "}
         <span className="text-primary">Met</span>. Pre-register now!
@@ -77,6 +79,7 @@ export default function SharedFooter() {
       <p className="text-white text-xs md:text-sm">
         © 2026 FastMet. All rights reserved.
       </p>
+      </PageContainer>
     </footer>
   );
 }

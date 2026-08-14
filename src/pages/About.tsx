@@ -5,17 +5,14 @@ import Founder from "@/components/about/Founder";
 import JoinFastMet from "@/components/about/Join";
 import MissionVision from "@/components/about/MissionVision";
 import OurValues from "@/components/about/Values";
-import LoaderModal from "@/components/modals/Loader";
 import {aboutBg} from "@/constants/images";
-import {useVehicles} from "@/hooks/useVehicleQueries";
-import {UserRound, Truck} from "lucide-react";
+import {UserRound, Van, Truck, Motorbike, Car} from "lucide-react";
 import {Link} from "react-router-dom";
+import PageContainer from "@/components/PageContainer";
 
 export default function About() {
-  const {isPending: vehiclesLoading, data, isError} = useVehicles();
-
   return (
-    <div>
+    <div className="w-full flex flex-col gap-16 md:gap-20">
       <Helmet>
         <title>About FastMet | On-Demand Delivery in Greater Manila</title>
         <meta
@@ -33,9 +30,9 @@ export default function About() {
           alt="FastMet delivery"
           className="absolute inset-0 w-full h-full object-cover md:object-fill "
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/50 lg:via-black/10 to-black/50" />
 
-        <div className="relative z-10 w-full px-4 md:px-12 xl:px-20 py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
+        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
           {/* Left: headline */}
           <div className="flex flex-col gap-5 text-white max-w-xl">
             <h1 className="text-4xl text-primary md:text-5xl font-extrabold leading-tight">
@@ -43,7 +40,9 @@ export default function About() {
             </h1>
             <p className="text-white font-semibold text-base md:text-lg">
               FastMet is an on-demand delivery platform created for individuals,
-              online sellers, businesses, and partner-drivers.
+              online sellers, businesses, and partner-drivers. We connect users
+              with the right vehicle and partner-driver for different delivery
+              needs.
             </p>
             {/* Desktop: pre-register buttons */}
             <div className="gap-3 mt-2 hidden lg:flex">
@@ -89,11 +88,12 @@ export default function About() {
               </Link>
             </div>
           </div>
-        </div>
+        </PageContainer>
       </section>
 
       {/* Right vehicle for every delivery */}
-      <section className="w-full px-4 md:px-12 xl:px-20 py-12 md:py-16 flex flex-col lg:flex-row gap-8 lg:gap-16 justify-center items-center">
+      <section className="w-full">
+        <PageContainer className="flex flex-col lg:flex-row gap-8 lg:gap-16 justify-center items-center">
         <div className="flex flex-col gap-4 max-w-xl">
           <h2 className="text-2xl md:text-3xl font-extrabold text-primary">
             The right vehicle for every delivery
@@ -121,81 +121,81 @@ export default function About() {
             </li>
           </ul>
         </div>
+        <div className="w-full max-w-md lg:max-w-sm bg-secondary/10 rounded-xl p-6 sm:p-8 shrink-0">
+          {[
+            {icon: Motorbike, label: "Small Parcel", vehicle: "Motorcycle"},
+            {icon: Car, label: "Multiple Boxes", vehicle: "Car"},
+            {icon: Van, label: "Bulky Items", vehicle: "Van"},
+            {icon: Truck, label: "Commercial Cargo", vehicle: "Truck"},
+          ].map(({icon: Icon, label, vehicle}, i, arr) => (
+            <div
+              key={label}
+              className={`flex items-center gap-3 py-4 ${
+                i !== arr.length - 1 ? "border-b border-secondary/10" : ""
+              }`}
+            >
+              <span className="text-xs sm:text-sm font-semibold text-zinc-800 shrink-0 w-24 sm:w-28">
+                {label}
+              </span>
 
-        {/* Vehicle grid */}
-        <div className="w-full max-w-xs sm:max-w-sm lg:max-w-[280px] mx-auto lg:mx-0 grid grid-cols-2 gap-3 lg:gap-4 shrink-0">
-          {vehiclesLoading &&
-            Array.from({length: 4}).map((_, i) => (
-              <div
-                key={i}
-                className="aspect-square rounded-lg bg-zinc-200 animate-pulse"
+              <span
+                className="flex-1 h-0 border-t-2 border-dotted border-primary min-w-4"
+                aria-hidden="true"
               />
-            ))}
-
-          {isError && (
-            <p className="col-span-2 text-sm text-red-500">
-              Couldn't load vehicle types.
-            </p>
-          )}
-
-          {!vehiclesLoading &&
-            !isError &&
-            [
-              {
-                image: data![0]?.imageUrl,
-                label: "Small Parcel",
-              },
-              {
-                image: data![1]?.imageUrl,
-                label: "Multiple Boxes",
-              },
-              {
-                image: data![5]?.imageUrl,
-                label: "Bulky Items",
-              },
-              {
-                image: data![6]?.imageUrl,
-                label: "Commercial Cargo",
-              },
-            ].map((vehicle) => (
-              <div
-                key={vehicle.label}
-                className="relative aspect-square rounded-lg bg-secondary/90 overflow-hidden flex flex-col items-center justify-center gap-4 p-2 sm:p-3"
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 8 8"
+                className="text-primary fill-current -ml-2 shrink-0"
+                aria-hidden="true"
               >
-                <img
-                  src={vehicle.image}
-                  alt={vehicle.label}
-                  className="w-full h-1/2 object-contain"
+                <path d="M0 0 L8 4 L0 8 Z" />
+              </svg>
+
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-primary bg-secondary flex items-center justify-center shrink-0">
+                <Icon
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                  strokeWidth={2}
                 />
-                <span className="text-white text-[10px] sm:text-xs font-semibold text-center leading-tight px-1">
-                  {vehicle.label}
-                </span>
               </div>
-            ))}
+
+              <span className="text-xs sm:text-sm font-semibold text-zinc-800 shrink-0 w-20 sm:w-24">
+                {vehicle}
+              </span>
+            </div>
+          ))}
         </div>
+        </PageContainer>
       </section>
 
       {/* Better route for everyone */}
-      <section className="w-full px-4 md:px-12 xl:px-20 py-16 bg-zinc-50">
+      <section className="w-full py-10 bg-zinc-50">
+        <PageContainer>
         <div className="max-w-2xl mx-auto text-center flex flex-col gap-4">
           <h2 className="text-2xl md:text-3xl font-extrabold text-primary">
             A better route for everyone.
           </h2>
           <p className="text-sm text-zinc-700">
-            Sa Greater Manila, mabilis ang takbo ng buhay at negosyo.
-          </p>
-          <p className="text-sm text-zinc-700">
+            <span className="font-semibold">
+              Sa Greater Manila, mabilis ang takbo ng buhay at negosyo.
+            </span>
+            <br />
             Customers need a more convenient way to send their items. Online
             sellers and businesses need delivery support that can keep up with
             their daily operations. Drivers also need flexible opportunities to
             earn using their own vehicles.
           </p>
+          <p className="text-sm text-zinc-700">
+            <span className="font-semibold">FastMet </span> was created to
+            connect these needs. Our goal is to build a delivery community where
+            users, businesses, and partner-drivers can move forward together.
+            Hindi lang kami tungkol sa paglipat ng package mula isang lugar
+            papunta sa iba. Gusto naming makatulong sa negosyo, gawing mas
+            convenient ang delivery, at magbigay ng mas maraming opportunities
+            para sa Filipino drivers.
+          </p>
         </div>
-
-        {/* TODO: no source for this box's content yet — image / testimonial / stat? */}
-        <div className="relative mt-10 max-w-3xl mx-auto">
-          <div className="w-full h-64 md:h-80 bg-gray-300 rounded-lg" />
-        </div>
+        </PageContainer>
       </section>
 
       <ConnectNeeds />
@@ -204,8 +204,6 @@ export default function About() {
       <Founder />
       <Coverage />
       <JoinFastMet />
-
-      <LoaderModal open={vehiclesLoading} />
     </div>
   );
 }

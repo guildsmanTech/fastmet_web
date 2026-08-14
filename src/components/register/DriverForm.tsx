@@ -124,8 +124,6 @@ export default function DriverForm() {
   const [searchParams] = useSearchParams();
   const preselectVehicle = searchParams.get("vehicle");
 
-  console.log("preselectVehicle", preselectVehicle);
-
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",

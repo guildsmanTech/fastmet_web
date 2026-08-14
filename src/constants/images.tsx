@@ -19,7 +19,6 @@ import homeBg from "@/assets/home_bg.png";
 import homeBox from "@/assets/home_box.png";
 import homeUser from "@/assets/home_user.png";
 import homeDriver from "@/assets/home_driver.png";
-import phMap from "@/assets/ph_map.png";
 import coverage from "@/assets/coverage.jpg";
 
 import closedVan from "@/assets/vehicles/closed_van.png";
@@ -36,10 +35,6 @@ import aboutBg2 from "@/assets/about_bg2.png";
 import aboutUser from "@/assets/about_user.png";
 import aboutBusiness from "@/assets/about_business.png";
 import aboutTruck from "@/assets/about_truck.png";
-import aboutTruck2 from "@/assets/about_truck2.png";
-import aboutTruck3 from "@/assets/about_truck3.png";
-import aboutRider from "@/assets/about_rider.png";
-import aboutMotor from "@/assets/about_motor.png";
 
 export {
   phone,
@@ -48,7 +43,6 @@ export {
   question,
   reward_bg,
   zero,
-  phMap,
   gift_close,
   gift_open,
   homeBg,
@@ -75,8 +69,4 @@ export {
   aboutUser,
   aboutBusiness,
   aboutTruck,
-  aboutTruck2,
-  aboutTruck3,
-  aboutRider,
-  aboutMotor,
 };

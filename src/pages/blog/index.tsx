@@ -5,6 +5,7 @@ import { useBlogs } from "@/hooks/useBlogQueries";
 import BlogCardSkeleton from "@/components/cards/BlogCardSkeleton";
 import FeaturedCard from "@/components/cards/FeaturedCard";
 import BlogCard from "@/components/cards/BlogCard";
+import PageContainer from "@/components/PageContainer";
 
 const TAGS = ["All", "Announcement", "Drivers", "Users", "Guide", "Updates"];
 
@@ -29,7 +30,7 @@ export default function BlogList() {
         />
         <link rel="canonical" href="https://fastmet.com.ph/blog" />
       </Helmet>
-      <div className="w-full max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
+      <PageContainer>
         <div className="mb-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
             FastMet Blog
@@ -81,7 +82,7 @@ export default function BlogList() {
             ))}
           </div>
         )}
-      </div>
+      </PageContainer>
     </section>
   );
 }

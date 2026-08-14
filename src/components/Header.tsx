@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {logo} from "@/constants/images";
 import GeneralFAQModal from "./modals/GeneralFAQModal";
+import PageContainer from "./PageContainer";
 import {Link, useLocation} from "react-router-dom";
 import {Menu, X} from "lucide-react";
 
@@ -20,8 +21,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="lg:px-16 px-4 md:py-4 py-3 z-50 bg-secondary text-white fixed top-0 left-0 right-0">
-        <div className="flex items-center justify-between w-full">
+      <header className="md:py-4 py-3 z-50 bg-secondary text-white fixed top-0 left-0 right-0">
+        <PageContainer className="flex items-center justify-between">
           {/* ── Logo ──────────────────────────────────────────────────────── */}
           <Link
             to="/"
@@ -75,7 +76,7 @@ export default function Header() {
               )}
             </button>
           </div>
-        </div>
+        </PageContainer>
       </header>
 
       {/* ── Mobile drawer ───────────────────────────────────────────────────── */}

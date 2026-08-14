@@ -1,5 +1,6 @@
 import {ChevronDown} from "lucide-react";
 import {useState} from "react";
+import PageContainer from "@/components/PageContainer";
 
 const FAQ_ITEMS = [
   {
@@ -46,10 +47,8 @@ export function DriverFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section
-      className="w-full px-4 md:px-12 xl:px-20 flex flex-col gap-8"
-      id="driver-faq"
-    >
+    <section className="w-full" id="driver-faq">
+      <PageContainer className="flex flex-col gap-8">
       <div className="flex flex-col gap-1 max-w-2xl">
         <h2 className="text-primary font-bold text-2xl md:text-3xl">
           Driver Frequently Asked Questions
@@ -125,6 +124,7 @@ export function DriverFAQ() {
           );
         })}
       </div>
+      </PageContainer>
     </section>
   );
 }

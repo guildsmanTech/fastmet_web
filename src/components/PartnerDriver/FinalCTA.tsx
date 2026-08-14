@@ -1,12 +1,11 @@
 import {zero} from "@/constants/images";
 import {Link} from "react-router-dom";
+import PageContainer from "@/components/PageContainer";
 
 export function FinalCTA() {
   return (
-    <section
-      className="w-full px-4 md:px-12 xl:px-20 flex flex-col py-10 items-center text-center gap-6"
-      id="final-cta"
-    >
+    <section className="w-full py-10" id="final-cta">
+      <PageContainer className="flex flex-col items-center text-center gap-6">
       <h2 className="text-primary font-bold text-2xl md:text-3xl max-w-md">
         Be One of the First FastMet Partner-Drivers
       </h2>
@@ -35,6 +34,7 @@ export function FinalCTA() {
       >
         Pre-Register as a Driver
       </Link>
+      </PageContainer>
     </section>
   );
 }
