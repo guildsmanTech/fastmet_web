@@ -7,10 +7,21 @@ import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
 import {getBusinessInquiryMailto} from "@/helper/constant";
 import {servicesBg, servicesMain} from "@/constants/images";
+import {Helmet} from "react-helmet-async";
 
 export default function DeliveryServices() {
   return (
     <div className="w-full flex flex-col md:gap-10">
+      <Helmet>
+        <title>
+          FastMet Delivery Services | On-Demand Delivery in Greater Manila
+        </title>
+        <meta
+          name="description"
+          content="Pre-register as a FastMet user for fast, reliable delivery across Greater Manila. Get updates on launch, coverage, promos, and platform access."
+        />
+        <link rel="canonical" href="https://fastmet.com.ph/delivery-services" />
+      </Helmet>
       <section
         className="relative w-full min-h-dvh flex items-center bg-secondary"
         id="hero"
