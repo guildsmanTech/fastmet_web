@@ -60,14 +60,14 @@ export default function DeliveryServices() {
           <img
             src={servicesMain}
             alt="Fastmet Delivery"
-            className="w-full scale-110 md:scale-100 lg:w-1/2"
+            className="w-full lg:w-1/2"
           />
 
           <div className="flex flex-col justify-center items-center gap-4 mt-2 w-full lg:hidden">
-            <div className="flex gap-1 w-full md:w-5/6">
+            <div className="flex flex-col gap-3 w-full md:w-5/6">
               <CTAButton
                 to="/user-register"
-                variant="hero-outline"
+                variant="user"
                 size="sm"
                 fullWidth
                 className="hover:bg-zinc-200"
@@ -80,7 +80,7 @@ export default function DeliveryServices() {
                 size="sm"
                 fullWidth
               >
-                Business Inquiry
+                Send a Business Inquiry
               </CTAButton>
             </div>
           </div>

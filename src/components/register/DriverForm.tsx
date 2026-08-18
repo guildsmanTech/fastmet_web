@@ -683,7 +683,7 @@ export default function DriverForm() {
               </p>
               <p className="text-xs text-center text-red-500">
                 If you think this is a mistake,{" "}
-                <a href="/#inquiry" className="underline font-medium">
+                <a href="/" className="underline font-medium">
                   message us
                 </a>{" "}
                 and we&apos;ll look into it.
