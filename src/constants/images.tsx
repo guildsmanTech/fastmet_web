@@ -5,36 +5,47 @@ import question from "../assets/question.png";
 import reward_bg from "../assets/reward_bg.png";
 import gift_close from "../assets/gift-close.png";
 import gift_open from "../assets/gift-open.png";
-import zero from "@/assets/zero.png";
 
-import vehicleNumbers from "@/assets/vehicle_numbers.png";
-import vehicleImage from "@/assets/vehicle_image.png";
-import vehicleDocu from "@/assets/vehicle_documents.png";
-import license from "@/assets/driver-license.png";
+// requirements
+import vehicleNumbers from "@/assets/requirements/vehicle_numbers.png";
+import vehicleImage from "@/assets/requirements/vehicle_image.png";
+import vehicleDocu from "@/assets/requirements/vehicle_documents.png";
+import license from "@/assets/requirements/driver-license.png";
 
-import partnerDriverBG from "@/assets/partnerdriver_bg.png";
-import partnerDriverPhoto from "@/assets/partnerdriver_photo.png";
+// home
+import homeBg from "@/assets/home/home_bg.webp";
+import homeBox from "@/assets/home/home_box.webp";
+import homeUser from "@/assets//home/home_left.webp";
+import homeDriver from "@/assets/home/home_driver.webp";
+import coverage from "@/assets/home/map.webp";
 
-import homeBg from "@/assets/home_bg.png";
-import homeBox from "@/assets/home_box.png";
-import homeUser from "@/assets/home_user.png";
-import homeDriver from "@/assets/home_driver.png";
-import coverage from "@/assets/coverage.jpg";
+// about
+import aboutBg from "@/assets/about/about_bg.png";
+import aboutUser from "@/assets/about/about_user.png";
+import aboutBusiness from "@/assets/about/about_business.png";
+import aboutTruck from "@/assets/about/about_truck.png";
+import aboutMain from "@/assets/about/about_main.webp";
+import aboutVehicles from "@/assets/about/about_vehicles.webp";
+import aboutMotor from "@/assets/about/about_motor.webp";
 
-import closedVan from "@/assets/vehicles/closed_van.png";
-import l300 from "@/assets/vehicles/l300.png";
-import motor from "@/assets/vehicles/motor.png";
-import pickUp from "@/assets/vehicles/pick_up.png";
-import sedan from "@/assets/vehicles/sedan.png";
-import smallVan from "@/assets/vehicles/small_van.png";
-import wingVan from "@/assets/vehicles/wing_van.png";
-import subcompact from "@/assets/vehicles/subcompact.png";
+// partner-driver
+import partnerBg from "@/assets/partner/partner_bg.webp";
+import partnerComms from "@/assets/partner/partner_comms.webp";
+import partnerMain from "@/assets/partner/partner_main.webp";
+import partnerZero from "@/assets/partner/partner_zero.webp";
+import zero from "@/assets/partner/zero.png";
 
-import aboutBg from "@/assets/about_bg.png";
-import aboutBg2 from "@/assets/about_bg2.png";
-import aboutUser from "@/assets/about_user.png";
-import aboutBusiness from "@/assets/about_business.png";
-import aboutTruck from "@/assets/about_truck.png";
+// deliver services
+import servicesMain from "@/assets/services/services_main.webp";
+import servicesDocu from "@/assets/services/docu.webp";
+import servicesDocu2 from "@/assets/services/docu2.webp";
+import servicesDocu3 from "@/assets/services/docu3.webp";
+import servicesDocu4 from "@/assets/services/docu4.webp";
+import servicesDocu5 from "@/assets/services/docu5.webp";
+import servicesDocu6 from "@/assets/services/docu6.webp";
+import servicesDocu7 from "@/assets/services/docu7.webp";
+import servicesNeeds from "@/assets/services/services_needs.webp";
+import servicesBg from "@/assets/services/services_bg.webp";
 
 export {
   phone,
@@ -45,28 +56,44 @@ export {
   zero,
   gift_close,
   gift_open,
+
+  // home
   homeBg,
   homeBox,
   homeUser,
   homeDriver,
   coverage,
-  closedVan,
-  l300,
-  motor,
-  pickUp,
-  sedan,
-  smallVan,
-  wingVan,
-  subcompact,
+
+  // requirements
   vehicleNumbers,
   vehicleImage,
   vehicleDocu,
   license,
-  partnerDriverBG,
-  partnerDriverPhoto,
+
+  // about
   aboutBg,
-  aboutBg2,
   aboutUser,
   aboutBusiness,
   aboutTruck,
+  aboutMain,
+  aboutVehicles,
+  aboutMotor,
+
+  // partner-driver
+  partnerBg,
+  partnerComms,
+  partnerMain,
+  partnerZero,
+
+  // deliver services
+  servicesMain,
+  servicesDocu,
+  servicesDocu2,
+  servicesDocu3,
+  servicesDocu4,
+  servicesDocu5,
+  servicesDocu6,
+  servicesDocu7,
+  servicesNeeds,
+  servicesBg,
 };

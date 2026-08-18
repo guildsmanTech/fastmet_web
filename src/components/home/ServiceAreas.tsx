@@ -1,3 +1,4 @@
+import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
 
 const SERVICE_AREAS = {
@@ -73,8 +74,9 @@ export default function ServiceAreas() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <button
-            className="w-fit flex items-center cursor-pointer gap-2 px-5 py-2.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition"
+          <CTAButton
+            variant="outline"
+            className="w-fit px-5 py-2.5"
             onClick={() =>
               document
                 .getElementById("hero")
@@ -82,7 +84,7 @@ export default function ServiceAreas() {
             }
           >
             Pre-Register for Updates
-          </button>
+          </CTAButton>
           <p className="text-gray-500 text-xs">
             Final service availability may depend on the pickup location,
             destination, vehicle type, cargo size, route accessibility, and

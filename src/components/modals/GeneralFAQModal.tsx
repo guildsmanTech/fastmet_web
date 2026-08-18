@@ -48,7 +48,7 @@ export default function GeneralFAQModal() {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="flex justify-center items-center p-2 bg-white rounded-full border transition-all duration-200 cursor-pointer border-primary hover:bg-primary hover:scale-110">
-          <img src={question} alt="question" className="size-5 sm:size-6" />
+          <img src={question} alt="question" className="size-5" />
         </Button>
       </DialogTrigger>
 

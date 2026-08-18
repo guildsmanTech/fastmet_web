@@ -1,6 +1,6 @@
+import CTAButton from "@/components/CTAButton";
 import {homeUser, homeDriver} from "@/constants/images";
 import {UserRound, Truck, ChevronRight} from "lucide-react";
-import {Link} from "react-router-dom";
 import PageContainer from "@/components/PageContainer";
 
 export default function UserDriverSplit() {
@@ -20,13 +20,14 @@ export default function UserDriverSplit() {
             tungkol sa service availability, coverage, promos, at future
             platform access.
           </p>
-          <Link
+          <CTAButton
             to="/user-register"
-            className="w-fit flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition"
+            variant="primary"
+            icon={UserRound}
+            className="w-fit px-5 py-2.5"
           >
-            <UserRound className="size-4" />
             Pre-Register as a User
-          </Link>
+          </CTAButton>
         </div>
 
         {/* Driver card */}
@@ -42,13 +43,14 @@ export default function UserDriverSplit() {
             tungkol sa onboarding, activation, at future delivery opportunities.
           </p>
           <div className="flex items-center gap-2 flex-wrap">
-            <Link
+            <CTAButton
               to="/driver-register"
-              className="w-fit flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition"
+              variant="primary"
+              icon={Truck}
+              className="w-fit px-5 py-2.5"
             >
-              <Truck className="size-4" />
               Pre-Register as a Driver
-            </Link>
+            </CTAButton>
             <ChevronRight className="text-primary size-4 shrink-0" />
             <span className="leading-tight">
               <span className="block text-[10px] text-gray-500">

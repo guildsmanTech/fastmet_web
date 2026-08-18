@@ -1,5 +1,5 @@
+import CTAButton from "@/components/CTAButton";
 import {zero} from "@/constants/images";
-import {Link} from "react-router-dom";
 import PageContainer from "@/components/PageContainer";
 
 export function FinalCTA() {
@@ -28,12 +28,9 @@ export function FinalCTA() {
         accepted vehicles, and future delivery opportunities.
       </p>
 
-      <Link
-        to="/driver-register"
-        className="px-6 py-2.5 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold text-sm hover:from-yellow-500 hover:to-orange-600 transition"
-      >
+      <CTAButton to="/driver-register" variant="driver" className="px-6 py-2.5">
         Pre-Register as a Driver
-      </Link>
+      </CTAButton>
       </PageContainer>
     </section>
   );
