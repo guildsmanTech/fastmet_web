@@ -21,7 +21,7 @@ export default function AnoAngFastmet() {
           </div>
 
           <CTAButton
-            href="/"
+            to="/"
             variant="primary"
             className="shrink-0 self-start md:self-auto"
           >
