@@ -10,6 +10,7 @@ import BlogList from "./pages/blog/index";
 import {queryClient} from "./lib/queryClient";
 import PartnerDriver from "./pages/PartnerDriver";
 import About from "./pages/About";
+import DeliveryServices from "./pages/DeliveryServices";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     children: [
       {path: "/", element: <Home />},
       {path: "/partner-driver", element: <PartnerDriver />},
+      {path: "/delivery-services", element: <DeliveryServices />},
       {path: "/about", element: <About />},
       {path: "/driver-register", element: <DriverRegister />},
       {path: "/user-register", element: <UserRegister />},

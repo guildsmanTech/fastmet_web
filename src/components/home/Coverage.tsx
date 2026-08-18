@@ -56,7 +56,7 @@ export default function CoverageExplainer() {
         </div>
 
         <img
-          className="flex-1 w-full aspect-[4/3] md:w-[400px] bg-gray-300 rounded-2xl"
+          className="flex-1 w-full aspect-[4/3] md:w-[400px] bg-gray-300 "
           src={coverage}
           alt="Coverage"
         />

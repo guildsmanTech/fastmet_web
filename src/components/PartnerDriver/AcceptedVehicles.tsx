@@ -1,6 +1,6 @@
+import CTAButton from "@/components/CTAButton";
 import {useVehicles} from "@/hooks/useVehicleQueries";
 import type {IVehicleType} from "@/types/vehicle";
-import {Link} from "react-router-dom";
 import PageContainer from "@/components/PageContainer";
 
 const VEHICLE_DESCRIPTION = {
@@ -46,12 +46,14 @@ function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
             VEHICLE_DESCRIPTION[vehicle.key as keyof typeof VEHICLE_DESCRIPTION]
           }{" "}
         </p>
-        <Link
+        <CTAButton
           to={`/driver-register?vehicle=${vehicle.key}`}
-          className="mt-1 text-center text-[11px] md:text-xs font-semibold border border-primary text-primary hover:bg-primary hover:text-white rounded-full px-3 py-2 transition"
+          variant="outline-primary"
+          size="card"
+          className="mt-1 w-full text-center font-semibold"
         >
           Pre-Register This Vehicle
-        </Link>
+        </CTAButton>
       </div>
     </div>
   );

@@ -3,36 +3,15 @@ import QuestionForm from "@/components/home/QuestionForm";
 import LoaderModal from "@/components/modals/Loader";
 import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
 import {useVehicles} from "@/hooks/useVehicleQueries";
-import {Link} from "react-router-dom";
+import CTAButton from "@/components/CTAButton";
+import PreRegisterActions from "@/components/PreRegisterActions";
 
-import {UserRound, Truck, BriefcaseBusiness, MapPinned} from "lucide-react";
-import {
-  motor,
-  sedan,
-  pickUp,
-  smallVan,
-  subcompact,
-  l300,
-  closedVan,
-  wingVan,
-  homeBg,
-  homeBox,
-} from "@/constants/images";
+import {Truck, BriefcaseBusiness, MapPinned} from "lucide-react";
+import {homeBg, homeBox} from "@/constants/images";
 import ServiceAreas from "@/components/home/ServiceAreas";
 import UserDriverSplit from "@/components/home/UserDriverSplit";
 import CoverageExplainer from "@/components/home/Coverage";
 import PageContainer from "@/components/PageContainer";
-
-export const VEHICLE_TYPES = [
-  {label: "Motorcycle", img: motor},
-  {label: "Sedan", img: sedan},
-  {label: "Pick-up", img: pickUp},
-  {label: "SUV / Small Van", img: smallVan},
-  {label: "Subcompact SUV", img: subcompact},
-  {label: "L300", img: l300},
-  {label: "Closed Van", img: closedVan},
-  {label: "Wing Van", img: wingVan},
-];
 
 export default function Home() {
   const {isPending: countsLoading} = useRegistrationCounts();
@@ -73,7 +52,7 @@ export default function Home() {
 
       {/* ===== HERO ===== */}
       <section
-        className="relative w-full min-h-dvh flex items-center bg-secondary"
+        className="relative w-full min-h-dvh items-center md:items-start md:pt-35 flex bg-secondary"
         id="hero"
       >
         <img
@@ -81,79 +60,36 @@ export default function Home() {
           alt="FastMet delivery"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/20" />
+        <PageContainer className="relative z-10 flex flex-col py-0 items-center text-center gap-5">
+          {/* Headline */}
+          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white max-w-2xl">
+            Delivery? FastMet Agad!
+          </h1>
 
-        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
-          {/* Left: headline */}
-          <div className="flex flex-col gap-5 text-white max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              Delivery? <br /> FastMet Agad.
-            </h1>
-            <p className="text-primary font-semibold text-base md:text-lg">
-              On-demand delivery for personal, business, and bulk delivery
-              needs. FastMet accepts delivery requests within Greater Manila and
-              can deliver nationwide through land-accessible routes.
-            </p>
-            {/* Desktop: pre-register buttons */}
-            <div className="gap-3 mt-2 hidden lg:flex">
-              <Link
-                to="/user-register"
-                className="flex-1 flex items-center justify-center gap-2 px-2 py-3 rounded-full bg-white text-secondary font-semibold text-sm hover:bg-zinc-200 transition"
-              >
-                <UserRound className="size-4" />
-                Pre-Register as a User
-              </Link>
-              <Link
-                to="/driver-register"
-                className="flex-1 flex items-center justify-center gap-2 px-2 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold text-sm hover:from-yellow-500 hover:to-orange-600 transition"
-              >
-                <Truck className="size-4" />
-                Pre-Register as a Driver
-              </Link>
-            </div>
-          </div>
+          {/* Description */}
+          <p className="font-semibold text-base md:text-lg max-w-2xl">
+            On-demand delivery for personal, business, and bulk delivery needs.
+            FastMet accepts delivery requests within Greater Manila and can
+            deliver nationwide through land-accessible routes.
+          </p>
 
-          {/* Right: vehicle grid */}
-          <div className="grid grid-cols-4 gap-1 w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-xl 2xl:max-w-2xl mx-auto lg:mx-0">
-            {VEHICLE_TYPES.map(({label, img}) => (
-              <div
-                className="relative aspect-square rounded-lg overflow-hidden shadow-md bg-gray-200"
-                key={label}
-              >
-                <img
-                  src={img}
-                  alt={label}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          <PreRegisterActions
+            layout="inline"
+            userVariant="user"
+            driverVariant="user"
+            size="md"
+            className="mt-2 w-full sm:w-auto justify-center hidden md:flex"
+          />
 
-          {/* Mobile: pre-register buttons */}
-          <div className="flex flex-col justify-center items-center gap-4 mt-2 w-full lg:hidden">
-            <span className="text-white/90 font-semibold text-xs uppercase tracking-wide">
-              Pre-Register as a:
-            </span>
-            <div className="flex gap-3 w-full md:w-5/6">
-              <Link
-                to="/user-register"
-                className="flex-1 flex items-center justify-center gap-2 px-2 py-3 rounded-full bg-white text-secondary font-semibold text-sm hover:bg-zinc-200 transition"
-              >
-                <UserRound className="size-4" />
-                User
-              </Link>
-              <Link
-                to="/driver-register"
-                className="flex-1 flex items-center justify-center gap-2 px-2 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold text-sm hover:from-yellow-500 hover:to-orange-600 transition"
-              >
-                <Truck className="size-4" />
-                Driver
-              </Link>
-            </div>
-          </div>
+          <PreRegisterActions
+            layout="stacked-mobile"
+            userVariant="user"
+            driverVariant="user"
+            shortLabels
+            className="md:hidden mt-10"
+          />
         </PageContainer>
       </section>
-
       {/* ===== ANO ANG FASTMET ===== */}
       <section className="w-full">
         <PageContainer className="flex flex-col gap-10">
@@ -181,18 +117,12 @@ export default function Home() {
                 land-accessible routes.
               </p>
               <div className="flex gap-3 mt-2 flex-row justify-center lg:justify-start">
-                <Link
-                  to="/user-register"
-                  className="px-3 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold text-xs hover:from-yellow-500 hover:to-orange-600 transition text-center lg:text-sm lg:py-3 lg:px-5"
-                >
+                <CTAButton to="/user-register" variant="driver" size="compact">
                   Pre-Register as a User
-                </Link>
-                <Link
-                  to="/driver-register"
-                  className="px-3 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-semibold text-xs hover:from-yellow-500 hover:to-orange-600 transition text-center lg:text-sm lg:py-3 lg:px-5"
-                >
+                </CTAButton>
+                <CTAButton to="/driver-register" variant="driver" size="compact">
                   Pre-Register as a Driver
-                </Link>
+                </CTAButton>
               </div>
             </div>
           </div>
@@ -249,12 +179,14 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col items-center gap-2 text-center">
-              <Link
-                to="/blog/filipino-made-delivery-app-fastmet"
-                className="rounded-full border-2 w-fit shadow-xl border-primary py-2 px-3 lg:px-5 text-sm md:text-base hover:text-white cursor-pointer hover:bg-primary-hover transition"
+              <CTAButton
+                to="/about"
+                variant="ghost-border"
+                size="md"
+                className="w-fit py-2 px-3 lg:px-5 text-sm md:text-base cursor-pointer"
               >
                 Learn More About FastMet
-              </Link>
+              </CTAButton>
               <p className="text-gray-700 leading-relaxed text-sm md:text-base">
                 Full terms, duration, and eligibility details will be shared
                 through official FastMet updates.

@@ -1,4 +1,9 @@
 export const API_URL = import.meta.env.VITE_API_URL;
+export const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL as string;
+
+export function getBusinessInquiryMailto() {
+  return `mailto:${SUPPORT_EMAIL}`;
+}
 
 export const tagColors: Record<string, string> = {
   Announcement: "bg-primary/10 text-primary",
