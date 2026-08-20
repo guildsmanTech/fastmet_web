@@ -47,6 +47,9 @@ const VEHICLE_EXAMPLES: Record<string, string[]> = {
     "Honda CR-V",
     "Suzuki Ertiga",
     "Nissan Terra",
+    "Toyota HiAce",
+    "Nissan Urvan",
+    "Foton Traveller",
   ],
   "small_pickup_800": [
     "Toyota Hi-Lux",
@@ -57,15 +60,7 @@ const VEHICLE_EXAMPLES: Record<string, string[]> = {
     "Foton Thunder",
     "Dongfeng Rich 6",
   ],
-  "l300_cargo_van_1000": [
-    "Mitsubishi L300",
-    "Toyota HiAce",
-    "Nissan Urvan",
-    "Isuzu Elf",
-    "Kia Bongo",
-    "Hyundai H100",
-    "Foton Traveller",
-  ],
+  "l300_cargo_van_1000": ["Mitsubishi L300", "Hyundai H100", "Van w/o seats"],
   "l300_cargo_van_2000": [
     "Isuzu Traviz",
     "Hyundai HD45",

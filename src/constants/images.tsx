@@ -18,6 +18,7 @@ import homeBox from "@/assets/home/home_box.webp";
 import homeUser from "@/assets//home/home_left.webp";
 import homeDriver from "@/assets/home/home_driver.webp";
 import coverage from "@/assets/home/map.webp";
+import homeMain from "@/assets/home/home_main.webp";
 
 // about
 import aboutBg from "@/assets/about/about_bg.png";
@@ -62,6 +63,7 @@ export {
   homeBox,
   homeUser,
   homeDriver,
+  homeMain,
   coverage,
 
   // requirements

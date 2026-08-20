@@ -37,6 +37,7 @@ const REQUIREMENTS_STEPS = [
       "Plate Number Photo",
       "Engine Number Photo",
       "Chassis Number Photo",
+      "LTFRB PA/CPC (L300, Closed Van, and Wing Van)",
     ],
   },
 ];
