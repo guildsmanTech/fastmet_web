@@ -36,7 +36,7 @@ export default function PartnerDriver() {
           {/* Left: headline */}
           <div className="flex flex-col gap-5 text-white max-w-xl">
             <h1 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight">
-              May sasakyan ka? <br /> FastMet agad!
+              May Sasakyan ka? <br /> FastMet Agad!
             </h1>
             <p className="text-white font-semibold text-base md:text-lg">
               Pre-register as a FastMet partner-driver and receive updates about
