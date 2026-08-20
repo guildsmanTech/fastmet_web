@@ -3,6 +3,7 @@ import {useParams, Link, useNavigate} from "react-router-dom";
 import {CalendarDays, Clock, ArrowLeft, ArrowRight, Tag} from "lucide-react";
 import type {IBlogPost} from "@/types/blog";
 import {useBlog} from "@/hooks/useBlogQueries";
+import PageContainer from "@/components/PageContainer";
 
 const formatDate = (d: string) =>
   new Date(d).toLocaleDateString("en-PH", {
@@ -26,7 +27,7 @@ function BlogPostSkeleton() {
     <div className="animate-pulse">
       {/* Banner skeleton */}
       <div className="w-full h-64 md:h-[480px] bg-gray-200 mb-10" />
-      <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
+      <PageContainer>
         <div className="flex gap-12">
           <div className="flex-1 space-y-4">
             <div className="h-4 w-24 bg-gray-200 rounded-full" />
@@ -46,7 +47,7 @@ function BlogPostSkeleton() {
             <div className="h-48 bg-gray-100 rounded-2xl" />
           </div>
         </div>
-      </div>
+      </PageContainer>
     </div>
   );
 }
@@ -148,7 +149,7 @@ export default function BlogPost() {
         </button>
 
         {/* Title overlaid on banner bottom */}
-        <div className="absolute bottom-0 left-0 right-0 px-4 md:px-8 lg:px-12 pb-8 max-w-6xl mx-auto">
+        <PageContainer className="absolute bottom-0 left-0 right-0 pb-8">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span
               className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${tagColors[post.tag] ?? "bg-gray-100 text-gray-500"}`}
@@ -168,11 +169,11 @@ export default function BlogPost() {
           <h1 className="text-2xl md:text-4xl font-black text-white leading-tight max-w-3xl drop-shadow-md">
             {post.title}
           </h1>
-        </div>
+        </PageContainer>
       </div>
 
       {/* ── Body ────────────────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12 py-10">
+      <PageContainer className="py-10">
         <div className="flex gap-12 items-start">
           {/* ── Main content ──────────────────────────────────────────── */}
           <div className="flex-1 min-w-0">
@@ -214,7 +215,7 @@ export default function BlogPost() {
                 <Link
                   to={post.cta.url}
                   target="_blank"
-                  className="shrink-0 bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-colors"
+                  className="shrink-0 bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:bg-primary-hover transition-colors"
                 >
                   {post.cta.label}
                 </Link>
@@ -252,7 +253,7 @@ export default function BlogPost() {
                 <Link
                   to={post.cta.url}
                   target="_blank"
-                  className="flex items-center justify-center gap-1.5 w-full bg-primary text-white text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary/90 transition-colors"
+                  className="flex items-center justify-center gap-1.5 w-full bg-primary text-white text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-primary-hover transition-colors"
                 >
                   {post.cta.label}
                   <ArrowRight className="size-3.5" />
@@ -284,7 +285,7 @@ export default function BlogPost() {
             </Link>
           </aside>
         </div>
-      </div>
+      </PageContainer>
     </section>
   );
 }

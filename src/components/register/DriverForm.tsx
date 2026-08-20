@@ -11,6 +11,7 @@ import {formatPHNumber} from "@/helper/format";
 import type {IVehicleType} from "@/types/vehicle";
 import {OtpCountdown} from "@/components/ui/OtpCountdown";
 import {useAllowedDomains} from "@/hooks/useAllowedDomains";
+import {useSearchParams} from "react-router-dom";
 
 interface FormData {
   firstName: string;
@@ -46,6 +47,9 @@ const VEHICLE_EXAMPLES: Record<string, string[]> = {
     "Honda CR-V",
     "Suzuki Ertiga",
     "Nissan Terra",
+    "Toyota HiAce",
+    "Nissan Urvan",
+    "Foton Traveller",
   ],
   "small_pickup_800": [
     "Toyota Hi-Lux",
@@ -56,15 +60,7 @@ const VEHICLE_EXAMPLES: Record<string, string[]> = {
     "Foton Thunder",
     "Dongfeng Rich 6",
   ],
-  "l300_cargo_van_1000": [
-    "Mitsubishi L300",
-    "Toyota HiAce",
-    "Nissan Urvan",
-    "Isuzu Elf",
-    "Kia Bongo",
-    "Hyundai H100",
-    "Foton Traveller",
-  ],
+  "l300_cargo_van_1000": ["Mitsubishi L300", "Hyundai H100", "Van w/o seats"],
   "l300_cargo_van_2000": [
     "Isuzu Traviz",
     "Hyundai HD45",
@@ -120,6 +116,9 @@ function getVehicleExamples(key: string, maxLoadKg: number): string[] {
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function DriverForm() {
+  const [searchParams] = useSearchParams();
+  const preselectVehicle = searchParams.get("vehicle");
+
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -150,14 +149,30 @@ export default function DriverForm() {
   const vehicles = useMemo(() => vehiclesData ?? [], [vehiclesData]);
 
   useEffect(() => {
-    if (!selectedVehicle && vehicles.length > 0) {
+    if (vehicles.length === 0) return;
+
+    if (preselectVehicle) {
+      const vehicleData = vehicles.find((v) => v.key === preselectVehicle);
+
+      if (vehicleData) {
+        setSelectedVehicle(vehicleData);
+        setSelectedVariantId(
+          vehicleData.variants.length > 0 ? vehicleData.variants[0]._id : "",
+        );
+        return;
+      }
+    }
+
+    // No valid vehicle query parameter → use first vehicle
+    if (!selectedVehicle) {
       const first = vehicles[0];
-      const firstActive = first.variants.filter((v) => v.isActive);
 
       setSelectedVehicle(first);
-      setSelectedVariantId(firstActive.length > 0 ? firstActive[0]._id : "");
+      setSelectedVariantId(
+        first.variants.length > 0 ? first.variants[0]._id : "",
+      );
     }
-  }, [selectedVehicle, vehicles]);
+  }, [preselectVehicle, vehicles, selectedVehicle]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -663,10 +678,7 @@ export default function DriverForm() {
               </p>
               <p className="text-xs text-center text-red-500">
                 If you think this is a mistake,{" "}
-                <a
-                  href="/#inquiry"
-                  className="underline font-medium"
-                >
+                <a href="/" className="underline font-medium">
                   message us
                 </a>{" "}
                 and we&apos;ll look into it.

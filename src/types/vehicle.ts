@@ -10,6 +10,7 @@ export interface IVehicleType {
   _id: string;
   key: string;
   name: string;
+  desc: string;
   imageUrl: string;
   variants: ILoadVariant[];
 }

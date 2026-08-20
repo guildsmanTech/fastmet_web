@@ -388,7 +388,7 @@ export default function UserForm() {
               </p>
               <p className="text-red-500 text-xs text-center">
                 If you think this is a mistake,{" "}
-                <a href="/#inquiry" className="underline font-medium">
+                <a href="/" className="underline font-medium">
                   message us
                 </a>{" "}
                 and we&apos;ll look into it.

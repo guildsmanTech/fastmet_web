@@ -1,50 +1,102 @@
-import phoneBG from "../assets/phone-bg.png";
 import phone from "../assets/phone.png";
-import phone_map from "../assets/phone-map.png";
-import single_phone from "../assets/single-phone.png";
-import motor from "../assets/vehicles/motor.png";
-import sedan from "../assets/vehicles/sedan.png";
-import pickup from "../assets/vehicles/small_pickup.png";
-import light_van from "../assets/vehicles/light_van.png";
-import closed_van from "../assets/vehicles/closed_van.png";
-import wing_van from "../assets/vehicles/wing_van.png";
-import mpv_suv from "../assets/vehicles/mpv_suv.png";
-import l300 from "../assets/vehicles/fastmet_truck.png"; //placeholder
+import phoneBG from "../assets/phone-bg.png";
 import logo from "../assets/logo.png";
 import question from "../assets/question.png";
 import reward_bg from "../assets/reward_bg.png";
-import bg_map from "../assets/bg-map.png";
 import gift_close from "../assets/gift-close.png";
 import gift_open from "../assets/gift-open.png";
 
+// requirements
+import vehicleNumbers from "@/assets/requirements/vehicle_numbers.png";
+import vehicleImage from "@/assets/requirements/vehicle_image.png";
+import vehicleDocu from "@/assets/requirements/vehicle_documents.png";
+import license from "@/assets/requirements/driver-license.png";
+
+// home
+import homeBg from "@/assets/home/home_bg.webp";
+import homeBox from "@/assets/home/home_box.webp";
+import homeUser from "@/assets//home/home_left.webp";
+import homeDriver from "@/assets/home/home_driver.webp";
+import coverage from "@/assets/home/map.webp";
+import homeMain from "@/assets/home/home_main.webp";
+
+// about
+import aboutBg from "@/assets/about/about_bg.png";
+import aboutUser from "@/assets/about/about_user.png";
+import aboutBusiness from "@/assets/about/about_business.png";
+import aboutTruck from "@/assets/about/about_truck.png";
+import aboutMain from "@/assets/about/about_main.webp";
+
+import mission from "@/assets/about/mission.webp";
+import vision from "@/assets/about/vision.webp";
+
+// partner-driver
+import partnerBg from "@/assets/partner/partner_bg.webp";
+import partnerComms from "@/assets/partner/partner_comms.webp";
+import partnerMain from "@/assets/partner/partner_main.webp";
+import partnerZero from "@/assets/partner/partner_zero.webp";
+import zero from "@/assets/partner/zero.png";
+
+// deliver services
+import servicesMain from "@/assets/services/services_main.webp";
+import servicesDocu from "@/assets/services/docu.webp";
+import servicesDocu2 from "@/assets/services/docu2.webp";
+import servicesDocu3 from "@/assets/services/docu3.webp";
+import servicesDocu4 from "@/assets/services/docu4.webp";
+import servicesDocu5 from "@/assets/services/docu5.webp";
+import servicesDocu6 from "@/assets/services/docu6.webp";
+import servicesDocu7 from "@/assets/services/docu7.webp";
+import servicesNeeds from "@/assets/services/services_needs.webp";
+import servicesBg from "@/assets/services/services_bg.webp";
+
 export {
-  phoneBG,
   phone,
-  single_phone,
-  phone_map,
-  motor,
-  sedan,
-  pickup,
-  light_van,
-  closed_van,
-  wing_van,
-  mpv_suv,
-  l300,
+  phoneBG,
   logo,
   question,
   reward_bg,
-  bg_map,
+  zero,
   gift_close,
   gift_open,
-};
 
-export const VEHICLES = [
-  { id: "motorcycle", name: "Motorcycle", img: motor },
-  { id: "sedan", name: "Sedan", img: sedan },
-  { id: "pickup", name: "Pickup", img: pickup },
-  { id: "suv", name: "MPV/SUV", img: mpv_suv },
-  { id: "l300", name: "Truck", img: l300 },
-  { id: "light_van", name: "Light Van", img: light_van },
-  { id: "closed_van", name: "Closed Van", img: closed_van },
-  { id: "wing_van", name: "Wing Van", img: wing_van },
-];
+  // home
+  homeBg,
+  homeBox,
+  homeUser,
+  homeDriver,
+  homeMain,
+  coverage,
+
+  // requirements
+  vehicleNumbers,
+  vehicleImage,
+  vehicleDocu,
+  license,
+
+  // about
+  aboutBg,
+  aboutUser,
+  aboutBusiness,
+  aboutTruck,
+  aboutMain,
+  mission,
+  vision,
+
+  // partner-driver
+  partnerBg,
+  partnerComms,
+  partnerMain,
+  partnerZero,
+
+  // deliver services
+  servicesMain,
+  servicesDocu,
+  servicesDocu2,
+  servicesDocu3,
+  servicesDocu4,
+  servicesDocu5,
+  servicesDocu6,
+  servicesDocu7,
+  servicesNeeds,
+  servicesBg,
+};

@@ -2,57 +2,6 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes pulse-ring {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.06);
-    opacity: 0.85;
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(0.6);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-.animate-pulse-ring {
-  animation: pulse-ring 3s ease-in-out infinite;
-}
-
-.animate-blink-1 {
-  animation: blink 2s ease-in-out infinite;
-}
-.animate-blink-2 {
-  animation: blink 2.5s ease-in-out infinite 0.4s;
-}
-.animate-blink-3 {
-  animation: blink 3s ease-in-out infinite 0.8s;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -67,6 +16,7 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -103,6 +53,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: #ffa840;
+  --primary-hover: #f38d08;
   --primary-foreground: oklch(0.145 0 0); /* Dark text on orange */
   --secondary: #0f2535;
   --secondary-foreground: oklch(0.205 0 0);
@@ -138,6 +89,7 @@
   --popover-foreground: oklch(0.985 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.77 0.14 56); /* Same #FFA840 */
+  --primary-hover: oklch(0.7 0.14 56);
   --primary-foreground: oklch(0.145 0 0); /* Dark text on orange */
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
