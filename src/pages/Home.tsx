@@ -63,8 +63,8 @@ export default function Home() {
         <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between lg:gap-6">
           {/* Left: headline */}
           <div className="flex flex-col gap-5 text-white max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white max-w-2xl">
-              Delivery? FastMet Agad!
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-primary max-w-2xl">
+              Delivery? <br /> FastMet Agad!
             </h1>
 
             {/* Description */}

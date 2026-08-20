@@ -1,5 +1,5 @@
 import PageContainer from "@/components/PageContainer";
-import {aboutMotor, aboutVehicles} from "@/constants/images";
+import {mission, vision} from "@/constants/images";
 
 type BlockProps = {
   title: string;
@@ -24,7 +24,7 @@ function MissionVisionBlock({
         <img
           src={image}
           alt="FastMet delivery"
-          className="w-full md:w-1/2 object-cover"
+          className="w-96 object-cover rounded-lg"
         />
       )}
 
@@ -52,7 +52,7 @@ export default function MissionVision() {
         <MissionVisionBlock
           title="Our Mission"
           imageFirst
-          image={aboutVehicles}
+          image={mission}
           paragraphs={[
             "To make every delivery faster, easier, and more reliable by connecting people and businesses with the right delivery solutions while creating better opportunities for our partner-drivers.",
             "Gawing mas mabilis, mas madali, at mas maasahan ang bawat pagpapadala sa pamamagitan ng tamang delivery solutions para sa mga tao at negosyo, habang lumilikha ng mas magandang oportunidad para sa aming mga partner-driver.",
@@ -61,7 +61,7 @@ export default function MissionVision() {
         <MissionVisionBlock
           title="Our Vision"
           imageFirst={false}
-          image={aboutMotor}
+          image={vision}
           paragraphs={[
             "To become one of the Philippines' most trusted on-demand delivery platforms by building a delivery community where users, businesses, and partner-drivers grow together through fast, fair, and reliable service.",
             "Maging isa sa mga pinaka-pinagkakatiwalaang on-demand delivery platforms sa Pilipinas sa pamamagitan ng pagbuo ng isang komunidad kung saan ang mga user, negosyo, at partner-drivers ay sabay-sabay na umuunlad sa pamamagitan ng mabilis, patas, at maaasahang serbisyo.",

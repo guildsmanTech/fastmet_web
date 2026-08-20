@@ -26,8 +26,9 @@ import aboutUser from "@/assets/about/about_user.png";
 import aboutBusiness from "@/assets/about/about_business.png";
 import aboutTruck from "@/assets/about/about_truck.png";
 import aboutMain from "@/assets/about/about_main.webp";
-import aboutVehicles from "@/assets/about/about_vehicles.webp";
-import aboutMotor from "@/assets/about/about_motor.webp";
+
+import mission from "@/assets/about/mission.webp";
+import vision from "@/assets/about/vision.webp";
 
 // partner-driver
 import partnerBg from "@/assets/partner/partner_bg.webp";
@@ -78,8 +79,8 @@ export {
   aboutBusiness,
   aboutTruck,
   aboutMain,
-  aboutVehicles,
-  aboutMotor,
+  mission,
+  vision,
 
   // partner-driver
   partnerBg,
