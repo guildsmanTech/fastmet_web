@@ -1,7 +1,6 @@
 import {Helmet} from "react-helmet-async";
 import ConnectNeeds from "@/components/about/ConnectNeeds";
 import Coverage from "@/components/about/Coverage";
-import Founder from "@/components/about/Founder";
 import JoinFastMet from "@/components/about/Join";
 import MissionVision from "@/components/about/MissionVision";
 import OurValues from "@/components/about/Values";
