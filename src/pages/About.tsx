@@ -29,7 +29,7 @@ export default function About() {
           alt="FastMet delivery"
           className="absolute inset-0 w-full h-full object-cover md:object-fill "
         />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-secondary/80" />
 
         <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
           {/* Left: headline */}
