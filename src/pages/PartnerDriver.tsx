@@ -35,10 +35,10 @@ export default function PartnerDriver() {
         <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between gap-6">
           {/* Left: headline */}
           <div className="flex flex-col gap-5 text-white max-w-xl">
-            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight">
               May sasakyan ka? <br /> FastMet agad!
             </h1>
-            <p className="text-primary font-semibold text-base md:text-lg">
+            <p className="text-white font-semibold text-base md:text-lg">
               Pre-register as a FastMet partner-driver and receive updates about
               onboarding, activation, and future delivery opportunities.
             </p>
