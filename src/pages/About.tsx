@@ -73,28 +73,28 @@ export default function About() {
             <h2 className="text-2xl md:text-3xl font-extrabold text-primary">
               The right vehicle for every delivery
             </h2>
-            <ul className="flex flex-col gap-3 text-sm text-zinc-700 list-disc pl-4">
-              <li>
+            <div className="flex flex-col gap-3 text-sm text-zinc-700 pl-4">
+              <p>
                 <span className="font-semibold">FastMet</span> is a delivery
                 platform built to make moving items easier for individuals and
                 businesses.
-              </li>
-              <li>Hindi pare-pareho ang bawat delivery.</li>
-              <li>
+              </p>
+              <p>Hindi pare-pareho ang bawat delivery.</p>
+              <p>
                 May documents na kasya sa motorcycle. May online orders na
                 kailangan ng sedan. May appliances, supplies, at equipment na
                 mas bagay sa pickup, cargo van, o truck.
-              </li>
-              <li>
+              </p>
+              <p>
                 FastMet brings different vehicle options together in one
                 platform so users can be connected with a vehicle that matches
                 their delivery needs.
-              </li>
-              <li>
+              </p>
+              <p>
                 We accept delivery requests within Greater Manila and can
                 deliver to land-accessible destinations nationwide.
-              </li>
-            </ul>
+              </p>
+            </div>
           </div>
           <div className="w-full max-w-md lg:max-w-sm bg-secondary/10 rounded-xl p-6 sm:p-8 shrink-0">
             {[
@@ -178,7 +178,7 @@ export default function About() {
       <ConnectNeeds />
       <MissionVision />
       <OurValues />
-      <Founder />
+      {/* <Founder /> */}
       <Coverage />
       <JoinFastMet />
     </div>

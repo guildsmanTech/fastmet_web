@@ -7,7 +7,7 @@ import CTAButton from "@/components/CTAButton";
 import PreRegisterActions from "@/components/PreRegisterActions";
 
 import {Truck, BriefcaseBusiness, MapPinned} from "lucide-react";
-import {homeBg, homeBox} from "@/constants/images";
+import {homeBg, homeBox, homeMain} from "@/constants/images";
 import ServiceAreas from "@/components/home/ServiceAreas";
 import UserDriverSplit from "@/components/home/UserDriverSplit";
 import CoverageExplainer from "@/components/home/Coverage";
@@ -49,10 +49,8 @@ export default function Home() {
           })}
         </script>
       </Helmet>
-
-      {/* ===== HERO ===== */}
       <section
-        className="relative w-full min-h-dvh items-center md:items-start md:pt-35 flex bg-secondary"
+        className="relative w-full min-h-dvh flex items-center bg-secondary"
         id="hero"
       >
         <img
@@ -60,25 +58,34 @@ export default function Home() {
           alt="FastMet delivery"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <PageContainer className="relative z-10 flex flex-col py-0 items-center text-center gap-5">
-          {/* Headline */}
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white max-w-2xl">
-            Delivery? FastMet Agad!
-          </h1>
+        <div className="absolute inset-0 bg-black/20" />
 
-          {/* Description */}
-          <p className="font-semibold text-base md:text-lg max-w-2xl">
-            On-demand delivery for personal, business, and bulk delivery needs.
-            FastMet accepts delivery requests within Greater Manila and can
-            deliver nationwide through land-accessible routes.
-          </p>
+        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between lg:gap-6">
+          {/* Left: headline */}
+          <div className="flex flex-col gap-5 text-white max-w-xl">
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white max-w-2xl">
+              Delivery? FastMet Agad!
+            </h1>
 
-          <PreRegisterActions
-            layout="inline"
-            userVariant="user"
-            driverVariant="user"
-            size="md"
-            className="mt-2 w-full sm:w-auto justify-center hidden md:flex"
+            {/* Description */}
+            <p className="font-semibold text-base md:text-lg max-w-2xl">
+              On-demand delivery for personal, business, and bulk delivery
+              needs. FastMet accepts delivery requests within Greater Manila and
+              can deliver nationwide through land-accessible routes.
+            </p>
+            <PreRegisterActions
+              layout="inline"
+              userVariant="user"
+              driverVariant="user"
+              size="md"
+              className="mt-2 w-full hidden lg:flex"
+            />
+          </div>
+
+          <img
+            src={homeMain}
+            alt="FastMet delivery"
+            className="w-full md:w-1/2 object-cover"
           />
 
           <PreRegisterActions
@@ -86,10 +93,11 @@ export default function Home() {
             userVariant="user"
             driverVariant="user"
             shortLabels
-            className="md:hidden mt-10"
+            className="lg:hidden"
           />
         </PageContainer>
       </section>
+
       {/* ===== ANO ANG FASTMET ===== */}
       <section className="w-full">
         <PageContainer className="flex flex-col gap-10">
@@ -120,7 +128,11 @@ export default function Home() {
                 <CTAButton to="/user-register" variant="driver" size="compact">
                   Pre-Register as a User
                 </CTAButton>
-                <CTAButton to="/driver-register" variant="driver" size="compact">
+                <CTAButton
+                  to="/driver-register"
+                  variant="driver"
+                  size="compact"
+                >
                   Pre-Register as a Driver
                 </CTAButton>
               </div>

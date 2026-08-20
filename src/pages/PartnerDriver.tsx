@@ -61,7 +61,6 @@ export default function PartnerDriver() {
             </p>
           </div>
 
-          {/* Right: 0% commission badge */}
           <img
             src={partnerMain}
             alt="FastMet delivery"
