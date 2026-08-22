@@ -14,7 +14,7 @@ export default function UserDriverSplit() {
             src={homeUser}
             alt="User"
           />
-          <h3 className="text-primary font-bold text-lg">May ipapadala ka?</h3>
+          <h3 className="text-primary font-bold text-lg">May Ipapadala Ka?</h3>
           <p className="text-gray-700 text-sm leading-relaxed">
             Pre-register as a FastMet user para makatanggap ng official updates
             tungkol sa service availability, coverage, promos, at future
