@@ -11,6 +11,8 @@ import {queryClient} from "./lib/queryClient";
 import PartnerDriver from "./pages/PartnerDriver";
 import About from "./pages/About";
 import DeliveryServices from "./pages/DeliveryServices";
+import UserRegisterAppView from "./pages/app-view/UserRegister";
+import DriverRegisterAppView from "./pages/app-view/DriverRegister";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,13 @@ const router = createBrowserRouter([
           {path: ":slug", element: <BlogPost />},
         ],
       },
+    ],
+  },
+  {
+    path: "app-view",
+    children: [
+      {path: "user-register", element: <UserRegisterAppView />},
+      {path: "driver-register", element: <DriverRegisterAppView />},
     ],
   },
 ]);
