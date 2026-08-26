@@ -22,7 +22,7 @@ export default function LegalTabsLayoutAppView({
 }: Props) {
   return (
     <div className="min-h-screen bg-gray-50/60">
-      <PageContainer className="py-10">
+      <PageContainer className="pt-5 pb-10">
         <div className="flex flex-col gap-2 md:gap-8 md:flex-row md:items-start">
           <div className="shrink-0">
             <div className="flex flex-col gap-2 justify-center items-center mb-8">
