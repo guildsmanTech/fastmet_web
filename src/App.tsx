@@ -1,5 +1,5 @@
 import {QueryClientProvider} from "@tanstack/react-query";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import Home from "./pages/Home";
 import DriverRegister from "./pages/DriverRegister";
 import RootLayout from "./layout/RootLayout";
@@ -13,6 +13,10 @@ import About from "./pages/About";
 import DeliveryServices from "./pages/DeliveryServices";
 import UserRegisterAppView from "./pages/app-view/UserRegister";
 import DriverRegisterAppView from "./pages/app-view/DriverRegister";
+import PrivacyPolicyPage from "./pages/legal/PrivacyPolicy";
+import TermsPage from "./pages/legal/Terms";
+import PrivacyPolicyPageAppView from "./pages/app-view/legal/PrivacyPolicyApp";
+import TermsPageAppView from "./pages/app-view/legal/TermsApp";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,25 @@ const router = createBrowserRouter([
           {path: ":slug", element: <BlogPost />},
         ],
       },
+      {
+        path: "/legal",
+        children: [
+          {
+            path: "privacy-policy",
+            children: [
+              {index: true, element: <Navigate to="user" replace />},
+              {path: ":type", element: <PrivacyPolicyPage />},
+            ],
+          },
+          {
+            path: "terms",
+            children: [
+              {index: true, element: <Navigate to="user" replace />},
+              {path: ":type", element: <TermsPage />},
+            ],
+          },
+        ],
+      },
     ],
   },
   {
@@ -39,6 +62,25 @@ const router = createBrowserRouter([
     children: [
       {path: "user-register", element: <UserRegisterAppView />},
       {path: "driver-register", element: <DriverRegisterAppView />},
+      {
+        path: "legal",
+        children: [
+          {
+            path: "privacy-policy",
+            children: [
+              {index: true, element: <Navigate to="user" replace />},
+              {path: ":type", element: <PrivacyPolicyPageAppView />},
+            ],
+          },
+          {
+            path: "terms",
+            children: [
+              {index: true, element: <Navigate to="user" replace />},
+              {path: ":type", element: <TermsPageAppView />},
+            ],
+          },
+        ],
+      },
     ],
   },
 ]);
