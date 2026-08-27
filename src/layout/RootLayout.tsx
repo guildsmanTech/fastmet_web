@@ -9,7 +9,9 @@ export default function RootLayout() {
   const {pathname} = useLocation();
 
   const hideRewardModal =
-    pathname.startsWith("/legal") || pathname.startsWith("/blog");
+    pathname.startsWith("/legal") ||
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/delete-account");
   return (
     <div className="relative">
       <ScrollToTop />
