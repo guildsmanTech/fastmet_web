@@ -32,9 +32,9 @@ const DELETED_AFTER_GRACE = [
 ];
 
 const RETAINED = [
-  "Completed, cancelled, and historical trip/booking records (pickup/drop-off details you entered for a delivery), kept for operations, disputes, and Philippine tax/accounting requirements (typically 3–10 years)",
-  "Bond ledger, refund, and reward issuance records for drivers (accounting / BIR)",
-  "Safety records such as SOS alerts (liability)",
+  "Completed, cancelled, and historical trip/booking records (pickup/drop-off details you entered for a delivery), kept for operations, disputes, and Philippine tax/accounting requirements (5 years from the relevant tax return's filing deadline, per BIR RR No. 7-2024; longer if a related tax dispute or refund claim is pending)",
+  "Bond ledger, refund, and reward issuance records for drivers (accounting / BIR — same 5-year retention rule)",
+  "Safety records such as SOS alerts (retained for liability purposes)",
   "Chat history with the other party, with your identity shown as a deleted account (so their inbox is not wiped)",
   "Fraud-prevention records keyed to a device (not your profile), and email bounce suppression lists",
 ];
@@ -187,7 +187,7 @@ export default function DeleteAccountPage() {
       </Helmet>
       <section className="py-8 bg-secondary md:py-12 lg:py-16">
         <PageContainer>
-          <h1 className="mt-2 text-xl font-bold md:text-3xl text-primary md:text-4xl">
+          <h1 className="mt-2 text-xl font-bold text-primary md:text-4xl">
             Delete your FastMet account
           </h1>
           <p className="mt-4 max-w-3xl text-sm md:text-base text-white/80">
@@ -295,37 +295,56 @@ export default function DeleteAccountPage() {
                   Mobile number
                 </label>
 
-                <PhoneInput
-                  country="ph"
-                  value={phone}
-                  onChange={(value) => setPhone(value)}
-                  onlyCountries={["ph"]}
-                  countryCodeEditable={false}
-                  disableDropdown
-                  inputClass="!w-full !py-2.5 !px-12 !rounded-lg !text-sm !h-auto !border-gray-300"
-                  buttonClass="!border !border-gray-300 !rounded-l-lg !bg-white"
-                />
+                <div className="flex items-center gap-4 flex-col md:flex-row justify-center">
+                  <PhoneInput
+                    country="ph"
+                    value={phone}
+                    onChange={(value) => {
+                      // IMPORTANT: do not reformat here aggressively
+                      setPhone(value);
+                    }}
+                    inputProps={{
+                      maxLength: 15,
+                      onPaste: (e: React.ClipboardEvent<HTMLInputElement>) => {
+                        e.preventDefault();
 
-                <Button
-                  type="submit"
-                  disabled={sending || sendRateLimit !== null}
-                  className="mt-4 w-full text-white"
-                >
-                  {sending ? (
-                    <span className="flex gap-2 items-center">
-                      <Loader2 className="animate-spin size-4" />
-                      Sending code…
-                    </span>
-                  ) : sendRateLimit !== null ? (
-                    <OtpCountdown
-                      seconds={sendRateLimit}
-                      label="Try again in {s}s"
-                      onDone={() => setSendRateLimit(null)}
-                    />
-                  ) : (
-                    "Send OTP"
-                  )}
-                </Button>
+                        const pasted = e.clipboardData.getData("Text");
+                        const formatted = formatPHNumber(pasted);
+
+                        setPhone(formatted);
+                      },
+                    }}
+                    onlyCountries={["ph"]}
+                    countryCodeEditable={false}
+                    disableDropdown
+                    inputClass="!w-full !py-2.5 !px-12 !rounded-lg !text-sm !h-auto !border-gray-300"
+                    buttonClass="!border !border-gray-300 !rounded-l-lg !bg-white"
+                  />
+                  <Button
+                    type="submit"
+                    disabled={
+                      sending ||
+                      sendRateLimit !== null ||
+                      normalizedPhone.length < 12
+                    }
+                    className="w-full text-white md:w-auto cursor-pointer"
+                  >
+                    {sending ? (
+                      <span className="flex gap-2 items-center">
+                        <Loader2 className="animate-spin size-4" />
+                        Sending code…
+                      </span>
+                    ) : sendRateLimit !== null ? (
+                      <OtpCountdown
+                        seconds={sendRateLimit}
+                        label="Try again in {s}s"
+                        onDone={() => setSendRateLimit(null)}
+                      />
+                    ) : (
+                      "Send OTP"
+                    )}
+                  </Button>
+                </div>
               </form>
             )}
 

@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import type {LegalContent} from "@/types/legal";
 import {slugify} from "@/utils/slugify";
 
@@ -12,6 +13,7 @@ export default function LegalContentRenderer({content}: Props) {
         const [num, ...rest] = section.heading.split(". ");
         const label = rest.join(". ") || section.heading;
         const id = slugify(section.heading);
+
         return (
           <section
             key={i}
@@ -22,13 +24,15 @@ export default function LegalContentRenderer({content}: Props) {
               <span className="text-3xl font-bold leading-none select-none text-primary/30">
                 {num.padStart(2, "0")}
               </span>
+
               <h2 className="text-base font-semibold text-secondary">
                 {label}
               </h2>
             </div>
+
             <div className="pl-1 space-y-3 text-sm leading-relaxed text-gray-600">
               {section.blocks.map((block, j) => {
-                if (block.type === "subheading")
+                if (block.type === "subheading") {
                   return (
                     <h3
                       key={j}
@@ -37,7 +41,9 @@ export default function LegalContentRenderer({content}: Props) {
                       {block.text}
                     </h3>
                   );
-                if (block.type === "list")
+                }
+
+                if (block.type === "list") {
                   return (
                     <ul
                       key={j}
@@ -48,7 +54,31 @@ export default function LegalContentRenderer({content}: Props) {
                       ))}
                     </ul>
                   );
-                return <p key={j}>{block.text}</p>;
+                }
+
+                if (block.type === "p") {
+                  return (
+                    <p key={j}>
+                      {block.content
+                        ? block.content.map((item, k) =>
+                            typeof item === "string" ? (
+                              item
+                            ) : (
+                              <Link
+                                key={k}
+                                to={item.href}
+                                className="text-primary underline underline-offset-2 hover:opacity-80"
+                              >
+                                {item.text}
+                              </Link>
+                            ),
+                          )
+                        : block.text}
+                    </p>
+                  );
+                }
+
+                return null;
               })}
             </div>
           </section>
