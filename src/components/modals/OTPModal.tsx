@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,10 +6,10 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { OtpCountdown } from "@/components/ui/OtpCountdown";
-import { formatPHNumber } from "@/helper/format";
+import {Button} from "@/components/ui/button";
+import {Loader2} from "lucide-react";
+import {OtpCountdown} from "@/components/ui/OtpCountdown";
+import {formatPHNumber} from "@/helper/format";
 
 interface OTPModalProps {
   open: boolean;
@@ -17,7 +17,7 @@ interface OTPModalProps {
   phone: string;
   email?: string;
   onVerifySuccess: () => void;
-  onResend: () => Promise<{ error?: string }>;
+  onResend: () => Promise<{error?: string}>;
   onVerify: (code: string) => Promise<{
     success: boolean;
     error?: string;
@@ -25,6 +25,7 @@ interface OTPModalProps {
     locked?: boolean;
   }>;
   onClose?: () => void;
+  verifyButtonLabel?: string;
 }
 
 export default function OTPModal({
@@ -36,6 +37,7 @@ export default function OTPModal({
   onResend,
   onVerify,
   onClose,
+  verifyButtonLabel = "Verify & Complete Registration",
 }: OTPModalProps) {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [otpError, setOtpError] = useState("");
@@ -164,7 +166,8 @@ export default function OTPModal({
             </span>
             {email?.includes("@") && (
               <>
-                {" "}and{" "}
+                {" "}
+                and{" "}
                 <span className="font-semibold text-foreground">{email}</span>
               </>
             )}
@@ -222,7 +225,7 @@ export default function OTPModal({
                 Verifying…
               </span>
             ) : (
-              "Verify & Complete Registration"
+              `${verifyButtonLabel}`
             )}
           </Button>
         )}

@@ -266,6 +266,18 @@ export const userPrivacyPolicy: LegalContent = {
           type: "p",
           text: "To exercise your privacy rights, contact: support@fastmet.com.ph",
         },
+        {
+          type: "p",
+          content: [
+            "You may also request account deletion through the ",
+            {
+              type: "link",
+              text: "Delete Account",
+              href: "/delete-account",
+            },
+            " page, which explains what personal data is deleted, what records are retained for legal and accounting reasons, the 30-day cancellation period, and how to cancel a pending request.",
+          ],
+        },
       ],
     },
     {
@@ -923,7 +935,21 @@ export const driverPrivacyPolicy: LegalContent = {
         },
         {
           type: "p",
-          text: "To make a privacy-related request, contact: support@fastmet.com.ph",
+          content: [
+            "To make a privacy-related request, contact: support@fastmet.com.ph",
+          ],
+        },
+        {
+          type: "p",
+          content: [
+            "You may also request account deletion through the ",
+            {
+              type: "link",
+              text: "Delete Account",
+              href: "/delete-account",
+            },
+            " page, which explains what personal data is deleted, what records are retained for legal and accounting reasons, the 30-day cancellation period, and how to cancel a pending request.",
+          ],
         },
       ],
     },

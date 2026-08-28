@@ -17,6 +17,7 @@ import PrivacyPolicyPage from "./pages/legal/PrivacyPolicy";
 import TermsPage from "./pages/legal/Terms";
 import PrivacyPolicyPageAppView from "./pages/app-view/legal/PrivacyPolicyApp";
 import TermsPageAppView from "./pages/app-view/legal/TermsApp";
+import DeleteAccountPage from "./pages/DeleteAccount";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {path: "/delete-account", element: <DeleteAccountPage />},
     ],
   },
   {
