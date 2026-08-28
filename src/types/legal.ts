@@ -1,5 +1,16 @@
 export type ContentBlock =
-  | {type: "p"; text: string}
+  | {
+      type: "p";
+      text?: string;
+      content?: (
+        | string
+        | {
+            type: "link";
+            text: string;
+            href: string;
+          }
+      )[];
+    }
   | {type: "subheading"; text: string}
   | {type: "list"; items: string[]};
 
