@@ -82,16 +82,23 @@ export default function SharedFooter() {
       <PageContainer className="flex items-center justify-center gap-1.5 py-4 text-xs mb-7 text-white/60">
         <Link
           to="/legal/privacy-policy/user"
-          className="transition-colors hover:text-primary"
+          className="text-center transition-colors hover:text-primary"
         >
           Privacy Policy
         </Link>
         <span className="text-white/25">💠</span>
         <Link
           to="/legal/terms/user"
-          className="transition-colors hover:text-primary"
+          className="text-center transition-colors hover:text-primary"
         >
           Terms & Conditions
+        </Link>
+        <span className="text-white/25">💠</span>
+        <Link
+          to="/delete-account"
+          className="text-center transition-colors hover:text-primary"
+        >
+          Delete Account
         </Link>
       </PageContainer>
 
