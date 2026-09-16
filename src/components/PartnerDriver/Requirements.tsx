@@ -38,34 +38,37 @@ const REQUIREMENTS_STEPS = [
       "Engine Number Photo",
       "Chassis Number Photo",
       "LTFRB PA/CPC (L300, Closed Van, and Wing Van)",
+      "NBI or Police Clearance",
+      "Deed of Sale — if not yet transferred to your name",
+      "Letter of Authorization + Owner's Valid ID — if using someone else's vehicle",
     ],
   },
 ];
 
 export function Requirements() {
   return (
-    <section className="w-full bg-secondary py-10" id="requirements">
+    <section className="py-10 w-full bg-secondary" id="requirements">
       <PageContainer className="flex flex-col gap-10">
-        <h2 className="text-primary font-bold text-2xl md:text-3xl text-center">
+        <h2 className="text-2xl font-bold text-center text-primary md:text-3xl">
           Requirements to Become a FastMet Partner-Driver
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-2 max-w-5xl mx-auto w-full px-6">
+        <div className="grid grid-cols-1 gap-8 px-6 mx-auto w-full max-w-5xl md:grid-cols-2 lg:grid-cols-4 lg:gap-2">
           {REQUIREMENTS_STEPS.map(({icon: Icon, title, items}, i) => (
             <div
               key={title}
-              className="relative flex flex-row lg:flex-col items-start lg:items-center text-left lg:text-center gap-4 lg:gap-3"
+              className="flex relative flex-row gap-4 items-start text-left lg:flex-col lg:items-center lg:text-center lg:gap-3"
             >
-              <div className="flex items-center justify-center size-14 lg:size-16 shrink-0 rounded-full border-2 border-primary text-primary">
+              <div className="flex justify-center items-center rounded-full border-2 size-14 lg:size-16 shrink-0 border-primary text-primary">
                 <img
                   src={Icon}
                   alt={title}
-                  className="size-6 lg:size-8 object-contain"
+                  className="object-contain size-6 lg:size-8"
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <p className="text-primary font-bold text-sm">{title}</p>
-                <ul className="text-white/80 text-xs md:text-sm flex flex-col gap-1 list-disc list-inside text-left">
+                <p className="text-sm font-bold text-primary">{title}</p>
+                <ul className="flex flex-col gap-1 text-xs list-disc list-inside text-left text-white/80 md:text-sm">
                   {items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
@@ -86,16 +89,16 @@ export function Requirements() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center gap-4 text-center max-w-xl mx-auto">
-          <p className="text-primary font-semibold text-sm lg:text-base">
+        <div className="flex flex-col gap-4 items-center mx-auto max-w-xl text-center">
+          <p className="text-sm font-semibold text-primary lg:text-base">
             Before Submitting Your Application
           </p>
-          <ul className="text-white/80 text-xs md:text-sm flex flex-col gap-1 list-disc list-inside text-left">
+          <ul className="flex flex-col gap-1 text-xs list-disc list-inside text-left text-white/80 md:text-sm">
             <li>Ensure all photos are clear and readable</li>
             <li>Prepare valid and updated documents</li>
             <li>Provide accurate information for verification</li>
           </ul>
-          <p className="text-white/60 text-xs lg:text-sm">
+          <p className="text-xs text-white/60 lg:text-sm">
             Once your application is reviewed, FastMet will send official
             updates regarding onboarding and activation.
           </p>
