@@ -11,11 +11,12 @@ import PageContainer from "@/components/PageContainer";
 const REQUIREMENTS_STEPS = [
   {
     icon: license,
-    title: "Driver's License",
+    title: "Driver's Identification",
     items: [
       "License Number",
       "Front and Back Photos of License",
       "Selfie holding your driver's license",
+      "NBI or Police Clearance",
     ],
   },
   {
@@ -38,7 +39,6 @@ const REQUIREMENTS_STEPS = [
       "Engine Number Photo",
       "Chassis Number Photo",
       "LTFRB PA/CPC (L300, Closed Van, and Wing Van)",
-      "NBI or Police Clearance",
       "Deed of Sale — if not yet transferred to your name",
       "Letter of Authorization + Owner's Valid ID — if using someone else's vehicle",
     ],
