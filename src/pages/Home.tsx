@@ -1,21 +1,22 @@
-import {Helmet} from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import QuestionForm from "@/components/home/QuestionForm";
 import LoaderModal from "@/components/modals/Loader";
-import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
-import {useVehicles} from "@/hooks/useVehicleQueries";
+import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
+import { useVehicles } from "@/hooks/useVehicleQueries";
 import CTAButton from "@/components/CTAButton";
 import PreRegisterActions from "@/components/PreRegisterActions";
 
-import {Truck, BriefcaseBusiness, MapPinned} from "lucide-react";
-import {homeBg, homeBox, homeMain} from "@/constants/images";
+import { Truck, BriefcaseBusiness, MapPinned } from "lucide-react";
+import { homeBg, homeBox, homeMain } from "@/constants/images";
 import ServiceAreas from "@/components/home/ServiceAreas";
 import UserDriverSplit from "@/components/home/UserDriverSplit";
 import CoverageExplainer from "@/components/home/Coverage";
 import PageContainer from "@/components/PageContainer";
+import Registrations from "@/components/home/Registrations";
 
 export default function Home() {
-  const {isPending: countsLoading} = useRegistrationCounts();
-  const {isPending: vehiclesLoading} = useVehicles();
+  const { isPending: countsLoading } = useRegistrationCounts();
+  const { isPending: vehiclesLoading } = useVehicles();
 
   return (
     <div className="flex items-center justify-center flex-col w-full overflow-x-hidden gap-12">
@@ -32,20 +33,20 @@ export default function Home() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "FastMet",
-            "url": "https://fastmet.com.ph",
+            name: "FastMet",
+            url: "https://fastmet.com.ph",
           })}
         </script>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "FastMet",
-            "url": "https://fastmet.com.ph",
-            "logo": "https://fastmet.com.ph/fastmet_icon.png",
-            "description": "On-demand delivery platform in Greater Manila",
-            "areaServed": "Greater Manila",
-            "sameAs": [],
+            name: "FastMet",
+            url: "https://fastmet.com.ph",
+            logo: "https://fastmet.com.ph/fastmet_icon.png",
+            description: "On-demand delivery platform in Greater Manila",
+            areaServed: "Greater Manila",
+            sameAs: [],
           })}
         </script>
       </Helmet>
@@ -159,7 +160,7 @@ export default function Home() {
                   "Delivery requests within Greater Manila, with delivery through land-accessible routes.",
                 icon: MapPinned,
               },
-            ].map(({title, description, icon: Icon}) => (
+            ].map(({ title, description, icon: Icon }) => (
               <div
                 key={title}
                 className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
@@ -213,6 +214,8 @@ export default function Home() {
       <CoverageExplainer />
 
       <ServiceAreas />
+
+      <Registrations />
 
       <QuestionForm />
 

@@ -19,6 +19,8 @@ import homeUser from "@/assets//home/home_left.webp";
 import homeDriver from "@/assets/home/home_driver.webp";
 import coverage from "@/assets/home/map.webp";
 import homeMain from "@/assets/home/home_main.webp";
+import bir from "@/assets/home/bir.png";
+import sec from "@/assets/home/sec.png";
 
 // about
 import aboutBg from "@/assets/about/about_bg.png";
@@ -26,6 +28,8 @@ import aboutUser from "@/assets/about/about_user.png";
 import aboutBusiness from "@/assets/about/about_business.png";
 import aboutTruck from "@/assets/about/about_truck.png";
 import aboutMain from "@/assets/about/about_main.webp";
+import dex from "@/assets/about/dex.png";
+import josh from "@/assets/about/josh.png";
 
 import mission from "@/assets/about/mission.webp";
 import vision from "@/assets/about/vision.webp";
@@ -66,6 +70,8 @@ export {
   homeDriver,
   homeMain,
   coverage,
+  bir,
+  sec,
 
   // requirements
   vehicleNumbers,
@@ -81,6 +87,8 @@ export {
   aboutMain,
   mission,
   vision,
+  dex,
+  josh,
 
   // partner-driver
   partnerBg,
