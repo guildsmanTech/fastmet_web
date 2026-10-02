@@ -18,6 +18,8 @@ import TermsPage from "./pages/legal/Terms";
 import PrivacyPolicyPageAppView from "./pages/app-view/legal/PrivacyPolicyApp";
 import TermsPageAppView from "./pages/app-view/legal/TermsApp";
 import DeleteAccountPage from "./pages/DeleteAccount";
+import SubscriptionPage from "./pages/Subscription";
+import SubscriptionResultPage from "./pages/SubscriptionResult";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,13 @@ const router = createBrowserRouter([
         ],
       },
       {path: "/delete-account", element: <DeleteAccountPage />},
+      {
+        path: "/subscription",
+        children: [
+          {index: true, element: <SubscriptionPage />},
+          {path: "result", element: <SubscriptionResultPage />},
+        ],
+      },
     ],
   },
   {

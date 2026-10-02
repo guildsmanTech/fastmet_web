@@ -1,10 +1,10 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {logo} from "@/constants/images";
 import GeneralFAQModal from "./modals/GeneralFAQModal";
-import PreRegisterActions from "@/components/PreRegisterActions";
+import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import {Link, useLocation} from "react-router-dom";
-import {Menu, X} from "lucide-react";
+import {BadgeCheck, Menu, X} from "lucide-react";
 
 const navLinks = [
   {label: "Home", to: "/"},
@@ -17,6 +17,11 @@ const navLinks = [
 export default function Header() {
   const {pathname} = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close the drawer after any navigation (e.g. the Subscribe button).
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   const isActive = (to: string) =>
     to === "/" ? pathname === "/" : pathname.startsWith(to);
@@ -58,7 +63,15 @@ export default function Header() {
             </div>
           </div>
           <div className="lg:flex hidden items-center gap-2 xl:gap-3 ">
-            <PreRegisterActions layout="header" />
+            <CTAButton
+              to="/subscription"
+              variant="driver"
+              size="header"
+              icon={BadgeCheck}
+              title="Subscribe"
+            >
+              Subscribe
+            </CTAButton>
 
             <div className="flex items-center gap-2 ml-2">
               <p className="text-sm font-semibold text-white/80">FAQs</p>
@@ -68,6 +81,15 @@ export default function Header() {
 
           {/* ── Mobile right: FAQs + hamburger ────────────────────────────── */}
           <div className="flex lg:hidden items-center gap-3">
+            <CTAButton
+              to="/subscription"
+              variant="driver"
+              size="header"
+              icon={BadgeCheck}
+              title="Subscribe"
+            >
+              Subscribe
+            </CTAButton>
             <GeneralFAQModal />
             <button
               type="button"
@@ -113,11 +135,17 @@ export default function Header() {
               </Link>
             ))}
 
-            <PreRegisterActions
-              layout="stacked-mobile"
-              shortLabels
-              className="lg:hidden mt-10"
-            />
+            <div className="lg:hidden mt-8 flex">
+              <CTAButton
+                to="/subscription"
+                variant="driver"
+                size="md"
+                icon={BadgeCheck}
+                fullWidth
+              >
+                Subscribe
+              </CTAButton>
+            </div>
           </div>
         </>
       )}
