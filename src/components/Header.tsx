@@ -4,7 +4,7 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Menu, X } from "lucide-react";
+import { BadgeCheck, Menu, Rocket, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -70,6 +70,9 @@ export default function Header() {
               title="Subscribe"
             >
               Get Subscription
+            </CTAButton>
+            <CTAButton to="/get-a-quote" variant="user-soft-border" size="header" icon={Rocket} title="Get a Quote">
+              Get a Quote
             </CTAButton>
 
             <div className="flex items-center gap-2 ml-2">

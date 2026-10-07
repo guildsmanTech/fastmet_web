@@ -20,6 +20,7 @@ import TermsPageAppView from "./pages/app-view/legal/TermsApp";
 import DeleteAccountPage from "./pages/DeleteAccount";
 import SubscriptionPage from "./pages/Subscription";
 import SubscriptionResultPage from "./pages/SubscriptionResult";
+import GetQuotePage from "./pages/GetQuote";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {path: "/get-a-quote", element: <GetQuotePage />},
       {path: "/delete-account", element: <DeleteAccountPage />},
       {
         path: "/subscription",
