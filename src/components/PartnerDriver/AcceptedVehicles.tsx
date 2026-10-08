@@ -1,7 +1,6 @@
 import {useVehicles} from "@/hooks/useVehicleQueries";
 import type {IVehicleType} from "@/types/vehicle";
 import PageContainer from "@/components/PageContainer";
-import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 const VEHICLE_DESCRIPTION = {
   motorcycle:
