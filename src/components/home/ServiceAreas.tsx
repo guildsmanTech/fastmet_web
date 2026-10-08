@@ -44,7 +44,7 @@ const SERVICE_AREAS = {
 };
 export default function ServiceAreas() {
   return (
-    <section className="w-full bg-gray-50 py-10">
+    <section id="service-areas" className="w-full bg-gray-50 py-10 scroll-mt-24">
       <PageContainer className="flex flex-col gap-8">
         <div className="text-center flex flex-col gap-1">
           <h2 className="text-primary font-bold text-xl md:text-2xl">

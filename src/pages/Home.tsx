@@ -5,6 +5,7 @@ import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
 import {useVehicles} from "@/hooks/useVehicleQueries";
 import CTAButton from "@/components/CTAButton";
 import PreRegisterActions from "@/components/PreRegisterActions";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 import {Truck, BriefcaseBusiness, MapPinned} from "lucide-react";
 import {homeBg, homeBox, homeMain} from "@/constants/images";
@@ -12,13 +13,14 @@ import ServiceAreas from "@/components/home/ServiceAreas";
 import UserDriverSplit from "@/components/home/UserDriverSplit";
 import CoverageExplainer from "@/components/home/Coverage";
 import PageContainer from "@/components/PageContainer";
+import Registrations from "@/components/home/Registrations";
 
 export default function Home() {
   const {isPending: countsLoading} = useRegistrationCounts();
   const {isPending: vehiclesLoading} = useVehicles();
 
   return (
-    <div className="flex items-center justify-center flex-col w-full overflow-x-hidden gap-12">
+    <div className="flex overflow-x-hidden flex-col gap-12 justify-center items-center w-full">
       <Helmet>
         <title>
           FastMet – Fast & Reliable On-Demand Delivery in Greater Manila
@@ -32,43 +34,43 @@ export default function Home() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "FastMet",
-            "url": "https://fastmet.com.ph",
+            name: "FastMet",
+            url: "https://fastmet.com.ph",
           })}
         </script>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "FastMet",
-            "url": "https://fastmet.com.ph",
-            "logo": "https://fastmet.com.ph/fastmet_icon.png",
-            "description": "On-demand delivery platform in Greater Manila",
-            "areaServed": "Greater Manila",
-            "sameAs": [],
+            name: "FastMet",
+            url: "https://fastmet.com.ph",
+            logo: "https://fastmet.com.ph/fastmet_icon.png",
+            description: "On-demand delivery platform in Greater Manila",
+            areaServed: "Greater Manila",
+            sameAs: [],
           })}
         </script>
       </Helmet>
       <section
-        className="relative w-full min-h-dvh flex items-center bg-secondary"
+        className="flex relative items-center w-full min-h-dvh bg-secondary"
         id="hero"
       >
         <img
           src={homeBg}
           alt="FastMet delivery"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="object-cover absolute inset-0 w-full h-full"
         />
         <div className="absolute inset-0 bg-black/20" />
 
-        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between lg:gap-6">
+        <PageContainer className="flex relative z-10 flex-col justify-between items-center py-20 lg:flex-row lg:gap-6">
           {/* Left: headline */}
-          <div className="flex flex-col gap-5 text-white max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-primary max-w-2xl">
+          <div className="flex flex-col gap-5 max-w-xl text-white">
+            <h1 className="max-w-2xl text-4xl font-extrabold leading-tight md:text-5xl text-primary">
               Delivery? <br /> FastMet Agad!
             </h1>
 
             {/* Description */}
-            <p className="font-semibold text-base md:text-lg max-w-2xl">
+            <p className="max-w-2xl text-base font-semibold md:text-lg">
               On-demand delivery for personal, business, and bulk delivery
               needs. FastMet accepts delivery requests within Greater Manila and
               can deliver nationwide through land-accessible routes.
@@ -78,14 +80,14 @@ export default function Home() {
               userVariant="user"
               driverVariant="user"
               size="md"
-              className="mt-2 w-full hidden lg:flex"
+              className="hidden mt-2 w-full lg:flex"
             />
           </div>
 
           <img
             src={homeMain}
             alt="FastMet delivery"
-            className="w-full md:w-1/2 object-cover"
+            className="object-cover w-full md:w-1/2"
           />
 
           <PreRegisterActions
@@ -101,18 +103,18 @@ export default function Home() {
       {/* ===== ANO ANG FASTMET ===== */}
       <section className="w-full">
         <PageContainer className="flex flex-col gap-10">
-          <div className="flex flex-col md:flex-row gap-5 md:gap-10">
+          <div className="flex flex-col gap-5 md:flex-row md:gap-10">
             <img
               src={homeBox}
               alt="FastMet delivery"
               className="w-full md:w-1/2 aspect-[4/3] lg:w-1/3 object-cover rounded-2xl"
             />
 
-            <div className="flex-1 flex flex-col gap-4">
-              <h2 className="text-primary font-bold text-2xl md:text-3xl text-center lg:text-start">
+            <div className="flex flex-col flex-1 gap-4">
+              <h2 className="text-2xl font-bold text-center text-primary md:text-3xl lg:text-start">
                 Ano ang FastMet?
               </h2>
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">
+              <p className="text-sm leading-relaxed text-justify text-gray-700 md:text-base">
                 FastMet is an on-demand delivery platform that connects users
                 and businesses with the right partner-driver and vehicle for
                 their delivery needs. <br /> <br />
@@ -124,23 +126,23 @@ export default function Home() {
                 destinations may reach different parts of the country through
                 land-accessible routes.
               </p>
-              <div className="flex gap-3 mt-2 flex-row justify-center lg:justify-start">
+              <div className="flex flex-row gap-3 justify-center mt-2 lg:justify-start">
                 <CTAButton to="/user-register" variant="driver" size="compact">
                   Pre-Register as a User
                 </CTAButton>
                 <CTAButton
-                  to="/driver-register"
+                  href={DRIVER_PLAY_STORE_URL}
                   variant="driver"
                   size="compact"
                 >
-                  Pre-Register as a Driver
+                  Download Driver App
                 </CTAButton>
               </div>
             </div>
           </div>
 
           {/* Feature strip — icons still placeholder, none provided yet */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
               {
                 title: "Different Vehicle Options",
@@ -162,46 +164,46 @@ export default function Home() {
             ].map(({title, description, icon: Icon}) => (
               <div
                 key={title}
-                className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="p-5 bg-white rounded-xl border border-gray-200 shadow-sm transition group hover:-translate-y-1 hover:shadow-md"
               >
-                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="flex justify-center items-center mb-4 rounded-lg size-11 bg-primary/10 text-primary">
                   <Icon className="size-5" />
                 </div>
 
-                <h3 className="text-sm md:text-base font-bold text-gray-900">
+                <h3 className="text-sm font-bold text-gray-900 md:text-base">
                   {title}
                 </h3>
 
-                <p className="mt-2 text-xs md:text-sm leading-relaxed text-gray-600">
+                <p className="mt-2 text-xs leading-relaxed text-gray-600 md:text-sm">
                   {description}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col gap-6 border-b-2 border-primary pb-10 justify-center items-center lg:pt-5">
+          <div className="flex flex-col gap-6 justify-center items-center pb-10 border-b-2 border-primary lg:pt-5">
             <div className="flex flex-col gap-1 text-center">
               <h2 className="text-lg font-bold lg:text-2xl">
-                Introductory 0% Commission for Partner-Drivers
+                0% Commission — Subscription Fee Lang
               </h2>
 
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                During the introductory zero-commission period, eligible FastMet
-                partner-drivers can keep 100% of their delivery earnings.
+              <p className="text-sm leading-relaxed text-gray-700 md:text-base">
+                FastMet partner-drivers keep 100% of their delivery earnings.
+                Walang commission cut — subscription fee lang ang babayaran.
               </p>
             </div>
-            <div className="flex flex-col items-center gap-2 text-center">
+            <div className="flex flex-col gap-2 items-center text-center">
               <CTAButton
-                to="/about"
+                to="/subscription"
                 variant="ghost-border"
                 size="md"
-                className="w-fit py-2 px-3 lg:px-5 text-sm md:text-base cursor-pointer"
+                className="px-3 py-2 text-sm cursor-pointer w-fit lg:px-5 md:text-base"
               >
-                Learn More About FastMet
+                View Subscription Plans
               </CTAButton>
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                Full terms, duration, and eligibility details will be shared
-                through official FastMet updates.
+              <p className="text-sm leading-relaxed text-gray-700 md:text-base">
+                Manage your plan anytime on the Subscription page or in the
+                FastMet Driver app.
               </p>
             </div>
           </div>
@@ -213,6 +215,8 @@ export default function Home() {
       <CoverageExplainer />
 
       <ServiceAreas />
+
+      <Registrations />
 
       <QuestionForm />
 

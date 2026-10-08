@@ -9,22 +9,23 @@ import {
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {question} from "@/constants/images";
-import {Link} from "react-router-dom";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 const DRIVER_FAQS = [
   {
     question: "Paano maging driver ng FastMet?",
     answer:
-      "Bukas na ang aming pre-registration para sa mga gustong maging driver-partner.",
+      "I-download ang FastMet Driver app sa Google Play para mag-sign up bilang partner-driver.",
     hasLink: true,
     extra:
       "Maging isa sa mga unang driver ng FastMet at magkaroon ng chance na manalo ng cash prizes at exclusive merchandise sa aming official launch.",
   },
   {
-    question: "Magkano ang commission rate sa FastMet?",
+    question: "May commission ba sa FastMet?",
     answer:
-      "Sa simula, magpapatupad ang FastMet ng zero-based commission, ibig sabihin mas malaki ang maiuuwi mong kita bilang driver.",
-    extra: "Ito ay introductory offer at maaaring magbago sa hinaharap.",
+      "Walang commission. Keep mo ang 100% ng delivery earnings mo — subscription fee lang ang babayaran.",
+    extra:
+      "Maaari mong tingnan at i-manage ang iyong plan sa Subscription page o sa FastMet Driver app.",
   },
   {
     question: "Ano ang mga sasakyan na puwedeng i-register?",
@@ -107,14 +108,14 @@ export function DriverFAQModal() {
                 <p className="text-xs leading-relaxed text-justify md:text-sm">
                   {answer}{" "}
                   {hasLink && (
-                    <DialogClose asChild>
-                      <Link
-                        to="/driver-register"
-                        className="text-blue-600 underline"
-                      >
-                        mag-register dito
-                      </Link>
-                    </DialogClose>
+                    <a
+                      href={DRIVER_PLAY_STORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      i-download ang Driver app
+                    </a>
                   )}
                 </p>
 

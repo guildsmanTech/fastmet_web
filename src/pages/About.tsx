@@ -1,13 +1,14 @@
-import {Helmet} from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import ConnectNeeds from "@/components/about/ConnectNeeds";
 import Coverage from "@/components/about/Coverage";
 import JoinFastMet from "@/components/about/Join";
 import MissionVision from "@/components/about/MissionVision";
 import OurValues from "@/components/about/Values";
-import {aboutBg, aboutMain} from "@/constants/images";
+import { aboutBg, aboutMain } from "@/constants/images";
 import PreRegisterActions from "@/components/PreRegisterActions";
-import {Van, Truck, Motorbike, Car} from "lucide-react";
+import { Van, Truck, Motorbike, Car } from "lucide-react";
 import PageContainer from "@/components/PageContainer";
+import Founder from "@/components/about/Founder";
 
 export default function About() {
   return (
@@ -97,11 +98,11 @@ export default function About() {
           </div>
           <div className="w-full max-w-md lg:max-w-sm bg-secondary/10 rounded-xl p-6 sm:p-8 shrink-0">
             {[
-              {icon: Motorbike, label: "Small Parcel", vehicle: "Motorcycle"},
-              {icon: Car, label: "Multiple Boxes", vehicle: "Car"},
-              {icon: Van, label: "Bulky Items", vehicle: "Van"},
-              {icon: Truck, label: "Commercial Cargo", vehicle: "Truck"},
-            ].map(({icon: Icon, label, vehicle}, i, arr) => (
+              { icon: Motorbike, label: "Small Parcel", vehicle: "Motorcycle" },
+              { icon: Car, label: "Multiple Boxes", vehicle: "Car" },
+              { icon: Van, label: "Bulky Items", vehicle: "Van" },
+              { icon: Truck, label: "Commercial Cargo", vehicle: "Truck" },
+            ].map(({ icon: Icon, label, vehicle }, i, arr) => (
               <div
                 key={label}
                 className={`flex items-center gap-3 ${i !== 0 ? "pt-4" : ""} ${
@@ -177,7 +178,7 @@ export default function About() {
       <ConnectNeeds />
       <MissionVision />
       <OurValues />
-      {/* <Founder /> */}
+      <Founder />
       <Coverage />
       <JoinFastMet />
     </div>

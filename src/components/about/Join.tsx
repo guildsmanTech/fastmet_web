@@ -1,6 +1,7 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
-import {UserRound, Truck} from "lucide-react";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
+import {Calculator, Smartphone} from "lucide-react";
 
 export default function JoinFastMet() {
   return (
@@ -12,29 +13,29 @@ export default function JoinFastMet() {
           </h2>
           <p className="text-white/90 text-sm font-semibold">
             Whether you need delivery services or want to become a
-            partner-driver, pre-register today and receive official FastMet
-            updates.
+            partner-driver, get a quote or download the FastMet Driver app
+            today.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center gap-3 mt-10 max-w-md mx-auto">
           <CTAButton
-            to="/user-register"
+            to="/get-a-quote"
             variant="user-soft-border"
             size="sm"
-            icon={UserRound}
+            icon={Calculator}
             fullWidth
           >
-            Pre-Register as a User
+            Get a Quote
           </CTAButton>
           <CTAButton
-            to="/driver-register"
+            href={DRIVER_PLAY_STORE_URL}
             variant="user-soft-border"
             size="sm"
-            icon={Truck}
+            icon={Smartphone}
             fullWidth
           >
-            Pre-Register as a Driver
+            Download Driver App
           </CTAButton>
         </div>
       </PageContainer>

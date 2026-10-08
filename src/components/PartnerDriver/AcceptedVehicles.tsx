@@ -1,7 +1,7 @@
 import {useVehicles} from "@/hooks/useVehicleQueries";
 import type {IVehicleType} from "@/types/vehicle";
 import PageContainer from "@/components/PageContainer";
-import {Link} from "react-router-dom";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 const VEHICLE_DESCRIPTION = {
   motorcycle:
@@ -24,7 +24,7 @@ function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
   const maxLoad = Math.max(...vehicle.variants.map((v) => v.maxLoadKg));
 
   return (
-    <div className="flex flex-col bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+    <div className="flex overflow-hidden flex-col bg-white rounded-lg border border-gray-100 shadow-sm">
       <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center p-4">
         <img
           src={vehicle.imageUrl}
@@ -32,8 +32,8 @@ function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
           className="object-contain w-full h-22 lg:h-28 xl:h-30"
         />
       </div>
-      <div className="px-4 pt-3 pb-4 flex flex-col gap-2 flex-1">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-2 border-b border-primary pb-2">
+      <div className="flex flex-col flex-1 gap-2 px-4 pt-3 pb-4">
+        <div className="flex flex-col gap-2 justify-between items-center pb-2 border-b md:flex-row border-primary">
           <span className="text-[11px] md:text-xs font-bold uppercase text-secondary">
             {vehicle.name}
           </span>
@@ -41,15 +41,9 @@ function VehicleCard({vehicle}: {vehicle: IVehicleType}) {
             Up to {maxLoad} kg
           </span>
         </div>
-        <p className="text-xs text-gray-600 lg:text-sm leading-relaxed flex-1">
+        <p className="flex-1 text-xs leading-relaxed text-gray-600 lg:text-sm">
           {VEHICLE_DESCRIPTION[vehicle.key as keyof typeof VEHICLE_DESCRIPTION]}
         </p>
-        <Link
-          to={`/driver-register?vehicle=${vehicle.key}`}
-          className="mt-1 w-full hover:bg-primary-hover hover:text-white transition-colors text-center font-semibold text-xs lg:text-sm border border-primary rounded-full text-primary py-2 "
-        >
-          Pre-Register This Vehicle
-        </Link>
       </div>
     </div>
   );
@@ -61,8 +55,8 @@ export function AcceptedVehicles() {
   return (
     <section className="w-full" id="accepted-vehicles">
       <PageContainer className="flex flex-col gap-8">
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h2 className="text-primary font-bold text-2xl md:text-3xl">
+        <div className="flex flex-col gap-1 items-center text-center">
+          <h2 className="text-2xl font-bold text-primary md:text-3xl">
             Accepted Vehicles
           </h2>
           <p className="text-gray-500 text-[11px] md:text-sm">
@@ -72,7 +66,7 @@ export function AcceptedVehicles() {
         </div>
 
         {isPending && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {Array.from({length: 8}).map((_, i) => (
               <div
                 key={i}
@@ -83,13 +77,13 @@ export function AcceptedVehicles() {
         )}
 
         {isError && (
-          <p className="text-center text-sm text-red-500">
+          <p className="text-sm text-center text-red-500">
             Unable to load vehicle list right now. Please try again later.
           </p>
         )}
 
         {!isPending && !isError && data && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {[...data].map((vehicle) => (
               <VehicleCard key={vehicle._id} vehicle={vehicle} />
             ))}

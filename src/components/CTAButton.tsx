@@ -85,7 +85,13 @@ export default function CTAButton({
 
   if (href) {
     return (
-      <a href={href} className={classes} title={title}>
+      <a
+        href={href}
+        className={classes}
+        title={title}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {content}
       </a>
     );

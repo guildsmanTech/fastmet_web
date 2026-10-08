@@ -1,22 +1,27 @@
-import {useState} from "react";
-import {logo} from "@/constants/images";
+import { useEffect, useState } from "react";
+import { logo } from "@/constants/images";
 import GeneralFAQModal from "./modals/GeneralFAQModal";
-import PreRegisterActions from "@/components/PreRegisterActions";
+import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
-import {Link, useLocation} from "react-router-dom";
-import {Menu, X} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
 
 const navLinks = [
-  {label: "Home", to: "/"},
-  {label: "Partner - Driver", to: "/partner-driver"},
-  {label: "Delivery Services", to: "/delivery-services"},
-  {label: "About us", to: "/about"},
-  {label: "Blog", to: "/blog"},
+  { label: "Home", to: "/" },
+  { label: "Partner - Driver", to: "/partner-driver" },
+  { label: "Delivery Services", to: "/delivery-services" },
+  { label: "About us", to: "/about" },
+  { label: "Blog", to: "/blog" },
 ];
 
 export default function Header() {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close the drawer after any navigation (e.g. the Subscribe button).
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   const isActive = (to: string) =>
     to === "/" ? pathname === "/" : pathname.startsWith(to);
@@ -42,15 +47,14 @@ export default function Header() {
           {/* ── Desktop nav ───────────────────────────────────────────────── */}
           <div className="hidden lg:flex items-center gap-8 xl:gap-14">
             <div className="flex items-center gap-6">
-              {navLinks.map(({label, to}) => (
+              {navLinks.map(({ label, to }) => (
                 <Link
                   key={to}
                   to={to}
-                  className={`text-sm font-semibold transition-colors relative pb-0.5 whitespace-nowrap ${
-                    isActive(to)
-                      ? "text-yellow-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-400 after:rounded-full"
-                      : "text-white/80 hover:text-white"
-                  }`}
+                  className={`text-sm font-semibold transition-colors relative pb-0.5 whitespace-nowrap ${isActive(to)
+                    ? "text-yellow-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-400 after:rounded-full"
+                    : "text-white/80 hover:text-white"
+                    }`}
                 >
                   {label}
                 </Link>
@@ -58,7 +62,24 @@ export default function Header() {
             </div>
           </div>
           <div className="lg:flex hidden items-center gap-2 xl:gap-3 ">
-            <PreRegisterActions layout="header" />
+            <CTAButton
+              to="/subscription"
+              variant="driver"
+              size="header"
+              icon={BadgeCheck}
+              title="Subscribe"
+            >
+              Get Subscription
+            </CTAButton>
+            <CTAButton
+              to="/get-a-quote"
+              variant="user-soft-border"
+              size="header"
+              icon={Calculator}
+              title="Get a Quote"
+            >
+              Get a Quote
+            </CTAButton>
 
             <div className="flex items-center gap-2 ml-2">
               <p className="text-sm font-semibold text-white/80">FAQs</p>
@@ -66,8 +87,17 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ── Mobile right: FAQs + hamburger ────────────────────────────── */}
+          {/* ── Mobile right: Subscribe only + FAQs + hamburger ───────────── */}
           <div className="flex lg:hidden items-center gap-3">
+            <CTAButton
+              to="/subscription"
+              variant="driver"
+              size="header"
+              icon={BadgeCheck}
+              title="Subscribe"
+            >
+              Subscribe
+            </CTAButton>
             <GeneralFAQModal />
             <button
               type="button"
@@ -95,16 +125,15 @@ export default function Header() {
           />
           {/* Panel */}
           <div className="fixed top-[52px] left-0 right-0 z-40 bg-secondary border-t border-white/10 lg:hidden px-6 py-4 space-y-1">
-            {navLinks.map(({label, to}) => (
+            {navLinks.map(({ label, to }) => (
               <Link
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${
-                  isActive(to)
-                    ? "text-primary"
-                    : "text-white/80 hover:text-white"
-                }`}
+                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${isActive(to)
+                  ? "text-primary"
+                  : "text-white/80 hover:text-white"
+                  }`}
               >
                 {label}
                 {isActive(to) && (
@@ -113,11 +142,26 @@ export default function Header() {
               </Link>
             ))}
 
-            <PreRegisterActions
-              layout="stacked-mobile"
-              shortLabels
-              className="lg:hidden mt-10"
-            />
+            <div className="lg:hidden mt-8 flex flex-col gap-3">
+              <CTAButton
+                to="/subscription"
+                variant="driver"
+                size="md"
+                icon={BadgeCheck}
+                fullWidth
+              >
+                Get Subscription
+              </CTAButton>
+              <CTAButton
+                to="/get-a-quote"
+                variant="user-soft-border"
+                size="md"
+                icon={Calculator}
+                fullWidth
+              >
+                Get a Quote
+              </CTAButton>
+            </div>
           </div>
         </>
       )}

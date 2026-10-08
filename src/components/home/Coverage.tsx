@@ -4,7 +4,7 @@ import PageContainer from "@/components/PageContainer";
 
 export default function CoverageExplainer() {
   return (
-    <section className="w-full bg-white">
+    <section id="coverage" className="w-full bg-white scroll-mt-24">
       <PageContainer className="flex flex-col md:flex-row items-center gap-10">
         <div className="flex-1 flex flex-col gap-4">
           <h2 className="text-primary font-bold text-2xl md:text-3xl leading-tight">
