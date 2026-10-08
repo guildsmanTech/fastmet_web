@@ -1,5 +1,5 @@
 import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
-import {Truck, User} from "lucide-react";
+import {User} from "lucide-react";
 import {SocialIcon} from "react-social-icons";
 import PageContainer from "@/components/PageContainer";
 import {Link} from "react-router-dom";
@@ -18,19 +18,7 @@ export default function SharedFooter() {
         <div className="flex flex-col gap-8 items-center md:flex-row md:divide-x">
           {/* Statistics */}
           <div className="flex flex-col gap-5 items-center md:flex-row lg:gap-10 md:pr-5">
-            <div className="grid grid-cols-2 gap-5 place-items-center">
-              <div className="flex flex-col gap-2 items-center">
-                <p className="text-xs font-medium text-white lg:text-sm">
-                  Pre-Registered Drivers
-                </p>
-                <div className="flex gap-2 items-center">
-                  <div className="p-1.5 border border-primary bg-white rounded-md w-fit">
-                    <Truck className="fill-primary text-secondary lg:size-7" />
-                  </div>
-                  <p className="font-bold text-white">{counts?.drivers ?? 0}</p>
-                </div>
-              </div>
-
+            <div className="grid gap-5 place-items-center">
               <div className="flex flex-col gap-2 items-center">
                 <p className="text-xs font-medium text-white lg:text-sm">
                   Pre-Registered Users
