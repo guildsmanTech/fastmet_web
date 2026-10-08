@@ -7,7 +7,11 @@ import {
   type PlaceSuggestion,
 } from "@/lib/googlePlaces";
 
-export type SelectedPlace = { label: string; coords: PlaceCoords };
+export type SelectedPlace = {
+  label: string;
+  coords: PlaceCoords;
+  placeId: string;
+};
 
 type Props = {
   label: string;
@@ -88,7 +92,11 @@ export default function PlaceAutocompleteInput({
       const coords = await session.current.resolve(suggestion);
       setText(suggestion.fullText);
       setConfirmedText(suggestion.fullText.trim());
-      onChange({ label: suggestion.fullText, coords });
+      onChange({
+        label: suggestion.fullText,
+        coords,
+        placeId: suggestion.id,
+      });
     } catch {
       setError("We couldn't get that location. Please pick another.");
       onChange(null);

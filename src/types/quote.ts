@@ -25,8 +25,8 @@ export interface PublicQuoteResponse {
 }
 
 export interface PublicQuoteRequest {
-  pickUp: {coords: QuoteCoords};
-  dropOff: {coords: QuoteCoords};
+  pickUp: {coords: QuoteCoords; placeId: string; address?: string};
+  dropOff: {coords: QuoteCoords; placeId: string; address?: string};
   recaptchaToken: string;
 }
 

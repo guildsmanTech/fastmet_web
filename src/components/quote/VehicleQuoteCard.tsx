@@ -32,68 +32,92 @@ export default function VehicleQuoteCard({
   return (
     <div
       className={cn(
-        "bg-white border rounded-2xl shadow-sm",
-        hasRecommended ? "border-primary ring-1 ring-primary/30" : "border-gray-200",
+        "flex h-full flex-col overflow-hidden bg-white border rounded-2xl transition-shadow",
+        hasRecommended
+          ? "border-primary shadow-md shadow-primary/10 ring-1 ring-primary/25"
+          : "border-gray-200 shadow-sm hover:shadow-md",
       )}
     >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex items-center w-full gap-3 p-4 text-left cursor-pointer md:p-5"
+        className="flex items-start w-full gap-3 p-3.5 text-left cursor-pointer sm:p-4"
       >
-        {vehicle.imageUrl && (
-          <img
-            src={vehicle.imageUrl}
-            alt=""
-            loading="lazy"
-            className="object-contain size-14 md:size-16 shrink-0"
-          />
-        )}
+        <div
+          className={cn(
+            "flex items-center justify-center rounded-xl shrink-0 size-12 sm:size-14",
+            hasRecommended ? "bg-primary/10" : "bg-gray-50",
+          )}
+        >
+          {vehicle.imageUrl ? (
+            <img
+              src={vehicle.imageUrl}
+              alt=""
+              loading="lazy"
+              className="object-contain size-9 sm:size-11"
+            />
+          ) : (
+            <span className="text-xs font-semibold text-gray-400">N/A</span>
+          )}
+        </div>
+
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-base font-bold md:text-lg text-secondary">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="text-sm font-bold leading-snug text-secondary sm:text-base">
               {vehicle.name}
             </h3>
-            {hasRecommended && (
-              <span className="flex items-center gap-1 px-2 py-0.5 text-[11px] font-bold text-white rounded-full bg-primary">
-                <Sparkles className="size-3" /> Recommended
-              </span>
-            )}
+            <ChevronDown
+              className={cn(
+                "mt-0.5 size-4 text-gray-400 transition-transform shrink-0 sm:size-5",
+                open && "rotate-180 text-primary",
+              )}
+            />
           </div>
-          <p className="text-sm text-gray-500">
-            {rows.length > 1 ? "from " : ""}
-            <span className="font-semibold text-gray-900">
-              {formatPeso(cheapest)}
+
+          {hasRecommended && (
+            <span className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 text-[10px] font-bold text-white rounded-full bg-primary">
+              <Sparkles className="size-3" /> Recommended
             </span>
+          )}
+
+          <p className="mt-1.5 text-xs text-gray-500">
+            {rows.length} load size{rows.length === 1 ? "" : "s"}
+            <span className="mx-1 text-gray-300">·</span>
+            <span className="text-gray-500">
+              {rows.length > 1 ? "from " : ""}
+            </span>
+            <span className="font-bold text-secondary">{formatPeso(cheapest)}</span>
           </p>
         </div>
-        <ChevronDown
-          className={cn("size-5 text-gray-400 transition-transform", open && "rotate-180")}
-        />
       </button>
 
       {open && (
-        <ul className="border-t border-gray-100 divide-y divide-gray-100">
+        <ul className="mt-auto border-t border-gray-100 bg-gray-50/60">
           {rows.map(({ variant, price }) => {
             const recommended = variant.variantId === recommendedVariantId;
             return (
               <li
                 key={variant.variantId}
                 className={cn(
-                  "flex items-center justify-between gap-3 px-4 py-3 md:px-5",
-                  recommended && "bg-primary/5",
+                  "flex items-center justify-between gap-2 px-3.5 py-2.5 sm:px-4 border-b border-gray-100 last:border-b-0",
+                  recommended && "bg-primary/10",
                 )}
               >
-                <span className="flex items-center gap-2 text-sm text-gray-700">
-                  Up to {variant.maxLoadKg.toLocaleString()} kg
+                <span className="flex flex-wrap items-center gap-1.5 text-xs text-gray-700">
+                  <span>
+                    Up to{" "}
+                    <span className="font-semibold text-gray-900">
+                      {variant.maxLoadKg.toLocaleString()} kg
+                    </span>
+                  </span>
                   {recommended && (
-                    <span className="px-2 py-0.5 text-[10px] font-bold text-primary bg-primary/10 rounded-full">
-                      Recommended
+                    <span className="px-1.5 py-0.5 text-[10px] font-bold text-primary bg-primary/15 rounded-full">
+                      Best fit
                     </span>
                   )}
                 </span>
-                <span className="text-sm font-bold text-gray-900">
+                <span className="text-xs font-bold tabular-nums text-secondary shrink-0 sm:text-sm">
                   {formatPeso(price)}
                 </span>
               </li>
