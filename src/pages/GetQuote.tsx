@@ -5,13 +5,11 @@ import {Loader2, Route} from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 import {Button} from "@/components/ui/button";
 import BookingTypeTabs from "@/components/quote/BookingTypeTabs";
-import ItemTypeSelect from "@/components/quote/ItemTypeSelect";
 import PlaceAutocompleteInput, {
   type SelectedPlace,
 } from "@/components/quote/PlaceAutocompleteInput";
 import VehicleQuoteCard from "@/components/quote/VehicleQuoteCard";
 import {fetchPublicQuote, QuoteApiError} from "@/api/quote";
-import {pickRecommended} from "@/helper/itemTypes";
 import {getRecaptchaV3Token, preloadRecaptchaV3} from "@/lib/recaptchaV3";
 import type {PublicQuoteResponse, QuoteTab} from "@/types/quote";
 
@@ -31,7 +29,6 @@ const tripKeyOf = (pickup: SelectedPlace, dropoff: SelectedPlace) =>
 export default function GetQuotePage() {
   const [pickup, setPickup] = useState<SelectedPlace | null>(null);
   const [dropoff, setDropoff] = useState<SelectedPlace | null>(null);
-  const [itemType, setItemType] = useState<string | null>(null);
 
   const [quote, setQuote] = useState<PublicQuoteResponse | null>(null);
   const [tab, setTab] = useState<QuoteTab>("asap");
@@ -70,11 +67,6 @@ export default function GetQuotePage() {
   const availableTabs = useMemo(
     () => (quote ? TAB_ORDER.filter((t) => quote.bookingTypes[t]) : []),
     [quote],
-  );
-
-  const recommended = useMemo(
-    () => (quote ? pickRecommended(quote.vehicles, itemType) : null),
-    [quote, itemType],
   );
 
   const tripKey = pickup && dropoff ? tripKeyOf(pickup, dropoff) : null;
@@ -207,7 +199,6 @@ export default function GetQuotePage() {
               onChange={setDropoff}
               disabled={loading}
             />
-            <ItemTypeSelect value={itemType} onChange={setItemType} />
 
             {error && (
               <div
@@ -308,22 +299,13 @@ export default function GetQuotePage() {
                 </div>
 
                 <div className="grid gap-3 lg:grid-cols-2">
-                  {quote.vehicles.map((vehicle) => {
-                    const isRecommended =
-                      recommended?.vehicleTypeId === vehicle.vehicleTypeId;
-                    return (
-                      <VehicleQuoteCard
-                        // Remount so the recommended card opens when the item changes.
-                        key={`${vehicle.vehicleTypeId}-${isRecommended}`}
-                        vehicle={vehicle}
-                        tab={tab}
-                        recommendedVariantId={
-                          isRecommended ? recommended.variantId : null
-                        }
-                        defaultOpen={isRecommended}
-                      />
-                    );
-                  })}
+                  {quote.vehicles.map((vehicle) => (
+                    <VehicleQuoteCard
+                      key={vehicle.vehicleTypeId}
+                      vehicle={vehicle}
+                      tab={tab}
+                    />
+                  ))}
                 </div>
 
                 <p className="px-1 text-xs text-center text-gray-500">
