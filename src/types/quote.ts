@@ -30,7 +30,3 @@ export interface PublicQuoteRequest {
   recaptchaToken: string;
 }
 
-export interface RecommendedVariant {
-  vehicleTypeId: string;
-  variantId: string;
-}

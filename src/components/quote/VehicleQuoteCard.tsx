@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Sparkles } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { formatPeso } from "@/helper/subscription";
 import { priceForTab } from "@/helper/itemTypes";
 import { cn } from "@/lib/utils";
@@ -8,17 +8,10 @@ import type { QuoteTab, QuoteVehicle } from "@/types/quote";
 type Props = {
   vehicle: QuoteVehicle;
   tab: QuoteTab;
-  recommendedVariantId: string | null;
-  defaultOpen?: boolean;
 };
 
-export default function VehicleQuoteCard({
-  vehicle,
-  tab,
-  recommendedVariantId,
-  defaultOpen = false,
-}: Props) {
-  const [open, setOpen] = useState(defaultOpen);
+export default function VehicleQuoteCard({ vehicle, tab }: Props) {
+  const [open, setOpen] = useState(false);
 
   const rows = vehicle.variants
     .map((v) => ({ variant: v, price: priceForTab(v, tab) }))
@@ -27,29 +20,16 @@ export default function VehicleQuoteCard({
   if (rows.length === 0) return null;
 
   const cheapest = Math.min(...rows.map((r) => r.price));
-  const hasRecommended = rows.some((r) => r.variant.variantId === recommendedVariantId);
 
   return (
-    <div
-      className={cn(
-        "flex h-full flex-col overflow-hidden bg-white border rounded-2xl transition-shadow",
-        hasRecommended
-          ? "border-primary shadow-md shadow-primary/10 ring-1 ring-primary/25"
-          : "border-gray-200 shadow-sm hover:shadow-md",
-      )}
-    >
+    <div className="flex h-full flex-col overflow-hidden bg-white border border-gray-200 rounded-2xl shadow-sm transition-shadow hover:shadow-md">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className="flex items-start w-full gap-3 p-3.5 text-left cursor-pointer sm:p-4"
       >
-        <div
-          className={cn(
-            "flex items-center justify-center rounded-xl shrink-0 size-12 sm:size-14",
-            hasRecommended ? "bg-primary/10" : "bg-gray-50",
-          )}
-        >
+        <div className="flex items-center justify-center rounded-xl shrink-0 size-12 sm:size-14 bg-gray-50">
           {vehicle.imageUrl ? (
             <img
               src={vehicle.imageUrl}
@@ -75,12 +55,6 @@ export default function VehicleQuoteCard({
             />
           </div>
 
-          {hasRecommended && (
-            <span className="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 text-[10px] font-bold text-white rounded-full bg-primary">
-              <Sparkles className="size-3" /> Recommended
-            </span>
-          )}
-
           <p className="mt-1.5 text-xs text-gray-500">
             {rows.length} load size{rows.length === 1 ? "" : "s"}
             <span className="mx-1 text-gray-300">·</span>
@@ -94,35 +68,22 @@ export default function VehicleQuoteCard({
 
       {open && (
         <ul className="mt-auto border-t border-gray-100 bg-gray-50/60">
-          {rows.map(({ variant, price }) => {
-            const recommended = variant.variantId === recommendedVariantId;
-            return (
-              <li
-                key={variant.variantId}
-                className={cn(
-                  "flex items-center justify-between gap-2 px-3.5 py-2.5 sm:px-4 border-b border-gray-100 last:border-b-0",
-                  recommended && "bg-primary/10",
-                )}
-              >
-                <span className="flex flex-wrap items-center gap-1.5 text-xs text-gray-700">
-                  <span>
-                    Up to{" "}
-                    <span className="font-semibold text-gray-900">
-                      {variant.maxLoadKg.toLocaleString()} kg
-                    </span>
-                  </span>
-                  {recommended && (
-                    <span className="px-1.5 py-0.5 text-[10px] font-bold text-primary bg-primary/15 rounded-full">
-                      Best fit
-                    </span>
-                  )}
+          {rows.map(({ variant, price }) => (
+            <li
+              key={variant.variantId}
+              className="flex items-center justify-between gap-2 px-3.5 py-2.5 sm:px-4 border-b border-gray-100 last:border-b-0"
+            >
+              <span className="text-xs text-gray-700">
+                Up to{" "}
+                <span className="font-semibold text-gray-900">
+                  {variant.maxLoadKg.toLocaleString()} kg
                 </span>
-                <span className="text-xs font-bold tabular-nums text-secondary shrink-0 sm:text-sm">
-                  {formatPeso(price)}
-                </span>
-              </li>
-            );
-          })}
+              </span>
+              <span className="text-xs font-bold tabular-nums text-secondary shrink-0 sm:text-sm">
+                {formatPeso(price)}
+              </span>
+            </li>
+          ))}
         </ul>
       )}
     </div>
