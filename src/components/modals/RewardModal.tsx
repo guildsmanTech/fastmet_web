@@ -7,7 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {gift_open, gift_close, reward_bg} from "@/constants/images";
 import {CheckCheck, Lock, Gift, ArrowLeft} from "lucide-react";
 
@@ -434,14 +433,7 @@ export default function RewardModal() {
   const [open, setOpen] = useState(false);
 
   const {data: counts} = useRegistrationCounts();
-  const driverCount = counts?.drivers ?? 0;
   const userCount = counts?.users ?? 0;
-
-  const {
-    data: driverTiers,
-    isLoading: loadingDriverTiers,
-    isError: errorDriverTiers,
-  } = useRewardTiers("driver");
 
   const {
     data: userTiers,
@@ -455,8 +447,8 @@ export default function RewardModal() {
     isError: errorRaffle,
   } = useRafflePrizes();
 
-  const isLoading = loadingDriverTiers || loadingUserTiers || loadingRaffle;
-  const isError = errorDriverTiers || errorUserTiers || errorRaffle;
+  const isLoading = loadingUserTiers || loadingRaffle;
+  const isError = errorUserTiers || errorRaffle;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -522,33 +514,12 @@ export default function RewardModal() {
               Failed to load rewards. Please try again later.
             </p>
           ) : (
-            <Tabs defaultValue="driver">
-              <TabsList className="w-full bg-white border border-gray-200 rounded-lg p-1 mb-5 h-auto">
-                <TabsTrigger
-                  value="driver"
-                  className="flex-1 text-xs font-semibold py-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-md transition-all"
-                >
-                  🚗 Driver Rewards
-                </TabsTrigger>
-                <TabsTrigger
-                  value="user"
-                  className="flex-1 text-xs font-semibold py-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-md transition-all"
-                >
-                  📦 User Rewards
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="driver">
-                <RewardTab levels={driverTiers ?? []} count={driverCount} />
-              </TabsContent>
-              <TabsContent value="user">
-                <RewardTab
-                  levels={userTiers ?? []}
-                  count={userCount}
-                  showRaffle
-                  rafflePrizes={rafflePrizes ?? []}
-                />
-              </TabsContent>
-            </Tabs>
+            <RewardTab
+              levels={userTiers ?? []}
+              count={userCount}
+              showRaffle
+              rafflePrizes={rafflePrizes ?? []}
+            />
           )}
         </div>
       </DialogContent>
