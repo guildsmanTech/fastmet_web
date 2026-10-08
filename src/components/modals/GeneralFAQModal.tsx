@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {question} from "@/constants/images";
-import {Link} from "react-router-dom";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 const FAQs = [
   {
@@ -20,7 +20,7 @@ const FAQs = [
   {
     question: "Paano maging driver ng FastMet?",
     answer:
-      "Bukas na ang aming pre-registration para sa mga gustong maging driver-partner!",
+      "I-download ang FastMet Driver app sa Google Play para mag-sign up bilang partner-driver.",
     hasLink: true,
     extra:
       "Maging isa sa mga unang partner drivers at magkaroon ng chance na manalo ng cash prizes at exclusive merchandise sa aming official launch.",
@@ -31,10 +31,11 @@ const FAQs = [
       "Oo naman! May iba’t ibang uri ng sasakyan ang FastMet para sa iba’t ibang delivery needs. Maliit man o malaki, kaya naming i-deliver — from documents to bulk items",
   },
   {
-    question: "Magkano ang commission rate sa FastMet?",
-    answer: `Sa simula, magpapatupad ang FastMet ng zero-based commission, ibig sabihin mas malaki ang kita ng drivers at mas mababa ang delivery cost para sa users.`,
+    question: "May commission ba sa FastMet?",
+    answer:
+      "Walang commission. Ang mga partner-drivers ay nakakatanggap ng 100% ng kanilang delivery earnings — subscription fee lang ang babayaran.",
     extra:
-      "Ang programang ito ay bahagi ng aming layunin na makatulong sa delivery sector sa bansa. Tandaan na ito ay introductory offer at maaaring magbago sa hinaharap, pero magandang panimula ito para sa ating drivers at users.",
+      "Maaari mong tingnan at i-manage ang driver subscription plans sa Subscription page ng FastMet website.",
   },
   {
     question: "Available ba ang FastMet 24/7?",
@@ -83,14 +84,14 @@ export default function GeneralFAQModal() {
               <p className="text-xs leading-relaxed text-justify md:text-sm">
                 {answer}{" "}
                 {hasLink && (
-                  <DialogClose asChild>
-                    <Link
-                      to="/driver-register"
-                      className="text-blue-600 underline"
-                    >
-                      mag-register dito
-                    </Link>
-                  </DialogClose>
+                  <a
+                    href={DRIVER_PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 underline"
+                  >
+                    i-download ang Driver app
+                  </a>
                 )}
               </p>
 

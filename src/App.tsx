@@ -1,7 +1,6 @@
 import {QueryClientProvider} from "@tanstack/react-query";
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import Home from "./pages/Home";
-import DriverRegister from "./pages/DriverRegister";
 import RootLayout from "./layout/RootLayout";
 import ErrorBoundary from "./pages/Error";
 import UserRegister from "./pages/UserRegister";
@@ -12,7 +11,6 @@ import PartnerDriver from "./pages/PartnerDriver";
 import About from "./pages/About";
 import DeliveryServices from "./pages/DeliveryServices";
 import UserRegisterAppView from "./pages/app-view/UserRegister";
-import DriverRegisterAppView from "./pages/app-view/DriverRegister";
 import PrivacyPolicyPage from "./pages/legal/PrivacyPolicy";
 import TermsPage from "./pages/legal/Terms";
 import PrivacyPolicyPageAppView from "./pages/app-view/legal/PrivacyPolicyApp";
@@ -31,7 +29,6 @@ const router = createBrowserRouter([
       {path: "/partner-driver", element: <PartnerDriver />},
       {path: "/delivery-services", element: <DeliveryServices />},
       {path: "/about", element: <About />},
-      {path: "/driver-register", element: <DriverRegister />},
       {path: "/user-register", element: <UserRegister />},
       {
         path: "/blog",
@@ -74,7 +71,6 @@ const router = createBrowserRouter([
     path: "app-view",
     children: [
       {path: "user-register", element: <UserRegisterAppView />},
-      {path: "driver-register", element: <DriverRegisterAppView />},
       {
         path: "legal",
         children: [

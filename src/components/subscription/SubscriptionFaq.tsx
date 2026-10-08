@@ -37,10 +37,10 @@ export default function SubscriptionFaq() {
     <section className="w-full" id="subscription-faq">
       <PageContainer className="flex flex-col gap-8">
         <div className="flex flex-col gap-1 max-w-2xl">
-          <h2 className="text-primary font-bold text-2xl md:text-3xl">
+          <h2 className="text-2xl font-bold text-primary md:text-3xl">
             Subscription Frequently Asked Questions
           </h2>
-          <p className="text-gray-500 text-xs md:text-sm">
+          <p className="text-xs text-gray-500 md:text-sm">
             Common questions from FastMet partner-drivers about subscriptions.
           </p>
         </div>
@@ -54,33 +54,32 @@ export default function SubscriptionFaq() {
                 className={`rounded-xl border transition-colors ${
                   isOpen
                     ? "border-primary bg-primary/5"
-                    : "border-gray-200 bg-white hover:border-primary/40"
+                    : "bg-white border-gray-200 hover:border-primary/40"
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center gap-4 px-4 md:px-5 py-4 text-left"
+                  className="flex gap-4 items-center px-4 py-4 w-full text-left md:px-5"
                   aria-expanded={isOpen}
                 >
                   <span
                     className={`flex items-center justify-center size-7 md:size-8 shrink-0 rounded-full text-xs md:text-sm font-bold transition-colors ${
                       isOpen
-                        ? "bg-primary text-white"
-                        : "bg-gray-100 text-gray-500"
+                        ? "text-white bg-primary"
+                        : "text-gray-500 bg-gray-100"
                     }`}
                   >
                     {i + 1}
                   </span>
 
-                  <span className="flex-1 text-secondary font-semibold text-xs md:text-sm">
+                  <span className="flex-1 text-xs font-semibold text-secondary md:text-sm">
                     {item.q}
                   </span>
 
                   <ChevronDown
                     className={`size-4 md:size-5 shrink-0 text-primary transition-transform duration-200 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                      isOpen ? "rotate-180" : ""}`}
                   />
                 </button>
 
@@ -89,7 +88,7 @@ export default function SubscriptionFaq() {
                   style={{gridTemplateRows: isOpen ? "1fr" : "0fr"}}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-4 md:px-5 pb-4 pl-15 md:pl-17 text-gray-600 text-xs md:text-sm leading-relaxed">
+                    <div className="px-4 pb-4 text-xs leading-relaxed text-gray-600 md:px-5 pl-15 md:pl-17 md:text-sm">
                       <p>{item.a}</p>
                     </div>
                   </div>
@@ -100,7 +99,7 @@ export default function SubscriptionFaq() {
         </div>
 
         {SUPPORT_EMAIL && (
-          <p className="text-xs md:text-sm text-gray-500">
+          <p className="text-xs text-center text-gray-500 md:text-sm">
             Kailangan ng tulong? Mag-email sa{" "}
             <a
               href={`mailto:${SUPPORT_EMAIL}`}

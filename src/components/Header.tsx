@@ -4,7 +4,7 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Menu, Rocket, X } from "lucide-react";
+import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -71,7 +71,13 @@ export default function Header() {
             >
               Get Subscription
             </CTAButton>
-            <CTAButton to="/get-a-quote" variant="user-soft-border" size="header" icon={Rocket} title="Get a Quote">
+            <CTAButton
+              to="/get-a-quote"
+              variant="user-soft-border"
+              size="header"
+              icon={Calculator}
+              title="Get a Quote"
+            >
               Get a Quote
             </CTAButton>
 
@@ -81,7 +87,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ── Mobile right: FAQs + hamburger ────────────────────────────── */}
+          {/* ── Mobile right: Subscribe only + FAQs + hamburger ───────────── */}
           <div className="flex lg:hidden items-center gap-3">
             <CTAButton
               to="/subscription"
@@ -136,7 +142,7 @@ export default function Header() {
               </Link>
             ))}
 
-            <div className="lg:hidden mt-8 flex">
+            <div className="lg:hidden mt-8 flex flex-col gap-3">
               <CTAButton
                 to="/subscription"
                 variant="driver"
@@ -145,6 +151,15 @@ export default function Header() {
                 fullWidth
               >
                 Get Subscription
+              </CTAButton>
+              <CTAButton
+                to="/get-a-quote"
+                variant="user-soft-border"
+                size="md"
+                icon={Calculator}
+                fullWidth
+              >
+                Get a Quote
               </CTAButton>
             </div>
           </div>

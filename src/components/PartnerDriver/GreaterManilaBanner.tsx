@@ -1,7 +1,8 @@
 import CTAButton from "@/components/CTAButton";
-import {Truck} from "lucide-react";
+import {Smartphone} from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 import {partnerComms} from "@/constants/images";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 export function Commission() {
   return (
@@ -21,9 +22,8 @@ export function Commission() {
             Mas Maraming Kita. Walang Commission
           </h1>
           <p className="text-xs text-gray-600 md:text-sm ">
-            During FastMet’s introductory zero-commission period, eligible
-            partner-drivers can keep 100% of their delivery earnings. No
-            commission deduction during the introductory period
+            FastMet partner-drivers keep 100% of their delivery earnings. Walang
+            commission cut — subscription fee lang.
           </p>
           <h3 className="text-xs font-semibold">
             Delivery Earnings →{" "}
@@ -31,13 +31,13 @@ export function Commission() {
             Driver
           </h3>
           <CTAButton
-            to="/driver-register"
+            href={DRIVER_PLAY_STORE_URL}
             variant="driver"
             size="compact"
-            icon={Truck}
+            icon={Smartphone}
             className="[&_svg]:hidden lg:[&_svg]:block"
           >
-            Pre-Register as a Driver
+            Download Driver App
           </CTAButton>
         </div>
       </PageContainer>

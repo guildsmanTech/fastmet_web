@@ -1,6 +1,13 @@
 import {Helmet} from "react-helmet-async";
 import {partnerBg, partnerMain, partnerZero} from "@/constants/images";
-import {BellRing, CalendarClock, Clock3, Target, Truck} from "lucide-react";
+import {
+  BellRing,
+  CalendarClock,
+  Clock3,
+  Smartphone,
+  Target,
+  Truck,
+} from "lucide-react";
 import CTAButton from "@/components/CTAButton";
 import {Requirements} from "@/components/PartnerDriver/Requirements";
 import {AcceptedVehicles} from "@/components/PartnerDriver/AcceptedVehicles";
@@ -8,6 +15,7 @@ import {Commission} from "@/components/PartnerDriver/GreaterManilaBanner";
 import {DriverFAQ} from "@/components/PartnerDriver/Faq";
 import {FinalCTA} from "@/components/PartnerDriver/FinalCTA";
 import PageContainer from "@/components/PageContainer";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 export default function PartnerDriver() {
   return (
@@ -16,7 +24,7 @@ export default function PartnerDriver() {
         <title>Become a FastMet Partner-Driver | Greater Manila</title>
         <meta
           name="description"
-          content="Pre-register as a FastMet partner-driver. Own a motorcycle, sedan, van, or truck? Get updates on onboarding, activation, and delivery opportunities across Greater Manila."
+          content="Download the FastMet Driver app. Own a motorcycle, sedan, van, or truck? Manage deliveries and grow as a partner-driver across Greater Manila."
         />
         <link rel="canonical" href="https://fastmet.com.ph/partner-driver" />
       </Helmet>
@@ -39,25 +47,33 @@ export default function PartnerDriver() {
               May Sasakyan Ka? <br /> FastMet Agad!
             </h1>
             <p className="text-white font-semibold text-base md:text-lg">
-              Pre-register as a FastMet partner-driver and receive updates about
-              onboarding, activation, and future delivery opportunities.
+              Download the FastMet Driver app to start as a partner-driver and
+              manage deliveries, earnings, and opportunities.
             </p>
 
-            <div className="mt-2 hidden lg:block">
+            <div className="mt-2 hidden lg:flex gap-3">
               <CTAButton
-                to="/driver-register"
+                href={DRIVER_PLAY_STORE_URL}
                 variant="driver"
                 size="sm"
-                icon={Truck}
+                icon={Smartphone}
                 className="px-10"
               >
-                Pre-Register as a Driver
+                Download Driver App
+              </CTAButton>
+              <CTAButton
+                to="/subscription"
+                variant="user"
+                size="sm"
+                className="px-6"
+              >
+                Get Subscription
               </CTAButton>
             </div>
 
             <p className="text-white/80 text-xs md:text-base mt-2 hidden lg:block">
-              Pre-registration pa lamang ito. Official updates will be sent
-              through the contact details you provide.
+              Available on Google Play. Manage your plan anytime via
+              Subscription.
             </p>
           </div>
 
@@ -67,35 +83,43 @@ export default function PartnerDriver() {
             className="w-full md:w-1/2 object-cover"
           />
 
-          <div className="mt-2 w-full lg:hidden flex justify-center">
+          <div className="mt-2 w-full lg:hidden flex flex-col items-center gap-3">
             <CTAButton
-              to="/driver-register"
+              href={DRIVER_PLAY_STORE_URL}
               variant="driver"
               size="sm"
-              icon={Truck}
+              icon={Smartphone}
               fullWidth
               className="max-w-[300px]"
             >
-              Pre-Register as a Driver
+              Download Driver App
+            </CTAButton>
+            <CTAButton
+              to="/subscription"
+              variant="user"
+              size="sm"
+              fullWidth
+              className="max-w-[300px]"
+            >
+              Get Subscription
             </CTAButton>
           </div>
           <p className="text-white/80 text-xs md:text-base mt-2 lg:hidden text-center">
-            Pre-registration pa lamang ito. Official updates will be sent
-            through the contact details you provide.
+            Available on Google Play. Manage your plan anytime via Subscription.
           </p>
         </PageContainer>
       </section>
 
-      {/* ===== WHY PRE-REGISTER NOW ===== */}
+      {/* ===== WHY JOIN NOW ===== */}
       <section className="w-full">
         <PageContainer className="flex flex-col gap-8">
           <h2 className="text-primary font-bold text-2xl md:text-3xl text-center">
-            Why Pre-Register Now?
+            Why Join Now?
           </h2>
 
           <img
             src={partnerZero}
-            alt="FastMet Zero Commission"
+            alt="FastMet 0% commission, subscription fee lang"
             className="w-full min-h-40 object-cover"
           />
         </PageContainer>

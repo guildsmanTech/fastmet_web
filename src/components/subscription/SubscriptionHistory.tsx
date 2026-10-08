@@ -39,9 +39,9 @@ function amountLabel(item: HistoryItem) {
 
 function coverage(item: HistoryItem) {
   if (item.startsOn && item.endsOn) {
-    return `${formatDay(item.startsOn)} â€“ ${formatDay(item.endsOn)}`;
+    return `${formatDay(item.startsOn)} - ${formatDay(item.endsOn)}`;
   }
-  return "â€”";
+  return "–";
 }
 
 type Props = {
@@ -63,28 +63,28 @@ export default function SubscriptionHistory({
 }: Props) {
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-xl md:text-2xl font-bold text-secondary">
+      <h2 className="text-xl font-bold md:text-2xl text-secondary">
         Subscription history
       </h2>
 
       {error && (
-        <p className="p-3 text-xs md:text-sm text-red-700 bg-red-50 rounded-lg">
+        <p className="p-3 text-xs text-red-700 bg-red-50 rounded-lg md:text-sm">
           {error}
         </p>
       )}
 
       {loading ? (
         <div className="flex justify-center py-10">
-          <Loader2 className="size-6 animate-spin text-primary" />
+          <Loader2 className="animate-spin size-6 text-primary" />
         </div>
       ) : items.length === 0 ? (
-        <p className="p-6 text-xs md:text-sm text-center text-gray-500 bg-white border border-gray-200 border-dashed rounded-2xl">
+        <p className="p-6 text-xs text-center text-gray-500 bg-white rounded-2xl border border-gray-200 border-dashed md:text-sm">
           No subscription purchases yet.
         </p>
       ) : (
         <>
           {/* Table: tablet and up */}
-          <div className="hidden overflow-hidden bg-white border border-gray-200 md:block rounded-2xl">
+          <div className="hidden overflow-hidden bg-white rounded-2xl border border-gray-200 md:block">
             <table className="w-full text-sm text-left">
               <thead className="text-xs text-gray-500 uppercase bg-gray-50">
                 <tr>
@@ -101,7 +101,9 @@ export default function SubscriptionHistory({
                     <td className="px-5 py-3 font-semibold text-secondary">
                       {item.label}
                     </td>
-                    <td className="px-5 py-3 text-gray-600">{coverage(item)}</td>
+                    <td className="px-5 py-3 text-gray-600">
+                      {coverage(item)}
+                    </td>
                     <td className="px-5 py-3 text-gray-900">
                       {amountLabel(item)}
                     </td>
@@ -122,9 +124,9 @@ export default function SubscriptionHistory({
             {items.map((item) => (
               <div
                 key={item.id}
-                className="p-4 bg-white border border-gray-200 rounded-xl"
+                className="p-4 bg-white rounded-xl border border-gray-200"
               >
-                <div className="flex items-start justify-between gap-2">
+                <div className="flex gap-2 justify-between items-start">
                   <p className="font-semibold text-secondary">{item.label}</p>
                   <StatusBadge item={item} />
                 </div>
@@ -148,8 +150,8 @@ export default function SubscriptionHistory({
               className="self-center cursor-pointer"
             >
               {loadingMore ? (
-                <span className="flex items-center gap-2">
-                  <Loader2 className="size-4 animate-spin" /> Loadingâ€¦
+                <span className="flex gap-2 items-center">
+                  <Loader2 className="animate-spin size-4" /> Loading...
                 </span>
               ) : (
                 "Load more"

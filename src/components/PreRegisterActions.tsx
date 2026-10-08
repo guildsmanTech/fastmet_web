@@ -1,9 +1,10 @@
 import CTAButton, {type CTASize, type CTAVariant} from "@/components/CTAButton";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 import {cn} from "@/lib/utils";
-import {Truck, UserRound} from "lucide-react";
+import {Calculator, Smartphone} from "lucide-react";
 
-const USER_LABEL = "Pre-Register as a User";
-const DRIVER_LABEL = "Pre-Register as a Driver";
+const QUOTE_LABEL = "Get a Quote";
+const DRIVER_APP_LABEL = "Download Driver App";
 
 type PreRegisterActionsProps = {
   layout: "inline" | "stacked-mobile" | "header";
@@ -26,29 +27,29 @@ export default function PreRegisterActions({
   showMobileLabel = true,
   fullWidth = false,
 }: PreRegisterActionsProps) {
-  const userLabel = shortLabels ? "User" : USER_LABEL;
-  const driverLabel = shortLabels ? "Driver" : DRIVER_LABEL;
+  const quoteLabel = shortLabels ? "Quote" : QUOTE_LABEL;
+  const driverLabel = shortLabels ? "Driver App" : DRIVER_APP_LABEL;
 
   if (layout === "header") {
     return (
       <div className={cn("flex items-center gap-2 xl:gap-3", className)}>
         <CTAButton
-          to="/user-register"
+          to="/get-a-quote"
           variant="user"
           size="header"
-          icon={UserRound}
-          title="Pre-Register as User"
+          icon={Calculator}
+          title="Get a Quote"
         >
-          <span className="hidden xl:inline">Pre-Register as User</span>
+          <span className="hidden xl:inline">Get a Quote</span>
         </CTAButton>
         <CTAButton
-          to="/driver-register"
+          href={DRIVER_PLAY_STORE_URL}
           variant="driver"
           size="header"
-          icon={Truck}
-          title="Pre-Register as Driver"
+          icon={Smartphone}
+          title="Download Driver App"
         >
-          <span className="hidden xl:inline">Pre-Register as Driver</span>
+          <span className="hidden xl:inline">Download Driver App</span>
         </CTAButton>
       </div>
     );
@@ -57,19 +58,19 @@ export default function PreRegisterActions({
   const buttons = (
     <>
       <CTAButton
-        to="/user-register"
+        to="/get-a-quote"
         variant={userVariant}
         size={size}
-        icon={UserRound}
+        icon={Calculator}
         fullWidth={fullWidth || layout === "stacked-mobile"}
       >
-        {userLabel}
+        {quoteLabel}
       </CTAButton>
       <CTAButton
-        to="/driver-register"
+        href={DRIVER_PLAY_STORE_URL}
         variant={driverVariant}
         size={size}
-        icon={Truck}
+        icon={Smartphone}
         fullWidth={fullWidth || layout === "stacked-mobile"}
       >
         {driverLabel}
@@ -87,7 +88,7 @@ export default function PreRegisterActions({
       >
         {showMobileLabel && (
           <span className="text-white/90 font-semibold text-xs uppercase tracking-wide">
-            Pre-Register as a:
+            Get started:
           </span>
         )}
         <div className="flex gap-3 w-full md:w-5/6">{buttons}</div>

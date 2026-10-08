@@ -4,20 +4,20 @@ import PageContainer from "@/components/PageContainer";
 
 const FAQ_ITEMS = [
   {
-    q: "Libre ba ang pre-registration?",
-    a: "Oo. Libre ang pre-registration para maging FastMet partner-driver. Maaari kang mag-submit ng iyong application online.",
+    q: "Paano maging FastMet partner-driver?",
+    a: "I-download ang FastMet Driver app sa Google Play, mag-sign up, at sundin ang onboarding steps sa app.",
   },
   {
-    q: "Paano gumagana ang introductory 0% commission?",
-    a: "Sa panahon ng introductory zero-commission period, ang mga eligible partner-drivers ay makakapag-uwi ng 100% ng kanilang delivery earnings. Ipapadala ang buong detalye sa pamamagitan ng official FastMet updates.",
+    q: "May commission ba sa FastMet?",
+    a: "Walang commission. Keep mo ang 100% ng delivery earnings mo — subscription fee lang ang babayaran.",
   },
   {
-    q: "Automatic approved ba agad pagkatapos mag-pre-register?",
-    a: "Hindi. Ang pre-registration ay unang hakbang pa lamang. Magpapadala ang FastMet ng updates tungkol sa susunod na proseso.",
+    q: "May subscription ba ang driver app?",
+    a: "Oo. Maaari mong i-manage ang iyong plan sa Subscription page ng website o sa loob ng FastMet Driver app.",
   },
   {
     q: "Kailan ako makakapagsimulang bumiyahe?",
-    a: "Makakatanggap ang mga registered drivers ng official updates kapag available na ang onboarding, activation, at delivery opportunities.",
+    a: "Kapag na-approve na ang iyong account at aktibo ang iyong subscription, maaari ka nang tumanggap ng delivery opportunities.",
   },
   {
     q: "May fixed working hours ba?",
@@ -28,7 +28,7 @@ const FAQ_ITEMS = [
     a: "Walang required na daily quota.",
   },
   {
-    q: "Anong mga sasakyan ang puwedeng i-pre-register?",
+    q: "Anong mga sasakyan ang tinatanggap?",
     a: null,
     list: [
       "Motorsiklo",

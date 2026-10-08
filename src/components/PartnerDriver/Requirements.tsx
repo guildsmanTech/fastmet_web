@@ -7,6 +7,7 @@ import {
 import {ChevronRight} from "lucide-react";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
+import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 
 const REQUIREMENTS_STEPS = [
   {
@@ -103,11 +104,11 @@ export function Requirements() {
             updates regarding onboarding and activation.
           </p>
           <CTAButton
-            to="/driver-register"
+            href={DRIVER_PLAY_STORE_URL}
             variant="driver"
             className="mt-2 px-6 py-2.5"
           >
-            Pre-Register as a Driver
+            Download Driver App
           </CTAButton>
         </div>
       </PageContainer>
