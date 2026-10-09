@@ -21,7 +21,6 @@ interface FormData {
 const GENDER_OPTIONS = [
   {value: "male", label: "Male"},
   {value: "female", label: "Female"},
-  {value: "prefer_not", label: "Prefer not to say"},
 ];
 
 const API_URL = import.meta.env.VITE_API_URL;
