@@ -4,7 +4,7 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
+import { Calculator, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -51,10 +51,11 @@ export default function Header() {
                 <Link
                   key={to}
                   to={to}
-                  className={`text-sm font-semibold transition-colors relative pb-0.5 whitespace-nowrap ${isActive(to)
-                    ? "text-yellow-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-400 after:rounded-full"
-                    : "text-white/80 hover:text-white"
-                    }`}
+                  className={`text-sm font-semibold transition-colors relative pb-0.5 whitespace-nowrap ${
+                    isActive(to)
+                      ? "text-yellow-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-400 after:rounded-full"
+                      : "text-white/80 hover:text-white"
+                  }`}
                 >
                   {label}
                 </Link>
@@ -62,7 +63,7 @@ export default function Header() {
             </div>
           </div>
           <div className="lg:flex hidden items-center gap-2 xl:gap-3 ">
-            <CTAButton
+            {/* <CTAButton
               to="/subscription"
               variant="driver"
               size="header"
@@ -70,7 +71,7 @@ export default function Header() {
               title="Subscribe"
             >
               Get Subscription
-            </CTAButton>
+            </CTAButton> */}
             <CTAButton
               to="/get-a-quote"
               variant="user-soft-border"
@@ -89,7 +90,7 @@ export default function Header() {
 
           {/* ── Mobile right: Subscribe only + FAQs + hamburger ───────────── */}
           <div className="flex lg:hidden items-center gap-3">
-            <CTAButton
+            {/* <CTAButton
               to="/subscription"
               variant="driver"
               size="header"
@@ -97,7 +98,7 @@ export default function Header() {
               title="Subscribe"
             >
               Subscribe
-            </CTAButton>
+            </CTAButton> */}
             <GeneralFAQModal />
             <button
               type="button"
@@ -130,10 +131,11 @@ export default function Header() {
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${isActive(to)
-                  ? "text-primary"
-                  : "text-white/80 hover:text-white"
-                  }`}
+                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${
+                  isActive(to)
+                    ? "text-primary"
+                    : "text-white/80 hover:text-white"
+                }`}
               >
                 {label}
                 {isActive(to) && (
@@ -143,7 +145,7 @@ export default function Header() {
             ))}
 
             <div className="lg:hidden mt-8 flex flex-col gap-3">
-              <CTAButton
+              {/* <CTAButton
                 to="/subscription"
                 variant="driver"
                 size="md"
@@ -151,7 +153,7 @@ export default function Header() {
                 fullWidth
               >
                 Get Subscription
-              </CTAButton>
+              </CTAButton>*/}
               <CTAButton
                 to="/get-a-quote"
                 variant="user-soft-border"

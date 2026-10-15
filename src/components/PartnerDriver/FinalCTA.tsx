@@ -41,9 +41,9 @@ export function FinalCTA() {
           >
             Download Driver App
           </CTAButton>
-          <CTAButton to="/subscription" variant="outline" className="px-6 py-2.5">
+          {/* <CTAButton to="/subscription" variant="outline" className="px-6 py-2.5">
             Get Subscription
-          </CTAButton>
+          </CTAButton> */}
         </div>
       </PageContainer>
     </section>
