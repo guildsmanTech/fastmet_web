@@ -1,5 +1,11 @@
 import {QueryClientProvider} from "@tanstack/react-query";
-import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements, // Converts <Route> JSX into the route objects the router needs
+  Navigate,
+  Route, // Declarative route component
+  RouterProvider,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import RootLayout from "./layout/RootLayout";
 import ErrorBoundary from "./pages/Error";
@@ -20,83 +26,72 @@ import DeleteAccountPage from "./pages/DeleteAccount";
 // import SubscriptionResultPage from "./pages/SubscriptionResult";
 import GetQuotePage from "./pages/GetQuote";
 
-const router = createBrowserRouter([
-  {
-    element: <RootLayout />,
-    errorElement: <ErrorBoundary />,
-    children: [
-      {path: "/", element: <Home />},
-      {path: "/partner-driver", element: <PartnerDriver />},
-      {path: "/delivery-services", element: <DeliveryServices />},
-      {path: "/about", element: <About />},
-      {path: "/user-register", element: <UserRegister />},
-      {
-        path: "/blog",
-        children: [
-          {index: true, element: <BlogList />},
-          {path: ":slug", element: <BlogPost />},
-        ],
-      },
-      {
-        path: "/legal",
-        children: [
-          {
-            path: "privacy-policy",
-            children: [
-              {index: true, element: <Navigate to="user" replace />},
-              {path: ":type", element: <PrivacyPolicyPage />},
-            ],
-          },
-          {
-            path: "terms",
-            children: [
-              {index: true, element: <Navigate to="user" replace />},
-              {path: ":type", element: <TermsPage />},
-            ],
-          },
-        ],
-      },
-      {path: "/get-a-quote", element: <GetQuotePage />},
-      {path: "/delete-account", element: <DeleteAccountPage />},
-    /*  {
-        path: "/subscription",
-        children: [
-          {index: true, element: <SubscriptionPage />},
-          {path: "result", element: <SubscriptionResultPage />},
-        ],
-      }, */ 
-    ],
-  },
-  {
-    path: "app-view",
-    children: [
-      {path: "user-register", element: <UserRegisterAppView />},
-      {
-        path: "legal",
-        children: [
-          {
-            path: "privacy-policy",
-            children: [
-              {index: true, element: <Navigate to="user" replace />},
-              {path: ":type", element: <PrivacyPolicyPageAppView />},
-            ],
-          },
-          {
-            path: "terms",
-            children: [
-              {index: true, element: <Navigate to="user" replace />},
-              {path: ":type", element: <TermsPageAppView />},
-            ],
-          },
-        ],
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  // Turn the JSX <Route> tree below into route objects
+  createRoutesFromElements(
+    <>
+      {/* Pathless layout route: wraps all children with RootLayout, no URL segment added */}
+      <Route element={<RootLayout />} errorElement={<ErrorBoundary />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/partner-driver" element={<PartnerDriver />} />
+        <Route path="/delivery-services" element={<DeliveryServices />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/user-register" element={<UserRegister />} />
+
+        {/* /blog -> list, /blog/:slug -> single post */}
+        <Route path="/blog">
+          <Route index element={<BlogList />} /> {/* index = renders at exactly /blog */}
+          <Route path=":slug" element={<BlogPost />} />
+        </Route>
+
+        {/* /legal/privacy-policy and /legal/terms redirect to /user by default */}
+        <Route path="/legal">
+          <Route path="privacy-policy">
+            <Route index element={<Navigate to="user" replace />} />
+            <Route path=":type" element={<PrivacyPolicyPage />} />
+          </Route>
+          <Route path="terms">
+            <Route index element={<Navigate to="user" replace />} />
+            <Route path=":type" element={<TermsPage />} />
+          </Route>
+        </Route>
+
+        <Route path="/get-a-quote" element={<GetQuotePage />} />
+        <Route path="/delete-account" element={<DeleteAccountPage />} />
+
+        {/*
+        <Route path="/subscription">
+          <Route index element={<SubscriptionPage />} />
+          <Route path="result" element={<SubscriptionResultPage />} />
+        </Route>
+        */}
+      </Route>
+
+      {/* App-view routes: no RootLayout, so no navbar/footer inside the mobile app webview */}
+      <Route path="app-view">
+        <Route path="user-register" element={<UserRegisterAppView />} />
+        <Route path="legal">
+          {/* Children of /app-view/legal redirect to /app-view/legal/user by default */}
+          <Route path="privacy-policy">
+            <Route index element={<Navigate to="user" replace />} />
+            <Route path=":type" element={<PrivacyPolicyPageAppView />} />
+          </Route>
+          
+          <Route path="terms">
+            <Route index element={<Navigate to="user" replace />} />
+            <Route path=":type" element={<TermsPageAppView />} />
+          </Route>
+        </Route>
+      </Route>
+    </>,
+  ),
+);
 
 function App() {
   return (
+    // Provides the React Query cache to every component in the tree
     <QueryClientProvider client={queryClient}>
+      {/* Renders whichever route matches the current URL */}
       <RouterProvider router={router} />
     </QueryClientProvider>
   );

@@ -73,7 +73,7 @@ export default function Documents() {
           ))}
         </div>
 
-        <CTAButton to="/" variant="primary" className="mt-10">
+        <CTAButton to="/user-register" variant="primary" className="mt-10">
           Pre-Register Now
         </CTAButton>
       </PageContainer>

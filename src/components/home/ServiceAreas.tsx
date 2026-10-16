@@ -21,7 +21,7 @@ const SERVICE_AREAS = {
     "Taguig",
     "Valenzuela",
   ],
-  "Bulacan": [
+  Bulacan: [
     "Meycauayan",
     "Marilao",
     "Bocaue",
@@ -32,19 +32,16 @@ const SERVICE_AREAS = {
     "Malolos",
     "Plaridel",
   ],
-  "Cavite": ["Bacoor", "General Trias", "Imus", "Kawit", "Dasmariñas"],
-  "Rizal": [
-    "Antipolo",
-    "Cainta",
-    "Rodriguez (Montalban)",
-    "San Mateo",
-    "Taytay",
-  ],
-  "Laguna": ["Cabuyao", "Calamba", "Santa Rosa"],
+  Cavite: ["Bacoor", "General Trias", "Imus", "Kawit", "Dasmariñas"],
+  Rizal: ["Antipolo", "Cainta", "Rodriguez (Montalban)", "San Mateo", "Taytay"],
+  Laguna: ["Cabuyao", "Calamba", "Santa Rosa"],
 };
 export default function ServiceAreas() {
   return (
-    <section id="service-areas" className="w-full bg-gray-50 py-10 scroll-mt-24">
+    <section
+      id="service-areas"
+      className="w-full bg-gray-50 py-10 scroll-mt-24"
+    >
       <PageContainer className="flex flex-col gap-8">
         <div className="text-center flex flex-col gap-1">
           <h2 className="text-primary font-bold text-xl md:text-2xl">
@@ -77,11 +74,7 @@ export default function ServiceAreas() {
           <CTAButton
             variant="outline"
             className="w-fit px-5 py-2.5"
-            onClick={() =>
-              document
-                .getElementById("hero")
-                ?.scrollIntoView({behavior: "smooth"})
-            }
+            to="/user-register"
           >
             Pre-Register for Updates
           </CTAButton>
