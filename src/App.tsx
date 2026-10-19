@@ -67,6 +67,13 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // Public share-link tracking page: no site chrome, unlisted, noindex.
+  // Lazy so its map + socket code stays out of the main site bundle.
+  {
+    path: "/track/:token",
+    lazy: async () => ({Component: (await import("./pages/Track")).default}),
+    errorElement: <ErrorBoundary />,
+  },
   {
     path: "app-view",
     children: [
