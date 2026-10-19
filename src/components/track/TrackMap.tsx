@@ -16,7 +16,7 @@ type Props = {
   status: TrackStatus;
   driver: DriverPosition | null;
   onMapFailed: (reason: MapFailure) => void;
-  /** Directions failed (quota, denied, no route). Markers still work. */
+  /** Route request failed (quota, denied, no route). Markers still work. */
   onRouteUnavailable: (status: string) => void;
 };
 
@@ -182,26 +182,36 @@ export default function TrackMap({
         syncHighlight();
         syncDriver();
 
-        // One Directions request per page load (pickup -> drop-off). Kept in
+        // One Routes API request per page load (pickup -> drop-off). Kept in
         // memory only; never stored.
-        new libs.routes.DirectionsService().route(
-          {origin: p, destination: d, travelMode: libs.routes.TravelMode.DRIVING},
-          (result, routeStatus) => {
+        libs.routes.Route.computeRoutes({
+          origin: p,
+          destination: d,
+          travelMode: "DRIVING",
+          routingPreference: "TRAFFIC_UNAWARE",
+          fields: ["path"],
+        }).then(
+          ({routes}) => {
             if (cancelled) return;
-            const path = result?.routes?.[0]?.overview_path;
-            if (routeStatus !== "OK" || !path?.length) {
-              latest.current.onRouteUnavailable(String(routeStatus));
+            const path = routes?.[0]?.path;
+            if (!path?.length) {
+              latest.current.onRouteUnavailable("ZERO_RESULTS");
               return;
             }
             new libs.maps.Polyline({
               map,
-              path,
+              path: path.map((pt) => ({lat: pt.lat, lng: pt.lng})),
               strokeColor: ROUTE_COLOR,
               strokeOpacity: 0.85,
               strokeWeight: 5,
               clickable: false,
               zIndex: 1,
             });
+          },
+          (err: unknown) => {
+            if (cancelled) return;
+            const code = (err as {code?: unknown} | null)?.code;
+            latest.current.onRouteUnavailable(String(code ?? "ERROR"));
           },
         );
       })

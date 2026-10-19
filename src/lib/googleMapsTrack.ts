@@ -3,7 +3,7 @@
 /**
  * Google Maps JS loader for the public tracking page.
  *
- * Billing: one map load per page view, plus one Directions request (see
+ * Billing: one map load per page view, plus one Routes API request (see
  * TrackMap). The server decides beforehand whether this page load may use the
  * map at all (per-link and daily caps), so this file is only reached when the
  * budget allows it.
