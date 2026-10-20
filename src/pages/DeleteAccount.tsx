@@ -33,7 +33,7 @@ const DELETED_AFTER_GRACE = [
 
 const RETAINED = [
   "Completed, cancelled, and historical trip/booking records (pickup/drop-off details you entered for a delivery), kept for operations, disputes, and Philippine tax/accounting requirements (5 years from the relevant tax return's filing deadline, per BIR RR No. 7-2024; longer if a related tax dispute or refund claim is pending)",
-  "Bond ledger, refund, and reward issuance records for drivers (accounting / BIR — same 5-year retention rule)",
+  "Security deposit ledger, refund, and reward issuance records for drivers (accounting / BIR — same 5-year retention rule)",
   "Safety records such as SOS alerts (retained for liability purposes)",
   "Chat history with the other party, with your identity shown as a deleted account (so their inbox is not wiped)",
   "Fraud-prevention records keyed to a device (not your profile), and email bounce suppression lists",
@@ -243,7 +243,7 @@ export default function DeleteAccountPage() {
                 OTP.
               </li>
               <li>
-                If you have an active or scheduled booking, or a driver bond /
+                If you have an active or scheduled booking, or a driver security deposit /
                 refund still processing, deletion is blocked until that is
                 finished.
               </li>
