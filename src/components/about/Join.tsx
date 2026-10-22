@@ -1,7 +1,8 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
 import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
-import {Calculator, Smartphone} from "lucide-react";
+import {Smartphone} from "lucide-react";
+// import {Calculator} from "lucide-react";
 
 export default function JoinFastMet() {
   return (
@@ -19,7 +20,7 @@ export default function JoinFastMet() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center gap-3 mt-10 max-w-md mx-auto">
-          <CTAButton
+          {/* <CTAButton
             to="/get-a-quote"
             variant="user-soft-border"
             size="sm"
@@ -27,7 +28,7 @@ export default function JoinFastMet() {
             fullWidth
           >
             Get a Quote
-          </CTAButton>
+          </CTAButton> */}
           <CTAButton
             href={DRIVER_PLAY_STORE_URL}
             variant="user-soft-border"

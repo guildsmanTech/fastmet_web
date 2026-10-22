@@ -1,5 +1,5 @@
-import {Helmet} from "react-helmet-async";
-import {partnerBg, partnerMain, partnerZero} from "@/constants/images";
+import { Helmet } from "react-helmet-async";
+import { partnerBg, partnerMain, partnerZero } from "@/constants/images";
 import {
   BellRing,
   CalendarClock,
@@ -9,13 +9,13 @@ import {
   Truck,
 } from "lucide-react";
 import CTAButton from "@/components/CTAButton";
-import {Requirements} from "@/components/PartnerDriver/Requirements";
-import {AcceptedVehicles} from "@/components/PartnerDriver/AcceptedVehicles";
-import {Commission} from "@/components/PartnerDriver/GreaterManilaBanner";
-import {DriverFAQ} from "@/components/PartnerDriver/Faq";
-import {FinalCTA} from "@/components/PartnerDriver/FinalCTA";
+import { Requirements } from "@/components/PartnerDriver/Requirements";
+import { AcceptedVehicles } from "@/components/PartnerDriver/AcceptedVehicles";
+import { Commission } from "@/components/PartnerDriver/GreaterManilaBanner";
+import { DriverFAQ } from "@/components/PartnerDriver/Faq";
+import { FinalCTA } from "@/components/PartnerDriver/FinalCTA";
 import PageContainer from "@/components/PageContainer";
-import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
+import { DRIVER_PLAY_STORE_URL } from "@/helper/constant";
 
 export default function PartnerDriver() {
   return (
@@ -71,10 +71,9 @@ export default function PartnerDriver() {
               </CTAButton>
             </div>
 
-            <p className="text-white/80 text-xs md:text-base mt-2 hidden lg:block">
-              Available on Google Play. Manage your plan anytime via
-              Subscription.
-            </p>
+            {/* <p className="text-white/80 text-xs md:text-base mt-2">
+              Available on Google Play. Manage your plan anytime via Subscription.
+            </p> */}
           </div>
 
           <img
@@ -104,9 +103,9 @@ export default function PartnerDriver() {
               Get Subscription
             </CTAButton>
           </div>
-          <p className="text-white/80 text-xs md:text-base mt-2 lg:hidden text-center">
+          {/* <p className="text-white/80 text-xs md:text-base mt-2 lg:hidden text-center">
             Available on Google Play. Manage your plan anytime via Subscription.
-          </p>
+          </p> */}
         </PageContainer>
       </section>
 
@@ -157,7 +156,7 @@ export default function PartnerDriver() {
                 "Be among the first to receive onboarding, activation, and launch updates.",
               icon: BellRing,
             },
-          ].map(({title, description, icon: Icon}) => (
+          ].map(({ title, description, icon: Icon }) => (
             <div
               key={title}
               className="group rounded-xl border w-[400px] border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"

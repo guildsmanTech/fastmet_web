@@ -23,7 +23,7 @@ export default function Coverage() {
             requiring ferry or sea transport are not yet covered.
           </p>
 
-          <CTAButton to="/" variant="driver" className="px-5 py-2.5">
+          <CTAButton to="/user-register" variant="driver" className="px-5 py-2.5">
             Pre-Register for Coverage Updates
           </CTAButton>
 

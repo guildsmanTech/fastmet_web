@@ -120,7 +120,7 @@ export default function PaanoMagPreRegister() {
           ))}
         </div>
 
-        <CTAButton to="/" variant="primary" className="mt-10">
+        <CTAButton to="/user-register" variant="primary" className="mt-10">
           Complete Your Pre-Registration
         </CTAButton>
       </PageContainer>

@@ -16,16 +16,16 @@ import TermsPage from "./pages/legal/Terms";
 import PrivacyPolicyPageAppView from "./pages/app-view/legal/PrivacyPolicyApp";
 import TermsPageAppView from "./pages/app-view/legal/TermsApp";
 import DeleteAccountPage from "./pages/DeleteAccount";
+// import GetQuotePage from "./pages/GetQuote";
 import SubscriptionPage from "./pages/Subscription";
 import SubscriptionResultPage from "./pages/SubscriptionResult";
-import GetQuotePage from "./pages/GetQuote";
 
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
     errorElement: <ErrorBoundary />,
     children: [
-      {path: "/", element: <Home />},
+      {index: true, element: <Home />},
       {path: "/partner-driver", element: <PartnerDriver />},
       {path: "/delivery-services", element: <DeliveryServices />},
       {path: "/about", element: <About />},
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {path: "/get-a-quote", element: <GetQuotePage />},
+      // {path: "/get-a-quote", element: <GetQuotePage />},
       {path: "/delete-account", element: <DeleteAccountPage />},
       {
         path: "/subscription",
@@ -103,7 +103,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
+    // Provides the React Query cache to every component in the tree
     <QueryClientProvider client={queryClient}>
+      {/* Renders whichever route matches the current URL */}
       <RouterProvider router={router} />
     </QueryClientProvider>
   );

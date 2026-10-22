@@ -4,7 +4,8 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
+import { BadgeCheck, Menu, X } from "lucide-react";
+// import { Calculator } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -51,10 +52,11 @@ export default function Header() {
                 <Link
                   key={to}
                   to={to}
-                  className={`text-sm font-semibold transition-colors relative pb-0.5 whitespace-nowrap ${isActive(to)
-                    ? "text-yellow-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-400 after:rounded-full"
-                    : "text-white/80 hover:text-white"
-                    }`}
+                  className={`text-sm font-semibold transition-colors relative pb-0.5 whitespace-nowrap ${
+                    isActive(to)
+                      ? "text-yellow-400 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-yellow-400 after:rounded-full"
+                      : "text-white/80 hover:text-white"
+                  }`}
                 >
                   {label}
                 </Link>
@@ -71,7 +73,7 @@ export default function Header() {
             >
               Get Subscription
             </CTAButton>
-            <CTAButton
+            {/* <CTAButton
               to="/get-a-quote"
               variant="user-soft-border"
               size="header"
@@ -79,7 +81,7 @@ export default function Header() {
               title="Get a Quote"
             >
               Get a Quote
-            </CTAButton>
+            </CTAButton> */}
 
             <div className="flex items-center gap-2 ml-2">
               <p className="text-sm font-semibold text-white/80">FAQs</p>
@@ -130,10 +132,11 @@ export default function Header() {
                 key={to}
                 to={to}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${isActive(to)
-                  ? "text-primary"
-                  : "text-white/80 hover:text-white"
-                  }`}
+                className={`flex items-center justify-between w-full py-3 text-sm font-semibold border-b border-white/10 last:border-0 transition-colors ${
+                  isActive(to)
+                    ? "text-primary"
+                    : "text-white/80 hover:text-white"
+                }`}
               >
                 {label}
                 {isActive(to) && (
@@ -152,7 +155,7 @@ export default function Header() {
               >
                 Get Subscription
               </CTAButton>
-              <CTAButton
+              {/* <CTAButton
                 to="/get-a-quote"
                 variant="user-soft-border"
                 size="md"
@@ -160,7 +163,7 @@ export default function Header() {
                 fullWidth
               >
                 Get a Quote
-              </CTAButton>
+              </CTAButton> */}
             </div>
           </div>
         </>

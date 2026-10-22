@@ -1,14 +1,14 @@
-import {Helmet} from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import QuestionForm from "@/components/home/QuestionForm";
 import LoaderModal from "@/components/modals/Loader";
-import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
-import {useVehicles} from "@/hooks/useVehicleQueries";
+import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
+import { useVehicles } from "@/hooks/useVehicleQueries";
 import CTAButton from "@/components/CTAButton";
 import PreRegisterActions from "@/components/PreRegisterActions";
-import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
+import { DRIVER_PLAY_STORE_URL } from "@/helper/constant";
 
-import {Truck, BriefcaseBusiness, MapPinned} from "lucide-react";
-import {homeBg, homeBox, homeMain} from "@/constants/images";
+import { Truck, BriefcaseBusiness, MapPinned } from "lucide-react";
+import { homeBg, homeBox, homeMain } from "@/constants/images";
 import ServiceAreas from "@/components/home/ServiceAreas";
 import UserDriverSplit from "@/components/home/UserDriverSplit";
 import CoverageExplainer from "@/components/home/Coverage";
@@ -16,8 +16,8 @@ import PageContainer from "@/components/PageContainer";
 import Registrations from "@/components/home/Registrations";
 
 export default function Home() {
-  const {isPending: countsLoading} = useRegistrationCounts();
-  const {isPending: vehiclesLoading} = useVehicles();
+  const { isPending: countsLoading } = useRegistrationCounts();
+  const { isPending: vehiclesLoading } = useVehicles();
 
   return (
     <div className="flex overflow-x-hidden flex-col gap-12 justify-center items-center w-full">
@@ -161,7 +161,7 @@ export default function Home() {
                   "Delivery requests within Greater Manila, with delivery through land-accessible routes.",
                 icon: MapPinned,
               },
-            ].map(({title, description, icon: Icon}) => (
+            ].map(({ title, description, icon: Icon }) => (
               <div
                 key={title}
                 className="p-5 bg-white rounded-xl border border-gray-200 shadow-sm transition group hover:-translate-y-1 hover:shadow-md"
@@ -181,7 +181,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-6 justify-center items-center pb-10 border-b-2 border-primary lg:pt-5">
+          {/*<div className="flex flex-col gap-6 justify-center items-center pb-10 border-b-2 border-primary lg:pt-5">
             <div className="flex flex-col gap-1 text-center">
               <h2 className="text-lg font-bold lg:text-2xl">
                 0% Commission — Subscription Fee Lang
@@ -200,13 +200,13 @@ export default function Home() {
                 className="px-3 py-2 text-sm cursor-pointer w-fit lg:px-5 md:text-base"
               >
                 View Subscription Plans
-              </CTAButton>
+              </CTAButton> 
               <p className="text-sm leading-relaxed text-gray-700 md:text-base">
                 Manage your plan anytime on the Subscription page or in the
                 FastMet Driver app.
               </p>
-            </div>
-          </div>
+            </div> 
+          </div>*/}
         </PageContainer>
       </section>
 
