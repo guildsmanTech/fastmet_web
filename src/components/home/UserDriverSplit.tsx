@@ -1,8 +1,7 @@
 import CTAButton from "@/components/CTAButton";
 import {homeUser, homeDriver} from "@/constants/images";
 import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
-import {Smartphone, ChevronRight} from "lucide-react";
-// import {Calculator} from "lucide-react";
+import {Calculator, Smartphone, ChevronRight} from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 
 export default function UserDriverSplit() {
@@ -29,14 +28,14 @@ export default function UserDriverSplit() {
           >
             Pre-Register as a User
           </CTAButton>
-          {/* <CTAButton
+          <CTAButton
             to="/get-a-quote"
             variant="primary"
             icon={Calculator}
             className="w-fit px-5 py-2.5"
           >
             Get a Quote
-          </CTAButton> */}
+          </CTAButton>
         </div>
 
         {/* Driver card */}

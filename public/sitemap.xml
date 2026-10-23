@@ -10,11 +10,11 @@
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <!-- <url>
+  <url>
     <loc>https://fastmet.com.ph/get-a-quote</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
-  </url> -->
+  </url>
   <url>
     <loc>https://fastmet.com.ph/subscription</loc>
     <priority>0.8</priority>

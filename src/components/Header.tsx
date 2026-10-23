@@ -4,8 +4,7 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Menu, X } from "lucide-react";
-// import { Calculator } from "lucide-react";
+import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -73,7 +72,7 @@ export default function Header() {
             >
               Get Subscription
             </CTAButton>
-            {/* <CTAButton
+            <CTAButton
               to="/get-a-quote"
               variant="user-soft-border"
               size="header"
@@ -81,7 +80,7 @@ export default function Header() {
               title="Get a Quote"
             >
               Get a Quote
-            </CTAButton> */}
+            </CTAButton>
 
             <div className="flex items-center gap-2 ml-2">
               <p className="text-sm font-semibold text-white/80">FAQs</p>
@@ -155,7 +154,7 @@ export default function Header() {
               >
                 Get Subscription
               </CTAButton>
-              {/* <CTAButton
+              <CTAButton
                 to="/get-a-quote"
                 variant="user-soft-border"
                 size="md"
@@ -163,7 +162,7 @@ export default function Header() {
                 fullWidth
               >
                 Get a Quote
-              </CTAButton> */}
+              </CTAButton>
             </div>
           </div>
         </>

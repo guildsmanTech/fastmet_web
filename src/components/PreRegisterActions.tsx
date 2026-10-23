@@ -1,10 +1,9 @@
 import CTAButton, {type CTASize, type CTAVariant} from "@/components/CTAButton";
 import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
 import {cn} from "@/lib/utils";
-import {Smartphone} from "lucide-react";
-// import {Calculator} from "lucide-react";
+import {Calculator, Smartphone} from "lucide-react";
 
-// const QUOTE_LABEL = "Get a Quote";
+const QUOTE_LABEL = "Get a Quote";
 const DRIVER_APP_LABEL = "Download Driver App";
 
 type PreRegisterActionsProps = {
@@ -20,7 +19,7 @@ type PreRegisterActionsProps = {
 
 export default function PreRegisterActions({
   layout,
-  // userVariant = "user",
+  userVariant = "user",
   driverVariant = "driver",
   size = "sm",
   shortLabels = false,
@@ -28,13 +27,13 @@ export default function PreRegisterActions({
   showMobileLabel = true,
   fullWidth = false,
 }: PreRegisterActionsProps) {
-  // const quoteLabel = shortLabels ? "Quote" : QUOTE_LABEL;
+  const quoteLabel = shortLabels ? "Quote" : QUOTE_LABEL;
   const driverLabel = shortLabels ? "Driver App" : DRIVER_APP_LABEL;
 
   if (layout === "header") {
     return (
       <div className={cn("flex items-center gap-2 xl:gap-3", className)}>
-        {/* <CTAButton
+        <CTAButton
           to="/get-a-quote"
           variant="user"
           size="header"
@@ -42,7 +41,7 @@ export default function PreRegisterActions({
           title="Get a Quote"
         >
           <span className="hidden xl:inline">Get a Quote</span>
-        </CTAButton> */}
+        </CTAButton>
         <CTAButton
           href={DRIVER_PLAY_STORE_URL}
           variant="driver"
@@ -58,7 +57,7 @@ export default function PreRegisterActions({
 
   const buttons = (
     <>
-      {/* <CTAButton
+      <CTAButton
         to="/get-a-quote"
         variant={userVariant}
         size={size}
@@ -66,7 +65,7 @@ export default function PreRegisterActions({
         fullWidth={fullWidth || layout === "stacked-mobile"}
       >
         {quoteLabel}
-      </CTAButton> */}
+      </CTAButton>
       <CTAButton
         href={DRIVER_PLAY_STORE_URL}
         variant={driverVariant}
