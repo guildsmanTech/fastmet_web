@@ -281,7 +281,7 @@ export const userPrivacyPolicy: LegalContent = {
         },
         {
           type: "p",
-          text: "Your face verification photo and face template are kept while your account exists and are deleted when your account is deleted. If your account was banned, or its verification was not approved, FastMet keeps them after deletion to prevent repeat fraudulent sign-ups.",
+          text: "Your face verification photo and face template are kept while your account exists and are deleted when your account is deleted. If your account was banned for violating our Terms, FastMet keeps them for up to 3 years from the date of the ban, even after the account is deleted, to prevent the same person from signing up again. They are deleted at the end of that period, or earlier if the ban is lifted. Access to this information is limited to authorized FastMet administrators.",
         },
       ],
     },

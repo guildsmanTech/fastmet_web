@@ -177,9 +177,9 @@ export default function FaceVerificationAppView() {
             and your photo is stored securely with Cloudinary.
           </li>
           <li>
-            Your face data is deleted when you delete your account, unless the
-            account was banned or not approved, in which case it is kept to
-            prevent repeat fraudulent sign-ups.
+            Your face data is deleted when you delete your account. If your
+            account is banned for violating our Terms, it is kept for up to 3
+            years from the ban to stop the same person from signing up again.
           </li>
         </ul>
         <p className="mt-3 text-sm leading-6 text-gray-700">

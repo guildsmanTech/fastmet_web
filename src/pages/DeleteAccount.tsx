@@ -37,7 +37,7 @@ const RETAINED = [
   "Safety records such as SOS alerts (retained for liability purposes)",
   "Chat history with the other party, with your identity shown as a deleted account (so their inbox is not wiped)",
   "Fraud-prevention records keyed to a device (not your profile), and email bounce suppression lists",
-  "For users whose account was banned or whose verification was not approved: the face verification photo and face data, kept to stop repeat sign-ups",
+  "For users whose account was banned: the face verification photo and face data, kept for up to 3 years from the ban to stop repeat sign-ups, then deleted",
 ];
 
 function formatScheduledDate(raw: string | null) {
