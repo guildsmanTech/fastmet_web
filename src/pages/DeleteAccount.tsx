@@ -21,7 +21,7 @@ const DELETE_CONFIRM_PHRASE = "delete-my-account";
 
 const DELETED_NOW = [
   "Account profile details (name, phone number, email, gender, saved address)",
-  "Profile photo and identity documents (ID, selfie, license, OR/CR, vehicle photos) — files are removed from our storage",
+  "Profile photo, face verification photo and face data (users), and identity documents (drivers: license, OR/CR, vehicle photos) — files are removed from our storage",
   "Login sessions, refresh tokens, and push-notification tokens",
   "In-app notification records and device-link records for your account",
   "Registration and rejection records tied to your account (anonymized or removed)",
@@ -37,6 +37,7 @@ const RETAINED = [
   "Safety records such as SOS alerts (retained for liability purposes)",
   "Chat history with the other party, with your identity shown as a deleted account (so their inbox is not wiped)",
   "Fraud-prevention records keyed to a device (not your profile), and email bounce suppression lists",
+  "For users whose account was banned or whose verification was not approved: the face verification photo and face data, kept to stop repeat sign-ups",
 ];
 
 function formatScheduledDate(raw: string | null) {
