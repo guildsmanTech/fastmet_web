@@ -110,7 +110,10 @@ export default function QuestionForm() {
   };
 
   return (
-    <section className="w-full bg-gradient-to-br from-white to-[#FFF6ED]">
+    <section
+      id="contact"
+      className="w-full scroll-mt-24 bg-gradient-to-br from-white to-[#FFF6ED]"
+    >
       <PageContainer className="flex flex-col md:flex-row items-center gap-10 py-10">
         {/* Left Side */}
         <div className="flex-1 flex flex-col gap-4 text-center md:text-left">
