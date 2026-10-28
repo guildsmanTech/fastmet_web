@@ -6,7 +6,21 @@ import {
   type AwsCredentialProvider,
 } from "@aws-amplify/ui-react-liveness";
 import "@aws-amplify/ui-react/styles.css";
+import {
+  Camera,
+  CircleAlert,
+  Fingerprint,
+  LoaderCircle,
+  ScanFace,
+  Server,
+  ShieldCheck,
+  Smartphone,
+  Trash2,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import {cn} from "@/lib/utils";
 import {
   fetchLivenessCredentials,
   type LivenessCredentials,
@@ -22,7 +36,7 @@ import {
 type AppMessage =
   | {type: "complete"}
   | {type: "cancel"}
-  | {type: "error"; message: string};
+  | {type: "error"; code: string; message: string};
 
 declare global {
   interface Window {
@@ -54,6 +68,51 @@ const ERROR_MESSAGES: Record<string, string> = {
 
 const DEFAULT_ERROR = "The face scan stopped. Please try again.";
 
+// getUserMedia only exists in a secure context (HTTPS or localhost). Over
+// plain HTTP the webview never asks for the camera, and Amplify fails with
+// CAMERA_ACCESS_ERROR, so check up front and say so clearly.
+const CAMERA_UNAVAILABLE = "CAMERA_UNAVAILABLE";
+const LOAD_ERROR = "LOAD_ERROR";
+
+function cameraSupported() {
+  return window.isSecureContext && !!navigator.mediaDevices?.getUserMedia;
+}
+
+const CONSENT_POINTS: {icon: LucideIcon; title: string; body: string}[] = [
+  {
+    icon: Camera,
+    title: "Live presence check",
+    body: "Your camera checks that you are physically present. The video is analyzed in real time and is not stored by FastMet.",
+  },
+  {
+    icon: Fingerprint,
+    title: "What we keep",
+    body: "We keep one photo of your face and a face template (numbers that describe your facial features and can't be turned back into a photo).",
+  },
+  {
+    icon: Users,
+    title: "Duplicate account check",
+    body: "Your face template is compared with other FastMet user accounts to detect duplicate or previously banned accounts. A close match is reviewed by a FastMet administrator.",
+  },
+  {
+    icon: Server,
+    title: "Who processes it",
+    body: "The check is processed by Amazon Web Services (Amazon Rekognition), and your photo is stored securely with Cloudinary.",
+  },
+  {
+    icon: Trash2,
+    title: "How long it's kept",
+    body: "Your face data is deleted when you delete your account. If your account is banned for violating our Terms, it is kept for up to 3 years from the ban to stop the same person from signing up again.",
+  },
+];
+
+// Large touch targets for the app webview. Disabled primary drops to gray
+// instead of faded orange so it clearly reads as not yet tappable.
+const PRIMARY_BUTTON =
+  "w-full h-12 rounded-xl text-base font-semibold bg-primary text-white shadow-md shadow-primary/30 hover:bg-primary-hover active:scale-[0.98] disabled:opacity-100 disabled:bg-gray-200 disabled:text-gray-500 disabled:shadow-none [&_svg:not([class*='size-'])]:size-5";
+const GHOST_BUTTON =
+  "w-full h-12 rounded-xl text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-secondary";
+
 export default function FaceVerificationAppView() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("sessionId") ?? "";
@@ -62,7 +121,7 @@ export default function FaceVerificationAppView() {
   const [credentials, setCredentials] = useState<LivenessCredentials | null>(
     null,
   );
-  const [loadError, setLoadError] = useState<string | null>(null);
+  const [failure, setFailure] = useState<string | null>(null);
   const [agreed, setAgreed] = useState(false);
   const [started, setStarted] = useState(false);
   const [done, setDone] = useState(false);
@@ -81,12 +140,30 @@ export default function FaceVerificationAppView() {
     return fresh;
   }, [sessionId]);
 
+  // The app shows its own error screen as soon as it gets the message; the
+  // local one only covers the moment before the webview closes.
+  const fail = useCallback((code: string, message: string) => {
+    setFailure(message);
+    postToApp({type: "error", code, message});
+  }, []);
+
   useEffect(() => {
     if (!validSession) return;
     loadCredentials()
       .then(setCredentials)
-      .catch((err: Error) => setLoadError(err.message || DEFAULT_ERROR));
-  }, [validSession, loadCredentials]);
+      .catch((err: Error) => fail(LOAD_ERROR, err.message || DEFAULT_ERROR));
+  }, [validSession, loadCredentials, fail]);
+
+  const onStart = () => {
+    if (!cameraSupported()) {
+      fail(
+        CAMERA_UNAVAILABLE,
+        "Your camera can't be used on this connection. Please update the FastMet app or try again later.",
+      );
+      return;
+    }
+    setStarted(true);
+  };
 
   const credentialProvider: AwsCredentialProvider = useCallback(async () => {
     const c = await loadCredentials();
@@ -109,29 +186,30 @@ export default function FaceVerificationAppView() {
     return (
       <Centered>
         {head}
-        <h1 className="text-xl font-bold text-secondary">Open the FastMet app</h1>
-        <p className="mt-2 text-sm text-gray-600">
+        <StatusIcon tone="neutral">
+          <Smartphone className="size-7" />
+        </StatusIcon>
+        <h1 className="text-xl font-bold text-secondary">
+          Open the FastMet app
+        </h1>
+        <p className="mt-2 text-sm leading-6 text-gray-600">
           Face verification can only be completed inside the FastMet app.
         </p>
       </Centered>
     );
   }
 
-  if (loadError) {
+  if (failure) {
     return (
       <Centered>
         {head}
+        <StatusIcon tone="error">
+          <CircleAlert className="size-7" />
+        </StatusIcon>
         <h1 className="text-xl font-bold text-secondary">
-          Couldn&apos;t start the scan
+          The scan didn&apos;t work
         </h1>
-        <p className="mt-2 text-sm text-gray-600">{loadError}</p>
-        <Button
-          className="mt-6 w-full"
-          size="lg"
-          onClick={() => postToApp({type: "error", message: loadError})}
-        >
-          Go back
-        </Button>
+        <p className="mt-2 text-sm leading-6 text-gray-600">{failure}</p>
       </Centered>
     );
   }
@@ -140,79 +218,107 @@ export default function FaceVerificationAppView() {
     return (
       <Centered>
         {head}
-        <div className="mx-auto mb-4 size-10 rounded-full border-4 border-primary/30 border-t-primary animate-spin" />
-        <p className="text-sm text-gray-600">Checking your scan...</p>
+        <StatusIcon tone="primary">
+          <LoaderCircle className="size-7 animate-spin" />
+        </StatusIcon>
+        <h1 className="text-lg font-bold text-secondary">Checking your scan</h1>
+        <p className="mt-2 text-sm text-gray-600">
+          This only takes a moment. Please keep this screen open.
+        </p>
       </Centered>
     );
   }
 
   if (!started) {
     return (
-      <main className="flex flex-col px-4 py-6 min-h-screen bg-white">
+      <main className="flex flex-col min-h-screen bg-gray-50">
         {head}
-        <h1 className="text-xl font-bold text-secondary">
-          Before we scan your face
-        </h1>
-        <p className="mt-3 text-sm leading-6 text-gray-700">
-          FastMet uses a live face scan to make sure every account belongs to a
-          real, unique person. During the scan:
-        </p>
-        <ul className="mt-3 space-y-2 text-sm leading-6 text-gray-700 list-disc pl-5">
-          <li>
-            Your camera checks that you are physically present. The video is
-            analyzed in real time and is not stored by FastMet.
-          </li>
-          <li>
-            We keep one photo of your face and a face template (numbers that
-            describe your facial features and can&apos;t be turned back into a
-            photo).
-          </li>
-          <li>
-            Your face template is compared with other FastMet user accounts to
-            detect duplicate or previously banned accounts. A close match is
-            reviewed by a FastMet administrator.
-          </li>
-          <li>
-            The check is processed by Amazon Web Services (Amazon Rekognition),
-            and your photo is stored securely with Cloudinary.
-          </li>
-          <li>
-            Your face data is deleted when you delete your account. If your
-            account is banned for violating our Terms, it is kept for up to 3
-            years from the ban to stop the same person from signing up again.
-          </li>
-        </ul>
-        <p className="mt-3 text-sm leading-6 text-gray-700">
-          Read more in Section 2.D of the FastMet User Privacy Policy, available
-          in the app and at fastmet.com.ph/legal/privacy-policy/user.
-        </p>
+        <div className="flex-1 px-4 pt-8 pb-6">
+          <div className="flex flex-col items-center text-center">
+            <StatusIcon tone="primary">
+              <ScanFace className="size-8" />
+            </StatusIcon>
+            <h1 className="text-xl font-bold text-secondary">
+              Before we scan your face
+            </h1>
+            <p className="max-w-sm mt-2 text-sm leading-6 text-gray-600">
+              FastMet uses a live face scan to make sure every account belongs
+              to a real, unique person. During the scan:
+            </p>
+          </div>
 
-        <label className="flex gap-3 items-start p-4 mt-6 rounded-lg border border-gray-200 cursor-pointer">
-          <input
-            type="checkbox"
-            className="mt-1 size-4 accent-[var(--color-primary)]"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-          />
-          <span className="text-sm leading-6 text-gray-800">
-            I agree to FastMet collecting and processing my face data for
-            account verification and fraud prevention, as described above.
-          </span>
-        </label>
+          <ul className="mt-6 overflow-hidden bg-white border border-gray-200 divide-y divide-gray-100 rounded-xl">
+            {CONSENT_POINTS.map(({icon: Icon, title, body}) => (
+              <li key={title} className="flex gap-3 p-4">
+                <span className="flex items-center justify-center rounded-full shrink-0 size-9 bg-primary/10 text-primary-hover">
+                  <Icon className="size-[18px]" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-secondary">
+                    {title}
+                  </p>
+                  <p className="mt-0.5 text-sm leading-6 text-gray-600">
+                    {body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
 
-        <div className="flex flex-col gap-3 pt-6 mt-auto">
-          <Button
-            size="lg"
-            className="w-full"
-            disabled={!agreed || !credentials}
-            onClick={() => setStarted(true)}
+          <p className="flex gap-2 mt-4 text-xs leading-5 text-gray-500">
+            <ShieldCheck className="mt-0.5 size-4 shrink-0" />
+            <span>
+              Read more in Section 2.D of the FastMet User Privacy Policy,
+              available in the app and at{" "}
+              <span className="font-medium text-gray-700">
+                fastmet.com.ph/legal/privacy-policy/user
+              </span>
+              .
+            </span>
+          </p>
+
+          <label
+            className={cn(
+              "flex items-start gap-3 p-4 mt-6 border rounded-xl cursor-pointer transition-colors",
+              agreed
+                ? "border-primary bg-primary/5"
+                : "border-gray-200 bg-white",
+            )}
           >
-            {credentials ? "Start face scan" : "Preparing..."}
+            <input
+              type="checkbox"
+              className="mt-1 size-4 shrink-0 accent-white"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <span className="text-sm leading-6 text-gray-800">
+              I agree to FastMet collecting and processing my face data for
+              account verification and fraud prevention, as described above.
+            </span>
+          </label>
+        </div>
+
+        <div className="sticky bottom-0 flex flex-col gap-2 px-4 pt-3 bg-white border-t border-gray-200">
+          <Button
+            className={PRIMARY_BUTTON}
+            disabled={!agreed || !credentials}
+            onClick={onStart}
+          >
+            {credentials ? (
+              <>
+                <ScanFace />
+                Start face scan
+              </>
+            ) : (
+              <>
+                <LoaderCircle className="animate-spin" />
+                Preparing...
+              </>
+            )}
           </Button>
           <Button
-            size="lg"
             variant="ghost"
-            className="w-full"
+            className={GHOST_BUTTON}
             onClick={() => postToApp({type: "cancel"})}
           >
             Not now
@@ -235,12 +341,12 @@ export default function FaceVerificationAppView() {
           postToApp({type: "complete"});
         }}
         onUserCancel={() => postToApp({type: "cancel"})}
-        onError={(livenessError) => {
-          postToApp({
-            type: "error",
-            message: ERROR_MESSAGES[livenessError.state] ?? DEFAULT_ERROR,
-          });
-        }}
+        onError={(livenessError) =>
+          fail(
+            livenessError.state,
+            ERROR_MESSAGES[livenessError.state] ?? DEFAULT_ERROR,
+          )
+        }
       />
     </main>
   );
@@ -248,8 +354,32 @@ export default function FaceVerificationAppView() {
 
 function Centered({children}: {children: React.ReactNode}) {
   return (
-    <main className="flex flex-col justify-center items-center px-4 min-h-screen text-center bg-white">
-      <div className="w-full max-w-sm">{children}</div>
+    <main className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-white">
+      <div className="flex flex-col items-center w-full max-w-sm">
+        {children}
+      </div>
     </main>
+  );
+}
+
+const TONES = {
+  primary: "bg-primary/15 text-primary-hover",
+  error: "bg-red-50 text-red-500",
+  neutral: "bg-gray-100 text-secondary",
+};
+
+function StatusIcon({
+  tone,
+  children,
+}: {
+  tone: keyof typeof TONES;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={`mb-4 flex size-16 items-center justify-center rounded-full ${TONES[tone]}`}
+    >
+      {children}
+    </div>
   );
 }
