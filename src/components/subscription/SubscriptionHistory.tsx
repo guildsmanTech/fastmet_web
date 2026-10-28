@@ -9,6 +9,7 @@ const STATUS_LABEL: Record<HistoryItem["status"], string> = {
   completed: "Paid",
   pending: "Awaiting payment",
   under_review: "Under review",
+  dismissed: "Not applied",
 };
 
 const STATUS_STYLE: Record<HistoryItem["status"], string> = {
@@ -16,6 +17,7 @@ const STATUS_STYLE: Record<HistoryItem["status"], string> = {
   completed: "bg-green-100 text-green-700",
   pending: "bg-amber-100 text-amber-700",
   under_review: "bg-blue-100 text-blue-700",
+  dismissed: "bg-gray-100 text-gray-700",
 };
 
 function StatusBadge({item}: {item: HistoryItem}) {

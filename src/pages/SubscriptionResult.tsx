@@ -52,6 +52,9 @@ function BackLink({label = "Back to my subscription"}: {label?: string}) {
 export default function SubscriptionResultPage() {
   const [params] = useSearchParams();
   const id = params.get("id") ?? "";
+  // Which Xendit redirect brought the driver back. Display hint only: the
+  // status itself always comes from the server.
+  const cameFromFailure = params.get("outcome") === "failure";
   const {session, clear} = useSubscriptionSession();
   const [polls, setPolls] = useState(0);
 
@@ -65,8 +68,11 @@ export default function SubscriptionResultPage() {
     staleTime: 0,
     retry: false,
     // The webhook can lag behind the redirect: keep asking until it settles.
+    // Not after a failed/abandoned payment: there is nothing to wait for.
     refetchInterval: (q) =>
-      q.state.data?.status === "pending" && q.state.dataUpdateCount < MAX_POLLS
+      !cameFromFailure &&
+      q.state.data?.status === "pending" &&
+      q.state.dataUpdateCount < MAX_POLLS
         ? POLL_INTERVAL_MS
         : false,
   });
@@ -168,6 +174,46 @@ export default function SubscriptionResultPage() {
             .
           </p>
         )}
+        <BackLink />
+      </Panel>
+    );
+  } else if (state.status === "dismissed") {
+    body = (
+      <Panel
+        icon={<ShieldAlert className="size-7" />}
+        tone="bg-gray-100 text-gray-700"
+        title="Payment reviewed"
+      >
+        <p>
+          Our team reviewed this payment and it was not applied to a plan.
+          Please contact support for details.
+        </p>
+        {SUPPORT_EMAIL && (
+          <p className="mt-2">
+            Email{" "}
+            <a
+              href={`mailto:${SUPPORT_EMAIL}`}
+              className="font-semibold text-primary hover:underline"
+            >
+              {SUPPORT_EMAIL}
+            </a>
+            .
+          </p>
+        )}
+        <BackLink />
+      </Panel>
+    );
+  } else if (state.status === "pending" && cameFromFailure) {
+    body = (
+      <Panel
+        icon={<CircleX className="size-7" />}
+        tone="bg-gray-100 text-gray-600"
+        title="Payment not completed"
+      >
+        <p>
+          Your payment didn&apos;t go through, so this plan is not active yet.
+          You can continue or cancel this payment on your subscription page.
+        </p>
         <BackLink />
       </Panel>
     );

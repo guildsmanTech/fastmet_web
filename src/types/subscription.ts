@@ -51,7 +51,8 @@ export type HistoryItem = {
   id: string;
   plan: SubscriptionPlanId;
   label: string;
-  status: "completed" | "pending" | "under_review" | "revoked";
+  /** "dismissed" = paid, but reviewed by the team and not applied. */
+  status: "completed" | "pending" | "under_review" | "revoked" | "dismissed";
   /** "admin_grant" = complimentary plan, nothing was paid. */
   source: "checkout" | "admin_grant";
   amount: number;
@@ -79,7 +80,8 @@ export type CheckoutState = {
   id: string;
   plan: SubscriptionPlanId;
   label: string;
-  status: "completed" | "pending" | "closed" | "under_review";
+  /** "closed" = never charged; "under_review" / "dismissed" = charged but not applied. */
+  status: "completed" | "pending" | "closed" | "under_review" | "dismissed";
   startsOn: string | null;
   endsOn: string | null;
 };

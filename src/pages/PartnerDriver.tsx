@@ -61,14 +61,14 @@ export default function PartnerDriver() {
               >
                 Download Driver App
               </CTAButton>
-              {/* <CTAButton
+              <CTAButton
                 to="/subscription"
                 variant="user"
                 size="sm"
                 className="px-6"
               >
                 Get Subscription
-              </CTAButton> */}
+              </CTAButton>
             </div>
 
             {/* <p className="text-white/80 text-xs md:text-base mt-2">
@@ -93,7 +93,7 @@ export default function PartnerDriver() {
             >
               Download Driver App
             </CTAButton>
-            {/* <CTAButton
+            <CTAButton
               to="/subscription"
               variant="user"
               size="sm"
@@ -101,7 +101,7 @@ export default function PartnerDriver() {
               className="max-w-[300px]"
             >
               Get Subscription
-            </CTAButton> */}
+            </CTAButton>
           </div>
           {/* <p className="text-white/80 text-xs md:text-base mt-2 lg:hidden text-center">
             Available on Google Play. Manage your plan anytime via Subscription.

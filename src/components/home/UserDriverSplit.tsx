@@ -22,6 +22,13 @@ export default function UserDriverSplit() {
             land-accessible routes.
           </p>
           <CTAButton
+            variant="primary"
+            className="w-fit px-5 py-2.5"
+            to="/user-register"
+          >
+            Pre-Register as a User
+          </CTAButton>
+          <CTAButton
             to="/get-a-quote"
             variant="primary"
             icon={Calculator}
