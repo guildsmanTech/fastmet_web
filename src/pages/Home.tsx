@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { homeBg, homeMain } from "@/constants/images";
 import ServiceAreas from "@/components/home/ServiceAreas";
-import UserDriverSplit from "@/components/home/UserDriverSplit";
+import ZeroCommission from "@/components/home/ZeroCommission";
 import CoverageExplainer from "@/components/home/Coverage";
 import PageContainer from "@/components/PageContainer";
 import Registrations from "@/components/home/Registrations";
@@ -199,7 +199,7 @@ export default function Home() {
           </div>
 
           {/* Right: vehicle image + supporting badges */}
-          <div className="mt-5 md:mt-0 flex flex-col gap-3 w-full lg:w-1/2">
+          <div className="mt-4 md:mt-0 flex flex-col gap-3 w-full lg:w-1/2">
             <div className="max-w-xl w-full self-center">
               <img
                 src={homeMain}
@@ -235,9 +235,8 @@ export default function Home() {
           </div>
         </PageContainer>
       </section>
-
       {/* ===== WHY FASTMET ===== bg-[#fffaf3] */}
-      <section className="mb-12 relative isolate w-full overflow-hidden py-16 sm:py-20 lg:py-24">
+      <section className="px-2 md:px-0 mb-12 relative isolate w-full overflow-hidden py-16 sm:py-20 lg:py-24">
         {/* <div
           aria-hidden="true"
           className="absolute -right-24 -top-28 -z-10 size-72 rounded-full bg-[#fff0d9]"
@@ -313,17 +312,11 @@ export default function Home() {
           </div>
         </PageContainer>
       </section>
-
-      <UserDriverSplit />
-
+      <ZeroCommission /> {/* UserDriverSplit */}
       <CoverageExplainer />
-
       <ServiceAreas />
-
       <Registrations />
-
       <QuestionForm />
-
       <LoaderModal open={countsLoading || vehiclesLoading} />
     </div>
   );
