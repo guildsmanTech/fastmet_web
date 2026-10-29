@@ -1,8 +1,9 @@
 // components/delivery-services.tsx
-import { Bike, Car, Truck, type LucideIcon } from "lucide-react";
+import { ArrowRight, Bike, Car, Truck, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import PageContainer from "../PageContainer";
+import CTAButton from "../CTAButton";
 
 interface IServices {
   id: string;
@@ -112,15 +113,21 @@ export default function ServiceDelivery({ className }: { className?: string }) {
           </div>
 
           {/* Highlight + Button */}
-          <div className="space-y-4 pt-2">
-            <p className="text-lg font-semibold text-slate-900 leading-snug">
-              From Motorcycle to Wing Van,{" "}
+          <div className="space-y-3 text-right">
+            <div className="text-lg font-semibold text-slate-900 leading-snug">
+              <p>From Motorcycle to Wing Van, </p>
               <span className="text-primary">May FastMet Para Diyan!</span>
-            </p>
+            </div>
 
-            <Button className="rounded-full bg-primary hover:bg-primary/90 text-white px-8">
+            <CTAButton
+              to="/delivery-services"
+              variant="driver"
+              size="md"
+              icon={ArrowRight}
+              className="self-start"
+            >
               Explore Delivery Services
-            </Button>
+            </CTAButton>
           </div>
         </div>
       </div>
