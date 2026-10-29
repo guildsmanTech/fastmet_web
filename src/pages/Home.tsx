@@ -24,6 +24,7 @@ import Registrations from "@/components/home/Registrations";
 import PhSunIcon from "@/assets/home/PhSunIcon";
 import type { ElementType } from "react";
 import ServiceDelivery from "@/components/home/ServiceDelivery";
+import FareCalculator from "@/components/home/FareCalculator";
 
 interface IHeroBadge {
   title: string;
@@ -314,6 +315,7 @@ export default function Home() {
       </section>
       <ZeroCommission /> {/* <UserDriverSplit /> */}
       <ServiceDelivery /> {/* <CoverageExplainer /> */}
+      <FareCalculator />
       <ServiceAreas />
       <Registrations />
       <QuestionForm />

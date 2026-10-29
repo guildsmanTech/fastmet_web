@@ -1,9 +1,17 @@
 // components/delivery-services.tsx
-import { Bike, Car, Truck } from "lucide-react";
+import { Bike, Car, Truck, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import PageContainer from "../PageContainer";
 
-const services = [
+interface IServices {
+  id: string;
+  icon: LucideIcon;
+  category: string;
+  title: string;
+  description: string;
+}
+
+const services: IServices[] = [
   {
     id: "01",
     icon: Bike,
@@ -47,9 +55,9 @@ export default function ServiceDelivery({ className }: { className?: string }) {
             <br />
             Malaki,
             <br />
-            <span className="text-orange-500">FastMet Ang</span>
+            <span className="text-primary">FastMet Ang</span>
             <br />
-            <span className="text-orange-500">Bahala!</span>
+            <span className="text-primary">Bahala!</span>
           </h2>
 
           <p className="max-w-md text-slate-600 text-base leading-relaxed">
@@ -70,15 +78,12 @@ export default function ServiceDelivery({ className }: { className?: string }) {
               >
                 {/* Icon */}
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-50">
-                  <Icon
-                    className="h-6 w-6 text-orange-500"
-                    strokeWidth={1.75}
-                  />
+                  <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} />
                 </div>
 
                 {/* Text */}
                 <div className="space-y-1 pt-0.5">
-                  <p className="text-xs font-semibold tracking-wider text-orange-500">
+                  <p className="text-xs font-semibold tracking-wider text-primary">
                     {service.category}
                   </p>
                   <h3 className="text-lg font-semibold text-slate-900">

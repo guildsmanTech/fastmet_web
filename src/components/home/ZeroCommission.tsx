@@ -79,7 +79,7 @@ export default function ZeroCommission() {
         {/* Copy + benefits */}
         <div className="flex flex-col gap-5">
           <span className="inline-flex self-start items-center rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-primary sm:text-[11px]">
-            Zero Commission
+            No Required Commission
           </span>
 
           <h2 className="text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-[3.25rem] 2xl:text-6xl">
