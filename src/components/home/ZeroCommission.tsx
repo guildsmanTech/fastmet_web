@@ -13,17 +13,20 @@ interface IZeroCommissionPoint {
 const points: IZeroCommissionPoint[] = [
   {
     title: "Walang Commission sa Bawat Delivery",
-    description: "Buong delivery fee, sa'yo mapupunta.",
+    description:
+      "No percentage-based commission deductions from completed bookings.",
     icon: Coins,
   },
   {
     title: "Buong Delivery Earnings, Sa'yo",
-    description: "Ikaw ang may kontrol sa kinikita mo.",
+    description:
+      "Keep 100% of your delivery earnings without platform commission deductions.",
     icon: HandCoins,
   },
   {
     title: "Subscription-Based ang Sistema",
-    description: "Simple at malinaw na paraan para magamit ang platform.",
+    description:
+      "Instead of paying commission per delivery, partner-drivers operate under FastMet's subscription-based model.",
     icon: ReceiptText,
   },
 ];
@@ -59,10 +62,10 @@ export default function ZeroCommission() {
                 className="h-1 w-9 rounded-full bg-primary"
               />
               <h3 className="text-xl font-extrabold leading-tight text-white sm:text-2xl">
-                Be a Partner-Driver
+                Walang Commission. Buong Kita sa Bawat Biyahe.
               </h3>
               <p className="max-w-[18rem] text-sm leading-snug text-white/80">
-                Keep 100% of your delivery earnings. Drive on your own time.
+                Subscription fees and applicable terms and conditions apply
               </p>
               <CTAButton
                 to="/partner-driver"
@@ -84,10 +87,30 @@ export default function ZeroCommission() {
             <span className="text-primary">For Life.</span>
           </h2>
 
-          <p className="max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            Mas malaking kita sa bawat delivery—walang kaltas na komisyon, at
-            100% ng bayad sa delivery ay direktang napupunta sa partner-driver.
-          </p>
+          <div className="flex flex-col gap-3 max-w-xl text-sm text-slate-300 sm:text-base leading-relaxed font-medium md:gap-4 lg:text-[15px] 2xl:text-base">
+            <p>
+              Sa FastMet, naniniwala kami na dapat mas sulit ang bawat biyahe
+              para sa ating partner-drivers. That's why we're introducing a
+              subscription-based delivery model.
+            </p>
+
+            <p>
+              Unlike traditional delivery platforms that deduct a percentage
+              from every completed booking,{" "}
+              <span className="font-extrabold text-primary">
+                walang commission na kinukuha ang FastMet sa delivery earnings
+                ng partner-drivers.
+              </span>
+            </p>
+
+            <p>
+              <span className="font-extrabold text-primary">
+                Instead, FastMet operates through a subscription-based system,
+                allowing partner-drivers to keep 100% of their delivery
+                earnings.
+              </span>
+            </p>
+          </div>
 
           <div className="mt-2 grid grid-cols-1 gap-8 border-t border-white/10 pt-8 md:grid-cols-3 md:gap-0">
             {points.map(({ title, description, icon: Icon }, index) => (
