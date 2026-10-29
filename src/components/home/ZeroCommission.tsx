@@ -41,8 +41,8 @@ export default function ZeroCommission() {
       />
 
       <PageContainer className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[25rem_minmax(0,1fr)] 2xl:gap-20">
-        {/* Photo with CTA overlaid inside the image */}
-        <div className="w-full rounded-[2.25rem] border-2 border-dashed border-primary/70 p-3 sm:p-4">
+        {/* Photo with partner-driver prompt + CTA overlaid inside the image */}
+        <div className="w-full rounded-[2.25rem] border-dashed border-primary/70">
           <div className="relative overflow-hidden rounded-[1.6rem]">
             <img
               src={homeDriver}
@@ -51,14 +51,24 @@ export default function ZeroCommission() {
             />
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/75 via-black/35 to-transparent"
+              className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/90 via-black/55 to-transparent"
             />
-            <div className="absolute inset-x-0 bottom-0 flex justify-center px-5 pb-5 sm:px-6 sm:pb-6">
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 px-5 pb-5 sm:px-6 sm:pb-6">
+              <span
+                aria-hidden="true"
+                className="h-1 w-9 rounded-full bg-primary"
+              />
+              <h3 className="text-xl font-extrabold leading-tight text-white sm:text-2xl">
+                Be a Partner-Driver
+              </h3>
+              <p className="max-w-[18rem] text-sm leading-snug text-white/80">
+                Keep 100% of your delivery earnings. Drive on your own time.
+              </p>
               <CTAButton
                 to="/partner-driver"
                 variant="primary"
                 size="md"
-                className="w-full px-8 text-secondary shadow-lg shadow-black/30 sm:w-auto"
+                className="mt-1 w-full px-8 text-secondary shadow-lg shadow-black/30 sm:w-auto"
               >
                 Drive with FastMet
               </CTAButton>
