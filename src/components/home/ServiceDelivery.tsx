@@ -1,6 +1,5 @@
 // components/delivery-services.tsx
 import { ArrowRight, Bike, Car, Truck, type LucideIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import PageContainer from "../PageContainer";
 import CTAButton from "../CTAButton";
@@ -115,7 +114,7 @@ export default function ServiceDelivery({ className }: { className?: string }) {
           {/* Highlight + Button */}
           <div className="space-y-3 text-right">
             <div className="text-lg font-semibold text-slate-900 leading-snug">
-              <p>From Motorcycle to Wing Van, </p>
+              <p>From Motorcycle to Wing Van</p>
               <span className="text-primary">May FastMet Para Diyan!</span>
             </div>
 
