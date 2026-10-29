@@ -59,27 +59,27 @@ const heroBadges: IHeroBadge[] = [
 
 const whyFastmet: IWhyFastMet[] = [
   {
-    title: "Gawang Pinoy",
+    title: "Gawang Pinoy, Para sa Pinoy",
     description:
-      "Binuo sa Pilipinas, para sa mga Pilipinong nagpapadala at nagde-deliver.",
+      "A homegrown delivery app built to serve Filipino individuals, businesses, and communities.",
     icon: PhSunIcon,
   },
   {
     title: "Zero Commission for Life",
     description:
-      "Walang kinukuhang komisyon sa partner-driver. Sa kanila napupunta ang kita.",
+      "Sa FastMet, walang percentage-based commission deductions. Partner-drivers keep 100% of their delivery earnings under our subscription-based model.",
     icon: Coins,
   },
   {
-    title: "Vehicle Options",
+    title: "May Sasakyan Para sa Bawat Delivery",
     description:
-      "Mula documents at small parcels hanggang appliances at larger cargo, may sasakyang akma.",
+      "From motorcycles to wing vans, choose the right vehicle for your parcels, supplies, equipment, or larger cargo.",
     icon: Truck,
   },
   {
-    title: "Personal & Business",
+    title: "Personal Man o Pang-Business",
     description:
-      "Para sa personal, business, at bulk deliveries, iisang platform lang.",
+      "Whether it's a personal package or business inventory, FastMet offers delivery options for different needs.",
     icon: UsersRound,
   },
 ];
@@ -254,15 +254,28 @@ export default function Home() {
                 Bakit FastMet?
               </span>
               <h2 className="mt-4 text-3xl font-extrabold leading-tight text-secondary sm:text-4xl lg:text-5xl">
-                Mas madaling biyahe.
+                Mas Convenient na Delivery.
                 <br />
-                Mas maraming <span className="text-primary">oportunidad.</span>
+                Mas Sulit na <span className="text-primary">Biyahe.</span>
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-                Isang on-demand delivery platform na nag-uugnay sa mga users at
-                negosyo sa tamang partner-driver at sasakyan, mula documents
-                hanggang malaking cargo.
-              </p>
+              <div className="flex flex-col gap-3 max-w-xl mt-4 text-base leading-relaxed text-slate-600 sm:text-lg font-medium md:gap-4 lg:text-[15px] 2xl:text-base">
+                <p>
+                  FastMet is a proudly Filipino-made delivery platform designed
+                  for the everyday needs of Filipino customers, businesses, and
+                  partner-drivers.
+                </p>
+                <p>
+                  Whether you're sending a small package or transporting larger
+                  cargo, may FastMet vehicle option para sa delivery needs mo.
+                </p>
+                <p>
+                  At para sa ating partner-drivers, iba ang sistema ng FastMet.
+                  With our subscription-based model,{" "}
+                  <span className="font-extrabold text-primary">
+                    walang commission na ibabawas sa bawat completed delivery.
+                  </span>
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-wrap gap-3 lg:justify-end">
