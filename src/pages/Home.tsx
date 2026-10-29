@@ -19,11 +19,11 @@ import {
 import { homeBg, homeMain } from "@/constants/images";
 import ServiceAreas from "@/components/home/ServiceAreas";
 import ZeroCommission from "@/components/home/ZeroCommission";
-import CoverageExplainer from "@/components/home/Coverage";
 import PageContainer from "@/components/PageContainer";
 import Registrations from "@/components/home/Registrations";
 import PhSunIcon from "@/assets/home/PhSunIcon";
 import type { ElementType } from "react";
+import ServiceDelivery from "@/components/home/ServiceDelivery";
 
 interface IHeroBadge {
   title: string;
@@ -312,8 +312,8 @@ export default function Home() {
           </div>
         </PageContainer>
       </section>
-      <ZeroCommission /> {/* UserDriverSplit */}
-      <CoverageExplainer />
+      <ZeroCommission /> {/* <UserDriverSplit /> */}
+      <ServiceDelivery /> {/* <CoverageExplainer /> */}
       <ServiceAreas />
       <Registrations />
       <QuestionForm />
