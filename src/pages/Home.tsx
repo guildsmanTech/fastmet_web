@@ -250,8 +250,8 @@ export default function Home() {
         <PageContainer className="flex flex-col gap-7 sm:gap-9">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <span className="inline-flex rounded-full bg-[#fff0d9] px-4 py-2 text-sm font-bold text-primary">
-                WHY FASTMET?
+              <span className="inline-flex rounded-full bg-[#fff0d9] px-4 py-2 text-sm font-bold text-primary uppercase">
+                Bakit FastMet?
               </span>
               <h2 className="mt-4 text-3xl font-extrabold leading-tight text-secondary sm:text-4xl lg:text-5xl">
                 Mas madaling biyahe.

@@ -46,10 +46,6 @@ export default function ServiceDelivery({ className }: { className?: string }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
         {/* Left content */}
         <div className="space-y-6">
-          <span className="inline-flex rounded-full bg-[#fff0d9] px-4 py-2 text-sm font-bold text-primary">
-            DELIVERY SERVICES
-          </span>
-
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
             Maliit Man o
             <br />
