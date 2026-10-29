@@ -1,5 +1,6 @@
 // components/delivery-services.tsx
 import { Bike, Car, Truck, type LucideIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import PageContainer from "../PageContainer";
 
@@ -16,25 +17,25 @@ const services: IServices[] = [
     id: "01",
     icon: Bike,
     category: "MOTOR",
-    title: "Small Parcel",
+    title: "Small Parcel Deliveries",
     description:
-      "Mabilis na padala para sa dokumento, pagkain, at maliliit na package sa loob ng siyudad.",
+      "Para sa documents, small packages, at everyday delivery needs.",
   },
   {
     id: "02",
     icon: Car,
     category: "SASAKYAN",
-    title: "Personal & Business",
+    title: "Personal & Business Deliveries",
     description:
-      "Para sa mas malalaking kahon, grocery, at gamit ng negosyo na kailangan ng mas maluwag na espasyo.",
+      "Para sa personal belongings, merchandise, business supplies, at medium-sized items.",
   },
   {
     id: "03",
     icon: Truck,
     category: "TRUCK",
-    title: "Large & Bulk",
+    title: "Large & Bulk Deliveries",
     description:
-      "Para sa muwebles, appliances, at maramihang kargamento na kailangan ng malaking sasakyan.",
+      "Para sa appliances, equipment, business inventory, at mas malalaking cargo.",
   },
 ];
 
@@ -56,42 +57,71 @@ export default function ServiceDelivery({ className }: { className?: string }) {
             <span className="text-primary">Bahala!</span>
           </h2>
 
-          <p className="max-w-md text-slate-600 text-base leading-relaxed">
-            Mula sa maliit na parcel hanggang sa mabigat na kargamento, may
-            partner-driver at sasakyan na akma sa padala mo.
-          </p>
+          <div className="space-y-4 max-w-md">
+            <div className="space-y-3">
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-700 leading-snug">
+                May Delivery Option Para sa Iba&apos;t Ibang Pangangailangan.
+              </h3>
+              <div className="h-1 w-11 rounded-full bg-primary" />
+            </div>
+
+            <div className="space-y-3 text-base leading-relaxed text-slate-600">
+              <p>
+                May documents ka bang ipapadala? Business supplies na kailangang
+                ihatid? O malalaking gamit na kailangang i-transport?
+              </p>
+              <p>
+                FastMet offers different vehicle options to match your delivery
+                needs. Mula motorcycle hanggang wing van, may FastMet para sa
+                iba&apos;t ibang klase ng padala.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Right cards (stacked) */}
-        <div className="flex flex-col gap-4">
-          {services.map((service) => {
-            const Icon = service.icon;
+        {/* Right side: Cards + Highlight */}
+        <div className="flex flex-col gap-6">
+          {/* Cards */}
+          <div className="flex flex-col gap-4">
+            {services.map((service) => {
+              const Icon = service.icon;
 
-            return (
-              <div
-                key={service.id}
-                className="flex items-start gap-4 rounded-2xl border border-orange-100/80 bg-white p-5 shadow-sm transition-colors hover:bg-orange-50/40"
-              >
-                {/* Icon */}
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-50">
-                  <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} />
-                </div>
+              return (
+                <div
+                  key={service.id}
+                  className="flex items-start gap-4 rounded-2xl border border-orange-100/80 bg-white p-5 shadow-sm transition-colors hover:bg-orange-50/40"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-50">
+                    <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} />
+                  </div>
 
-                {/* Text */}
-                <div className="space-y-1 pt-0.5">
-                  <p className="text-xs font-semibold tracking-wider text-primary">
-                    {service.category}
-                  </p>
-                  <h3 className="text-lg font-semibold text-slate-900">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {service.description}
-                  </p>
+                  <div className="space-y-1 pt-0.5">
+                    <p className="text-xs font-semibold tracking-wider text-primary">
+                      {service.category}
+                    </p>
+                    <h3 className="text-lg font-semibold text-slate-900">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* Highlight + Button */}
+          <div className="space-y-4 pt-2">
+            <p className="text-lg font-semibold text-slate-900 leading-snug">
+              From Motorcycle to Wing Van,{" "}
+              <span className="text-primary">May FastMet Para Diyan!</span>
+            </p>
+
+            <Button className="rounded-full bg-primary hover:bg-primary/90 text-white px-8">
+              Explore Delivery Services
+            </Button>
+          </div>
         </div>
       </div>
     </PageContainer>
