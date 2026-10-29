@@ -2,7 +2,7 @@ import type {LegalContent} from "@/types/legal";
 
 export const userPrivacyPolicy: LegalContent = {
   title: "FastMet User App Privacy Policy",
-  lastUpdated: "August 2026",
+  lastUpdated: "October 2026",
   sections: [
     {
       heading: "1. Introduction",
@@ -94,6 +94,32 @@ export const userPrivacyPolicy: LegalContent = {
             "Improve the reliability of our services",
           ],
         },
+        {type: "subheading", text: "D. Face Verification Information"},
+        {
+          type: "p",
+          text: "Before you can book, FastMet asks you to complete a live face scan. With your consent, FastMet collects:",
+        },
+        {
+          type: "list",
+          items: [
+            "A short live camera check that confirms a real person is present (the video is analyzed in real time and is not stored by FastMet)",
+            "One still photo of your face taken during the check",
+            "A face template: a numerical representation of your facial features that cannot be turned back into a photo",
+          ],
+        },
+        {type: "p", text: "Why We Collect This Information:"},
+        {
+          type: "list",
+          items: [
+            "Confirm that each FastMet account belongs to a real, unique person",
+            "Detect duplicate accounts, including new sign-ups by people whose accounts were banned, suspended, or deactivated",
+            "Prevent fraud and protect drivers and other users",
+          ],
+        },
+        {
+          type: "p",
+          text: "Your face template is compared automatically with the templates of other FastMet user accounts. If it closely matches another account, a FastMet administrator reviews both face photos before your account is approved. Face verification information is used only for account verification and fraud prevention, and never for marketing.",
+        },
       ],
     },
     {
@@ -171,6 +197,15 @@ export const userPrivacyPolicy: LegalContent = {
             "Deliver important account and service notifications",
           ],
         },
+        {type: "subheading", text: "Identity Verification and Storage Providers"},
+        {type: "p", text: "Used to:"},
+        {
+          type: "list",
+          items: [
+            "Run the live face check and face matching (Amazon Web Services, Amazon Rekognition)",
+            "Securely store your face verification photo (Cloudinary)",
+          ],
+        },
         {
           type: "p",
           text: "FastMet only shares information when necessary to provide, maintain, and improve our services.",
@@ -243,6 +278,10 @@ export const userPrivacyPolicy: LegalContent = {
         {
           type: "p",
           text: "When information is no longer required, FastMet will take reasonable steps to securely delete or anonymize the information.",
+        },
+        {
+          type: "p",
+          text: "Your face verification photo and face template are kept while your account exists and are deleted when your account is deleted. If your account was banned for violating our Terms, FastMet keeps them for up to 3 years from the date of the ban, even after the account is deleted, to prevent the same person from signing up again. They are deleted at the end of that period, or earlier if the ban is lifted. Access to this information is limited to authorized FastMet administrators.",
         },
       ],
     },

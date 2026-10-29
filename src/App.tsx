@@ -78,6 +78,16 @@ const router = createBrowserRouter([
     path: "app-view",
     children: [
       {path: "user-register", element: <UserRegisterAppView />},
+      // Client app face scan. Lazy so the AWS liveness bundle stays out of
+      // the main site.
+      {
+        path: "face-verification",
+        lazy: async () => ({
+          Component: (await import("./pages/app-view/FaceVerification"))
+            .default,
+        }),
+        errorElement: <ErrorBoundary />,
+      },
       {
         path: "legal",
         children: [
