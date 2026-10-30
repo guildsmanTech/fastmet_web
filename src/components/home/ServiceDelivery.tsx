@@ -44,7 +44,7 @@ export default function ServiceDelivery({ className }: { className?: string }) {
     <PageContainer
       className={cn("w-full max-w-6xl mx-auto px-4 py-16", className)}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start px-2 md:px-0">
         {/* Left content */}
         <div className="space-y-6">
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
@@ -112,7 +112,7 @@ export default function ServiceDelivery({ className }: { className?: string }) {
           </div>
 
           {/* Highlight + Button */}
-          <div className="space-y-3 text-right">
+          <div className="space-y-3 text-center md:text-right">
             <div className="text-lg font-semibold text-slate-900 leading-snug">
               <p>From Motorcycle to Wing Van</p>
               <span className="text-primary">May FastMet Para Diyan!</span>

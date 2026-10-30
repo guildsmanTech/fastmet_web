@@ -19,6 +19,7 @@ import homeUser from "@/assets//home/home_left.webp";
 import homeDriver from "@/assets/home/home_driver.webp";
 import coverage from "@/assets/home/map.webp";
 import homeMain from "@/assets/home/home_main.webp";
+import homeFareCalcu from "@/assets/home/home_farecalcu.png";
 import bir from "@/assets/home/bir.png";
 import sec from "@/assets/home/sec.png";
 
@@ -69,6 +70,7 @@ export {
   homeUser,
   homeDriver,
   homeMain,
+  homeFareCalcu,
   coverage,
   bir,
   sec,

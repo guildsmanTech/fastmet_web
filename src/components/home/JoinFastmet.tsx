@@ -7,9 +7,9 @@ import CTAButton from "../CTAButton";
 export default function JoinFastMet({ className }: { className?: string }) {
   return (
     <PageContainer className={cn("w-full px-6 md:px-4 py-14 md:py-16", className)}>
-      <div className="flex w-full flex-col xl:flex-row">
+      <div className="flex w-full flex-col xl:flex-row xl:items-center">
         {/* Right: Texts */}
-        <div className="w-full max-w-4xl space-y-6 lg:pt-4 h-full text-left  flex flex-col lg:self-center">
+        <div className="w-full max-w-4xl space-y-6 lg:pt-4 h-full text-left  flex flex-col">
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
             May Ipapadala? May
             <br />
@@ -26,7 +26,7 @@ export default function JoinFastMet({ className }: { className?: string }) {
           </p>
         </div>
         {/* Cards (stacked) */}
-        <div className="flex flex-col w-full gap-x-5 mt-6 md:mt-0">
+        <div className="flex flex-col w-full gap-x-5 mt-6">
           <div className="flex flex-col text-left gap-6">
             {/* Customer Card */}
             <div className="relative overflow-hidden rounded-3xl bg-orange-50/80 border border-orange-100 p-8">

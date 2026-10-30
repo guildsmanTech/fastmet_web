@@ -9,7 +9,8 @@ import Registrations from "@/components/home/Registrations";
 import ServiceDelivery from "@/components/home/ServiceDelivery";
 import FareCalculator from "@/components/home/FareCalculator";
 import HeroSection from "@/components/home/HeroSection";
-import WhyFastMet from "@/components/home/WhyFastmet";
+import WhyFastMet from "@/components/home/WhyFastMet";
+import JoinFastMet from "@/components/home/JoinFastmet";
 
 // TAKE_NOTE: px-2 md:px-0 (OVERALL EACH SECTION)
 
@@ -54,6 +55,7 @@ export default function Home() {
       <ZeroCommission /> {/* <UserDriverSplit /> */}
       <ServiceDelivery /> {/* <CoverageExplainer /> */}
       <FareCalculator />
+      <JoinFastMet />
       <ServiceAreas />
       <Registrations />
       <QuestionForm />

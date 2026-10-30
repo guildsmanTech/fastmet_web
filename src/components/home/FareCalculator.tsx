@@ -3,17 +3,24 @@ import { Calculator } from "lucide-react";
 import { cn } from "@/lib/utils";
 import PageContainer from "../PageContainer";
 import CTAButton from "../CTAButton";
-import { homeUser } from "@/constants/images";
+import { homeFareCalcu } from "@/constants/images";
 
 export default function FareCalculator({ className }: { className?: string }) {
   return (
     <PageContainer
-      className={cn("w-full max-w-6xl mx-auto px-4 py-16", className)}
+      className={cn("w-full max-w-6xl mx-auto px-6 py-16", className)}
     >
-      <div className="relative overflow-hidden rounded-3xl bg-secondary px-8 py-12 sm:px-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left content */}
-          <div className="space-y-6">
+      <div className="relative overflow-hidden rounded-3xl bg-secondary px-6 py-10 md:py-12 sm:px-12 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center md:px-2">
+          {/* Left illustration */}
+          <img
+            src={homeFareCalcu}
+            alt="FastMet delivery coverage map across Greater Manila"
+            className="aspect-[4/3] w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
+          />
+
+          {/* Right content */}
+          <div className="space-y-6 order-2">
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-[1.15]">
               Magkano ang
               <br />
@@ -52,13 +59,6 @@ export default function FareCalculator({ className }: { className?: string }) {
               </p>
             </div>
           </div>
-
-          {/* Right illustration */}
-          <img
-            src={homeUser}
-            alt="FastMet delivery coverage map across Greater Manila"
-            className="aspect-[4/3] w-full rounded-2xl object-cover ring-1 ring-white/10"
-          />
         </div>
       </div>
     </PageContainer>
