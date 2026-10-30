@@ -49,8 +49,8 @@ export default function WhyFastMet() {
         /> */}
 
       <PageContainer className="flex flex-col gap-7 sm:gap-9">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
+        <div className="flex flex-col gap-6 justify-center items-center text-center">
+          <div className="max-w-5xl">
             <span className="inline-flex rounded-full bg-[#fff0d9] px-4 py-2 text-sm font-bold text-primary uppercase">
               Bakit FastMet?
             </span>
@@ -59,19 +59,14 @@ export default function WhyFastMet() {
               <br />
               Mas Sulit na <span className="text-primary">Biyahe.</span>
             </h2>
-            <div className="flex flex-col gap-3 max-w-xl mt-4 text-base leading-relaxed text-slate-600 sm:text-lg font-medium md:gap-4 lg:text-[15px] 2xl:text-base">
+            <div className="flex flex-col gap-3 max-w-2xl mt-4 text-base leading-relaxed text-slate-600 sm:text-lg font-medium md:gap-4 lg:text-[15px] 2xl:text-base">
               <p>
                 FastMet is a proudly Filipino-made delivery platform designed
                 for the everyday needs of Filipino customers, businesses, and
-                partner-drivers.
-              </p>
-              <p>
-                Whether you're sending a small package or transporting larger
-                cargo, may FastMet vehicle option para sa delivery needs mo.
-              </p>
-              <p>
-                At para sa ating partner-drivers, iba ang sistema ng FastMet.
-                With our subscription-based model,{" "}
+                partner-drivers. Whether you're sending a small package or
+                transporting larger cargo, may FastMet vehicle option para sa
+                delivery needs mo. At para sa ating partner-drivers, iba ang
+                sistema ng FastMet. With our subscription-based model,{" "}
                 <span className="font-extrabold text-primary">
                   walang commission na ibabawas sa bawat completed delivery.
                 </span>
@@ -79,7 +74,7 @@ export default function WhyFastMet() {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3 lg:justify-end">
+          <div className="flex flex-col md:flex-row md:flex-wrap gap-3">
             <CTAButton
               to="/user-register"
               variant="driver"
