@@ -3,7 +3,6 @@ import QuestionForm from "@/components/home/QuestionForm";
 import LoaderModal from "@/components/modals/Loader";
 import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
 import { useVehicles } from "@/hooks/useVehicleQueries";
-import ServiceAreas from "@/components/home/ServiceAreas";
 import ZeroCommission from "@/components/home/ZeroCommission";
 import Registrations from "@/components/home/Registrations";
 import ServiceDelivery from "@/components/home/ServiceDelivery";
@@ -11,6 +10,8 @@ import FareCalculator from "@/components/home/FareCalculator";
 import HeroSection from "@/components/home/HeroSection";
 import WhyFastMet from "@/components/home/WhyFastMet";
 import JoinFastMet from "@/components/home/JoinFastmet";
+import CoverageSection from "@/components/home/Coverage";
+import ServiceAreas from "@/components/home/ServiceAreas";
 
 // TAKE_NOTE: px-2 md:px-0 (OVERALL EACH SECTION)
 
@@ -56,6 +57,7 @@ export default function Home() {
       <ServiceDelivery /> {/* <CoverageExplainer /> */}
       <FareCalculator />
       <JoinFastMet />
+      <CoverageSection />
       <ServiceAreas />
       <Registrations />
       <QuestionForm />

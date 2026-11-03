@@ -64,7 +64,7 @@ export default function JoinFastMet({ className }: { className?: string }) {
             </div>
 
             {/* Driver Card */}
-            <div className="relative overflow-hidden rounded-3xl bg-slate-900 p-8">
+            <div className="relative overflow-hidden rounded-3xl bg-secondary p-8">
               <User
                 className="absolute -bottom-4 -right-4 h-36 w-36 text-slate-700/80"
                 strokeWidth={1}
