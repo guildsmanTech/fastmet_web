@@ -1,6 +1,6 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export const SERVICE_AREAS = [
   {
@@ -76,18 +76,15 @@ export default function ServiceAreas() {
               </div>
 
               <h3 className="text-4xl sm:text-5xl font-bold leading-[1.15] tracking-tight text-slate-950">
-                Greater Manila Service Areas
+                Greater Manila
+                <br />
+                <span className="text-primary">Service Areas</span>
               </h3>
 
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-500 sm:text-base">
                 We currently accept pickups across Metro Manila and selected
                 nearby cities and municipalities.
               </p>
-            </div>
-
-            <div className="flex items-center gap-2 text-sm font-medium text-slate-500">
-              <MapPin className="h-4 w-4 text-primary" />
-              <span>5 covered areas</span>
             </div>
           </div>
 

@@ -13,7 +13,7 @@ export default function PageContainer({
 }: PageContainerProps) {
   return (
     <div
-      className={cn("w-full md:max-w-[85rem] lg:max-w-[100rem] mx-auto px-4", className)}
+      className={cn("w-full md:max-w-[90rem] mx-auto px-4", className)}
     >
       {children}
     </div>

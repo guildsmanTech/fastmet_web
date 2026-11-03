@@ -1,6 +1,6 @@
 import { MapPin, Route, Ban } from "lucide-react";
 import PageContainer from "../PageContainer";
-import { coverage } from "@/constants/images";
+import { holdingMap } from "@/constants/images";
 import { SERVICE_AREAS } from "./ServiceAreas";
 
 const coverageDetails = [
@@ -31,9 +31,9 @@ export default function CoverageSection() {
           <div className="relative order-2 md:order-1 w-full">
             {/* Map */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] border border-primary/20 bg-primary/[0.04] sm:aspect-[1.12/0.8]">
-              {coverage ? (
+              {holdingMap ? (
                 <img
-                  src={coverage}
+                  src={holdingMap}
                   alt="FastMet delivery coverage map"
                   className="h-full w-full object-cover shadow-sm md:shadow-none"
                 />

@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import QuestionForm from "@/components/home/QuestionForm";
 import LoaderModal from "@/components/modals/Loader";
 import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
 import { useVehicles } from "@/hooks/useVehicleQueries";
@@ -12,6 +11,9 @@ import WhyFastMet from "@/components/home/WhyFastMet";
 import JoinFastMet from "@/components/home/JoinFastmet";
 import CoverageSection from "@/components/home/Coverage";
 import ServiceAreas from "@/components/home/ServiceAreas";
+import QuestionForm from "@/components/home/QuestionForm";
+import ClosingCTA from "@/components/home/ClosingCTA";
+// import ClosingCTA from "@/components/home/ClosingCTA";
 
 // TAKE_NOTE: px-2 md:px-0 (OVERALL EACH SECTION)
 
@@ -61,6 +63,7 @@ export default function Home() {
       <ServiceAreas />
       <Registrations />
       <QuestionForm />
+      <ClosingCTA /> 
       <LoaderModal open={countsLoading || vehiclesLoading} />
     </div>
   );

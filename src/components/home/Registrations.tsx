@@ -26,11 +26,8 @@ export default function Registrations() {
       <PageContainer>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left column – copy */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 order-1 md:order-2">
             <div className="flex flex-col gap-3">
-              <span className="text-primary font-semibold tracking-wide text-sm uppercase">
-                Registration
-              </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
                 Registered. Legit.
                 <br />
@@ -61,11 +58,11 @@ export default function Registrations() {
           </div>
 
           {/* Right column – certificate cards */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-end">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-end w-full">
             {registrations.map((reg) => (
               <div
-                key={reg.badge}
-                className="bg-white text-zinc-900 rounded-xl shadow-lg overflow-hidden w-full max-w-[350px] flex flex-col"
+                key={reg.badge} 
+                className="bg-white text-zinc-900 rounded-xl shadow-lg overflow-hidden w-full md:max-w-[350px] flex flex-col"
               >
                 {/* Certificate mockup */}
                 <div className="relative p-5 pb-4 flex-1">

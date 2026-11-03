@@ -61,15 +61,14 @@ export default function WhyFastMet() {
             </h2>
             <div className="flex flex-col gap-3 max-w-2xl mt-4 text-base leading-relaxed text-slate-600 sm:text-lg font-medium md:gap-4 lg:text-[15px] 2xl:text-base">
               <p>
-                FastMet is a proudly Filipino-made delivery platform designed
-                for the everyday needs of Filipino customers, businesses, and
-                partner-drivers. Whether you're sending a small package or
-                transporting larger cargo, may FastMet vehicle option para sa
-                delivery needs mo. At para sa ating partner-drivers, iba ang
-                sistema ng FastMet. With our subscription-based model,{" "}
+                FastMet is a proudly Filipino-made delivery platform for
+                customers, businesses, and partner-drivers. From small packages
+                to larger cargo, may FastMet vehicle option para sa delivery
+                needs mo. At para sa ating drivers,{" "}
                 <span className="font-extrabold text-primary">
-                  walang commission na ibabawas sa bawat completed delivery.
-                </span>
+                  walang commission na ibabawas
+                </span>{" "}
+                sa bawat completed delivery thanks to our subscription model.
               </p>
             </div>
           </div>
@@ -108,13 +107,13 @@ export default function WhyFastMet() {
                 <h3 className="max-w-[14rem] text-xl font-bold leading-tight text-secondary sm:text-2xl">
                   {title}
                 </h3>
-                <p className="mt-4 max-w-sm text-base leading-relaxed text-slate-600">
+                <p className="mt-4 max-w-sm text-base leading-relaxed text-slate-600 relative">
                   {description}
                 </p>
               </div>
               <Icon
                 aria-hidden="true"
-                className="absolute bottom-4 right-4 z-10 size-12 text-orange-300"
+                className="absolute bottom-4 right-4 z-10 size-12 text-primary/80 opacity-40 md:opacity-100 "
                 strokeWidth={1.8}
               />
             </article>

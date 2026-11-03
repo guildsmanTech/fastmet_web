@@ -16,7 +16,7 @@ export default function FareCalculator({ className }: { className?: string }) {
           <img
             src={homeFareCalcu}
             alt="FastMet delivery coverage map across Greater Manila"
-            className="aspect-[4/3] w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
+            className="aspect-[3/3] md:aspect-[4/3] w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
           />
 
           {/* Right content */}
@@ -42,13 +42,13 @@ export default function FareCalculator({ className }: { className?: string }) {
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 flex flex-col items-center justify-center md:items-start">
               <CTAButton
                 to="/get-a-quote"
                 variant="user-soft-border"
                 size="md"
                 icon={Calculator}
-                fullWidth
+                className="w-full sm:w-auto"
               >
                 Get a Quote
               </CTAButton>
