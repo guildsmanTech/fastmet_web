@@ -1,66 +1,84 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
+import { Bell, Smartphone, Ticket, type LucideIcon } from "lucide-react";
+
+interface IPerk {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}
+
+const PERKS = [
+  {
+    icon: Ticket,
+    title: "Exclusive Delivery Vouchers",
+    desc: "Pre-registered users may receive exclusive vouchers that can be used for eligible FastMet deliveries once the service becomes available.",
+  },
+  {
+    icon: Smartphone,
+    title: "Chance to Win Mobile Load",
+    desc: "Successful pre-registrants may get a chance to win mobile load worth up to ₱500.",
+  },
+  {
+    icon: Bell,
+    title: "Early FastMet Updates",
+    desc: "Receive official announcements about our launch, service coverage, promotions, and future access to the FastMet mobile app.",
+  },
+] satisfies IPerk[];
 
 export default function AnoAngFastmet() {
   return (
-    <section className="w-full bg-gray-50 py-10">
-      <PageContainer>
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-          <div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-primary">
+    <section className="w-full py-20 lg:py-28">
+      <PageContainer className="flex flex-col gap-12 lg:gap-14">
+        {/* Header + CTA */}
+        <div className="flex flex-col items-center gap-6 text-center">
+          <div className="flex max-w-3xl flex-col items-center gap-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+              Pre-registration
+            </p>
+
+            <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
               Bakit FastMet?
             </h2>
-            <p className="text-secondary text-sm font-medium mt-2">
+
+            <p className="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
               Be among the first to receive official FastMet updates before our
-              public launch.
-            </p>
-            <p className="text-secondary/70 text-xs mt-1">
-              Pre-registration pa lamang ito. FastMet will send official updates
-              and next steps through the contact details you provide.
+              public launch. Pre-registration pa lamang ito. FastMet will send
+              official updates and next steps through the contact details you
+              provide.
             </p>
           </div>
 
           <CTAButton
             to="/user-register"
             variant="primary"
-            className="shrink-0 self-start md:self-auto"
+            className="px-7 py-3"
           >
             Pre-Register Now
           </CTAButton>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
-          {[
-            {
-              emoji: "🎟️",
-              title: "Exclusive Delivery Vouchers",
-              desc: "Pre-registered users may receive exclusive vouchers that can be used for eligible FastMet deliveries once the service becomes available.",
-            },
-            {
-              emoji: "📱",
-              title: "Chance to Win Mobile Load",
-              desc: "Successful pre-registrants may get a chance to win mobile load worth up to ₱500.",
-            },
-            {
-              emoji: "🔔",
-              title: "Early FastMet Updates",
-              desc: "Receive official announcements about our launch, service coverage, promotions, and future access to the FastMet mobile app.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="bg-white rounded-lg shadow-sm p-5 flex flex-col gap-3"
+        {/* Perks: joined grid with hairline dividers */}
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-3">
+          {PERKS.map(({ icon: Icon, title, desc }) => (
+            <article
+              key={title}
+              className="group flex flex-col gap-5 bg-white p-6 transition-colors duration-200 hover:bg-slate-50 lg:p-8"
             >
-              <span className="text-3xl">{item.emoji}</span>
-              <h3 className="text-secondary font-bold text-sm">{item.title}</h3>
-              <p className="text-secondary/70 text-xs leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
+              <div className="flex size-11 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-primary transition-colors duration-200 group-hover:border-primary/30 group-hover:bg-primary/10">
+                <Icon aria-hidden className="size-5" strokeWidth={1.8} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-secondary">
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-600">{desc}</p>
+              </div>
+            </article>
           ))}
         </div>
 
-        <p className="text-secondary/50 text-[11px] text-center mt-8">
+        <p className="max-w-3xl text-xs leading-relaxed text-slate-500 text-center mx-auto">
           Vouchers, prizes, eligibility requirements, and redemption details are
           subject to the official promotion mechanics and FastMet terms and
           conditions.
