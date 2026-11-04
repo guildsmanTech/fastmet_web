@@ -58,43 +58,55 @@ export function AcceptedVehicles() {
   const { data, isPending, isError } = useVehicles();
 
   return (
-    <section className="w-full px-3 md:px-0 py-10 md:py-20" id="accepted-vehicles">
-      <PageContainer className="flex flex-col gap-8">
-        <div className="flex flex-col gap-2 items-center text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
-            Accepted Vehicles
-          </h2>
+    <section
+      className="w-full bg-white py-20 lg:py-28 border-t"
+      id="accepted-vehicles"
+    >
+      <PageContainer className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
+        {/* Left: vehicle grid */}
+        <div className="lg:col-span-7">
+          {isPending && (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="aspect-[3/4] animate-pulse rounded-xl bg-slate-100"
+                />
+              ))}
+            </div>
+          )}
 
-          <p className="max-w-2xl text-xs leading-relaxed text-gray-500 sm:text-sm">
-            Vehicle categories and capacities are subject to final FastMet
-            confirmation.
-          </p>
+          {isError && (
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-16 text-center text-sm text-slate-500">
+              Unable to load vehicle list right now. Please try again later.
+            </div>
+          )}
+
+          {!isPending && !isError && data && (
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {[...data].map((vehicle) => (
+                <VehicleCard key={vehicle._id} vehicle={vehicle} />
+              ))}
+            </div>
+          )}
         </div>
 
-        {isPending && (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="aspect-[3/4] rounded-lg bg-gray-100 animate-pulse"
-              />
-            ))}
-          </div>
-        )}
-
-        {isError && (
-          <p className="text-sm text-center text-red-500">
-            Unable to load vehicle list right now. Please try again later.
+        {/* Right: sticky intro / CTA text */}
+        <div className="flex flex-col gap-4 lg:col-span-5 lg:sticky lg:top-28">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            Vehicles
           </p>
-        )}
 
-        {!isPending && !isError && data && (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {[...data].map((vehicle) => (
-              <VehicleCard key={vehicle._id} vehicle={vehicle} />
-            ))}
-          </div>
-        )}
+          <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
+            Accepted <span className="text-primary">Vehicles</span>
+          </h2>
+
+          <p className="max-w-md text-sm leading-relaxed text-slate-600 sm:text-base">
+            Vehicle categories, payload capacities, and operational guidelines
+            are strictly subject to final FastMet confirmation, review, and
+            verification upon application submission.
+          </p>
+        </div>
       </PageContainer>
     </section>
   );

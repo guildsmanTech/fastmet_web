@@ -73,7 +73,7 @@ export default function HeroSection() {
         <img
           src={partnerMain}
           alt="FastMet delivery"
-          className="w-full md:w-1/2 object-cover"
+          className="w-full md:w-1/2 object-cover hidden md:block"
         />
 
         {/* Mobile CTAs */}

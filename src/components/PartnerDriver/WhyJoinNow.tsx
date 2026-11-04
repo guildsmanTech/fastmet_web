@@ -42,32 +42,36 @@ const features: IFeature[] = [
 
 export default function WhyJoinNow() {
   return (
-    <Fragment>
-      <section className="w-full px-3 md:px-0">
-        <PageContainer className="flex flex-col gap-8">
-          <div className="flex flex-col gap-3 justify-center items-center text-center">
-            <h2 className="mt-4 text-3xl font-extrabold leading-tight text-secondary sm:text-4xl lg:text-5xl">
-              Bakit Maging FastMet
-              <br />
-              <span className="text-primary">Partner-Driver? </span>
-            </h2>
-            <div className="flex flex-col gap-3 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg font-medium md:gap-4 lg:text-[15px] 2xl:text-base">
-              <p>
-                Sa aming subscription-based model, walang percentage-based
-                commission na ibabawas sa iyong delivery earnings.
-              </p>
-            </div>
-          </div>
+    <section className="w-full py-20 lg:py-28">
+      <PageContainer className="flex flex-col gap-12 lg:gap-16">
+        {/* Header / CTA text */}
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            Partner-Driver Benefits
+          </p>
 
+          <h2 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
+            Bakit Maging FastMet
+            <br className="hidden sm:block" />
+            <span className="text-primary"> Partner-Driver?</span>
+          </h2>
+
+          <p className="max-w-2xl text-sm font-medium leading-relaxed text-slate-600 sm:text-base lg:text-lg">
+            Sa aming subscription-based model, walang percentage-based
+            commission na ibabawas sa iyong delivery earnings.
+          </p>
+        </div>
+
+        {/* Featured image */}
+        <div className="mx-auto w-full max-w-5xl">
           <img
             src={partnerZero}
             alt="FastMet 0% commission, subscription fee lang"
-            className="w-full min-h-40 object-cover rounded-xl"
+            className="h-auto w-full rounded-2xl object-cover shadow-sm"
           />
-        </PageContainer>
-      </section>
+        </div>
 
-      <section className="px-3 md:px-0">
+        {/* Feature cards */}
         <PageContainer className="flex flex-wrap justify-center gap-4">
           {features.map(({ title, description, icon: Icon }) => (
             <article
@@ -98,7 +102,7 @@ export default function WhyJoinNow() {
             </article>
           ))}
         </PageContainer>
-      </section>
-    </Fragment>
+      </PageContainer>
+    </section>
   );
 }

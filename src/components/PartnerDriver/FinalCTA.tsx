@@ -4,7 +4,7 @@ import { Smartphone } from "lucide-react";
 
 export function FinalCTA() {
   return (
-    <section id="final-cta" className="w-full bg-primary py-20 lg:py-28">
+    <section id="final-cta" className="w-full bg-primary py-20">
       <PageContainer className="flex flex-col items-center gap-8 text-center">
         <div className="flex max-w-2xl flex-col items-center gap-4">
           <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
