@@ -90,7 +90,7 @@ export default function ZeroCommission() {
             <div className="space-y-5">
               <div className="space-y-1">
                 <h2 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
-                  Zero Commission.
+                  Zero Commission.{" "}
                   <span className="block text-primary">For Life.</span>
                 </h2>
               </div>

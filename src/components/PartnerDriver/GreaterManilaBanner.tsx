@@ -1,44 +1,80 @@
 import CTAButton from "@/components/CTAButton";
-import {Smartphone} from "lucide-react";
+import { Smartphone } from "lucide-react";
 import PageContainer from "@/components/PageContainer";
-import {partnerComms} from "@/constants/images";
-import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
+import { partnerComms } from "@/constants/images";
 
 export function Commission() {
   return (
-    <section
-      className="w-full border-b-2 border-primary pb-10"
-      id="greater-manila"
-    >
-      <PageContainer className="flex flex-col md:gap-10 md:flex-row gap-4 justify-center items-center">
-        <img
-          src={partnerComms}
-          alt="FastMet delivery"
-          className="w-full md:w-1/2 object-cover"
-        />
+    <section id="greater-manila" className="px-3 md:px-0 -full bg-white py-20 lg:py-28">
+      <PageContainer className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-12">
+        {/* Image */}
+        <div className="relative w-full lg:col-span-6">
+          <div>
+            <div className="overflow-hidden rounded-3xl">
+              <img
+                src={partnerComms}
+                alt="FastMet delivery"
+                className="block h-auto w-full object-cover self-center"
+              />
+            </div>
+          </div>
+        </div>
 
-        <div className="w-full md:w-1/2 flex flex-col gap-3 justify-center items-center md:items-start">
-          <h1 className="text-lg font-bold md:text-2xl">
-            Mas Maraming Kita. Walang Commission
-          </h1>
-          <p className="text-xs text-gray-600 md:text-sm ">
-            FastMet partner-drivers keep 100% of their delivery earnings. Walang
-            commission cut — subscription fee lang.
-          </p>
-          <h3 className="text-xs font-semibold">
-            Delivery Earnings →{" "}
-            <span className="font-bold text-primary text-sm">100%</span> for the
-            Driver
-          </h3>
-          <CTAButton
-            href={DRIVER_PLAY_STORE_URL}
-            variant="driver"
-            size="compact"
-            icon={Smartphone}
-            className="[&_svg]:hidden lg:[&_svg]:block"
-          >
-            Download Driver App
-          </CTAButton>
+        {/* Content */}
+        <div className="flex flex-col items-start gap-6 lg:col-span-6">
+          <div className="flex flex-col gap-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+              Zero commission
+            </p>
+
+            <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
+              Mas Sulit ang Bawat Biyahe.{" "}
+              <span className="text-primary">Walang commission.</span>
+            </h2>
+
+            <div className="max-w-lg space-y-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+              <p>
+                Walang percentage-based commission na ibabawas sa bawat
+                completed delivery, so you keep 100% of your delivery earnings.
+              </p>
+              <p>
+                Sa FastMet, zero commission for life ang partner-drivers through
+                our subscription-based model.
+              </p>
+            </div>
+          </div>
+
+          {/* Earnings stat */}
+          <div className="flex w-full max-w-lg items-center gap-5 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4">
+            <span className="text-4xl font-bold tracking-tight text-primary">
+              100%
+            </span>
+            <div className="h-10 w-px bg-slate-200" />
+            <p className="text-sm font-medium leading-snug text-secondary">
+              Delivery earnings
+              <br />
+              <span className="font-normal text-slate-600">
+                go to the driver
+              </span>
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="flex w-full max-w-lg flex-col items-start gap-3">
+            <CTAButton
+              href="/subscription"
+              variant="driver"
+              size="compact"
+              className="w-full md:w-auto py-3 md:py-0"
+            >
+              Get Started Today
+              <Smartphone className="text-white ml-1" size={16} />
+            </CTAButton>
+
+            <p className="text-xs text-slate-500 text-center md:text-left">
+              Subscription fees and applicable terms and conditions apply.
+            </p>
+          </div>
         </div>
       </PageContainer>
     </section>

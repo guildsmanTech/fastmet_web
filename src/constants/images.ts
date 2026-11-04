@@ -38,7 +38,7 @@ import vision from "@/assets/about/vision.webp";
 
 // partner-driver
 import partnerBg from "@/assets/partner/partner_bg.webp";
-import partnerComms from "@/assets/partner/partner_comms.webp";
+import partnerComms from "@/assets/partner/partner_comms.jpg";
 import partnerMain from "@/assets/partner/partner_main.webp";
 import partnerZero from "@/assets/partner/partner_zero.webp";
 import zero from "@/assets/partner/zero.png";
