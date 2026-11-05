@@ -10,9 +10,9 @@ export default function BetterRoute() {
           <div className="w-full text-center flex flex-col gap-4">
             <div className="space-y-4 flex flex-col justify-center items-center">
               <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-                Bagong Sistema.{" "}
+                Bagong sistema.{" "}
                 <span className="block text-primary">
-                  Sama-samang Pag-unlad.
+                  sama-samang pag-unlad.
                 </span>
               </h2>
 
