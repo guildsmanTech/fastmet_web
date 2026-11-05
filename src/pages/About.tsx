@@ -21,8 +21,6 @@ export default function About() {
       </Helmet>
       <HeroSection />
       <RightVehicle />
-
-      {/* Better route for everyone */}
       <BetterRoute />
       <MissionVision />
       <OurValues />

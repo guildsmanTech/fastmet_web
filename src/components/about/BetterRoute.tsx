@@ -9,10 +9,6 @@ export default function BetterRoute() {
         <PageContainer>
           <div className="w-full text-center flex flex-col gap-4">
             <div className="space-y-4 flex flex-col justify-center items-center">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-                Our Mission
-              </span>
-
               <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-secondary sm:text-4xl lg:text-5xl">
                 Bagong Sistema.{" "}
                 <span className="block text-primary">
