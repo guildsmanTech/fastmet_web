@@ -7,7 +7,6 @@ const registrations = [
     alt: "SEC certificate of incorporation",
     badge: "SEC",
     title: "Certificate of incorporation",
-    company: "Guildsman Technology OPC",
     regNo: "Registration No. 2026070259894-15",
   },
   {
@@ -15,7 +14,6 @@ const registrations = [
     alt: "BIR certificate of registration",
     badge: "BIR",
     title: "Certificate of registration",
-    company: "Guildsman Technology OPC",
     regNo: "BIR registered & verified official BIR registration seal badge",
   },
 ];
@@ -61,7 +59,7 @@ export default function Registrations() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-end w-full">
             {registrations.map((reg) => (
               <div
-                key={reg.badge} 
+                key={reg.badge}
                 className="bg-white text-zinc-900 rounded-xl shadow-lg overflow-hidden w-full md:max-w-[350px] flex flex-col"
               >
                 {/* Certificate mockup */}
@@ -74,12 +72,9 @@ export default function Registrations() {
                 </div>
 
                 {/* Footer */}
-                <div className="px-5 pb-5 pt-1 border-t border-zinc-100">
+                <div className="px-5 pb-5 pt-2 border-t border-zinc-100">
                   <p className="text-[10px] font-semibold tracking-wide text-zinc-500 uppercase mb-1">
                     {reg.title}
-                  </p>
-                  <p className="text-sm font-bold text-zinc-900 leading-tight">
-                    {reg.company}
                   </p>
                   <p className="text-xs text-zinc-500 mt-0.5">{reg.regNo}</p>
 

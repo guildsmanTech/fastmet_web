@@ -34,7 +34,7 @@ export default function SubscriptionPage() {
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      <section className="pb-8 pt-6 bg-secondary md:py-12 lg:py-16 px-8 md:px-0">
+      <section className="pb-8 pt-6 bg-slate-50 md:py-12 lg:py-16 px-8 md:px-0">
         <PageContainer className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 lg:items-start py-20 px-0">
           {/* Left column – Login / Dashboard */}
           <div className="lg:col-span-6 order-2">
@@ -52,11 +52,12 @@ export default function SubscriptionPage() {
 
           {/* Right column – CTA text */}
           <div className="order-1 lg:col-span-6 lg:pt-4">
-            <h1 className="text-3xl font-bold text-primary md:text-4xl lg:text-5xl leading-tight">
-              Driver Subscription
+            <h1 className="text-3xl font-bold text-secondary md:text-4xl lg:text-5xl leading-tight">
+              Get started with your{" "}
+              <span className="text-primary">Driver Subscription</span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 md:text-base">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-500 md:text-base">
               Manage your FastMet partner-driver plan, see when it ends, and
               subscribe or renew in just a few steps. Log in with the mobile
               number linked to your driver account to view your active plan,
