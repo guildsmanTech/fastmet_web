@@ -44,6 +44,8 @@ export default function ConnectNeeds() {
               preserveAspectRatio="none"
               className="absolute inset-0 w-full h-full"
               fill="none"
+              aria-hidden="true"
+              role="presentation"
             >
               <line
                 x1="920"
@@ -174,8 +176,7 @@ export default function ConnectNeeds() {
         <div className="md:hidden flex flex-col items-center">
           <div className="flex items-center justify-center rounded-full border border-primary/30 size-[110px]">
             <div className="flex flex-col items-center justify-center rounded-full bg-white size-[80px] font-extrabold text-secondary text-xs">
-              <img src={logo} alt="FastMet logo" className="size-6" />
-              FastMet
+              <img src={logo} alt="FastMet logo" className="size-6" /> FastMet
             </div>
           </div>
 

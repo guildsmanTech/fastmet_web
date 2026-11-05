@@ -1,11 +1,11 @@
 import PageContainer from "@/components/PageContainer";
-import {mission, vision} from "@/constants/images";
+import { mission, vision } from "@/constants/images";
 
 type BlockProps = {
-  title: string;
-  paragraphs: string[];
-  imageFirst?: boolean;
-  image?: string;
+  readonly title: string;
+  readonly paragraphs: string[];
+  readonly imageFirst?: boolean;
+  readonly image?: string;
 };
 
 function MissionVisionBlock({
@@ -34,7 +34,7 @@ function MissionVisionBlock({
         </h2>
         {paragraphs.map((p, i) => (
           <p
-            key={i}
+            key={p}
             className={`text-sm text-zinc-700 leading-relaxed ${i === 0 ? "font-semibold" : ""}`}
           >
             {p}

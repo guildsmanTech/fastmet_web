@@ -1,4 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
 import PageContainer from "../PageContainer";
 import { partnerZero } from "@/constants/images";
 import { Calendar, Clock, Package, Smartphone, Truck } from "lucide-react";

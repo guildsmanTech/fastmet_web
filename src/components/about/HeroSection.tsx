@@ -8,7 +8,7 @@ const heroCtaClass: string =
 export default function HeroSection() {
   return (
     <section
-      className="relative flex min-h-dvh w-full items-center overflow-hidden bg-secondary pt-10 md:pt-0"
+      className="relative flex min-h-dvh w-full items-center overflow-hidden bg-secondary pt-10 md:pt-0 px-3 md:px-0"
       id="hero"
     >
       <img
@@ -40,27 +40,25 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Desktop CTAs */}
-          <div className="mt-2 flex flex-wrap gap-3">
-            <div className="flex flex-wrap gap-3 mt-2">
-              <CTAButton
-                to="/user-register"
-                variant="user"
-                size="md"
-                className={`${heroCtaClass} text-secondary shadow-lg flex-1 basis-full sm:flex-none sm:basis-auto`}
-              >
-                Register as a User
-              </CTAButton>
+          {/* Desktop & Mobile CTAs */}
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <CTAButton
+              to="/user-register"
+              variant="user"
+              size="md"
+              className={`${heroCtaClass} text-secondary shadow-lg w-full justify-center sm:w-fit`}
+            >
+              Register as a User
+            </CTAButton>
 
-              <CTAButton
-                to="/partner-driver"
-                variant="driver"
-                size="md"
-                className={`${heroCtaClass} flex-1 basis-full sm:flex-none sm:basis-auto`}
-              >
-                Become a Partner-Driver
-              </CTAButton>
-            </div>
+            <CTAButton
+              to="/partner-driver"
+              variant="driver"
+              size="md"
+              className={`${heroCtaClass} w-full justify-center sm:w-fit`}
+            >
+              Become a Partner-Driver
+            </CTAButton>
           </div>
         </div>
 
