@@ -16,25 +16,25 @@ interface IServices {
 const SERVICES: IServices[] = [
   {
     img: servicesDocu7,
-    caption: "Documents and Small Parcels",
+    caption: "Documents and small parcels",
     description:
       "Para sa documents, contracts, gifts, at iba pang magagaang na padala.",
   },
   {
     img: servicesDocu2,
-    caption: "Online Orders and Business Supplies",
+    caption: "Online orders and business supplies",
     description:
       "Para sa customer orders, stocks, supplies, at araw-araw na business deliveries.",
   },
   {
     img: servicesDocu3,
-    caption: "Appliances and Household Items",
+    caption: "Appliances and household items",
     description:
       "Para sa appliances, furniture, equipment, at iba pang bulky items.",
   },
   {
     img: servicesDocu5,
-    caption: "Lipat-Bahay and Larger Cargo",
+    caption: "Lipat-bahay and larger cargo",
     description:
       "Para sa lipat-bahay, maramihang padala, at mas malalaking cargo.",
   },
@@ -78,8 +78,8 @@ export default function Documents() {
                 Services
               </p>
               <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-                Mula Documents Hanggang{" "}
-                <span className="text-primary">Lipat-Bahay</span>
+                Mula documents hanggang{" "}
+                <span className="text-primary">lipat-bahay</span>
               </h2>
               <p className="max-w-md text-sm leading-relaxed text-slate-600 sm:text-base">
                 FastMet offers delivery options para sa iba’t ibang personal,
@@ -97,7 +97,7 @@ export default function Documents() {
               variant="primary"
               className="w-full justify-center px-7 py-3 sm:w-fit"
             >
-              Register Now
+              Register now
             </CTAButton>
           </div>
         </div>

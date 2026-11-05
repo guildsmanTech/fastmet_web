@@ -11,17 +11,17 @@ interface IPerk {
 const PERKS = [
   {
     icon: Ticket,
-    title: "Exclusive Delivery Vouchers",
+    title: "Exclusive delivery vouchers",
     desc: "Pre-registered users may receive exclusive vouchers that can be used for eligible FastMet deliveries once the service becomes available.",
   },
   {
     icon: Smartphone,
-    title: "Chance to Win Mobile Load",
+    title: "Chance to win mobile load",
     desc: "Successful pre-registrants may get a chance to win mobile load worth up to ₱500.",
   },
   {
     icon: Bell,
-    title: "Early FastMet Updates",
+    title: "Early FastMet updates",
     desc: "Receive official announcements about our launch, service coverage, promotions, and future access to the FastMet mobile app.",
   },
 ] satisfies IPerk[];
@@ -54,7 +54,7 @@ export default function AnoAngFastmet() {
             variant="primary"
             className="px-7 py-3"
           >
-            Pre-Register Now
+            Pre-register now
           </CTAButton>
         </div>
 

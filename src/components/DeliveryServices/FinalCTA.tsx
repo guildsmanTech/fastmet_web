@@ -30,7 +30,7 @@ export default function FinalCTA() {
             variant="outline"
             className="justify-center border-secondary bg-secondary px-7 py-3 text-white hover:bg-secondary/90 hover:text-white"
           >
-            Pre-Register as a User
+            Pre-register as a user
           </CTAButton>
 
           {/* Secondary action: outlined, same height */}
@@ -39,7 +39,7 @@ export default function FinalCTA() {
             variant="outline"
             className="justify-center border-secondary bg-transparent px-7 py-3 text-secondary hover:bg-secondary/10 hover:text-secondary"
           >
-            Send a Business Inquiry
+            Send a business inquiry
           </CTAButton>
         </div>
       </PageContainer>

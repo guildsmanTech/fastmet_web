@@ -4,17 +4,17 @@ import PageContainer from "@/components/PageContainer";
 const steps = [
   {
     icon: "📝",
-    title: "1. Complete Your Information",
+    title: "1. Complete your information",
     desc: "Ilagay ang iyong name, address, gender, at email. Maaari ka ring mag-upload ng profile picture, pero optional ito.",
   },
   {
     icon: "🔔",
-    title: "2. Complete Face Verification",
+    title: "2. Complete face verification",
     desc: "Sundin ang instructions para makumpleto ang face verification ng iyong account.",
   },
   {
     icon: "📲",
-    title: "3. Ready Ka Nang Magpadala!",
+    title: "3. Ready ka nang magpadala!",
     desc: "Kapag kumpleto na ang registration at face verification mo, enjoy affordable delivery services, available 24/7 para sa iba’t ibang delivery needs mo.",
   },
 ];
@@ -29,7 +29,7 @@ export default function PaanoMagPreRegister() {
             How it works
           </p>
           <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-            Paano Mag-Register?
+            Paano mag-register?
           </h2>
         </div>
 
@@ -130,7 +130,7 @@ export default function PaanoMagPreRegister() {
             variant="primary"
             className="w-full justify-center px-7 py-3 sm:w-fit"
           >
-            Register Now
+            Register now
           </CTAButton>
         </div>
       </PageContainer>

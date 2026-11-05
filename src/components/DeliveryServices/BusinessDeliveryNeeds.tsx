@@ -33,7 +33,7 @@ export default function BusinessDeliveryNeeds() {
               For business
             </p>
             <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
-              May Delivery Needs ang Business Mo?
+              May delivery needs ang business mo?
             </h2>
             <div className="flex max-w-xl flex-col gap-3 text-sm leading-relaxed text-slate-400 sm:text-base">
               <p>
@@ -72,7 +72,7 @@ export default function BusinessDeliveryNeeds() {
               variant="user"
               className="w-full justify-center px-7 py-3 sm:w-fit"
             >
-              Send a Business Inquiry
+              Send a business inquiry
             </CTAButton>
             <p className="max-w-xl text-xs leading-relaxed text-slate-500">
               Our team will review your requirements and contact you about

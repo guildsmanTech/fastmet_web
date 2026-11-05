@@ -40,7 +40,7 @@ export default function AvailableVehicles() {
               variant="user"
               className="w-full justify-center border border-primary/30 px-6 py-3 sm:w-fit"
             >
-              Pre-Register as a User
+              Pre-register as a user
             </CTAButton>
           </div>
         </div>

@@ -45,11 +45,11 @@ export default function HeroSection() {
           {/* Left: headline + text + CTAs */}
           <div className="flex flex-col gap-4 w-full max-w-2xl text-white pt-16 md:pt-0 sm:gap-5 md:gap-6">
             <span className="inline-flex self-start items-center px-3 py-1.5 text-[10px] font-extrabold tracking-wide rounded-full sm:px-3.5 sm:text-[11px] 2xl:text-xs bg-primary text-secondary">
-              FastMet Delivery Benefits
+              FastMet delivery benefits
             </span>
 
             <h1 className="max-w-2xl text-3xl font-extrabold leading-[1.15] text-primary sm:text-4xl lg:text-[2.5rem] 2xl:text-5xl">
-              May Ipapadala Ka? <br /> FastMet Agad!
+              May ipapadala ka? <br /> FastMet agad!
             </h1>
 
             <div className="flex flex-col gap-3 max-w-xl text-[13px] font-medium leading-relaxed text-white/90 sm:text-sm md:gap-4 lg:text-[15px] 2xl:text-base">
@@ -72,7 +72,7 @@ export default function HeroSection() {
                 size="md"
                 className={`${heroCtaClass} text-secondary shadow-lg flex-1 basis-full sm:flex-none sm:basis-auto`}
               >
-                Register Now
+                Register now
               </CTAButton>
 
               <CTAButton
@@ -81,7 +81,7 @@ export default function HeroSection() {
                 size="md"
                 className={`${heroCtaClass} flex-1 basis-full sm:flex-none sm:basis-auto`}
               >
-                Business Inquiry
+                Business inquiry
               </CTAButton>
             </div>
 
