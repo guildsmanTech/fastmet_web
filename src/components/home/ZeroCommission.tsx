@@ -1,8 +1,6 @@
 import { Coins, HandCoins, ReceiptText, type LucideIcon } from "lucide-react";
-
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
-import { homeDriver } from "@/constants/images";
 
 interface IZeroCommissionPoint {
   title: string;
@@ -12,19 +10,19 @@ interface IZeroCommissionPoint {
 
 const points: IZeroCommissionPoint[] = [
   {
-    title: "Walang Commission sa Bawat Delivery",
+    title: "Walang commission sa bawat delivery",
     description:
       "No percentage-based commission deductions from completed bookings.",
     icon: Coins,
   },
   {
-    title: "Buong Delivery Earnings, Sa'yo",
+    title: "Buong delivery earnings, sa'yo",
     description:
       "Keep 100% of your delivery earnings without platform commission deductions.",
     icon: HandCoins,
   },
   {
-    title: "Subscription-Based ang Sistema",
+    title: "Subscription-based ang sistema",
     description:
       "Instead of paying commission per delivery, partner-drivers operate under FastMet's subscription-based model.",
     icon: ReceiptText,
@@ -35,115 +33,81 @@ export default function ZeroCommission() {
   return (
     <section
       id="zero-commission"
-      className="relative isolate mb-12 w-full scroll-mt-24 overflow-hidden bg-secondary px-4 py-16 sm:px-6 sm:py-20 lg:py-24"
+      className="w-full scroll-mt-24 bg-secondary py-20 lg:py-28"
     >
-      {/* Background accent */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-40 -z-10 size-[34rem] rounded-full bg-primary/[0.07] blur-3xl"
-      />
-
-      <PageContainer>
-        <div className="grid items-center gap-10 lg:gap-14 xl:grid-cols-[0.78fr_1.5fr] xl:gap-16">
-          {/* Driver image */}
-          <div className="relative w-full min-w-0">
-            <div className="group relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]">
-              <img
-                src={homeDriver}
-                alt="FastMet partner-driver"
-                className="aspect-[3/4] md:aspect-[5/4]  w-full object-cover object-center sm:aspect-[16/9] xl:aspect-[4/5]"
-              />
-
-              {/* Image overlay */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"
-              />
-
-              {/* Image content */}
-              <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 p-5 sm:p-7 lg:p-8">
-                <h3 className="max-w-sm text-xl font-extrabold leading-tight text-white sm:text-2xl lg:text-3xl">
-                  Walang Commission.
-                  <br />
-                  Buong Kita sa Bawat Biyahe.
-                </h3>
-
-                <p className="max-w-xs text-xs leading-relaxed text-white/75 sm:text-sm">
-                  Subscription fees and applicable terms and conditions apply
-                </p>
-
-                <CTAButton
-                  to="/partner-driver"
-                  variant="primary"
-                  size="md"
-                  className="mt-1 w-full px-8 text-secondary shadow-lg shadow-black/20 sm:w-auto"
-                >
-                  Drive with FastMet
-                </CTAButton>
-              </div>
-            </div>
+      <PageContainer className="flex flex-col items-center gap-12 lg:gap-16">
+        {/* Header */}
+        <div className="flex max-w-3xl flex-col items-center gap-6 text-center">
+          <div className="flex flex-col items-center gap-4 w-full max-w-xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+              No commission required
+            </p>
+            <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Zero commission. <span className="text-primary">For life.</span>
+            </h2>
           </div>
 
-          {/* Main content */}
-          <div className="flex min-w-0 flex-col gap-8 sm:gap-10">
-            {/* Heading and description */}
-            <div className="space-y-5">
-              <div className="space-y-1">
-                <h2 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
-                  Zero Commission.{" "}
-                  <span className="block text-primary">For Life.</span>
-                </h2>
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-slate-400 sm:text-base w-full max-w-2xl">
+            <p>
+              Sa FastMet, naniniwala kami na dapat mas sulit ang bawat biyahe
+              para sa ating partner-drivers. That's why we're introducing a
+              subscription-based delivery model.
+            </p>
+            <p>
+              Unlike traditional delivery platforms that deduct a percentage
+              from every completed booking,{" "}
+              <span className="font-semibold text-white">
+                walang commission na kinukuha ang FastMet sa delivery earnings
+                ng partner-drivers.
+              </span>
+            </p>
+          </div>
+        </div>
+
+        {/* Benefits: joined cards, hairline dividers */}
+        <ul className="grid w-full max-w-5xl grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-3">
+          {points.map(({ title, description, icon: Icon }) => (
+            <li
+              key={title}
+              className="group flex flex-col gap-5 bg-secondary p-8 text-center transition-colors duration-200 hover:bg-white/[0.03] lg:p-9"
+            >
+              <div className="flex size-12 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-primary transition-colors duration-200 group-hover:border-primary/40">
+                <Icon aria-hidden className="size-5" strokeWidth={1.8} />
               </div>
-
-              <div className="max-w-2xl space-y-4 text-sm font-medium leading-relaxed text-slate-300 sm:text-base">
-                <p>
-                  Sa FastMet, naniniwala kami na dapat mas sulit ang bawat
-                  biyahe para sa ating partner-drivers. That's why we're
-                  introducing a subscription-based delivery model.
-                </p>
-
-                <p>
-                  Unlike traditional delivery platforms that deduct a percentage
-                  from every completed booking,{" "}
-                  <span className="font-bold text-primary">
-                    walang commission na kinukuha ang FastMet sa delivery
-                    earnings ng partner-drivers.
-                  </span>
-                </p>
-
-                <p className="font-bold text-primary">
-                  Instead, FastMet operates through a subscription-based system,
-                  allowing partner-drivers to keep 100% of their delivery
-                  earnings.
+              <div className="flex flex-col gap-2 text-left">
+                <h3 className="text-base font-semibold leading-snug text-white">
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-400">
+                  {description}
                 </p>
               </div>
-            </div>
+            </li>
+          ))}
+        </ul>
 
-            {/* Benefits */}
-            <div className="mt-2 grid grid-cols-1 gap-4 border-t border-white/10 pt-8 sm:grid-cols-2 xl:grid-cols-3">
-              {points.map(({ title, description, icon: Icon }) => (
-                <article
-                  key={title}
-                  className="relative flex min-w-0 flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-primary/30 hover:bg-white/[0.05] sm:p-6"
-                >
-                  <div className="absolute right-0 bottom-0 bg-primary p-2 rounded-full transform translate-x-3 translate-y-3">
-                    <Icon
-                      aria-hidden="true"
-                      className="size-6 shrink-0 text-secondary"
-                      strokeWidth={1.8}
-                    />
-                  </div>
+        {/* CTA */}
+        <div className="flex max-w-2xl flex-col items-center gap-6 text-center">
+          <p className="text-base font-medium leading-relaxed text-white sm:text-lg">
+            Instead, FastMet operates through a subscription-based system,
+            allowing partner-drivers to keep{" "}
+            <span className="text-primary">
+              100% of their delivery earnings.
+            </span>
+          </p>
 
-                  <h3 className="text-lg font-bold leading-snug text-white">
-                    {title}
-                  </h3>
-
-                  <p className="text-sm leading-relaxed text-slate-400">
-                    {description}
-                  </p>
-                </article>
-              ))}
-            </div>
+          <div className="flex flex-col items-center gap-3">
+            <CTAButton
+              to="/partner-driver"
+              variant="primary"
+              size="md"
+              className="px-8 text-secondary"
+            >
+              Drive with FastMet
+            </CTAButton>
+            <p className="text-xs text-slate-500">
+              Subscription fees and applicable terms and conditions apply.
+            </p>
           </div>
         </div>
       </PageContainer>

@@ -10,7 +10,7 @@ export default function ClosingCTA() {
           {/* Left side – Text + Buttons */}
           <div className="flex flex-col gap-5 max-w-xl">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-900 leading-tight">
-              Tara Na, FastMet Na!
+              Tara na, FastMet na!
             </h2>
 
             <p className="text-sm font-semibold text-zinc-900 bg-secondary/10 rounded-full px-4 py-2 w-fit self-center">

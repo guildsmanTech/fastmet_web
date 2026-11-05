@@ -9,7 +9,7 @@ export default function AvailableVehicles() {
     <section className="w-full bg-secondary py-20 lg:py-28">
       <PageContainer className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
         {/* Left: sticky intro + CTA */}
-        <div className="flex flex-col gap-8 lg:col-span-5 lg:sticky lg:top-28">
+        <div className="flex flex-col gap-8 lg:col-span-5">
           <div className="flex flex-col gap-4">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
               Vehicles

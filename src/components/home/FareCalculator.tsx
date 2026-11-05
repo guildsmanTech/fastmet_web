@@ -24,15 +24,15 @@ export default function FareCalculator({ className }: { className?: string }) {
             <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-[1.15]">
               Magkano ang
               <br />
-              Delivery?
+              delivery?
               <br />
-              <span className="text-primary">Check Mo Muna!</span>
+              <span className="text-primary">Check mo muna!</span>
             </h2>
 
             <div className="max-w-md space-y-3 text-slate-400 text-base leading-relaxed">
               <p>Gustong malaman kung magkano ang delivery bago mag-book?</p>
               <p>
-                With the FastMet Fare Calculator, you can check the estimated
+                With the FastMet fare calculator, you can check the estimated
                 delivery cost based on your pickup location, destination, and
                 preferred vehicle.
               </p>
@@ -50,7 +50,7 @@ export default function FareCalculator({ className }: { className?: string }) {
                 icon={Calculator}
                 className="w-full sm:w-auto"
               >
-                Get a Quote
+                Get a quote
               </CTAButton>
 
               <p className="max-w-md text-xs text-slate-500">

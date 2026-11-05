@@ -78,7 +78,7 @@ export default function ServiceAreas() {
               <h3 className="text-4xl sm:text-5xl font-bold leading-[1.15] tracking-tight text-slate-950">
                 Greater Manila
                 <br />
-                <span className="text-primary">Service Areas</span>
+                <span className="text-primary">service areas</span>
               </h3>
 
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-500 sm:text-base">
@@ -143,7 +143,7 @@ export default function ServiceAreas() {
             className="px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-primary/90"
             to="/get-a-quote"
           >
-            Check Your Delivery Fare
+            Check your delivery fare
             <ArrowUpRight className="h-4 w-4" />
           </CTAButton>
         </div>

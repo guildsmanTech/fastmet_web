@@ -4,19 +4,19 @@ import PageContainer from "../PageContainer";
 const registrations = [
   {
     image: sec,
-    alt: "SEC Certificate of Incorporation",
+    alt: "SEC certificate of incorporation",
     badge: "SEC",
-    title: "CERTIFICATE OF INCORPORATION",
-    company: "GUILDSMAN TECHNOLOGY OPC",
+    title: "Certificate of incorporation",
+    company: "Guildsman Technology OPC",
     regNo: "Registration No. 2026070259894-15",
   },
   {
     image: bir,
-    alt: "BIR Certificate of Registration",
+    alt: "BIR certificate of registration",
     badge: "BIR",
-    title: "CERTIFICATE OF REGISTRATION",
-    company: "GUILDSMAN TECHNOLOGY OPC",
-    regNo: "BIR Registered & Verified Official BIR Registration Seal Badge",
+    title: "Certificate of registration",
+    company: "Guildsman Technology OPC",
+    regNo: "BIR registered & verified official BIR registration seal badge",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function Registrations() {
               <div className="flex gap-4">
                 <span className="font-bold text-white w-10 shrink-0">BIR</span>
                 <span className="text-zinc-300">
-                  May Certificate of Registration at opisyal na resibo
+                  May certificate of registration at opisyal na resibo
                 </span>
               </div>
             </div>

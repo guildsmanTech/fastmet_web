@@ -67,7 +67,7 @@ export default function QuestionForm() {
     }
 
     if (!captchaValue) {
-      setErrors({ form: "Please complete the captcha." });
+      setErrors({ form: "Please complete the CAPTCHA." });
       return;
     }
 
@@ -129,9 +129,9 @@ export default function QuestionForm() {
           <div className="flex items-start gap-5 flex-1">
             <div className="flex flex-col gap-3">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-900 leading-tight">
-                May Tanong Ka?
+                May tanong ka?
                 <br />
-                <span className="text-primary">FastMet Agad!</span>
+                <span className="text-primary">FastMet agad!</span>
               </h2>
 
               <p className="text-zinc-600 text-sm sm:text-base leading-relaxed max-w-lg">
@@ -149,7 +149,7 @@ export default function QuestionForm() {
                   <Send className="text-primary size-8" />
                 </div>
                 <h3 className="text-primary font-bold text-xl">
-                  Message Sent!
+                  Message sent!
                 </h3>
                 <p className="text-zinc-600 text-sm md:text-base">
                   Thank you for reaching out. We&apos;ll get back to you
@@ -159,7 +159,7 @@ export default function QuestionForm() {
                   onClick={handleReset}
                   className="mt-2 border border-primary text-primary cursor-pointer bg-white px-6 py-2.5 rounded-full font-medium hover:bg-primary hover:text-white transition-colors"
                 >
-                  Send Another
+                  Send another
                 </button>
               </div>
             ) : (
@@ -308,7 +308,7 @@ export default function QuestionForm() {
                     onExpired={() => {
                       setCaptchaValue(null);
                       setErrors({
-                        form: "Captcha expired. Please verify again.",
+                        form: "CAPTCHA expired. Please verify again.",
                       });
                     }}
                   />
@@ -340,7 +340,7 @@ export default function QuestionForm() {
                   ) : (
                     <>
                       <Send className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      Send Message
+                      Send message
                     </>
                   )}
                 </button>

@@ -11,11 +11,11 @@ export default function JoinFastMet({ className }: { className?: string }) {
         {/* Right: Texts */}
         <div className="w-full max-w-4xl space-y-6 lg:pt-4 h-full text-left  flex flex-col">
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
-            May Ipapadala? May
+            May ipapadala? May
             <br />
-            Sasakyan?
+            sasakyan?
             <br />
-            <span className="text-primary">FastMet Na!</span>
+            <span className="text-primary">FastMet na!</span>
           </h2>
 
           <p className="max-w-xl text-slate-600 text-base leading-relaxed">
@@ -38,10 +38,10 @@ export default function JoinFastMet({ className }: { className?: string }) {
               <div className="relative z-10 space-y-6">
                 <div className="space-y-2">
                   <p className="text-xs font-semibold tracking-wider text-primary">
-                    FOR CUSTOMERS
+                    For customers
                   </p>
                   <h3 className="text-2xl font-bold text-slate-900">
-                    May Ipapadala?
+                    May ipapadala?
                   </h3>
                   <p className="text-slate-600 leading-relaxed max-w-sm">
                     May documents, parcels, business supplies, o malalaking
@@ -58,7 +58,7 @@ export default function JoinFastMet({ className }: { className?: string }) {
                   icon={CalendarCheck}
                   className="mt-1 w-full px-8 sm:w-auto"
                 >
-                  Book a Delivery
+                  Book a delivery
                 </CTAButton>
               </div>
             </div>
@@ -73,10 +73,10 @@ export default function JoinFastMet({ className }: { className?: string }) {
               <div className="relative z-10 space-y-6">
                 <div className="space-y-2">
                   <p className="text-xs font-semibold tracking-wider text-primary">
-                    FOR PARTNER-DRIVERS
+                    For partner-drivers
                   </p>
                   <h3 className="text-2xl font-bold text-white">
-                    May Sasakyan?
+                    May sasakyan?
                   </h3>
                   <p className="text-slate-400 leading-relaxed max-w-sm">
                     Gamitin ang iyong sasakyan para magkaroon ng delivery

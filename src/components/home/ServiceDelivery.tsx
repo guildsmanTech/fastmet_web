@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 import PageContainer from "../PageContainer";
 import CTAButton from "../CTAButton";
 
+interface IServiceDelivery {
+  readonly className?: string;
+}
+
 interface IServices {
   id: string;
   icon: LucideIcon;
@@ -16,60 +20,61 @@ const services: IServices[] = [
   {
     id: "01",
     icon: Bike,
-    category: "MOTOR",
-    title: "Small Parcel Deliveries",
+    category: "Motor",
+    title: "Small parcel deliveries",
     description:
       "Para sa documents, small packages, at everyday delivery needs.",
   },
   {
     id: "02",
     icon: Car,
-    category: "SASAKYAN",
-    title: "Personal & Business Deliveries",
+    category: "Sasakyan",
+    title: "Personal & business deliveries",
     description:
       "Para sa personal belongings, merchandise, business supplies, at medium-sized items.",
   },
   {
     id: "03",
     icon: Truck,
-    category: "TRUCK",
-    title: "Large & Bulk Deliveries",
+    category: "Truck",
+    title: "Large & bulk deliveries",
     description:
       "Para sa appliances, equipment, business inventory, at mas malalaking cargo.",
   },
 ];
 
-export default function ServiceDelivery({ className }: { className?: string }) {
+export default function ServiceDelivery({ className }: IServiceDelivery) {
   return (
     <PageContainer
-      className={cn("w-full max-w-6xl mx-auto px-4 py-16", className)}
+      className={cn("mx-auto w-full max-w-6xl px-4 pb-16 pt-18", className)}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start px-2 md:px-0">
+      <div className="grid grid-cols-1 items-start gap-12 px-2 lg:grid-cols-2 lg:gap-16 md:px-0">
         {/* Left content */}
-        <div className="space-y-6">
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
-            Maliit Man o
+        <div className="flex flex-col gap-7">
+          <h2 className="text-4xl font-bold leading-[1.12] tracking-tight text-slate-900 sm:text-5xl">
+            Maliit man o
             <br />
-            Malaki,
+            malaki,
             <br />
-            <span className="text-primary">FastMet Ang</span>
+            <span className="text-primary">FastMet ang</span>
             <br />
-            <span className="text-primary">Bahala!</span>
+            <span className="text-primary">bahala!</span>
           </h2>
-
-          <div className="space-y-4 max-w-md">
-            <div className="space-y-3">
-              <h3 className="text-lg sm:text-xl font-semibold text-slate-700 leading-snug">
-                May Delivery Option Para sa Iba&apos;t Ibang Pangangailangan.
+          <div className="flex max-w-md flex-col gap-5">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-lg font-semibold leading-snug text-slate-700 sm:text-xl">
+                May delivery option para sa iba&apos;t ibang pangangailangan.
               </h3>
-              <div className="h-1 w-11 rounded-full bg-primary" />
+
+              <div className="h-1 w-10 rounded-full bg-primary" />
             </div>
 
-            <div className="space-y-3 text-base leading-relaxed text-slate-600">
+            <div className="flex flex-col gap-4 text-sm leading-relaxed text-slate-600 sm:text-base">
               <p>
                 May documents ka bang ipapadala? Business supplies na kailangang
                 ihatid? O malalaking gamit na kailangang i-transport?
               </p>
+
               <p>
                 FastMet offers different vehicle options to match your delivery
                 needs. Mula motorcycle hanggang wing van, may FastMet para sa
@@ -80,42 +85,54 @@ export default function ServiceDelivery({ className }: { className?: string }) {
         </div>
 
         {/* Right side: Cards + Highlight */}
-        <div className="flex flex-col gap-6">
-          {/* Cards */}
-          <div className="flex flex-col gap-4">
+        <div className="flex min-w-0 flex-col gap-7">
+          {/* Service cards */}
+          <div className="flex flex-col gap-3">
             {services.map((service) => {
               const Icon = service.icon;
 
               return (
-                <div
+                <article
                   key={service.id}
-                  className="flex items-start gap-4 rounded-2xl border border-orange-100/80 bg-white p-5 shadow-sm transition-colors hover:bg-orange-50/40"
+                  className="group flex items-start gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 transition-colors duration-200 hover:border-primary/30 hover:bg-orange-50/20 sm:gap-5 sm:p-6"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-50">
-                    <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} />
+                  {/* Icon */}
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-orange-100 bg-orange-50 text-primary transition-colors duration-200 group-hover:border-orange-200 group-hover:bg-orange-100/70">
+                    <Icon
+                      aria-hidden="true"
+                      className="size-5"
+                      strokeWidth={1.8}
+                    />
                   </div>
-
-                  <div className="space-y-1 pt-0.5">
-                    <p className="text-xs font-semibold tracking-wider text-primary">
+                  {/* Content */}
+                  <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-primary">
                       {service.category}
-                    </p>
-                    <h3 className="text-lg font-semibold text-slate-900">
+                    </span>
+
+                    <h3 className="text-base font-bold leading-snug text-slate-900 sm:text-lg">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
+
+                    <p className="text-sm leading-relaxed text-slate-600">
                       {service.description}
                     </p>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
 
-          {/* Highlight + Button */}
-          <div className="space-y-3 text-center md:text-right">
-            <div className="text-lg font-semibold text-slate-900 leading-snug">
-              <p>From Motorcycle to Wing Van</p>
-              <span className="text-primary">May FastMet Para Diyan!</span>
+          {/* Highlight + CTA */}
+          <div className="flex flex-col items-center gap-4 border-t border-slate-200 pt-6 text-center md:items-end md:text-right">
+            <div className="flex flex-col gap-1">
+              <p className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                From motorcycle to wing van
+              </p>
+
+              <p className="text-lg font-bold leading-snug text-primary sm:text-xl">
+                May FastMet para diyan!
+              </p>
             </div>
 
             <CTAButton
@@ -123,9 +140,9 @@ export default function ServiceDelivery({ className }: { className?: string }) {
               variant="driver"
               size="md"
               icon={ArrowRight}
-              className="self-start"
+              className="justify-center"
             >
-              Explore Delivery Services
+              Explore delivery services
             </CTAButton>
           </div>
         </div>

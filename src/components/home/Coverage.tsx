@@ -92,9 +92,9 @@ export default function CoverageSection() {
           {/* Coverage Information */}
           <div className="order-1 md:order-2">
             <h2 className="text-4xl sm:text-5xl font-bold leading-[1.15] tracking-tight text-slate-950">
-              Greater Manila Pickup.
+              Greater Manila pickup.
               <br className="hidden sm:block" />{" "}
-              <span className="text-primary">Nationwide Land Delivery.</span>
+              <span className="text-primary">Nationwide land delivery.</span>
             </h2>
 
             <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-500 sm:text-lg">
