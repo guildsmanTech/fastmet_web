@@ -2,7 +2,6 @@ import { partnerBg, partnerMain } from "@/constants/images";
 import PageContainer from "../PageContainer";
 import { DRIVER_PLAY_STORE_URL } from "@/helper/constant";
 import CTAButton from "../CTAButton";
-import { BadgeCheck, Smartphone } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -47,7 +46,6 @@ export default function HeroSection() {
               href={DRIVER_PLAY_STORE_URL}
               variant="driver"
               size="sm"
-              icon={Smartphone}
               className="px-10"
             >
               Become a partner-driver
@@ -56,7 +54,6 @@ export default function HeroSection() {
               to="/subscription"
               variant="user"
               size="md"
-              icon={BadgeCheck}
               className="px-6"
             >
               Get subscription
@@ -82,7 +79,6 @@ export default function HeroSection() {
             href={DRIVER_PLAY_STORE_URL}
             variant="driver"
             size="sm"
-            icon={Smartphone}
             className="w-full"
           >
             Become a partner-driver
@@ -91,7 +87,6 @@ export default function HeroSection() {
             to="/subscription"
             variant="user"
             size="md"
-            icon={BadgeCheck}
             className="px-6 w-full"
           >
             Get subscription

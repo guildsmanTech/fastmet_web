@@ -1,28 +1,31 @@
-import {useEffect, useState} from "react";
-import {Helmet} from "react-helmet-async";
-import {Link, useSearchParams} from "react-router-dom";
-import {useQuery} from "@tanstack/react-query";
-import {CircleCheck, CircleX, Clock, Loader2, ShieldAlert} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import {
+  CircleCheck,
+  CircleX,
+  Clock,
+  Loader2,
+  ShieldAlert,
+} from "lucide-react";
 import PageContainer from "@/components/PageContainer";
-import {fetchCheckout, SubscriptionApiError} from "@/api/subscription";
-import {SUPPORT_EMAIL} from "@/helper/constant";
-import {formatDay} from "@/helper/subscription";
-import {useSubscriptionSession} from "@/hooks/useSubscriptionSession";
+import { fetchCheckout, SubscriptionApiError } from "@/api/subscription";
+import { SUPPORT_EMAIL } from "@/helper/constant";
+import { formatDay } from "@/helper/subscription";
+import { useSubscriptionSession } from "@/hooks/useSubscriptionSession";
+
+interface IPanel {
+  readonly icon: React.ReactNode;
+  readonly title: string;
+  readonly children: React.ReactNode;
+  readonly tone: string;
+}
 
 const POLL_INTERVAL_MS = 3000;
 const MAX_POLLS = 40; // ~2 minutes, then the driver can refresh manually
 
-function Panel({
-  icon,
-  title,
-  children,
-  tone,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-  tone: string;
-}) {
+function Panel({ icon, title, children, tone }: IPanel) {
   return (
     <div className="flex flex-col items-center max-w-lg gap-3 p-6 mx-auto text-center bg-white border border-gray-200 md:p-10 rounded-2xl shadow-sm">
       <div
@@ -38,7 +41,7 @@ function Panel({
   );
 }
 
-function BackLink({label = "Back to my subscription"}: {label?: string}) {
+function BackLink({ label = "Back to my subscription" }: { readonly label?: string }) {
   return (
     <Link
       to="/subscription"
@@ -55,7 +58,7 @@ export default function SubscriptionResultPage() {
   // Which Xendit redirect brought the driver back. Display hint only: the
   // status itself always comes from the server.
   const cameFromFailure = params.get("outcome") === "failure";
-  const {session, clear} = useSubscriptionSession();
+  const { session, clear } = useSubscriptionSession();
   const [polls, setPolls] = useState(0);
 
   const query = useQuery({
@@ -224,7 +227,9 @@ export default function SubscriptionResultPage() {
         tone="bg-gray-100 text-gray-600"
         title="Payment was not completed"
       >
-        <p>You were not charged for this checkout. You can try again anytime.</p>
+        <p>
+          You were not charged for this checkout. You can try again anytime.
+        </p>
         <BackLink label="Choose a plan" />
       </Panel>
     );
@@ -239,7 +244,11 @@ export default function SubscriptionResultPage() {
           )
         }
         tone="bg-primary/10 text-primary"
-        title={stillWaiting ? "Still confirming your payment" : "Confirming your payment…"}
+        title={
+          stillWaiting
+            ? "Still confirming your payment"
+            : "Confirming your payment…"
+        }
       >
         <p>
           {stillWaiting
