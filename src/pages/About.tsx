@@ -4,11 +4,10 @@ import Coverage from "@/components/about/Coverage";
 import JoinFastMet from "@/components/about/Join";
 import MissionVision from "@/components/about/MissionVision";
 import OurValues from "@/components/about/Values";
-import { aboutBg, aboutMain } from "@/constants/images";
-import PreRegisterActions from "@/components/PreRegisterActions";
 import { Van, Truck, Motorbike, Car } from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 import Founder from "@/components/about/Founder";
+import HeroSection from "@/components/about/HeroSection";
 
 export default function About() {
   return (
@@ -21,51 +20,7 @@ export default function About() {
         />
         <link rel="canonical" href="https://fastmet.com.ph/about" />
       </Helmet>
-      <section
-        className="relative w-full min-h-dvh flex items-center bg-secondary"
-        id="hero"
-      >
-        <img
-          src={aboutBg}
-          alt="FastMet delivery"
-          className="absolute inset-0 w-full h-full object-cover md:object-fill "
-        />
-        <div className="absolute inset-0 bg-secondary/80" />
-
-        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
-          {/* Left: headline */}
-          <div className="flex flex-col gap-5 text-white max-w-xl">
-            <h1 className="text-4xl text-primary md:text-5xl font-extrabold leading-tight">
-              Para sa Mas Mabilis at Mas Madaling Delivery
-            </h1>
-            <p className="text-white font-semibold text-base md:text-lg">
-              FastMet is an on-demand delivery platform created for individuals,
-              online sellers, businesses, and partner-drivers. We connect users
-              with the right vehicle and partner-driver for different delivery
-              needs.
-            </p>
-            <PreRegisterActions
-              layout="inline"
-              size="sm"
-              fullWidth
-              className="mt-2 hidden lg:flex"
-            />
-          </div>
-
-          <img
-            src={aboutMain}
-            alt="FastMet delivery"
-            className="w-full lg:w-1/2"
-          />
-
-          <PreRegisterActions
-            layout="stacked-mobile"
-            shortLabels
-            className="mt-2 lg:hidden"
-          />
-        </PageContainer>
-      </section>
-
+      <HeroSection />
       {/* Right vehicle for every delivery */}
       <section className="w-full">
         <PageContainer className="flex flex-col lg:flex-row gap-8 lg:gap-16 justify-center items-center">
