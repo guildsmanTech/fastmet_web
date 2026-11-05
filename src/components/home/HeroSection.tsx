@@ -28,7 +28,7 @@ const heroBadges: IHeroBadge[] = [
 export default function HeroSection() {
   return (
     <section
-      className="relative flex items-center w-full min-h-dvh bg-secondary pt-10"
+      className="relative flex items-center w-full min-h-dvh bg-secondary pt-10 px-3 md:px-0"
       id="hero"
     >
       <img

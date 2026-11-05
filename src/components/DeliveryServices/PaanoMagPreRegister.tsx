@@ -21,7 +21,7 @@ const steps = [
 
 export default function PaanoMagPreRegister() {
   return (
-    <section className="w-full bg-white py-20 lg:py-28">
+    <section className="w-full bg-white py-20 lg:py-28 px-3 md:px-0">
       <PageContainer className="flex flex-col gap-12 lg:gap-16">
         {/* Header */}
         <div className="flex flex-col gap-4">

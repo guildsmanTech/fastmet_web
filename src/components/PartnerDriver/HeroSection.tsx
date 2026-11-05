@@ -7,7 +7,7 @@ import { BadgeCheck, Smartphone } from "lucide-react";
 export default function HeroSection() {
   return (
     <section
-      className="relative w-full min-h-dvh flex items-center bg-secondary pt-10 md:pt-0"
+      className="relative w-full min-h-dvh flex items-center bg-secondary pt-10 md:pt-0 px-3 md:px-0"
       id="hero"
     >
       <img

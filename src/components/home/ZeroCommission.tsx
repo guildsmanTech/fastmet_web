@@ -33,7 +33,7 @@ export default function ZeroCommission() {
   return (
     <section
       id="zero-commission"
-      className="w-full scroll-mt-24 bg-secondary py-20 lg:py-28"
+      className="w-full scroll-mt-24 bg-secondary py-20 lg:py-28 px-3 md:px-0"
     >
       <PageContainer className="flex flex-col items-center gap-12 lg:gap-16">
         {/* Header */}

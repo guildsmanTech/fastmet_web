@@ -4,7 +4,7 @@ import { getBusinessInquiryMailto } from "@/helper/constant";
 
 export default function FinalCTA() {
   return (
-    <section className="w-full bg-primary py-20 lg:py-24">
+    <section className="w-full bg-primary py-20 lg:py-24 px-3 md:px-0">
       <PageContainer className="flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="flex max-w-2xl flex-col gap-4">
           <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">

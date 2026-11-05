@@ -15,7 +15,7 @@ const CHECKLIST = [
 
 export default function BusinessDeliveryNeeds() {
   return (
-    <section className="w-full bg-secondary py-20 lg:py-28">
+    <section className="w-full bg-secondary py-20 lg:py-28 px-3 md:px-0">
       <PageContainer className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
         {/* Image (left) */}
         <div className="overflow-hidden rounded-2xl border border-white/10 lg:col-span-5">

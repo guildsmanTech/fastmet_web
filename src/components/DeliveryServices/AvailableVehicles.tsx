@@ -6,7 +6,7 @@ export default function AvailableVehicles() {
   const { data, isPending, isError } = useVehicles();
 
   return (
-    <section className="w-full bg-secondary py-20 lg:py-28">
+    <section className="w-full bg-secondary py-20 lg:py-28 px-3 md:px-0">
       <PageContainer className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
         {/* Left: sticky intro + CTA */}
         <div className="flex flex-col gap-8 lg:col-span-5">

@@ -62,11 +62,11 @@ export default function WhyJoinNow() {
         </div>
 
         {/* Featured image */}
-        <div className="mx-auto w-full max-w-5xl">
+        <div className="mx-auto w-full max-w-5xl px-3 md:px-0 h-42 md:h-auto">
           <img
             src={partnerZero}
             alt="FastMet 0% commission, subscription fee lang"
-            className="h-auto w-full rounded-2xl object-cover shadow-sm"
+            className="h-full md:h-auto w-full rounded-2xl object-cover shadow-sm"
           />
         </div>
 

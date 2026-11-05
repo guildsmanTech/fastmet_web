@@ -38,7 +38,7 @@ const whyFastmet: IWhyFastMet[] = [
 
 export default function WhyFastMet() {
   return (
-    <section className="relative isolate w-full overflow-hidden bg-white py-20 lg:py-28">
+    <section className="relative isolate w-full overflow-hidden bg-white py-20 lg:py-28 px-3 md:px-0">
       <PageContainer className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
         {/* Left: feature cards */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7">

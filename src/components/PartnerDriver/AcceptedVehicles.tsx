@@ -59,7 +59,7 @@ export function AcceptedVehicles() {
 
   return (
     <section
-      className="w-full bg-white py-20 lg:py-28 border-t"
+      className="w-full bg-white py-20 lg:py-28 border-t px-2  md:px-0"
       id="accepted-vehicles"
     >
       <PageContainer className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
@@ -92,7 +92,7 @@ export function AcceptedVehicles() {
         </div>
 
         {/* Right: sticky intro / CTA text */}
-        <div className="flex flex-col gap-4 lg:col-span-5 lg:sticky lg:top-28">
+        <div className="flex flex-col gap-4 lg:col-span-5 lg:sticky lg:top-28 px-1 md:px-0">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
             Vehicles
           </p>

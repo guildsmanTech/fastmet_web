@@ -28,7 +28,7 @@ const PERKS = [
 
 export default function AnoAngFastmet() {
   return (
-    <section className="w-full py-20 lg:py-28">
+    <section className="w-full py-20 lg:py-28 px-3 md:px-0">
       <PageContainer className="flex flex-col gap-12 lg:gap-14">
         {/* Header + CTA */}
         <div className="flex flex-col items-center gap-6 text-center">
