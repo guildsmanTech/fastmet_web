@@ -10,30 +10,30 @@ interface IFeature extends Omit<IHeroBadge, "caption"> {
 
 const features: IFeature[] = [
   {
-    title: "Ikaw ang May Hawak ng Oras Mo",
+    title: "Ikaw ang may hawak ng oras mo",
     description:
       "Piliin kung kailan ka available tumanggap ng delivery opportunities.",
     icon: Clock,
   },
   {
-    title: "Walang Fixed Hours",
+    title: "Walang fixed hours",
     description:
       "FastMet offers flexible earning opportunities for partner-drivers.",
     icon: Calendar,
   },
   {
-    title: "Walang Daily Quota",
+    title: "Walang daily quota",
     description: "Walang required na bilang ng deliveries bawat araw.",
     icon: Package,
   },
   {
-    title: "Iba’t Ibang Sasakyan, Iba’t Ibang Delivery",
+    title: "Iba’t ibang sasakyan, iba’t ibang delivery",
     description:
       "FastMet accepts different vehicle types para sa iba’t ibang delivery needs.",
     icon: Truck,
   },
   {
-    title: "Makatanggap ng Official Updates",
+    title: "Makatanggap ng official updates",
     description:
       "Receive official FastMet updates tungkol sa iyong application, onboarding, at activation.",
     icon: Smartphone,
@@ -47,13 +47,13 @@ export default function WhyJoinNow() {
         {/* Header / CTA text */}
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-            Partner-Driver Benefits
+            Partner-driver benefits
           </p>
 
           <h2 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-            Bakit Maging FastMet
+            Bakit maging FastMet
             <br className="hidden sm:block" />
-            <span className="text-primary"> Partner-Driver?</span>
+            <span className="text-primary"> partner-driver?</span>
           </h2>
 
           <p className="max-w-2xl text-sm font-medium leading-relaxed text-slate-600 sm:text-base lg:text-lg">

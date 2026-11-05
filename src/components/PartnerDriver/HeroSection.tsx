@@ -21,7 +21,7 @@ export default function HeroSection() {
         {/* Left: headline */}
         <div className="flex flex-col gap-5 text-white max-w-xl">
           <h1 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight">
-            May Sasakyan Ka? <br /> FastMet Agad!
+            May sasakyan ka? <br /> FastMet agad!
           </h1>
 
           <p className="text-white font-semibold text-base md:text-lg">
@@ -32,7 +32,7 @@ export default function HeroSection() {
           {/* Highlight */}
           <div>
             <p className="text-primary font-extrabold text-xl md:text-2xl">
-              Zero Commission. For Life.
+              Zero commission. For life.
             </p>
             <p className="text-white/90 text-sm md:text-base mt-1">
               Sa FastMet, walang commission na ibabawas sa bawat delivery.
@@ -50,7 +50,7 @@ export default function HeroSection() {
               icon={Smartphone}
               className="px-10"
             >
-              Become a Partner-Driver
+              Become a partner-driver
             </CTAButton>
             <CTAButton
               to="/subscription"
@@ -59,7 +59,7 @@ export default function HeroSection() {
               icon={BadgeCheck}
               className="px-6"
             >
-              Get Subscription
+              Get subscription
             </CTAButton>
           </div>
 
@@ -85,7 +85,7 @@ export default function HeroSection() {
             icon={Smartphone}
             className="w-full"
           >
-            Become a Partner-Driver
+            Become a partner-driver
           </CTAButton>
           <CTAButton
             to="/subscription"
@@ -94,7 +94,7 @@ export default function HeroSection() {
             icon={BadgeCheck}
             className="px-6 w-full"
           >
-            Get Subscription
+            Get subscription
           </CTAButton>
 
           <p className="text-white/70 text-xs text-center max-w-sm mt-1">

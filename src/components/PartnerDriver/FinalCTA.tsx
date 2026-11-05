@@ -8,10 +8,10 @@ export function FinalCTA() {
       <PageContainer className="flex flex-col items-center gap-8 text-center">
         <div className="flex max-w-2xl flex-col items-center gap-4">
           <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-            Maging FastMet Partner-Driver Na!
+            Maging FastMet partner-driver na!
           </h2>
           <p className="text-sm font-semibold text-zinc-900 bg-secondary/10 rounded-full px-4 py-2 w-fit self-center">
-            Zero Commission. For Life.
+            Zero commission. For life.
           </p>
 
           <p className="max-w-xl text-sm leading-relaxed text-secondary/80 sm:text-base">
@@ -26,7 +26,7 @@ export function FinalCTA() {
             variant="driver"
             className="bg-secondary px-7 py-3 text-white hover:bg-secondary/90"
           >
-            Become a Partner-Driver
+            Become a partner-driver
             <Smartphone className="text-white ml-1" size={16} />
           </CTAButton>
           <p className="max-w-md text-xs leading-relaxed text-secondary/70">

@@ -20,7 +20,7 @@ export type RequirementsStepsList = RequirementStep[];
 const REQUIREMENTS_STEPS: RequirementsStepsList = [
   {
     icon: license,
-    title: "Driver's Identification",
+    title: "Driver's identification",
     items: [
       "License number",
       "Clear photos of the front and back of your driver’s license",
@@ -30,17 +30,17 @@ const REQUIREMENTS_STEPS: RequirementsStepsList = [
   },
   {
     icon: vehicleNumbers,
-    title: "Vehicle Information",
+    title: "Vehicle information",
     items: ["Plate number", "Engine number", "Chassis number"],
   },
   {
     icon: vehicleImage,
-    title: "Vehicle Photos",
+    title: "Vehicle photos",
     items: ["Front view", "Left side view", "Right side view", "Back view"],
   },
   {
     icon: vehicleDocu,
-    title: "Vehicle Documents",
+    title: "Vehicle documents",
     items: [
       "Official Receipt (OR)",
       "Certificate of Registration (CR)",
@@ -183,7 +183,7 @@ export function Requirements() {
               variant="driver"
               className="px-6 py-3"
             >
-              Download Driver App
+              Download driver app
             </CTAButton>
             <p className="max-w-xs text-xs leading-relaxed text-slate-500 lg:text-right">
               Once your application is reviewed, FastMet will send official

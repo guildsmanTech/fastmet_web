@@ -25,7 +25,7 @@ export function Commission() {
         <div className="flex flex-col items-start gap-7 lg:col-span-6">
           <div className="flex flex-col gap-5">
             <h2 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-              Mas Sulit ang Bawat Biyahe.{" "}
+              Mas sulit ang bawat biyahe.{" "}
               <span className="text-primary"> Walang commission.</span>
             </h2>
 
@@ -68,7 +68,7 @@ export function Commission() {
               size="compact"
               className="w-full py-3 sm:w-auto sm:py-0"
             >
-              Get Started Today
+              Get started today
               <Smartphone className="ml-1 text-white" size={16} />
             </CTAButton>
 
