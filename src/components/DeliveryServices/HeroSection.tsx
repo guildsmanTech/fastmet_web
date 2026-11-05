@@ -105,7 +105,7 @@ export default function HeroSection() {
         </div>
 
         {/* Bottom benefits row */}
-        <div className="w-full self-center md:absolute md:bottom-0 md:transform md:translate-y-15">
+        <div className="w-full self-center md:transform md:translate-y-15">
           <div className="grid grid-cols-1 gap-5 w-full pt-10 mt-8 border-t border-white/15 sm:grid-cols-3 sm:gap-0">
             {deliveryBenefits.map(({ title, caption, icon: Icon }, index) => (
               <div
