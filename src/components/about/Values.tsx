@@ -35,29 +35,38 @@ const values = [
   },
 ];
 
+// KEEP YOUR EXISTING IMPORTS HERE (lucide icons, PageContainer)
+// `values` array stays exactly the same as yours.
+
 export default function OurValues() {
   return (
-    <section className="w-full py-16 md:py-20 bg-gradient-to-r from-yellow-400 to-orange-500">
+    <section className="w-full bg-primary py-16 md:py-24 px-3 md:px-0">
       <PageContainer>
-        <div className="max-w-2xl mx-auto text-center flex flex-col gap-1 mb-10">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white">
+        {/* Header */}
+        <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center gap-3 text-center">
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-secondary sm:text-4xl lg:text-5xl">
             Our Values
           </h2>
-          <p className="text-white/90 text-sm font-semibold">
-            What moves us forward.
+
+          <p className="text-sm leading-relaxed text-secondary/80 sm:text-base">
+            Sa FastMet, naniniwala kami na ang magandang delivery service ay
+            nagsisimula sa malasakit, tiwala, at pagtutulungan. Ito ang
+            gumagabay sa amin para makapagbigay ng mas maayos na serbisyo at mas
+            magandang karanasan para sa lahat.
           </p>
         </div>
 
+        {/* Value Cards */}
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
-          {values.map(({icon: Icon, title, desc}) => (
+          {values.map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
-              className="bg-white rounded-lg p-4 flex flex-col gap-2 shadow-sm"
+              className="bg-white rounded-lg p-4 flex flex-col gap-2 shadow-sm pt-5"
             >
               <div className="size-9 md:size-11 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center shrink-0 lg:self-center">
                 <Icon className="size-4 md:size-6 text-white" />
               </div>
-              <h3 className="font-bold text-sm text-zinc-900 lg:self-center">
+              <h3 className="font-bold text-sm text-zinc-900 lg:self-center mt-3">
                 {title}
               </h3>
               <p className="text-xs text-zinc-600 leading-relaxed lg:text-center">

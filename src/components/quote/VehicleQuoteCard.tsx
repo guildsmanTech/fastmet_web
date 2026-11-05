@@ -8,9 +8,10 @@ import type { QuoteTab, QuoteVehicle } from "@/types/quote";
 type Props = {
   vehicle: QuoteVehicle;
   tab: QuoteTab;
+  className?: string;
 };
 
-export default function VehicleQuoteCard({ vehicle, tab }: Props) {
+export default function VehicleQuoteCard({ vehicle, tab, className }: Props) {
   const [open, setOpen] = useState(false);
 
   const rows = vehicle.variants
@@ -22,7 +23,12 @@ export default function VehicleQuoteCard({ vehicle, tab }: Props) {
   const cheapest = Math.min(...rows.map((r) => r.price));
 
   return (
-    <div className="flex h-full flex-col overflow-hidden bg-white border border-gray-200 rounded-2xl shadow-sm transition-shadow hover:shadow-md">
+    <div
+      className={cn(
+        "flex flex-col overflow-hidden bg-white border border-gray-200 rounded-2xl shadow-sm transition-shadow hover:shadow-md",
+        className,
+      )}
+    >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

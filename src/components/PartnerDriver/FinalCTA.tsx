@@ -1,49 +1,38 @@
 import CTAButton from "@/components/CTAButton";
-import {zero} from "@/constants/images";
 import PageContainer from "@/components/PageContainer";
-import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
-import {Smartphone} from "lucide-react";
+import { Smartphone } from "lucide-react";
 
 export function FinalCTA() {
   return (
-    <section className="w-full py-10" id="final-cta">
-      <PageContainer className="flex flex-col items-center text-center gap-6">
-        <h2 className="text-primary font-bold text-2xl md:text-3xl max-w-md">
-          Be One of the First FastMet Partner-Drivers
-        </h2>
+    <section id="final-cta" className="w-full bg-primary py-20">
+      <PageContainer className="flex flex-col items-center gap-8 text-center">
+        <div className="flex max-w-2xl flex-col items-center gap-4">
+          <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
+            Maging FastMet partner-driver na!
+          </h2>
+          <p className="text-sm font-semibold text-zinc-900 bg-secondary/10 rounded-full px-4 py-2 w-fit self-center">
+            Zero commission. For life.
+          </p>
 
-        <div className="flex items-center gap-3 md:gap-4">
-          <img
-            src={zero}
-            alt="0% commission, subscription fee lang"
-            className="size-30 lg:size-40 object-contain xl:size-50"
-          />
-          <p className="text-secondary font-bold text-xl md:text-2xl text-left leading-tight">
-            0% Commission
-            <br />
-            <span className="text-base md:text-lg font-semibold text-gray-600">
-              Subscription fee lang
-            </span>
+          <p className="max-w-xl text-sm leading-relaxed text-secondary/80 sm:text-base">
+            Gamitin ang iyong sasakyan para sa delivery earning opportunities at
+            panatilihin ang iyong delivery earnings nang walang commission sa
+            bawat biyahe.
           </p>
         </div>
-
-        <p className="text-gray-600 text-xs md:text-sm max-w-md">
-          Download the FastMet Driver app and start managing deliveries,
-          earnings, and opportunities as a partner-driver.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col items-center gap-4">
           <CTAButton
-            href={DRIVER_PLAY_STORE_URL}
+            href="/subscription"
             variant="driver"
-            icon={Smartphone}
-            className="px-6 py-2.5"
+            className="bg-secondary px-7 py-3 text-white hover:bg-secondary/90"
           >
-            Download Driver App
+            Become a partner-driver
+            <Smartphone className="text-white ml-1" size={16} />
           </CTAButton>
-          <CTAButton to="/subscription" variant="outline" className="px-6 py-2.5">
-            Get Subscription
-          </CTAButton>
+          <p className="max-w-md text-xs leading-relaxed text-secondary/70">
+            Subscription fees and applicable terms and conditions apply.
+            Partner-driver applications are subject to review and verification.
+          </p>
         </div>
       </PageContainer>
     </section>

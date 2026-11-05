@@ -8,7 +8,7 @@ export default function SharedFooter() {
   const {data: counts} = useRegistrationCounts();
 
   return (
-    <footer className="w-full bg-secondary">
+    <footer className="w-full bg-secondary pt-2">
       <PageContainer className="flex flex-col gap-8 items-center py-3 md:py-5">
         <h2 className="text-sm font-semibold text-center text-white md:text-xl">
           Need it <span className="text-primary">Fast</span>? Consider it{" "}
