@@ -107,31 +107,6 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-
-        {/* Bottom stats row — placed below like the reference, fully responsive */}
-        <div className="w-full self-center md:absolute md:bottom-0 md:transform md:translate-y-15">
-          <div className="grid grid-cols-1 gap-5 w-full pt-10 mt-8 border-t border-white/15 sm:grid-cols-3 sm:gap-0">
-            {heroBadges.map(({ title, caption, icon: Icon }, index) => (
-              <div
-                key={title}
-                className={`flex gap-2.5 items-center ${
-                  index > 0 ? "sm:pl-5 sm:border-l sm:border-white/15" : ""
-                }`}
-              >
-                <Icon
-                  className="size-5 shrink-0 text-primary"
-                  strokeWidth={1.8}
-                />
-                <div className="min-w-0">
-                  <h4 className="text-[13px] font-semibold leading-[1.25] text-white">
-                    {title}
-                  </h4>
-                  <p className="mt-0.5 text-[11px] text-white/65">{caption}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </PageContainer>
     </section>
   );
