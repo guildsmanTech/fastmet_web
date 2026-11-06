@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /track/
 
 Sitemap: https://fastmet.com.ph/sitemap.xml

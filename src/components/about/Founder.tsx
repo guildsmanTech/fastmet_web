@@ -22,27 +22,23 @@ export default function Founders() {
   return (
     <section className="w-full bg-secondary py-14 md:py-20">
       <PageContainer>
-        <div className="flex max-w-3xl mx-auto flex-col items-center gap-6 text-center mb-10 md:mb-14">
-          <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
-            <h2 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-white">
-              Kilalanin ang mga tao sa likod ng{" "}
-              <span className="text-primary">FastMet</span>
-            </h2>
-          </div>
-
-          <div className="flex flex-col gap-3 text-sm leading-relaxed text-slate-400 sm:text-base w-full max-w-2xl items-center">
-            <p>
-              Ang FastMet ay nagsimula sa layuning maghatid ng mas madali at
-              patas na sistema ng delivery. Kilalanin sina Sir Josh at Sir
-              Dexter, ang mga founders sa likod ng platapormang ito.
-            </p>
-          </div>
+        <div className="max-w-4xl mx-auto text-center flex flex-col gap-3 mb-10 md:mb-14">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-primary">
+            Meet the Bright Minds Behind FastMet
+          </h2>
+          <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
+            Behind every great platform is a vision driven by people who
+            understand the challenges of everyday Filipinos. Meet the founders
+            who are building a faster, more reliable, and more connected
+            delivery experience for customers, businesses, and partner-drivers
+            across the Philippines.
+          </p>
         </div>
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-10 sm:gap-8 lg:gap-16 max-w-4xl mx-auto">
-          {founders.map((founder) => (
+          {founders.map((founder, i) => (
             <div
-              key={founder.name}
+              key={i}
               className="flex flex-col items-center text-center gap-4 w-full sm:w-[45%] max-w-[320px] mx-auto"
             >
               <div className="w-40 sm:w-full max-w-[220px] h-48 md:h-60 rounded-lg overflow-hidden border-2 border-primary">

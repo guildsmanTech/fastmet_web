@@ -1,46 +1,40 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
+import {UserRound, Truck} from "lucide-react";
 
 export default function JoinFastMet() {
   return (
-    <section className="w-full bg-primary py-20 lg:py-24">
-      <PageContainer className="flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
-        {/* Content */}
-        <div className="flex max-w-2xl flex-col gap-4">
-          <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
-            Maging bahagi ng FastMet
+    <section className="w-full md:pt-20 py-16 md:py-20 bg-primary mb-5">
+      <PageContainer>
+        <div className="max-w-2xl mx-auto text-center flex flex-col gap-1 mb-10">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white">
+            Maging Bahagi ng FastMet
           </h2>
-
-          <div className="space-y-2 text-sm leading-relaxed text-secondary/80 sm:text-base">
-            <p>
-              May ipapadala ka o may sasakyang puwedeng gamitin sa delivery?
-            </p>
-            <p>
-              Join FastMet for convenient delivery options and partner-driver
-              earning opportunities with{" "}
-              <span className="font-semibold text-secondary">
-                zero commission for life through our subscription-based model.
-              </span>
-            </p>
-          </div>
+          <p className="text-white/90 text-sm font-semibold">
+            Whether you need delivery services or want to become a
+            partner-driver, pre-register today and receive official FastMet
+            updates.
+          </p>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 mt-10 max-w-md mx-auto">
           <CTAButton
             to="/user-register"
-            variant="outline"
-            className="justify-center border-secondary bg-secondary px-7 py-3 text-white hover:bg-secondary/90 hover:text-white"
+            variant="user-soft-border"
+            size="sm"
+            icon={UserRound}
+            fullWidth
           >
-            Pre-register as user
+            Pre-Register as a User
           </CTAButton>
-
           <CTAButton
-            href="/subscription"
-            variant="outline"
-            className="justify-center border-secondary bg-transparent px-7 py-3 text-secondary hover:bg-secondary/10 hover:text-secondary"
+            to="/driver-register"
+            variant="user-soft-border"
+            size="sm"
+            icon={Truck}
+            fullWidth
           >
-            Become a partner-driver
+            Pre-Register as a Driver
           </CTAButton>
         </div>
       </PageContainer>

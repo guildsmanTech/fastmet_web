@@ -1,7 +1,6 @@
 import CTAButton from "@/components/CTAButton";
 import {homeUser, homeDriver} from "@/constants/images";
-import {DRIVER_PLAY_STORE_URL} from "@/helper/constant";
-import {Calculator, Smartphone, ChevronRight} from "lucide-react";
+import {UserRound, Truck, ChevronRight} from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 
 export default function UserDriverSplit() {
@@ -15,26 +14,19 @@ export default function UserDriverSplit() {
             src={homeUser}
             alt="User"
           />
-          <h3 className="text-primary font-bold text-lg">May ipapadala ka?</h3>
+          <h3 className="text-primary font-bold text-lg">May Ipapadala Ka?</h3>
           <p className="text-gray-700 text-sm leading-relaxed">
-            Get an instant delivery quote for your parcel, cargo, or business
-            shipment — from motorcycle to wing van across Greater Manila and
-            land-accessible routes.
+            Pre-register as a FastMet user para makatanggap ng official updates
+            tungkol sa service availability, coverage, promos, at future
+            platform access.
           </p>
           <CTAButton
-            variant="primary"
-            className="w-fit px-5 py-2.5"
             to="/user-register"
-          >
-            Pre-register as a user
-          </CTAButton>
-          <CTAButton
-            to="/get-a-quote"
             variant="primary"
-            icon={Calculator}
+            icon={UserRound}
             className="w-fit px-5 py-2.5"
           >
-            Get a quote
+            Pre-Register as a User
           </CTAButton>
         </div>
 
@@ -45,30 +37,30 @@ export default function UserDriverSplit() {
             src={homeDriver}
             alt="Driver"
           />
-          <h3 className="text-primary font-bold text-lg">May sasakyan ka?</h3>
+          <h3 className="text-primary font-bold text-lg">May Sasakyan Ka?</h3>
           <p className="text-gray-700 text-sm leading-relaxed">
-            Download the FastMet driver app to manage deliveries, track
-            earnings, and join as a partner-driver.
+            Pre-register as a FastMet partner-driver para makatanggap ng updates
+            tungkol sa onboarding, activation, at future delivery opportunities.
           </p>
           <div className="flex items-center gap-2 flex-wrap">
             <CTAButton
-              href={DRIVER_PLAY_STORE_URL}
+              to="/driver-register"
               variant="primary"
-              icon={Smartphone}
+              icon={Truck}
               className="w-fit px-5 py-2.5"
             >
-              Download driver app
+              Pre-Register as a Driver
             </CTAButton>
             <ChevronRight className="text-primary size-4 shrink-0" />
             <span className="leading-tight">
+              <span className="block text-[10px] text-gray-500">
+                Introductory
+              </span>
               <span className="text-primary font-bold text-2xl">
                 0%{" "}
                 <span className="font-semibold text-gray-700 text-sm">
-                  commission
+                  Commission
                 </span>
-              </span>
-              <span className="block text-[10px] text-gray-500">
-                Subscription fee lang
               </span>
             </span>
           </div>
