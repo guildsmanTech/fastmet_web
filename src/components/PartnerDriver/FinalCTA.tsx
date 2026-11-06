@@ -1,5 +1,6 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
+import { DRIVER_PLAY_STORE_URL } from "@/helper/constant";
 import { Smartphone } from "lucide-react";
 
 export function FinalCTA() {
@@ -22,7 +23,7 @@ export function FinalCTA() {
         </div>
         <div className="flex flex-col items-center gap-4">
           <CTAButton
-            href="/subscription"
+            href={DRIVER_PLAY_STORE_URL}
             variant="driver"
             className="bg-secondary px-7 py-3 text-white hover:bg-secondary/90"
           >
