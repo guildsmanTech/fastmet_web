@@ -15,12 +15,12 @@ export default function FareCalculator({ className }: IFareCalcuProps) {
       className={cn("w-full max-w-6xl mx-auto px-6 py-16", className)}
     >
       <div className="relative overflow-hidden rounded-3xl bg-secondary px-6 py-10 md:py-12 sm:px-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center md:px-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center md:px-2">
           {/* Left illustration */}
           <img
             src={homeFareCalcu}
             alt="FastMet delivery coverage map across Greater Manila"
-            className="h-full w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
+            className="h-64 md:h-full w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
           />
 
           {/* Right content */}
