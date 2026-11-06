@@ -1,11 +1,11 @@
 import PageContainer from "@/components/PageContainer";
-import { mission, vision } from "@/constants/images";
+import {mission, vision} from "@/constants/images";
 
 type BlockProps = {
-  readonly title: string;
-  readonly paragraphs: string[];
-  readonly imageFirst?: boolean;
-  readonly image?: string;
+  title: string;
+  paragraphs: string[];
+  imageFirst?: boolean;
+  image?: string;
 };
 
 function MissionVisionBlock({
@@ -16,48 +16,30 @@ function MissionVisionBlock({
 }: BlockProps) {
   return (
     <div
-      className={`flex px-3 md:px-0 flex-col items-center gap-8 md:gap-12 ${
+      className={`flex flex-col gap-6 md:gap-10 items-center ${
         imageFirst ? "md:flex-row" : "md:flex-row-reverse"
       }`}
     >
-      {/* Image */}
       {image && (
-        <div className="w-full md:max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:w-[38%] md:shrink-0 order-2 md:order-1">
-          <img
-            src={image}
-            alt={`FastMet ${title.toLowerCase()}`}
-            loading="lazy"
-            className="aspect-[5/4] w-full object-cover"
-          />
-        </div>
+        <img
+          src={image}
+          alt="FastMet delivery"
+          className="w-96 object-cover rounded-lg"
+        />
       )}
 
-      {/* Content */}
-      <div className="flex w-full flex-col gap-5 md:w-1/2 order-1 md:order-2">
-        <div className="space-y-3">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
-            FastMet
-          </span>
-
-          <h2 className="text-3xl font-extrabold tracking-tight text-secondary sm:text-4xl">
-            {title}
-            <span className="ml-2 text-primary">.</span>
-          </h2>
-        </div>
-
-        {/* English Statement */}
-        <p className="text-base font-medium leading-8 text-slate-700 sm:text-lg">
-          {paragraphs[0]}
-        </p>
-
-        {/* Filipino Translation */}
-        {paragraphs[1] && (
-          <div className="border-t border-slate-200 pt-4">
-            <p className="text-sm leading-7 text-slate-500 sm:text-base">
-              {paragraphs[1]}
-            </p>
-          </div>
-        )}
+      <div className="w-full md:w-1/2 flex flex-col gap-3">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-primary">
+          {title}
+        </h2>
+        {paragraphs.map((p, i) => (
+          <p
+            key={i}
+            className={`text-sm text-zinc-700 leading-relaxed ${i === 0 ? "font-semibold" : ""}`}
+          >
+            {p}
+          </p>
+        ))}
       </div>
     </div>
   );
@@ -65,25 +47,24 @@ function MissionVisionBlock({
 
 export default function MissionVision() {
   return (
-    <section className="w-full bg-white py-16 md:py-24">
-      <PageContainer className="flex flex-col gap-16 md:gap-24">
+    <section className="w-full">
+      <PageContainer className="flex flex-col gap-16 md:gap-20">
         <MissionVisionBlock
           title="Our Vision"
           imageFirst
           image={vision}
           paragraphs={[
-            "To become one of the Philippines’ most trusted delivery platforms, where customers, businesses, and partner-drivers grow together through convenient, fair, and reliable service.",
-            "Maging isa sa mga pinakapinagkakatiwalaang delivery platforms sa Pilipinas, kung saan ang customers, negosyo, at partner-drivers ay sama-samang umuunlad sa pamamagitan ng maginhawa, patas, at maaasahang serbisyo.",
+            "To become one of the Philippines' most trusted on-demand delivery platforms by building a delivery community where users, businesses, and partner-drivers grow together through fast, fair, and reliable service.",
+            "Maging isa sa mga pinaka-pinagkakatiwalaang on-demand delivery platforms sa Pilipinas sa pamamagitan ng pagbuo ng isang komunidad kung saan ang mga user, negosyo, at partner-drivers ay sabay-sabay na umuunlad sa pamamagitan ng mabilis, patas, at maaasahang serbisyo.",
           ]}
         />
-
         <MissionVisionBlock
           title="Our Mission"
           imageFirst={false}
           image={mission}
           paragraphs={[
-            "To make delivery easier and more reliable for individuals and businesses by connecting them with suitable vehicles and partner-drivers, while creating fairer earning opportunities through our subscription-based, zero-commission model.",
-            "Gawing mas madali at mas maaasahan ang pagpapadala para sa mga tao at negosyo, habang nagbibigay ng mas patas na pagkakataong kumita ang partner-drivers sa pamamagitan ng subscription-based na sistemang walang commission sa bawat delivery.",
+            "To make every delivery faster, easier, and more reliable by connecting people and businesses with the right delivery solutions while creating better opportunities for our partner-drivers.",
+            "Gawing mas mabilis, mas madali, at mas maasahan ang bawat pagpapadala sa pamamagitan ng tamang delivery solutions para sa mga tao at negosyo, habang lumilikha ng mas magandang oportunidad para sa aming mga partner-driver.",
           ]}
         />
       </PageContainer>

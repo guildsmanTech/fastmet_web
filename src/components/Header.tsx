@@ -1,34 +1,25 @@
-import { useEffect, useState } from "react";
-import { logo } from "@/constants/images";
+import {useState} from "react";
+import {logo} from "@/constants/images";
 import GeneralFAQModal from "./modals/GeneralFAQModal";
-import CTAButton from "@/components/CTAButton";
+import PreRegisterActions from "@/components/PreRegisterActions";
 import PageContainer from "./PageContainer";
-import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
+import {Link, useLocation} from "react-router-dom";
+import {Menu, X} from "lucide-react";
 
 const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "About Us", to: "/about" },
-  { label: "Delivery Services", to: "/delivery-services" },
-  { label: "Partner-Drivers", to: "/partner-driver" },
-  { label: "Blog", to: "/blog" },
-  { label: "Contact Us", to: "/#contact" },
+  {label: "Home", to: "/"},
+  {label: "Partner - Driver", to: "/partner-driver"},
+  {label: "Delivery Services", to: "/delivery-services"},
+  {label: "About us", to: "/about"},
+  {label: "Blog", to: "/blog"},
 ];
 
 export default function Header() {
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close the drawer after any navigation (e.g. the Subscribe button).
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  const isActive = (to: string) => {
-    // Hash links (e.g. "/#contact") scroll to a section; never mark them active.
-    if (to.includes("#")) return false;
-    return to === "/" ? pathname === "/" : pathname.startsWith(to);
-  };
+  const isActive = (to: string) =>
+    to === "/" ? pathname === "/" : pathname.startsWith(to);
 
   return (
     <>
@@ -49,9 +40,9 @@ export default function Header() {
           </Link>
 
           {/* ── Desktop nav ───────────────────────────────────────────────── */}
-          <div className="hidden xl:flex items-center gap-6">
-            <div className="flex items-center gap-5">
-              {navLinks.map(({ label, to }) => (
+          <div className="hidden lg:flex items-center gap-8 xl:gap-14">
+            <div className="flex items-center gap-6">
+              {navLinks.map(({label, to}) => (
                 <Link
                   key={to}
                   to={to}
@@ -66,25 +57,8 @@ export default function Header() {
               ))}
             </div>
           </div>
-          <div className="xl:flex hidden items-center gap-2 xl:gap-3 ">
-            <CTAButton
-              to="/subscription"
-              variant="driver"
-              size="header"
-              icon={BadgeCheck}
-              title="Subscribe"
-            >
-              Get Subscription
-            </CTAButton>
-            <CTAButton
-              to="/get-a-quote"
-              variant="user-soft-border"
-              size="header"
-              icon={Calculator}
-              title="Get a Quote"
-            >
-              Get a Quote
-            </CTAButton>
+          <div className="lg:flex hidden items-center gap-2 xl:gap-3 ">
+            <PreRegisterActions layout="header" />
 
             <div className="flex items-center gap-2 ml-2">
               <p className="text-sm font-semibold text-white/80">FAQs</p>
@@ -92,17 +66,8 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ── Mobile right: Subscribe only + FAQs + hamburger ───────────── */}
-          <div className="flex xl:hidden items-center gap-3">
-            <CTAButton
-              to="/subscription"
-              variant="driver"
-              size="header"
-              icon={BadgeCheck}
-              title="Subscribe"
-            >
-              Subscribe
-            </CTAButton>
+          {/* ── Mobile right: FAQs + hamburger ────────────────────────────── */}
+          <div className="flex lg:hidden items-center gap-3">
             <GeneralFAQModal />
             <button
               type="button"
@@ -125,12 +90,12 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 z-40 bg-black/30 xl:hidden"
+            className="fixed inset-0 z-40 bg-black/30 lg:hidden"
             onClick={() => setMenuOpen(false)}
           />
           {/* Panel */}
-          <div className="fixed top-14 md:top-[72px] left-0 right-0 z-40 bg-secondary border-t border-white/10 xl:hidden px-6 py-4 space-y-1">
-            {navLinks.map(({ label, to }) => (
+          <div className="fixed top-[52px] left-0 right-0 z-40 bg-secondary border-t border-white/10 lg:hidden px-6 py-4 space-y-1">
+            {navLinks.map(({label, to}) => (
               <Link
                 key={to}
                 to={to}
@@ -148,26 +113,11 @@ export default function Header() {
               </Link>
             ))}
 
-            <div className="xl:hidden mt-8 flex flex-col gap-3">
-              <CTAButton
-                to="/subscription"
-                variant="driver"
-                size="md"
-                icon={BadgeCheck}
-                fullWidth
-              >
-                Get Subscription
-              </CTAButton>
-              <CTAButton
-                to="/get-a-quote"
-                variant="user-soft-border"
-                size="md"
-                icon={Calculator}
-                fullWidth
-              >
-                Get a Quote
-              </CTAButton>
-            </div>
+            <PreRegisterActions
+              layout="stacked-mobile"
+              shortLabels
+              className="lg:hidden mt-10"
+            />
           </div>
         </>
       )}

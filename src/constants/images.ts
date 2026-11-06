@@ -17,10 +17,8 @@ import homeBg from "@/assets/home/home_bg.webp";
 import homeBox from "@/assets/home/home_box.webp";
 import homeUser from "@/assets//home/home_left.webp";
 import homeDriver from "@/assets/home/home_driver.webp";
-import holdingMap from "@/assets/home/holding_map.jpg";
 import coverage from "@/assets/home/map.webp";
 import homeMain from "@/assets/home/home_main.webp";
-import homeFareCalcu from "@/assets/home/home_farecalcu.png";
 import bir from "@/assets/home/bir.png";
 import sec from "@/assets/home/sec.png";
 
@@ -38,7 +36,7 @@ import vision from "@/assets/about/vision.webp";
 
 // partner-driver
 import partnerBg from "@/assets/partner/partner_bg.webp";
-import partnerComms from "@/assets/partner/partner_comms.jpg";
+import partnerComms from "@/assets/partner/partner_comms.webp";
 import partnerMain from "@/assets/partner/partner_main.webp";
 import partnerZero from "@/assets/partner/partner_zero.webp";
 import zero from "@/assets/partner/zero.png";
@@ -69,10 +67,8 @@ export {
   homeBg,
   homeBox,
   homeUser,
-  holdingMap,
   homeDriver,
   homeMain,
-  homeFareCalcu,
   coverage,
   bir,
   sec,
