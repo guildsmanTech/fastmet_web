@@ -52,21 +52,21 @@ export default function AvailableVehicles() {
               Unable to load vehicle options right now.
             </div>
           ) : (
-            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:gap-4">
+            <div className="columns-2 gap-3 sm:columns-3 lg:gap-4">
               {isPending
                 ? Array.from({ length: 8 }).map((_, i) => (
-                    <li
+                    <div
                       key={i}
-                      className="flex aspect-[4/3] animate-pulse flex-col items-center justify-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-5"
+                      className="mb-3 flex aspect-[4/3] animate-pulse flex-col items-center justify-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-5 break-inside-avoid lg:mb-4"
                     >
                       <div className="size-14 rounded-lg bg-white/10" />
                       <div className="h-3 w-20 rounded bg-white/10" />
-                    </li>
+                    </div>
                   ))
                 : data?.map((vehicle) => (
-                    <li
+                    <div
                       key={vehicle.key}
-                      className="group flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-5 transition-colors duration-200 hover:border-primary/40 hover:bg-white/[0.06]"
+                      className="group mb-3 flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-5 transition-colors duration-200 hover:border-primary/40 hover:bg-white/[0.06] break-inside-avoid lg:mb-4"
                     >
                       <img
                         src={vehicle.imageUrl}
@@ -76,12 +76,12 @@ export default function AvailableVehicles() {
                       <span className="text-center text-sm font-medium leading-snug text-white">
                         {vehicle.name}
                       </span>
-                    </li>
+                    </div>
                   ))}
-            </ul>
+            </div>
           )}
         </div>
       </PageContainer>
     </section>
   );
-}   
+}

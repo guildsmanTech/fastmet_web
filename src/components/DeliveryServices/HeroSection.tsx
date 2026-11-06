@@ -1,30 +1,10 @@
 import { servicesBg, servicesMain } from "@/constants/images";
-import type { IHeroBadge } from "@/types/home";
-import { Store, Truck, Wallet } from "lucide-react";
 import CTAButton from "../CTAButton";
 import { getBusinessInquiryMailto } from "@/helper/constant";
 import PageContainer from "../PageContainer";
 
 const heroCtaClass: string =
   "w-full px-5 py-2.5 text-xs sm:w-auto sm:px-6 sm:py-3 sm:text-sm";
-
-const deliveryBenefits: IHeroBadge[] = [
-  {
-    title: "Affordable delivery services",
-    caption: "Available 24/7",
-    icon: Wallet,
-  },
-  {
-    title: "Vehicle options",
-    caption: "Small parcels to bulk cargo",
-    icon: Truck,
-  },
-  {
-    title: "Personal at business deliveries",
-    caption: "Sa isang platform",
-    icon: Store,
-  },
-];
 
 export default function HeroSection() {
   return (

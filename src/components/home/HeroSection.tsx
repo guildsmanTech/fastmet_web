@@ -1,29 +1,9 @@
-import { BadgePercent, PhilippinePeso, MapPinned } from "lucide-react";
 import PageContainer from "../PageContainer";
 import { homeBg, homeMain } from "@/constants/images";
-import type { IHeroBadge } from "@/types/home";
 import CTAButton from "../CTAButton";
 
 const heroCtaClass: string =
   "w-full px-5 py-2.5 text-xs sm:w-auto sm:px-6 sm:py-3 sm:text-sm";
-
-const heroBadges: IHeroBadge[] = [
-  {
-    title: "Proudly Pinoy-made",
-    caption: "Filipino-built platform",
-    icon: PhilippinePeso,
-  },
-  {
-    title: "Zero commission for life",
-    caption: "Drivers keep 100%",
-    icon: BadgePercent,
-  },
-  {
-    title: "Personal, business & bulk deliveries",
-    caption: "Any vehicle, any load",
-    icon: MapPinned,
-  },
-];
 
 export default function HeroSection() {
   return (
@@ -89,7 +69,7 @@ export default function HeroSection() {
                 to="/get-a-quote"
                 variant="hero-outline"
                 size="md"
-                className={`${heroCtaClass} flex-1 basis-full sm:flex-none sm:basis-auto`}
+                className={`${heroCtaClass} flex-1 basis-full sm:flex-none sm:basis-auto flex md:hidden`}
               >
                 Get a quote
               </CTAButton>
