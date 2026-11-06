@@ -1,29 +1,9 @@
-import { BadgePercent, PhilippinePeso, MapPinned } from "lucide-react";
 import PageContainer from "../PageContainer";
 import { homeBg, homeMain } from "@/constants/images";
-import type { IHeroBadge } from "@/types/home";
 import CTAButton from "../CTAButton";
 
 const heroCtaClass: string =
   "w-full px-5 py-2.5 text-xs sm:w-auto sm:px-6 sm:py-3 sm:text-sm";
-
-const heroBadges: IHeroBadge[] = [
-  {
-    title: "Proudly Pinoy-made",
-    caption: "Filipino-built platform",
-    icon: PhilippinePeso,
-  },
-  {
-    title: "Zero commission for life",
-    caption: "Drivers keep 100%",
-    icon: BadgePercent,
-  },
-  {
-    title: "Personal, business & bulk deliveries",
-    caption: "Any vehicle, any load",
-    icon: MapPinned,
-  },
-];
 
 export default function HeroSection() {
   return (
@@ -89,7 +69,7 @@ export default function HeroSection() {
                 to="/get-a-quote"
                 variant="hero-outline"
                 size="md"
-                className={`${heroCtaClass} flex-1 basis-full sm:flex-none sm:basis-auto`}
+                className={`${heroCtaClass} flex-1 basis-full sm:flex-none sm:basis-auto flex md:hidden`}
               >
                 Get a quote
               </CTAButton>
@@ -105,31 +85,6 @@ export default function HeroSection() {
                 className="object-contain w-full"
               />
             </div>
-          </div>
-        </div>
-
-        {/* Bottom stats row — placed below like the reference, fully responsive */}
-        <div className="w-full self-center md:absolute md:bottom-0 md:transform md:translate-y-15">
-          <div className="grid grid-cols-1 gap-5 w-full pt-10 mt-8 border-t border-white/15 sm:grid-cols-3 sm:gap-0">
-            {heroBadges.map(({ title, caption, icon: Icon }, index) => (
-              <div
-                key={title}
-                className={`flex gap-2.5 items-center ${
-                  index > 0 ? "sm:pl-5 sm:border-l sm:border-white/15" : ""
-                }`}
-              >
-                <Icon
-                  className="size-5 shrink-0 text-primary"
-                  strokeWidth={1.8}
-                />
-                <div className="min-w-0">
-                  <h4 className="text-[13px] font-semibold leading-[1.25] text-white">
-                    {title}
-                  </h4>
-                  <p className="mt-0.5 text-[11px] text-white/65">{caption}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </PageContainer>

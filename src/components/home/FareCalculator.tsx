@@ -5,18 +5,22 @@ import PageContainer from "../PageContainer";
 import CTAButton from "../CTAButton";
 import { homeFareCalcu } from "@/constants/images";
 
-export default function FareCalculator({ className }: { className?: string }) {
+interface IFareCalcuProps {
+  readonly className?: string;
+}
+
+export default function FareCalculator({ className }: IFareCalcuProps) {
   return (
     <PageContainer
       className={cn("w-full max-w-6xl mx-auto px-6 py-16", className)}
     >
       <div className="relative overflow-hidden rounded-3xl bg-secondary px-6 py-10 md:py-12 sm:px-12 sm:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center md:px-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center md:px-2">
           {/* Left illustration */}
           <img
             src={homeFareCalcu}
             alt="FastMet delivery coverage map across Greater Manila"
-            className="aspect-[3/3] md:aspect-[4/3] w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
+            className="h-64 md:h-full w-full rounded-2xl object-cover ring-1 ring-white/10 order-1 bg-primary"
           />
 
           {/* Right content */}

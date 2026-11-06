@@ -1,30 +1,10 @@
 import { servicesBg, servicesMain } from "@/constants/images";
-import type { IHeroBadge } from "@/types/home";
-import { Store, Truck, Wallet } from "lucide-react";
 import CTAButton from "../CTAButton";
 import { getBusinessInquiryMailto } from "@/helper/constant";
 import PageContainer from "../PageContainer";
 
 const heroCtaClass: string =
   "w-full px-5 py-2.5 text-xs sm:w-auto sm:px-6 sm:py-3 sm:text-sm";
-
-const deliveryBenefits: IHeroBadge[] = [
-  {
-    title: "Affordable delivery services",
-    caption: "Available 24/7",
-    icon: Wallet,
-  },
-  {
-    title: "Vehicle options",
-    caption: "Small parcels to bulk cargo",
-    icon: Truck,
-  },
-  {
-    title: "Personal at business deliveries",
-    caption: "Sa isang platform",
-    icon: Store,
-  },
-];
 
 export default function HeroSection() {
   return (
@@ -101,31 +81,6 @@ export default function HeroSection() {
                 className="object-contain w-full"
               />
             </div>
-          </div>
-        </div>
-
-        {/* Bottom benefits row */}
-        <div className="w-full self-center md:transform md:translate-y-15">
-          <div className="grid grid-cols-1 gap-5 w-full pt-10 mt-8 border-t border-white/15 sm:grid-cols-3 sm:gap-0">
-            {deliveryBenefits.map(({ title, caption, icon: Icon }, index) => (
-              <div
-                key={title}
-                className={`flex gap-2.5 items-center ${
-                  index > 0 ? "sm:pl-5 sm:border-l sm:border-white/15" : ""
-                }`}
-              >
-                <Icon
-                  className="size-5 shrink-0 text-primary"
-                  strokeWidth={1.8}
-                />
-                <div className="min-w-0">
-                  <h4 className="text-[13px] font-semibold leading-[1.25] text-white">
-                    {title}
-                  </h4>
-                  <p className="mt-0.5 text-[11px] text-white/65">{caption}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </PageContainer>
