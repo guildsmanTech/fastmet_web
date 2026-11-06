@@ -3,6 +3,7 @@ import {cva, type VariantProps} from "class-variance-authority";
 import type {LucideIcon} from "lucide-react";
 import {Link} from "react-router-dom";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ctaButtonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition whitespace-nowrap",
   {
@@ -85,7 +86,13 @@ export default function CTAButton({
 
   if (href) {
     return (
-      <a href={href} className={classes} title={title}>
+      <a
+        href={href}
+        className={classes}
+        title={title}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {content}
       </a>
     );

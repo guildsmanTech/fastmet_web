@@ -1,25 +1,28 @@
 import { Helmet } from "react-helmet-async";
-import QuestionForm from "@/components/home/QuestionForm";
 import LoaderModal from "@/components/modals/Loader";
 import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
 import { useVehicles } from "@/hooks/useVehicleQueries";
-import CTAButton from "@/components/CTAButton";
-import PreRegisterActions from "@/components/PreRegisterActions";
-
-import { Truck, BriefcaseBusiness, MapPinned } from "lucide-react";
-import { homeBg, homeBox, homeMain } from "@/constants/images";
-import ServiceAreas from "@/components/home/ServiceAreas";
-import UserDriverSplit from "@/components/home/UserDriverSplit";
-import CoverageExplainer from "@/components/home/Coverage";
-import PageContainer from "@/components/PageContainer";
+import ZeroCommission from "@/components/home/ZeroCommission";
 import Registrations from "@/components/home/Registrations";
+import ServiceDelivery from "@/components/home/ServiceDelivery";
+import FareCalculator from "@/components/home/FareCalculator";
+import HeroSection from "@/components/home/HeroSection";
+import WhyFastMet from "@/components/home/WhyFastMet";
+import JoinFastMet from "@/components/home/JoinFastmet";
+import CoverageSection from "@/components/home/Coverage";
+import ServiceAreas from "@/components/home/ServiceAreas";
+import QuestionForm from "@/components/home/QuestionForm";
+import ClosingCTA from "@/components/home/ClosingCTA";
+// import ClosingCTA from "@/components/home/ClosingCTA";
+
+// TAKE_NOTE: px-2 md:px-0 (OVERALL EACH SECTION)
 
 export default function Home() {
   const { isPending: countsLoading } = useRegistrationCounts();
   const { isPending: vehiclesLoading } = useVehicles();
 
   return (
-    <div className="flex items-center justify-center flex-col w-full overflow-x-hidden gap-12">
+    <div className="flex overflow-x-hidden flex-col justify-center items-center w-full">
       <Helmet>
         <title>
           FastMet – Fast & Reliable On-Demand Delivery in Greater Manila
@@ -50,175 +53,17 @@ export default function Home() {
           })}
         </script>
       </Helmet>
-      <section
-        className="relative w-full min-h-dvh flex items-center bg-secondary"
-        id="hero"
-      >
-        <img
-          src={homeBg}
-          alt="FastMet delivery"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/20" />
-
-        <PageContainer className="relative z-10 py-20 flex flex-col lg:flex-row items-center justify-between lg:gap-6">
-          {/* Left: headline */}
-          <div className="flex flex-col gap-5 text-white max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-primary max-w-2xl">
-              Delivery? <br /> FastMet Agad!
-            </h1>
-
-            {/* Description */}
-            <p className="font-semibold text-base md:text-lg max-w-2xl">
-              On-demand delivery for personal, business, and bulk delivery
-              needs. FastMet accepts delivery requests within Greater Manila and
-              can deliver nationwide through land-accessible routes.
-            </p>
-            <PreRegisterActions
-              layout="inline"
-              userVariant="user"
-              driverVariant="user"
-              size="md"
-              className="mt-2 w-full hidden lg:flex"
-            />
-          </div>
-
-          <img
-            src={homeMain}
-            alt="FastMet delivery"
-            className="w-full md:w-1/2 object-cover"
-          />
-
-          <PreRegisterActions
-            layout="stacked-mobile"
-            userVariant="user"
-            driverVariant="user"
-            shortLabels
-            className="lg:hidden"
-          />
-        </PageContainer>
-      </section>
-
-      {/* ===== ANO ANG FASTMET ===== */}
-      <section className="w-full">
-        <PageContainer className="flex flex-col gap-10">
-          <div className="flex flex-col md:flex-row gap-5 md:gap-10">
-            <img
-              src={homeBox}
-              alt="FastMet delivery"
-              className="w-full md:w-1/2 aspect-[4/3] lg:w-1/3 object-cover rounded-2xl"
-            />
-
-            <div className="flex-1 flex flex-col gap-4">
-              <h2 className="text-primary font-bold text-2xl md:text-3xl text-center lg:text-start">
-                Ano ang FastMet?
-              </h2>
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base text-justify">
-                FastMet is an on-demand delivery platform that connects users
-                and businesses with the right partner-driver and vehicle for
-                their delivery needs. <br /> <br />
-                Mula documents at small parcels hanggang appliances, business
-                supplies, equipment, at larger cargo, may FastMet vehicle option
-                para sa iba't ibang klase ng delivery. <br />
-                <br />
-                Delivery requests may come from Greater Manila, while
-                destinations may reach different parts of the country through
-                land-accessible routes.
-              </p>
-              <div className="flex gap-3 mt-2 flex-row justify-center lg:justify-start">
-                <CTAButton to="/user-register" variant="driver" size="compact">
-                  Pre-Register as a User
-                </CTAButton>
-                <CTAButton
-                  to="/driver-register"
-                  variant="driver"
-                  size="compact"
-                >
-                  Pre-Register as a Driver
-                </CTAButton>
-              </div>
-            </div>
-          </div>
-
-          {/* Feature strip — icons still placeholder, none provided yet */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              {
-                title: "Different Vehicle Options",
-                description: "From motorcycle to wing van.",
-                icon: Truck,
-              },
-              {
-                title: "For Personal and Business Use",
-                description:
-                  "For parcels, supplies, equipment, and larger cargo.",
-                icon: BriefcaseBusiness,
-              },
-              {
-                title: "Greater Manila to Nationwide",
-                description:
-                  "Delivery requests within Greater Manila, with delivery through land-accessible routes.",
-                icon: MapPinned,
-              },
-            ].map(({ title, description, icon: Icon }) => (
-              <div
-                key={title}
-                className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="size-5" />
-                </div>
-
-                <h3 className="text-sm md:text-base font-bold text-gray-900">
-                  {title}
-                </h3>
-
-                <p className="mt-2 text-xs md:text-sm leading-relaxed text-gray-600">
-                  {description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-6 border-b-2 border-primary pb-10 justify-center items-center lg:pt-5">
-            <div className="flex flex-col gap-1 text-center">
-              <h2 className="text-lg font-bold lg:text-2xl">
-                Introductory 0% Commission for Partner-Drivers
-              </h2>
-
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                During the introductory zero-commission period, eligible FastMet
-                partner-drivers can keep 100% of their delivery earnings.
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-2 text-center">
-              <CTAButton
-                to="/about"
-                variant="ghost-border"
-                size="md"
-                className="w-fit py-2 px-3 lg:px-5 text-sm md:text-base cursor-pointer"
-              >
-                Learn More About FastMet
-              </CTAButton>
-              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
-                Full terms, duration, and eligibility details will be shared
-                through official FastMet updates.
-              </p>
-            </div>
-          </div>
-        </PageContainer>
-      </section>
-
-      <UserDriverSplit />
-
-      <CoverageExplainer />
-
+      <HeroSection />
+      <WhyFastMet />
+      <ZeroCommission /> {/* <UserDriverSplit /> */}
+      <ServiceDelivery /> {/* <CoverageExplainer /> */}
+      <FareCalculator />
+      <JoinFastMet />
+      <CoverageSection />
       <ServiceAreas />
-
       <Registrations />
-
       <QuestionForm />
-
+      <ClosingCTA /> 
       <LoaderModal open={countsLoading || vehiclesLoading} />
     </div>
   );

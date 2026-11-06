@@ -6,12 +6,17 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://fastmet.com.ph/driver-register</loc>
+    <loc>https://fastmet.com.ph/user-register</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://fastmet.com.ph/user-register</loc>
+    <loc>https://fastmet.com.ph/get-a-quote</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://fastmet.com.ph/subscription</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
