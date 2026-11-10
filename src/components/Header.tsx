@@ -4,27 +4,31 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
+import { Calculator, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
-  { label: "Partner - Driver", to: "/partner-driver" },
+  { label: "About Us", to: "/about" },
   { label: "Delivery Services", to: "/delivery-services" },
-  { label: "About us", to: "/about" },
+  { label: "Partner-Drivers", to: "/partner-driver" },
   { label: "Blog", to: "/blog" },
+  { label: "Contact Us", to: "/#contact" },
 ];
 
 export default function Header() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close the drawer after any navigation (e.g. the Subscribe button).
+  // Close the drawer after any navigation.
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 
-  const isActive = (to: string) =>
-    to === "/" ? pathname === "/" : pathname.startsWith(to);
+  const isActive = (to: string) => {
+    // Hash links (e.g. "/#contact") scroll to a section; never mark them active.
+    if (to.includes("#")) return false;
+    return to === "/" ? pathname === "/" : pathname.startsWith(to);
+  };
 
   return (
     <>
@@ -45,8 +49,8 @@ export default function Header() {
           </Link>
 
           {/* ── Desktop nav ───────────────────────────────────────────────── */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-14">
-            <div className="flex items-center gap-6">
+          <div className="hidden xl:flex items-center gap-6">
+            <div className="flex items-center gap-5">
               {navLinks.map(({ label, to }) => (
                 <Link
                   key={to}
@@ -62,8 +66,9 @@ export default function Header() {
               ))}
             </div>
           </div>
-          <div className="lg:flex hidden items-center gap-2 xl:gap-3 ">
-            <CTAButton
+          <div className="xl:flex hidden items-center gap-2 xl:gap-3 ">
+            {/* Subscription access is temporarily disabled.
+<CTAButton
               to="/subscription"
               variant="driver"
               size="header"
@@ -72,6 +77,7 @@ export default function Header() {
             >
               Get Subscription
             </CTAButton>
+*/}
             <CTAButton
               to="/get-a-quote"
               variant="user-soft-border"
@@ -88,9 +94,10 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ── Mobile right: Subscribe only + FAQs + hamburger ───────────── */}
-          <div className="flex lg:hidden items-center gap-3">
-            <CTAButton
+          {/* ── Mobile right: FAQs + hamburger ───────────── */}
+          <div className="flex xl:hidden items-center gap-3">
+            {/* Subscription access is temporarily disabled.
+<CTAButton
               to="/subscription"
               variant="driver"
               size="header"
@@ -99,6 +106,7 @@ export default function Header() {
             >
               Subscribe
             </CTAButton>
+*/}
             <GeneralFAQModal />
             <button
               type="button"
@@ -121,11 +129,11 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 z-40 bg-black/30 lg:hidden"
+            className="fixed inset-0 z-40 bg-black/30 xl:hidden"
             onClick={() => setMenuOpen(false)}
           />
           {/* Panel */}
-          <div className="fixed top-[52px] left-0 right-0 z-40 bg-secondary border-t border-white/10 lg:hidden px-6 py-4 space-y-1">
+          <div className="fixed top-14 md:top-[72px] left-0 right-0 z-40 bg-secondary border-t border-white/10 xl:hidden px-6 py-4 space-y-1">
             {navLinks.map(({ label, to }) => (
               <Link
                 key={to}
@@ -144,8 +152,9 @@ export default function Header() {
               </Link>
             ))}
 
-            <div className="lg:hidden mt-8 flex flex-col gap-3">
-              <CTAButton
+            <div className="xl:hidden mt-8 flex flex-col gap-3">
+              {/* Subscription access is temporarily disabled.
+<CTAButton
                 to="/subscription"
                 variant="driver"
                 size="md"
@@ -154,6 +163,7 @@ export default function Header() {
               >
                 Get Subscription
               </CTAButton>
+*/}
               <CTAButton
                 to="/get-a-quote"
                 variant="user-soft-border"

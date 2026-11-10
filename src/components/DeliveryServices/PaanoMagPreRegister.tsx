@@ -1,44 +1,87 @@
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
+
 const steps = [
   {
     icon: "📝",
-    title: "1. Complete Your Pre-Registration",
-    desc: "Provide the required information through the existing FastMet user pre-registration page.",
+    title: "1. Complete your information",
+    desc: "Ilagay ang iyong name, address, gender, at email. Maaari ka ring mag-upload ng profile picture, pero optional ito.",
   },
   {
     icon: "🔔",
-    title: "2. Receive Official Updates",
-    desc: "FastMet will send launch announcements, service updates, promotions, and next steps through your registered contact details.",
+    title: "2. Complete face verification",
+    desc: "Sundin ang instructions para makumpleto ang face verification ng iyong account.",
   },
   {
     icon: "📲",
-    title: "3. Access FastMet When Available",
-    desc: "Once the app and delivery services become available, you will receive instructions on how to download the app and request a delivery.",
+    title: "3. Ready ka nang magpadala!",
+    desc: "Kapag kumpleto na ang registration at face verification mo, enjoy affordable delivery services, available 24/7 para sa iba’t ibang delivery needs mo.",
   },
 ];
 
 export default function PaanoMagPreRegister() {
   return (
-    <section className="w-full pb-10 pt-10 md:pt-5 bg-white">
-      <PageContainer className="text-center">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-primary">
-          Paano Mag-Pre-Register?
-        </h2>
+    <section className="w-full bg-white py-20 lg:py-28 px-3 md:px-0">
+      <PageContainer className="flex flex-col gap-12 lg:gap-16">
+        {/* Header */}
+        <div className="flex flex-col gap-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            How it works
+          </p>
+          <h2 className="text-3xl font-bold leading-[1.1] tracking-tight text-secondary sm:text-4xl lg:text-5xl">
+            Paano mag-register?
+          </h2>
+        </div>
 
-        {/* Desktop: icon row with connectors, text row below aligned to same columns */}
-        <div className="hidden sm:block mt-10 max-w-4xl mx-auto">
-          <div className="grid grid-cols-3 gap-6">
-            {steps.map((step, i) => (
-              <div
-                key={step.title}
-                className="relative flex flex-col items-center text-center"
-              >
-                {i < steps.length - 1 && (
-                  <div className="absolute top-10 left-1/2 -translate-y-1/2 w-full pr-10 pl-20 flex items-center gap-1 z-0">
+        {/* Steps */}
+        <ol className="flex flex-col gap-10 md:grid md:grid-cols-3 md:gap-8">
+          {steps.map((step, i) => (
+            <li
+              key={step.title}
+              className="relative flex gap-5 md:flex-col md:gap-6"
+            >
+              {/* Connector (SVG dashed line + arrow) */}
+              {i < steps.length - 1 && (
+                <>
+                  {/* Mobile: vertical connector */}
+                  <div
+                    aria-hidden
+                    className="absolute left-5 top-12 -bottom-8 flex -translate-x-1/2 flex-col items-center md:hidden"
+                  >
+                    <svg
+                      viewBox="0 0 4 80"
+                      className="h-full w-1 flex-1"
+                      preserveAspectRatio="none"
+                    >
+                      <line
+                        x1="2"
+                        y1="0"
+                        x2="2"
+                        y2="80"
+                        stroke="currentColor"
+                        className="text-primary"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeDasharray="0.5 8"
+                      />
+                    </svg>
+                    <svg
+                      viewBox="0 0 12 12"
+                      className="mt-0.5 size-3 shrink-0 text-primary"
+                      fill="currentColor"
+                    >
+                      <path d="M6 10L1 2h10L6 10z" />
+                    </svg>
+                  </div>
+
+                  {/* Desktop: horizontal connector */}
+                  <div
+                    aria-hidden
+                    className="absolute left-14 right-0 top-5 hidden -translate-y-1/2 items-center md:flex"
+                  >
                     <svg
                       viewBox="0 0 100 4"
-                      className="flex-1 h-1"
+                      className="h-1 flex-1"
                       preserveAspectRatio="none"
                     >
                       <line
@@ -48,81 +91,48 @@ export default function PaanoMagPreRegister() {
                         y2="2"
                         stroke="currentColor"
                         className="text-primary"
-                        strokeWidth="4"
+                        strokeWidth="3"
                         strokeLinecap="round"
-                        strokeDasharray="0.5 10"
+                        strokeDasharray="0.5 8"
                       />
                     </svg>
-                    <span className="text-primary text-lg shrink-0">
-                      &#9654;
-                    </span>
+                    <svg
+                      viewBox="0 0 12 12"
+                      className="ml-0.5 size-3.5 shrink-0 text-primary"
+                      fill="currentColor"
+                    >
+                      <path d="M10 6L2 1v10L10 6z" />
+                    </svg>
                   </div>
-                )}
+                </>
+              )}
 
-                <div className="flex items-center justify-center rounded-full bg-secondary size-20">
-                  <span className="text-4xl">{step.icon}</span>
-                </div>
-
-                <div className="mt-6 text-left w-full">
-                  <h3 className="text-secondary font-bold text-sm">
-                    {step.title}
-                  </h3>
-                  <p className="text-secondary/70 text-xs leading-relaxed mt-1">
-                    {step.desc}
-                  </p>
-                </div>
+              {/* Number badge */}
+              <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-sm font-semibold tabular-nums text-secondary">
+                {i + 1}
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Mobile: icon + text sequential per step, vertical arrow connector between */}
-        <div className="sm:hidden flex flex-col items-center mt-10 max-w-xs mx-auto">
-          {steps.map((step, i) => (
-            <div key={step.title} className="flex flex-col items-center w-full">
-              <div className="flex items-center justify-center rounded-full bg-secondary size-20">
-                <span className="text-4xl">{step.icon}</span>
-              </div>
-              <div className="text-center mt-3">
-                <h3 className="text-secondary font-bold text-sm">
+              <div className="flex flex-col gap-2">
+                <h3 className="text-base font-semibold text-secondary">
                   {step.title}
                 </h3>
-                <p className="text-secondary/70 text-xs leading-relaxed mt-1">
+                <p className="max-w-xs text-sm leading-relaxed text-slate-600">
                   {step.desc}
                 </p>
               </div>
-
-              {i < steps.length - 1 && (
-                <div className="flex flex-col items-center gap-1 my-4">
-                  <svg
-                    viewBox="0 0 4 60"
-                    className="w-1 h-14"
-                    preserveAspectRatio="none"
-                  >
-                    <line
-                      x1="2"
-                      y1="0"
-                      x2="2"
-                      y2="60"
-                      stroke="currentColor"
-                      className="text-primary"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      strokeDasharray="0.5 10"
-                    />
-                  </svg>
-                  <span className="text-primary text-lg rotate-90">
-                    &#9654;
-                  </span>
-                </div>
-              )}
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
 
-        <CTAButton to="/user-register" variant="primary" className="mt-10">
-          Complete Your Pre-Registration
-        </CTAButton>
+        <div>
+          <CTAButton
+            to="/user-register"
+            variant="primary"
+            className="w-full justify-center px-7 py-3 sm:w-fit"
+          >
+            Register now
+          </CTAButton>
+        </div>
       </PageContainer>
     </section>
   );

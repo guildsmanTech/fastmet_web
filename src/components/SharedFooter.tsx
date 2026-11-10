@@ -1,14 +1,14 @@
-import {useRegistrationCounts} from "@/hooks/useRegistrationQueries";
-import {User} from "lucide-react";
-import {SocialIcon} from "react-social-icons";
+import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
+import { User } from "lucide-react";
+import { SocialIcon } from "react-social-icons";
 import PageContainer from "@/components/PageContainer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SharedFooter() {
-  const {data: counts} = useRegistrationCounts();
+  const { data: counts } = useRegistrationCounts();
 
   return (
-    <footer className="w-full bg-secondary">
+    <footer className="w-full bg-secondary pt-2">
       <PageContainer className="flex flex-col gap-8 items-center py-3 md:py-5">
         <h2 className="text-sm font-semibold text-center text-white md:text-xl">
           Need it <span className="text-primary">Fast</span>? Consider it{" "}
@@ -42,7 +42,7 @@ export default function SharedFooter() {
                 url="https://www.facebook.com/profile.php?id=61585768732620"
                 className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                    hover:scale-110 hover:shadow-lg transition-all duration-300"
-                style={{width: 36, height: 36}}
+                style={{ width: 36, height: 36 }}
                 target="_blank"
               />
 
@@ -50,15 +50,15 @@ export default function SharedFooter() {
                 url="https://www.instagram.com/fastmetph?igsh=aDB2c2lmY2djNzUy&utm_source=qr"
                 className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                    hover:scale-110 hover:shadow-lg transition-all duration-300"
-                style={{width: 36, height: 36}}
+                style={{ width: 36, height: 36 }}
                 target="_blank"
               />
 
               <SocialIcon
-                url="https://www.tiktok.com/@fastmet0"
+                url="https://www.tiktok.com/@fastmetph?_r=1&_t=ZS-9BAhGNYHmjZ"
                 className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full 
                    hover:scale-110 hover:shadow-lg transition-all duration-300"
-                style={{width: 36, height: 36}}
+                style={{ width: 36, height: 36 }}
                 target="_blank"
               />
             </div>

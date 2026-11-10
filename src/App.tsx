@@ -17,8 +17,6 @@ import PrivacyPolicyPageAppView from "./pages/app-view/legal/PrivacyPolicyApp";
 import TermsPageAppView from "./pages/app-view/legal/TermsApp";
 import DeleteAccountPage from "./pages/DeleteAccount";
 import GetQuotePage from "./pages/GetQuote";
-import SubscriptionPage from "./pages/Subscription";
-import SubscriptionResultPage from "./pages/SubscriptionResult";
 
 const router = createBrowserRouter([
   {
@@ -58,13 +56,8 @@ const router = createBrowserRouter([
       },
       {path: "/get-a-quote", element: <GetQuotePage />},
       {path: "/delete-account", element: <DeleteAccountPage />},
-      {
-        path: "/subscription",
-        children: [
-          {index: true, element: <SubscriptionPage />},
-          {path: "result", element: <SubscriptionResultPage />},
-        ],
-      },
+      // Subscription access is temporarily disabled, including payment results.
+      {path: "/subscription/*", element: <Navigate to="/" replace />},
     ],
   },
   // Public share-link tracking page: no site chrome, unlisted, noindex.

@@ -1,13 +1,13 @@
-import {useCallback, useState} from "react";
-import {Helmet} from "react-helmet-async";
+import { useCallback, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import PageContainer from "@/components/PageContainer";
 import SubscriptionDashboard from "@/components/subscription/SubscriptionDashboard";
 import SubscriptionFaq from "@/components/subscription/SubscriptionFaq";
 import SubscriptionLogin from "@/components/subscription/SubscriptionLogin";
-import {useSubscriptionSession} from "@/hooks/useSubscriptionSession";
+import { useSubscriptionSession } from "@/hooks/useSubscriptionSession";
 
 export default function SubscriptionPage() {
-  const {session, save, clear} = useSubscriptionSession();
+  const { session, save, clear } = useSubscriptionSession();
   const [notice, setNotice] = useState("");
 
   const handleLoggedIn = useCallback(
@@ -34,30 +34,39 @@ export default function SubscriptionPage() {
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      <section className="py-8 bg-secondary md:py-12 lg:py-16">
-        <PageContainer>
-          <h1 className="mt-2 text-xl font-bold text-primary md:text-4xl">
-            Driver Subscription
-          </h1>
-          <p className="mt-4 max-w-3xl text-sm md:text-base text-white/80">
-            Manage your FastMet partner-driver plan, see when it ends, and
-            subscribe or renew in just a few steps.
-          </p>
+      <section className="pb-8 pt-6 bg-slate-50 md:py-12 lg:py-16 px-8 md:px-0">
+        <PageContainer className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 lg:items-start py-20 px-0">
+          {/* Left column – Login / Dashboard */}
+          <div className="lg:col-span-6 order-2">
+            {session ? (
+              <SubscriptionDashboard
+                token={session.token}
+                firstName={session.firstName}
+                onLogout={clear}
+                onSessionExpired={handleSessionExpired}
+              />
+            ) : (
+              <SubscriptionLogin notice={notice} onLoggedIn={handleLoggedIn} />
+            )}
+          </div>
+
+          {/* Right column – CTA text */}
+          <div className="order-1 lg:col-span-6 lg:pt-4">
+            <h1 className="text-3xl font-bold text-secondary md:text-4xl lg:text-5xl leading-tight">
+              Get started with your{" "}
+              <span className="text-primary">Driver Subscription</span>
+            </h1>
+
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-500 md:text-base">
+              Manage your FastMet partner-driver plan, see when it ends, and
+              subscribe or renew in just a few steps. Log in with the mobile
+              number linked to your driver account to view your active plan,
+              check remaining days, and choose a new subscription whenever
+              you’re ready.
+            </p>
+          </div>
         </PageContainer>
       </section>
-
-      <PageContainer className="py-10 md:py-14">
-        {session ? (
-          <SubscriptionDashboard
-            token={session.token}
-            firstName={session.firstName}
-            onLogout={clear}
-            onSessionExpired={handleSessionExpired}
-          />
-        ) : (
-          <SubscriptionLogin notice={notice} onLoggedIn={handleLoggedIn} />
-        )}
-      </PageContainer>
 
       <div className="pb-16 md:pb-20">
         <SubscriptionFaq />

@@ -1,7 +1,11 @@
-import {useEffect, useState} from "react";
-import {useInfiniteQuery, useQuery, useQueryClient} from "@tanstack/react-query";
-import {Loader2, LogOut} from "lucide-react";
-import {Button} from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import {
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { Loader2, LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   cancelCheckout,
   fetchHistory,
@@ -9,21 +13,23 @@ import {
   startCheckout,
   SubscriptionApiError,
 } from "@/api/subscription";
-import {isSafeCheckoutUrl} from "@/helper/subscription";
-import type {SubscriptionPlanId} from "@/types/subscription";
+import { isSafeCheckoutUrl } from "@/helper/subscription";
+import type { SubscriptionPlanId } from "@/types/subscription";
 import ActivePlanCard from "./ActivePlanCard";
 import PlanCards from "./PlanCards";
 import SubscriptionHistory from "./SubscriptionHistory";
 
 type Props = {
-  token: string;
-  firstName: string;
-  onLogout: () => void;
-  onSessionExpired: () => void;
+  readonly token: string;
+  readonly firstName: string;
+  readonly onLogout: () => void;
+  readonly onSessionExpired: () => void;
 };
 
 const errorMessage = (err: unknown) =>
-  err instanceof Error ? err.message : "Something went wrong. Please try again.";
+  err instanceof Error
+    ? err.message
+    : "Something went wrong. Please try again.";
 
 export default function SubscriptionDashboard({
   token,
@@ -49,7 +55,7 @@ export default function SubscriptionDashboard({
 
   const historyQuery = useInfiniteQuery({
     queryKey: ["subscription", "history", token],
-    queryFn: ({pageParam}) => fetchHistory(token, pageParam),
+    queryFn: ({ pageParam }) => fetchHistory(token, pageParam),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last) => last.nextCursor ?? undefined,
     staleTime: 0,
@@ -65,7 +71,7 @@ export default function SubscriptionDashboard({
   }, [sessionExpired, onSessionExpired]);
 
   const refreshAll = () =>
-    queryClient.invalidateQueries({queryKey: ["subscription"]});
+    queryClient.invalidateQueries({ queryKey: ["subscription"] });
 
   const handleSubscribe = async (plan: SubscriptionPlanId) => {
     if (busyPlan) return;
@@ -162,7 +168,10 @@ export default function SubscriptionDashboard({
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm md:text-base text-gray-700">
-          Hi, <span className="font-bold text-secondary">{firstName || plans.driver.firstName || "Driver"}</span>
+          Hi,{" "}
+          <span className="font-bold text-secondary">
+            {firstName || plans.driver.firstName || "Driver"}
+          </span>
         </p>
         <Button
           type="button"
@@ -220,7 +229,9 @@ export default function SubscriptionDashboard({
               variant="outline"
               className="cursor-pointer"
               disabled={cancelling || busyPlan !== null}
-              onClick={() => void handleCancelPending(plans.pendingCheckout!.id)}
+              onClick={() =>
+                void handleCancelPending(plans.pendingCheckout!.id)
+              }
             >
               {cancelling ? "Cancelling…" : "Cancel payment"}
             </Button>

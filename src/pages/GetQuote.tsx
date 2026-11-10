@@ -1,17 +1,17 @@
-import {useEffect, useMemo, useRef, useState} from "react";
-import {Helmet} from "react-helmet-async";
-import {Link} from "react-router-dom";
-import {Loader2, Route} from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { Loader2, Route } from "lucide-react";
 import PageContainer from "@/components/PageContainer";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import BookingTypeTabs from "@/components/quote/BookingTypeTabs";
 import PlaceAutocompleteInput, {
   type SelectedPlace,
 } from "@/components/quote/PlaceAutocompleteInput";
 import VehicleQuoteCard from "@/components/quote/VehicleQuoteCard";
-import {fetchPublicQuote, QuoteApiError} from "@/api/quote";
-import {getRecaptchaV3Token, preloadRecaptchaV3} from "@/lib/recaptchaV3";
-import type {PublicQuoteResponse, QuoteTab} from "@/types/quote";
+import { fetchPublicQuote, QuoteApiError } from "@/api/quote";
+import { getRecaptchaV3Token, preloadRecaptchaV3 } from "@/lib/recaptchaV3";
+import type { PublicQuoteResponse, QuoteTab } from "@/types/quote";
 
 const RECAPTCHA_ACTION = "get_quote";
 // Stops double-click / rapid re-submits after each response.
@@ -19,6 +19,52 @@ const COOLDOWN_MS = 3000;
 // Matches the server's response cache; older results are re-requested.
 const MEMORY_TTL_MS = 2 * 60 * 1000;
 const TAB_ORDER: QuoteTab[] = ["asap", "schedule", "pooling"];
+
+type AreaErrorCode = "PICKUP_AREA" | "DROPOFF_AREA";
+
+type AreaErrorDetails = {
+  message: string;
+  href: string;
+  linkLabel: string;
+};
+
+const AREA_ERROR_DETAILS: Record<AreaErrorCode, AreaErrorDetails> = {
+  PICKUP_AREA: {
+    message:
+      "Pickup is outside our service area. We only accept pickups in Greater Manila (see supported cities).",
+    href: "/#service-areas",
+    linkLabel: "View supported pickup cities",
+  },
+  DROPOFF_AREA: {
+    message:
+      "Drop-off is outside our delivery area. Destinations must be reachable by continuous land travel (no ferry).",
+    href: "/#coverage",
+    linkLabel: "View delivery coverage",
+  },
+};
+
+const isAreaErrorCode = (code?: string): code is AreaErrorCode =>
+  code === "PICKUP_AREA" || code === "DROPOFF_AREA";
+
+type SubmitLabelProps = {
+  readonly loading: boolean;
+  readonly alreadyQuoted: boolean;
+};
+
+function SubmitLabel({ loading, alreadyQuoted }: SubmitLabelProps) {
+  if (loading) {
+    return (
+      <span className="inline-flex items-center justify-center gap-2">
+        <Loader2 className="size-4 animate-spin" />
+        Getting price...
+      </span>
+    );
+  }
+
+  if (alreadyQuoted) return <>Price ready</>;
+
+  return <>Get price</>;
+}
 
 const coordKey = (p: SelectedPlace) =>
   `${p.coords.lat.toFixed(4)},${p.coords.lng.toFixed(4)}`;
@@ -33,7 +79,7 @@ export default function GetQuotePage() {
   const [quote, setQuote] = useState<PublicQuoteResponse | null>(null);
   const [tab, setTab] = useState<QuoteTab>("asap");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<{message: string; code?: string} | null>(
+  const [error, setError] = useState<{ message: string; code?: string } | null>(
     null,
   );
   const [coolingDown, setCoolingDown] = useState(false);
@@ -61,7 +107,7 @@ export default function GetQuotePage() {
     if (!quote || !scrollToResults.current) return;
     scrollToResults.current = false;
     if (!window.matchMedia("(max-width: 1023px)").matches) return;
-    resultsRef.current?.scrollIntoView({behavior: "smooth", block: "start"});
+    resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [quote]);
 
   const availableTabs = useMemo(
@@ -81,10 +127,15 @@ export default function GetQuotePage() {
   const canSubmit =
     Boolean(pickup && dropoff) && !loading && !coolingDown && !alreadyQuoted;
 
+  const areaError =
+    error && isAreaErrorCode(error.code)
+      ? AREA_ERROR_DETAILS[error.code]
+      : undefined;
+
   const lockTrip = (key: string) => {
     if (lockTimer.current) clearTimeout(lockTimer.current);
     const until = Date.now() + MEMORY_TTL_MS;
-    setLockedTrip({key, until});
+    setLockedTrip({ key, until });
     lockTimer.current = setTimeout(() => setLockedTrip(null), MEMORY_TTL_MS);
   };
 
@@ -130,7 +181,7 @@ export default function GetQuotePage() {
       setLockedTrip(null);
       if (lockTimer.current) clearTimeout(lockTimer.current);
       if (err instanceof QuoteApiError) {
-        setError({message: err.message, code: err.code});
+        setError({ message: err.message, code: err.code });
       } else {
         setError({
           message:
@@ -205,27 +256,14 @@ export default function GetQuotePage() {
                 role="alert"
                 className="p-3 text-xs text-red-700 rounded-lg md:text-sm bg-red-50 space-y-1.5"
               >
-                <p>
-                  {error.code === "PICKUP_AREA"
-                    ? "Pickup is outside our service area. We only accept pickups in Greater Manila (see supported cities)."
-                    : error.code === "DROPOFF_AREA"
-                      ? "Drop-off is outside our delivery area. Destinations must be reachable by continuous land travel (no ferry)."
-                      : error.message}
-                </p>
-                {(error.code === "PICKUP_AREA" ||
-                  error.code === "DROPOFF_AREA") && (
+                <p>{areaError?.message ?? error.message}</p>
+                {areaError && (
                   <p>
                     <Link
-                      to={
-                        error.code === "PICKUP_AREA"
-                          ? "/#service-areas"
-                          : "/#coverage"
-                      }
+                      to={areaError.href}
                       className="font-medium underline underline-offset-2 hover:text-red-900"
                     >
-                      {error.code === "PICKUP_AREA"
-                        ? "View supported pickup cities"
-                        : "View delivery coverage"}
+                      {areaError.linkLabel}
                     </Link>
                   </p>
                 )}
@@ -237,16 +275,7 @@ export default function GetQuotePage() {
               disabled={!canSubmit}
               className="py-5 w-full text-white cursor-pointer"
             >
-              {loading ? (
-                <span className="flex gap-2 items-center">
-                  <Loader2 className="animate-spin size-4" />
-                  Getting price…
-                </span>
-              ) : alreadyQuoted ? (
-                "Price ready"
-              ) : (
-                "Get price"
-              )}
+              <SubmitLabel loading={loading} alreadyQuoted={alreadyQuoted} />
             </Button>
 
             <p className="text-[11px] leading-snug text-center text-gray-400">
@@ -298,12 +327,15 @@ export default function GetQuotePage() {
                   )}
                 </div>
 
-                <div className="grid gap-3 lg:grid-cols-2">
+                {/* CSS columns act as a lightweight masonry: each card keeps
+                    its own height instead of stretching to match its row. */}
+                <div className="columns-1 gap-3 lg:columns-2">
                   {quote.vehicles.map((vehicle) => (
                     <VehicleQuoteCard
                       key={vehicle.vehicleTypeId}
                       vehicle={vehicle}
                       tab={tab}
+                      className="mb-3 break-inside-avoid"
                     />
                   ))}
                 </div>
