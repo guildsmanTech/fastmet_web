@@ -35,13 +35,15 @@ export default function JoinFastMet() {
             Pre-register as user
           </CTAButton>
 
-          <CTAButton
+          {/* Subscription access is temporarily disabled.
+<CTAButton
             href="/subscription"
             variant="outline"
             className="justify-center border-secondary bg-transparent px-7 py-3 text-secondary hover:bg-secondary/10 hover:text-secondary"
           >
             Become a partner-driver
           </CTAButton>
+*/}
         </div>
       </PageContainer>
     </section>

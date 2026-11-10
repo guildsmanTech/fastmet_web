@@ -4,7 +4,7 @@ import GeneralFAQModal from "./modals/GeneralFAQModal";
 import CTAButton from "@/components/CTAButton";
 import PageContainer from "./PageContainer";
 import { Link, useLocation } from "react-router-dom";
-import { BadgeCheck, Calculator, Menu, X } from "lucide-react";
+import { Calculator, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -19,7 +19,7 @@ export default function Header() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close the drawer after any navigation (e.g. the Subscribe button).
+  // Close the drawer after any navigation.
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -67,7 +67,8 @@ export default function Header() {
             </div>
           </div>
           <div className="xl:flex hidden items-center gap-2 xl:gap-3 ">
-            <CTAButton
+            {/* Subscription access is temporarily disabled.
+<CTAButton
               to="/subscription"
               variant="driver"
               size="header"
@@ -76,6 +77,7 @@ export default function Header() {
             >
               Get Subscription
             </CTAButton>
+*/}
             <CTAButton
               to="/get-a-quote"
               variant="user-soft-border"
@@ -92,9 +94,10 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ── Mobile right: Subscribe only + FAQs + hamburger ───────────── */}
+          {/* ── Mobile right: FAQs + hamburger ───────────── */}
           <div className="flex xl:hidden items-center gap-3">
-            <CTAButton
+            {/* Subscription access is temporarily disabled.
+<CTAButton
               to="/subscription"
               variant="driver"
               size="header"
@@ -103,6 +106,7 @@ export default function Header() {
             >
               Subscribe
             </CTAButton>
+*/}
             <GeneralFAQModal />
             <button
               type="button"
@@ -149,7 +153,8 @@ export default function Header() {
             ))}
 
             <div className="xl:hidden mt-8 flex flex-col gap-3">
-              <CTAButton
+              {/* Subscription access is temporarily disabled.
+<CTAButton
                 to="/subscription"
                 variant="driver"
                 size="md"
@@ -158,6 +163,7 @@ export default function Header() {
               >
                 Get Subscription
               </CTAButton>
+*/}
               <CTAButton
                 to="/get-a-quote"
                 variant="user-soft-border"
