@@ -84,7 +84,16 @@ export default function SubscriptionDashboard({
         onSessionExpired();
         return;
       }
-      setActionError(errorMessage(err));
+      // An earlier checkout turned out to be paid: the server applied it and
+      // opened no new invoice. Good news, not an error.
+      if (
+        err instanceof SubscriptionApiError &&
+        err.code === "PREVIOUS_PAYMENT_FOUND"
+      ) {
+        setActionNotice(err.message);
+      } else {
+        setActionError(errorMessage(err));
+      }
       setBusyPlan(null);
       void refreshAll();
     }
@@ -185,8 +194,9 @@ export default function SubscriptionDashboard({
       {plans.pendingCheckout && (
         <div className="flex flex-col gap-3 p-4 border border-amber-200 bg-amber-50 rounded-xl sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs md:text-sm text-amber-900">
-            You have an unfinished payment. If you already paid, please wait a
-            few minutes and refresh this page — don&apos;t pay again.
+            You have an unfinished payment. Continue it, or cancel it to choose
+            a different plan. If you already paid, please wait a few minutes
+            and refresh this page — don&apos;t pay again.
           </p>
           <div className="flex gap-2 shrink-0">
             <Button
@@ -221,7 +231,8 @@ export default function SubscriptionDashboard({
       <PlanCards
         data={plans}
         busyPlan={busyPlan}
-        disabled={cancelling}
+        // One open checkout at a time: finish or cancel it to pick another.
+        disabled={cancelling || Boolean(plans.pendingCheckout)}
         onSubscribe={(plan) => void handleSubscribe(plan)}
       />
 

@@ -18,16 +18,29 @@ export type ApiResult<T> = {
 export class SubscriptionApiError extends Error {
   status: number;
   sessionExpired: boolean;
+  /** Machine-readable reason from the server, e.g. "PREVIOUS_PAYMENT_FOUND". */
+  code?: string;
 
-  constructor(message: string, status: number, sessionExpired = false) {
+  constructor(
+    message: string,
+    status: number,
+    sessionExpired = false,
+    code?: string,
+  ) {
     super(message);
     this.name = "SubscriptionApiError";
     this.status = status;
     this.sessionExpired = sessionExpired;
+    this.code = code;
   }
 }
 
-type ErrorBody = {message?: string; error?: string; sessionExpired?: boolean};
+type ErrorBody = {
+  message?: string;
+  error?: string;
+  sessionExpired?: boolean;
+  code?: string;
+};
 
 async function readJson<T>(res: Response): Promise<T> {
   try {
@@ -125,6 +138,7 @@ async function authed<T>(
       data.message || data.error || "Something went wrong. Please try again.",
       res.status,
       res.status === 401 && data.sessionExpired === true,
+      typeof data.code === "string" ? data.code : undefined,
     );
   }
   return data;
