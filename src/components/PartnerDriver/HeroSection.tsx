@@ -50,7 +50,8 @@ export default function HeroSection() {
             >
               Become a partner-driver
             </CTAButton>
-            <CTAButton
+            {/* Subscription access is temporarily disabled.
+<CTAButton
               to="/subscription"
               variant="user"
               size="md"
@@ -58,6 +59,7 @@ export default function HeroSection() {
             >
               Get subscription
             </CTAButton>
+*/}
           </div>
 
           {/* Small note */}
@@ -83,7 +85,8 @@ export default function HeroSection() {
           >
             Become a partner-driver
           </CTAButton>
-          <CTAButton
+          {/* Subscription access is temporarily disabled.
+<CTAButton
             to="/subscription"
             variant="user"
             size="md"
@@ -91,6 +94,7 @@ export default function HeroSection() {
           >
             Get subscription
           </CTAButton>
+*/}
 
           <p className="text-white/70 text-xs text-center max-w-sm mt-1">
             Subscription fees and applicable terms and conditions apply.

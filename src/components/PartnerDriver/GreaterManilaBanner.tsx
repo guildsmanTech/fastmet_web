@@ -1,5 +1,3 @@
-import CTAButton from "@/components/CTAButton";
-import { Smartphone } from "lucide-react";
 import PageContainer from "@/components/PageContainer";
 import { partnerComms } from "@/constants/images";
 
@@ -62,7 +60,8 @@ export function Commission() {
 
           {/* CTA */}
           <div className="flex w-full max-w-lg flex-col items-start gap-3">
-            <CTAButton
+            {/* Subscription access is temporarily disabled.
+<CTAButton
               href="/subscription"
               variant="driver"
               size="compact"
@@ -71,6 +70,7 @@ export function Commission() {
               Get started today
               <Smartphone className="ml-1 text-white" size={16} />
             </CTAButton>
+*/}
 
             <p className="text-xs leading-relaxed text-slate-500">
               Subscription fees and applicable terms and conditions apply.
