@@ -279,7 +279,7 @@ export default function CompanyRegistrationForm({
           )}
           <p className="fleet-privacy-note">
             <LockKeyhole className="size-3.5" aria-hidden="true" />
-            Only authorized FastMet reviewers can access your documents.
+            Only authorized FastMet reviewers can access your supporting documents.
           </p>
           <div className="fleet-footer-actions">
             <Button

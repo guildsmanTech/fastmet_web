@@ -109,7 +109,7 @@ export function FileField({ name, label }: Readonly<{ name: FleetFileField; labe
   }
   const selected = field.value;
   const ready = selected && !fieldState.invalid;
-  const help = name === "logo" ? "JPG or PNG · up to 10 MB" : "JPG, PNG or PDF · up to 10 MB";
+  const help = name === "logo" ? "JPG or PNG · up to 10 MB. Your company logo will be public." : "JPG, PNG or PDF · up to 10 MB";
   const chooser = <input type="file" name={field.name} id={name}
     ref={(element) => { inputRef.current = element; field.ref(element); }}
     onBlur={field.onBlur} required
