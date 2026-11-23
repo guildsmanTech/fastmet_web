@@ -11,6 +11,7 @@ const navLinks = [
   { label: "About Us", to: "/about" },
   { label: "Delivery Services", to: "/delivery-services" },
   { label: "Partner-Drivers", to: "/partner-driver" },
+  { label: "Fleet", to: "/fleet" },
   { label: "Blog", to: "/blog" },
   { label: "Contact Us", to: "/#contact" },
 ];
@@ -45,7 +46,7 @@ export default function Header() {
               alt="Fastmet Logo"
               className="size-8 lg:size-10 object-contain"
             />
-            <h1 className="font-bold text-sm lg:text-2xl">FastMet</h1>
+            <span className="font-bold text-sm lg:text-2xl">FastMet</span>
           </Link>
 
           {/* ── Desktop nav ───────────────────────────────────────────────── */}

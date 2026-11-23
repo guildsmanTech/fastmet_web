@@ -1,3 +1,4 @@
+import SupportContactText from "@/components/SupportContactText";
 import React, { useRef, useState } from "react";
 import {
   Send,
@@ -138,6 +139,7 @@ export default function QuestionForm() {
                 May tanong ka ba tungkol sa mga rate, pickup, o sa status ng
                 padala mo? I-message mo lang kami—mabilis kaming sasagot.
               </p>
+              <SupportContactText />
             </div>
           </div>
 

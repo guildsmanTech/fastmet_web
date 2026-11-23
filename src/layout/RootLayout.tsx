@@ -18,6 +18,7 @@ export default function RootLayout() {
 
   const hideRewardModal =
     pathname.startsWith("/legal") ||
+    pathname.startsWith("/fleet") ||
     pathname.startsWith("/blog") ||
     pathname.startsWith("/delete-account") ||
     pathname.startsWith("/subscription");

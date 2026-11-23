@@ -1,3 +1,4 @@
+import SupportContactText from "@/components/SupportContactText";
 import PageContainer from "@/components/PageContainer";
 import CTAButton from "../CTAButton";
 import { ArrowUpRight, Calculator } from "lucide-react";
@@ -23,6 +24,8 @@ export default function ClosingCTA() {
               FastMet brings together convenient delivery options for customers
               and zero-commission earning opportunities for partner-drivers.
             </p>
+
+            <SupportContactText />
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-center gap-3 mt-2">

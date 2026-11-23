@@ -1,5 +1,5 @@
 export const API_URL = import.meta.env.VITE_API_URL;
-export const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL as string;
+export const SUPPORT_EMAIL = "support@fastmet.com.ph";
 
 /** FastMet Driver app on Google Play */
 export const DRIVER_PLAY_STORE_URL =
