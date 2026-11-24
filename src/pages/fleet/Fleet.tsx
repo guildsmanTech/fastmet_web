@@ -80,7 +80,7 @@ export default function Fleet() {
         />
         <div className="absolute inset-0 bg-[#0f2535]/85" />
         <PageContainer className="relative z-10 flex flex-col items-center justify-between gap-10 py-16 md:py-20 lg:flex-row lg:gap-12">
-          <div className="flex w-full max-w-2xl flex-col gap-6 text-white lg:flex-1">
+          <div className="flex w-full max-w-2xl flex-col gap-6 text-white lg:min-w-0 lg:flex-1">
             <div className="space-y-4">
               <h1 className="max-w-xl text-4xl font-extrabold leading-[1.12] tracking-tight text-primary sm:text-5xl lg:text-6xl">
                 Manage your company’s fleet with FastMet.
@@ -100,6 +100,17 @@ export default function Fleet() {
               {registerButton(true)}
             </div>
           </div>
+          <picture className="hidden w-full max-w-2xl overflow-clip md:block lg:min-w-0 lg:flex-[1.3]">
+            <source media="(min-width: 48rem)" srcSet="/laptop_pic-transparent.webp" />
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              alt="Laptop displaying the FastMet Fleet dashboard"
+              width={1679}
+              height={937}
+              fetchPriority="high"
+              className="h-auto w-full scale-[1.2] object-contain drop-shadow-xl"
+            />
+          </picture>
         </PageContainer>
       </section>
       <section className="border-b border-border bg-background">
