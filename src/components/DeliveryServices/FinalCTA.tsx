@@ -1,3 +1,4 @@
+import SupportContactText from "@/components/SupportContactText";
 import PageContainer from "../PageContainer";
 import CTAButton from "../CTAButton";
 import { getBusinessInquiryMailto } from "@/helper/constant";
@@ -21,6 +22,7 @@ export default function FinalCTA() {
               mapag-usapan natin ang delivery needs mo.
             </p>
           </div>
+          <SupportContactText />
         </div>
 
         <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">

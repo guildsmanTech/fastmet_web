@@ -2,62 +2,7 @@ import CTAButton from "@/components/CTAButton";
 import PageContainer from "@/components/PageContainer";
 import { ArrowUpRight } from "lucide-react";
 
-export const SERVICE_AREAS = [
-  {
-    name: "Metro Manila",
-    locations: [
-      "Caloocan",
-      "Las Piñas",
-      "Makati",
-      "Malabon",
-      "Mandaluyong",
-      "Manila",
-      "Marikina",
-      "Muntinlupa",
-      "Navotas",
-      "Parañaque",
-      "Pasay",
-      "Pasig",
-      "Pateros",
-      "Quezon City",
-      "San Juan",
-      "Taguig",
-      "Valenzuela",
-    ],
-  },
-  {
-    name: "Bulacan",
-    locations: [
-      "Meycauayan",
-      "Marilao",
-      "Bocaue",
-      "Santa Maria",
-      "Balagtas",
-      "Guiguinto",
-      "San Jose del Monte",
-      "Malolos",
-      "Plaridel",
-    ],
-  },
-  {
-    name: "Rizal",
-    locations: [
-      "Antipolo",
-      "Cainta",
-      "Rodriguez (Montalban)",
-      "San Mateo",
-      "Taytay",
-    ],
-  },
-  {
-    name: "Cavite",
-    locations: ["Bacoor", "General Trias", "Imus", "Kawit", "Dasmariñas"],
-  },
-  {
-    name: "Laguna",
-    locations: ["Cabuyao", "Calamba", "Santa Rosa"],
-  },
-];
+import {SERVICE_AREAS} from "@/constants/serviceAreas";
 
 export default function ServiceAreas() {
   return (

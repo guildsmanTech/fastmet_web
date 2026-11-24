@@ -24,6 +24,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
     children: [
       {index: true, element: <Home />},
+      // Fleet pages are temporarily unavailable.
+      {path: "/fleet/*", element: <Navigate to="/" replace />},
       {path: "/partner-driver", element: <PartnerDriver />},
       {path: "/delivery-services", element: <DeliveryServices />},
       {path: "/about", element: <About />},

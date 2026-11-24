@@ -67,7 +67,7 @@ export default function SharedFooter() {
       </PageContainer>
 
       {/* Legal row — its own section, visually separated */}
-      <PageContainer className="flex items-center justify-center gap-1.5 py-4 text-xs mb-7 text-white/60">
+      <PageContainer className="flex items-center justify-center gap-1.5 flex-wrap py-4 text-xs mb-7 text-white/60">
         <Link
           to="/legal/privacy-policy/user"
           className="text-center transition-colors hover:text-primary"

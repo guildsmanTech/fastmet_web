@@ -1,3 +1,37 @@
+# FastMet Web
+
+## Local setup
+
+Use **Node.js 24.x** and **npm**. The supported Node.js range is declared in
+`package.json`; `.nvmrc` selects version 24 for developers using nvm.
+
+From the `fastmet_web` folder:
+
+```bash
+nvm install
+nvm use
+node --version
+npm ci
+npm run dev
+```
+
+If you do not use nvm, install Node.js 24.x before running the npm commands.
+Use `npm ci` with the committed `package-lock.json` for reproducible installs.
+Configure any required local environment values with your team before running
+features that connect to external services; do not commit credentials.
+
+```bash
+npm run lint     # Check code
+npm run build    # Type-check and create the production build
+npm run preview  # Preview the production build locally
+```
+
+Use Node.js 24.x in deployment and CI environments as well. npm normally warns
+about incompatible Node.js versions; the engines declaration does not switch
+Node.js automatically.
+
+## Vite template reference
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

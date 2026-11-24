@@ -1,7 +1,7 @@
 import { MapPin, Route, Ban } from "lucide-react";
 import PageContainer from "../PageContainer";
 import { holdingMap } from "@/constants/images";
-import { SERVICE_AREAS } from "./ServiceAreas";
+import { SERVICE_AREAS } from "@/constants/serviceAreas";
 
 const coverageDetails = [
   {

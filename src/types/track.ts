@@ -18,6 +18,8 @@ export type TrackData = {
   expiresAt: string;
   /** Only on the `initial=1` request: whether this page load may use Google Maps. */
   map?: {enabled: boolean};
+  /** Replacement driver has not collected the cargo yet. */
+  handoverPending?: boolean;
 };
 
 export type TrackErrorCode =

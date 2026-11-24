@@ -141,9 +141,16 @@ export default function TrackPage() {
 
   // ── Live view ────────────────────────────────────────────────────────────
   const target = data.status === "picked_up" ? data.dropoff : data.pickup;
+  // Not while the new driver is collecting the cargo: they head to the
+  // previous driver first, so the distance to the drop-off would mislead.
   const distanceToTarget =
-    driver && data.status !== "need_continuance" ? distanceM(driver, target) : null;
+    driver && data.status !== "need_continuance" && !data.handoverPending
+      ? distanceM(driver, target)
+      : null;
   const isStale = !!driver && now - driver.ts > STALE_AFTER_MS;
+  const headline = data.handoverPending
+    ? "New driver is collecting the package"
+    : HEADLINES[data.status];
 
   const mapNotice = !mapAllowed
     ? "The live map is unavailable right now. The status below still updates."
@@ -188,7 +195,7 @@ export default function TrackPage() {
       {/* Status card */}
       <div className="absolute inset-x-0 bottom-0 p-4">
         <div className="mx-auto max-w-md rounded-2xl bg-white p-5 shadow-lg">
-          <p className="text-lg font-bold text-secondary">{HEADLINES[data.status]}</p>
+          <p className="text-lg font-bold text-secondary">{headline}</p>
 
           <div className="mt-2 space-y-1.5 text-sm text-gray-600">
             {data.vehicleName && (
