@@ -57,6 +57,13 @@ export default function CompanyRegistrationDialog() {
       <DialogContent
         showCloseButton={false}
         className={`fleet-registration ${success ? "fleet-registration--success" : ""}`}
+        onPointerDownOutside={(event) => {
+          // Only the registration backdrop should request dismissal.
+          const target = event.target;
+          if (!(target instanceof HTMLElement) || target.dataset.slot !== "dialog-overlay") {
+            event.preventDefault();
+          }
+        }}
         onOpenAutoFocus={() => {
           setSuccess(false);
           const active = document.activeElement;

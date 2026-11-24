@@ -12,6 +12,13 @@
   max-height: min(860px, calc(100dvh - 48px)); border: 0; border-radius: 20px;
   background: #fff; color: #233041; box-shadow: 0 28px 70px #091b3233;
 }
+
+/* reCAPTCHA appends its challenge and backdrop to body, outside the dialog's pointer boundary. */
+body:has(> .fleet-registration[data-state="open"]:not([aria-hidden="true"]))
+  > div:has(> div > iframe[src*="/recaptcha/api2/bframe"]) {
+  pointer-events: auto;
+}
+
 .fleet-registration-header { padding: 24px 28px 0; flex-shrink: 0; }
 .fleet-registration-title { color: var(--fleet-navy); font-size: 1.75rem; line-height: 1.2; font-weight: 600; margin-top: 0; padding-right: 48px; letter-spacing: -.025em; }
 .fleet-registration-description { font-size: 1rem; line-height: 1.55; margin-top: 10px; max-width: 640px; text-wrap: pretty; color: #5b687c; }

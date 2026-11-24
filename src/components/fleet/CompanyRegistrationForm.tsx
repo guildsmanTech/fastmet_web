@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Loader2, LockKeyhole } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { Popover } from "radix-ui";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FieldGroup, FieldSet, FieldLegend } from "@/components/ui/field";
@@ -93,7 +95,32 @@ export default function CompanyRegistrationForm({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [success, setSuccess] = useState(false);
   const successRef = useRef<HTMLHeadingElement>(null);
+  const captchaRef = useRef<ReCAPTCHA>(null);
+  const captchaSection = useRef<HTMLDivElement>(null);
+  const [captchaSize, setCaptchaSize] = useState<"normal" | "compact" | null>(null);
+  const submitButton = useRef<HTMLButtonElement>(null);
+  const [captcha, setCaptcha] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const [rateLimitMessage, setRateLimitMessage] = useState<string | null>(null);
   const submitting = useRef(false);
+  useLayoutEffect(() => {
+    const section = captchaSection.current;
+    if (!section) return;
+    let currentSize: "normal" | "compact" | undefined;
+    const fitWidget = () => {
+      // reCAPTCHA v2 has fixed iframe sizes and needs a new widget when the size changes.
+      const size = section.clientWidth >= 304 ? "normal" : "compact";
+      if (size === currentSize) return;
+      if (currentSize) setCaptcha(null);
+      currentSize = size;
+      setCaptchaSize(size);
+    };
+    fitWidget();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(fitWidget);
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [success]);
   useLayoutEffect(() => {
     onDirtyChange(!success && (isDirty || selectedFiles.some(Boolean)));
   }, [isDirty, onDirtyChange, selectedFiles, success]);
@@ -124,14 +151,25 @@ export default function CompanyRegistrationForm({
   }
   async function submit(values: FleetFormOutput) {
     if (submitting.current) return;
+    if (!captcha) {
+      setCaptchaError("Complete the CAPTCHA before submitting.");
+      captchaSection.current?.scrollIntoView({block: "nearest"});
+      return;
+    }
     submitting.current = true;
+    setRateLimitMessage(null);
     form.clearErrors("root");
     try {
-      const result = await submitFleetApplication(values);
+      const result = await submitFleetApplication(values, captcha);
       if (result.ok) {
         onDirtyChange(false);
         setSuccess(true);
         onSuccessChange(true);
+        return;
+      }
+      if (result.rateLimited) {
+        const wait = result.retryAfterSeconds;
+        setRateLimitMessage(wait ? `Try again in about ${Math.ceil(wait / 60)} min. Your entries and files are still here.` : result.message);
         return;
       }
 
@@ -143,6 +181,8 @@ export default function CompanyRegistrationForm({
       if (firstError) requestAnimationFrame(() => form.setFocus(firstError.name));
     } finally {
       submitting.current = false;
+      captchaRef.current?.reset();
+      setCaptcha(null);
     }
   }
   if (success)
@@ -267,6 +307,27 @@ export default function CompanyRegistrationForm({
             >
               <AgreementField />
               <p className="fleet-agreement-note">Once approved, your company login details will arrive by email.</p>
+              <div ref={captchaSection} className="col-span-full min-w-0">
+                {captchaSize && <ReCAPTCHA
+                  key={captchaSize}
+                  ref={captchaRef}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                  size={captchaSize}
+                  onChange={(value) => {
+                    setCaptcha(value);
+                    if (value) setCaptchaError(null);
+                  }}
+                  onExpired={() => {
+                    setCaptcha(null);
+                    setCaptchaError("CAPTCHA expired. Please verify again.");
+                  }}
+                  onErrored={() => {
+                    setCaptcha(null);
+                    setCaptchaError("CAPTCHA could not load. Check your connection and try again.");
+                  }}
+                />}
+                {captchaError && <p role="alert" className="mt-2 text-sm text-destructive">{captchaError}</p>}
+              </div>
             </FormSection>
           </fieldset>
         </div>
@@ -291,14 +352,29 @@ export default function CompanyRegistrationForm({
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="fleet-submit"
-            >
-              {isSubmitting && <Loader2 className="motion-safe:animate-spin" aria-hidden="true" />}
-              {isSubmitting ? "Submitting application…" : "Submit application"}
-            </Button>
+            <Popover.Root open={Boolean(rateLimitMessage)} onOpenChange={(open) => { if (!open) setRateLimitMessage(null); }}>
+              <Popover.Anchor asChild>
+                <Button ref={submitButton} type="submit" disabled={isSubmitting} className="fleet-submit">
+                  {isSubmitting && <Loader2 className="motion-safe:animate-spin" aria-hidden="true" />}
+                  {isSubmitting ? "Submitting application…" : "Submit application"}
+                </Button>
+              </Popover.Anchor>
+              <Popover.Content side="top" align="end" sideOffset={8}
+                aria-label="Application submission limit"
+                onOpenAutoFocus={(event) => event.preventDefault()}
+                onCloseAutoFocus={(event) => {
+                  event.preventDefault();
+                  if (document.activeElement === document.body) submitButton.current?.focus();
+                }}
+                onInteractOutside={(event) => event.preventDefault()}
+                className="z-[60] w-72 max-w-[calc(100vw-32px)] rounded-lg border bg-background p-4 text-sm shadow-lg">
+                <div role="alert">
+                  <p className="font-semibold">Too many application attempts</p>
+                  <p className="mt-1 text-muted-foreground">{rateLimitMessage}</p>
+                </div>
+                <Popover.Close asChild><Button type="button" variant="outline" size="sm" className="mt-3">Dismiss</Button></Popover.Close>
+              </Popover.Content>
+            </Popover.Root>
           </div>
         </footer>
       </form>
