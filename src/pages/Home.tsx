@@ -1,4 +1,3 @@
-import FleetPromotion from "@/components/home/FleetPromotion";
 import { Helmet } from "react-helmet-async";
 import LoaderModal from "@/components/modals/Loader";
 import { useRegistrationCounts } from "@/hooks/useRegistrationQueries";
@@ -55,7 +54,6 @@ export default function Home() {
         </script>
       </Helmet>
       <HeroSection />
-      <FleetPromotion />
       <WhyFastMet />
       <ZeroCommission /> {/* <UserDriverSplit /> */}
       <ServiceDelivery /> {/* <CoverageExplainer /> */}

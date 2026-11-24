@@ -82,8 +82,6 @@ export default function SharedFooter() {
           Terms & Conditions
         </Link>
         <span className="text-white/25">💠</span>
-        <Link to="/fleet" className="hover:text-primary">FastMet Fleet</Link>
-        <Link to="/fleet/terms" className="hover:text-primary">Fleet Terms</Link>
         <Link
           to="/delete-account"
           className="text-center transition-colors hover:text-primary"

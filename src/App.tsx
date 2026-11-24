@@ -24,9 +24,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
     children: [
       {index: true, element: <Home />},
-      {path: "/fleet", lazy: async () => ({Component: (await import("./pages/fleet/Fleet")).default})},
-      {path: "/fleet/register", element: <Navigate to="/fleet?register=1" replace />},
-      {path: "/fleet/terms", lazy: async () => ({Component: (await import("./pages/fleet/Terms")).default})},
+      // Fleet pages are temporarily unavailable.
+      {path: "/fleet/*", element: <Navigate to="/" replace />},
       {path: "/partner-driver", element: <PartnerDriver />},
       {path: "/delivery-services", element: <DeliveryServices />},
       {path: "/about", element: <About />},

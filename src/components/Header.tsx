@@ -11,7 +11,6 @@ const navLinks = [
   { label: "About Us", to: "/about" },
   { label: "Delivery Services", to: "/delivery-services" },
   { label: "Partner-Drivers", to: "/partner-driver" },
-  { label: "Fleet", to: "/fleet" },
   { label: "Blog", to: "/blog" },
   { label: "Contact Us", to: "/#contact" },
 ];
