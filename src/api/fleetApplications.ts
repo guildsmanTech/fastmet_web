@@ -50,6 +50,7 @@ export async function submitFleetApplication(
   body.set("captcha", captcha);
 
   try {
+    // Let fetch set the multipart boundary so the API can parse the files.
     const response = await fetch(fleetApplicationsUrl, { method: "POST", body });
     if (response.status === 201) return { ok: true };
 

@@ -18,6 +18,7 @@ const coverageDetails = [
     icon: Ban,
     title: "Not yet covered",
     description: "Routes requiring ferry or sea transport",
+    className: "opacity-75",
   },
 ];
 
@@ -30,7 +31,7 @@ export default function CoverageSection() {
           {/* Visuals */}
           <div className="relative order-2 md:order-1 w-full">
             {/* Map */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] border border-primary/20 bg-primary/[0.04] sm:aspect-[1.12/0.8]">
+            <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-primary/20 bg-primary/4 sm:aspect-[1.12/0.8]">
               {holdingMap ? (
                 <img
                   src={holdingMap}
@@ -41,7 +42,7 @@ export default function CoverageSection() {
                 <div className="flex h-full flex-col p-7">
                   <MapPin className="mb-3 h-7 w-7 text-primary" />
                   <h3 className="font-semibold text-slate-900">Coverage map</h3>
-                  <p className="mt-2 max-w-[190px] text-sm leading-relaxed text-slate-500">
+                  <p className="mt-2 max-w-47.5 text-sm leading-relaxed text-slate-500">
                     Greater Manila pickup and nationwide delivery coverage.
                   </p>
                 </div>
@@ -105,35 +106,23 @@ export default function CoverageSection() {
 
             {/* Coverage Details */}
             <div className="mt-8 border-t border-slate-200">
-              {coverageDetails.map((item, index) => {
-                const Icon = item.icon;
-
-                return (
-                  <div
-                    key={item.title}
-                    className={`flex gap-5 border-slate-200 py-6 ${
-                      index === 2
-                        ? "opacity-75"
-                        : index === 3
-                          ? "border-none"
-                          : "border-b"
-                    }`}
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Icon className="h-5 w-5" strokeWidth={1.8} />
-                    </div>
-
-                    <div>
-                      <h3 className="font-semibold text-slate-900">
-                        {item.title}
-                      </h3>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-500 sm:text-base">
-                        {item.description}
-                      </p>
-                    </div>
+              {coverageDetails.map(({ icon: Icon, title, description, className }) => (
+                <div
+                  key={title}
+                  className={`flex gap-5 border-b border-slate-200 py-6 last:border-b-0 ${className ?? ""}`}
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" strokeWidth={1.8} />
                   </div>
-                );
-              })}
+
+                  <div>
+                    <h3 className="font-semibold text-slate-900">{title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-500 sm:text-base">
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

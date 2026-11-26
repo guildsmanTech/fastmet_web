@@ -52,7 +52,7 @@ export default function QuestionForm() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
 
@@ -122,7 +122,7 @@ export default function QuestionForm() {
   return (
     <section
       id="contact"
-      className="w-full scroll-mt-24 bg-gradient-to-br from-white to-[#FFF6ED] px-3"
+      className="w-full scroll-mt-24 bg-linear-to-br from-white to-[#FFF6ED] px-3"
     >
       <PageContainer className="py-12 md:py-16">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
@@ -144,7 +144,7 @@ export default function QuestionForm() {
           </div>
 
           {/* Right side – Form */}
-          <div className="shrink-0 w-full md:w-[420px] lg:w-[460px]">
+          <div className="shrink-0 w-full md:w-105 lg:w-115">
             {submitted ? (
               <div className="bg-white rounded-2xl shadow-lg border border-zinc-100 p-8 flex flex-col items-center justify-center gap-4 text-center">
                 <div className="bg-primary/10 p-4 rounded-full">
@@ -285,7 +285,7 @@ export default function QuestionForm() {
                       aria-describedby={
                         errors.message ? "message-error" : undefined
                       }
-                      className={`${baseField} resize-y min-h-[130px] max-h-60 ${fieldState(!!errors.message)}`}
+                      className={`${baseField} resize-y min-h-32.5 max-h-60 ${fieldState(!!errors.message)}`}
                     />
                   </div>
                   {errors.message && (

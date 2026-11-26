@@ -73,9 +73,6 @@ export default function Fleet() {
         <img
           src={fleetBackground}
           alt=""
-          fetchPriority="high"
-          loading="eager"
-          sizes="100vw"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#0f2535]/85" />
@@ -100,6 +97,7 @@ export default function Fleet() {
               {registerButton(true)}
             </div>
           </div>
+          {/* Match the md breakpoint so narrow screens use the inline placeholder and skip the WebP download. */}
           <picture className="hidden w-full max-w-2xl overflow-clip md:block lg:min-w-0 lg:flex-[1.3]">
             <source media="(min-width: 48rem)" srcSet="/laptop_pic-transparent.webp" />
             <img

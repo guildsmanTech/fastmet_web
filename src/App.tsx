@@ -25,6 +25,7 @@ const router = createBrowserRouter([
     children: [
       {index: true, element: <Home />},
       {path: "/fleet", lazy: async () => ({Component: (await import("./pages/fleet/Fleet")).default})},
+      // Older registration links open the application dialog on the Fleet page.
       {path: "/fleet/register", element: <Navigate to="/fleet?register=1" replace />},
       {path: "/fleet/terms", lazy: async () => ({Component: (await import("./pages/fleet/Terms")).default})},
       {path: "/partner-driver", element: <PartnerDriver />},

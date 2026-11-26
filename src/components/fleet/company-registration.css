@@ -27,13 +27,13 @@ body:has(> .fleet-registration[data-state="open"]:not([aria-hidden="true"]))
 .fleet-close svg { width: 20px; height: 20px; }
 .fleet-section-nav { display: flex; gap: 22px; padding: 16px 28px 0; overflow-x: auto; flex-shrink: 0; border-bottom: 1px solid var(--fleet-line); scrollbar-width: thin; }
 .fleet-section-nav button { display: inline-flex; flex-shrink: 0; align-items: center; gap: 8px; min-height: 48px; padding: 8px 0 14px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: #566276; font-size: .875rem; font-weight: 600; cursor: pointer; }
-.fleet-section-nav button > span { min-width: 14px; display: grid; place-items: center; font-size: .8125rem; font-weight: 500; color: var(--fleet-muted); }
+.fleet-section-nav button > span[aria-hidden] { min-width: 14px; display: grid; place-items: center; font-size: .8125rem; font-weight: 500; color: var(--fleet-muted); }
 .fleet-section-nav button.is-active { border-bottom-color: var(--fleet-orange); color: var(--fleet-navy); }
-.fleet-section-nav button.is-active > span { color: var(--fleet-navy); }
 .fleet-section-nav button:focus-visible, .fleet-registration button:focus-visible { outline: 3px solid #ba6400; outline-offset: 3px; }
 .fleet-form-scroll { min-height: 0; flex: 1; overflow-y: auto; overscroll-behavior: contain; background: #fff8f0; padding: 20px 28px 24px; scroll-padding-block: 24px; scrollbar-width: thin; scrollbar-color: #d9cfc1 #fff8f0; }
 .fleet-required-note { color: var(--fleet-muted); margin-bottom: 18px; font-size: .875rem; }
 .fleet-required-note span, .fleet-field [data-slot=field-label] > span[aria-hidden] { color: #d32323; }
+.fleet-section-nav button.is-active > span[aria-hidden] { color: var(--fleet-navy); }
 .fleet-sections { min-width: 0; display: flex; flex-direction: column; gap: 20px; }
 .fleet-section { min-width: 0; display: block; border: 0; background: #fff; border-radius: 12px; padding: 24px; box-shadow: none; }
 .fleet-section-heading { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
@@ -59,22 +59,23 @@ body:has(> .fleet-registration[data-state="open"]:not([aria-hidden="true"]))
 .fleet-upload.is-ready { background: #fafdfb; border: 1px solid #9ac7ac; }
 .fleet-upload.is-dragging { background: #fff0d9; border-color: #a45c00; }
 .fleet-file-input { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
-.fleet-upload:has(.fleet-file-input:focus-visible) { outline: 3px solid #bd6900; outline-offset: 3px; }
 .fleet-upload-icon { display: grid; place-items: center; width: 24px; height: 24px; color: #67748a; flex-shrink: 0; }
 .is-ready .fleet-upload-icon { color: #17814b; }
 .fleet-upload-icon svg { width: 20px; height: 20px; }
 .fleet-upload-copy { flex: 1; min-width: 0; }
 .fleet-upload-copy strong { display: block; font-size: .875rem; font-weight: 600; overflow-wrap: anywhere; }
 .fleet-upload-copy > span { display: block; color: var(--fleet-muted); font-size: .875rem; margin-top: 3px; }
-.is-ready .fleet-upload-copy > span { color: #177a47; }
 .fleet-registration .fleet-file-choose, .fleet-registration .fleet-file-remove { border: 1px solid #dcd3c7; border-radius: 8px; background: #fff; min-height: 48px; height: auto; padding: 9px 16px; font-size: .875rem; font-weight: 600; box-shadow: none; flex-shrink: 0; }
 .fleet-registration .fleet-file-remove { width: 48px; padding: 10px; }
 .fleet-logo-field .fleet-upload { border: 0; padding: 0; background: none; justify-content: flex-start; }
+.fleet-upload:has(.fleet-file-input:focus-visible) { outline: 3px solid #bd6900; outline-offset: 3px; }
 .fleet-file-error { display: flex; align-items: flex-start; gap: 7px; color: #c41c1c; }
 .fleet-file-error > svg { width: 17px; height: 17px; flex-shrink: 0; }
 .fleet-agreement-box { display: flex; gap: 15px; align-items: flex-start; border: 0; padding: 0; background: transparent; }
-.fleet-agreement-box [role=checkbox] { width: 20px; height: 20px; margin-top: 3px; border-radius: 3px; flex-shrink: 0; }
-.fleet-agreement-box [data-slot=field-label] { font-weight: 400; }
+.fleet-agreement-box [role=checkbox] { position: relative; width: 20px; height: 20px; margin-top: 3px; border-radius: 3px; flex-shrink: 0; }
+/* Enlarge the checkbox tap target without changing its visible size. */
+.fleet-agreement-box [role=checkbox]::after { content: ""; position: absolute; inset: -14px; }
+.fleet-agreement-box [data-slot=field-label] { min-height: 0; font-weight: 400; }
 .fleet-agreement-box a { color: #a34b00; font-weight: 600; }
 .fleet-form-footer { flex-shrink: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 1px solid var(--fleet-line); padding: 16px 28px; background: #fff; }
 .fleet-form-footer > [role=alert] { flex-basis: 100%; }
@@ -97,6 +98,7 @@ body:has(> .fleet-registration[data-state="open"]:not([aria-hidden="true"]))
 .fleet-next-card > h3 { font-size: .875rem; font-weight: 600; color: var(--fleet-muted); margin-bottom: 24px; }
 .fleet-next-item { display: flex; align-items: flex-start; gap: 14px; margin-top: 20px; }
 .fleet-next-item > span { display: grid; place-items: center; flex-shrink: 0; width: 20px; height: 24px; color: var(--fleet-muted); font-weight: 700; }
+.is-ready .fleet-upload-copy > span { color: #177a47; }
 .fleet-next-item h4 { color: var(--fleet-navy); font-weight: 600; font-size: 1rem; }
 .fleet-next-item p { margin-top: 5px; color: #5b687c; font-size: .875rem; line-height: 1.6; }
 .fleet-done { min-width: 130px; }
@@ -148,18 +150,15 @@ body:has(> .fleet-registration[data-state="open"]:not([aria-hidden="true"]))
   .fleet-section-nav { padding-top: 15px; padding-bottom: 15px; }
 }
 
-.fleet-section-nav button.is-complete:not(.is-active) > span { color: #19814e; }
+.fleet-section-nav button.is-complete:not(.is-active) > span[aria-hidden] { color: #19814e; }
 .fleet-section-nav button > span > svg { width: 18px; height: 18px; }
 @media (prefers-reduced-motion: reduce) {
   .fleet-registration { animation: none !important; transition: none !important; }
 }
 
 .fleet-agreement-note { grid-column: 1 / -1; font-size: .875rem; line-height: 1.6; color: var(--fleet-muted); }
-.fleet-agreement-box [data-slot=field-label] { min-height: 0; }
 .fleet-agreement-copy { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 #fleet-section-4 .fleet-section-fields { row-gap: 12px; }
-.fleet-agreement-box [role=checkbox] { position: relative; }
-.fleet-agreement-box [role=checkbox]::after { content: ""; position: absolute; inset: -14px; }
 .fleet-registration .fleet-close:hover, .fleet-registration .fleet-cancel:hover { background: #f6f4f0; }
 .fleet-registration select.fleet-control { padding-right: 36px; }
 

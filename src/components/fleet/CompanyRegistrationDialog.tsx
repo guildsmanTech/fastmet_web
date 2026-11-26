@@ -72,6 +72,7 @@ export default function CompanyRegistrationDialog() {
         }}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
+          // Visitors who opened the dialog from a link may have no trigger to return to.
           const target = trigger.current?.isConnected
             ? trigger.current
             : document.querySelector<HTMLElement>("[data-fleet-register]");

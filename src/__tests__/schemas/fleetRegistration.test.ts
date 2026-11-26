@@ -22,6 +22,18 @@ describe("Fleet application validation", () => {
     expect(schema.safeParse({ ...values, logo: values.registrationDocument }).success).toBe(false);
   });
   it.each([
+    ["document.jpg", "application/pdf", false],
+    ["document.png.exe", "image/png", false],
+    ["document", "image/jpeg", false],
+    ["document.PDF", "application/pdf", true],
+    ["document.JPEG", "image/jpeg", true],
+    ["document.JPG", "image/jpeg", true],
+    ["document.PNG", "image/png", true],
+  ])("validates the extension of %s for %s", (name, type, expected) => {
+    const repGovernmentId = new File(["sample"], name, { type });
+    expect(schema.safeParse({ ...validFleetApplication(), repGovernmentId }).success).toBe(expected);
+  });
+  it.each([
     { acceptTerms: false }, { businessType: "Unknown" }, { dispatchPhone: "12345" },
     { repMobile: "+1 555 123 4567" }, { companyEmail: "invalid" }, { tin: "1234" },
     { companyName: "   " }, { repFullName: "x".repeat(251) }, { password: "unexpected" },

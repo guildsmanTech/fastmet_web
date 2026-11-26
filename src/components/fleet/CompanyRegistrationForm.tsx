@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode, type SyntheticEvent } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Loader2, LockKeyhole } from "lucide-react";
@@ -46,6 +46,25 @@ const defaults: FleetFormInput = {
   birCertificate: undefined,
 };
 
+const sections = [
+  { label: "Company", fields: ["logo", "companyName", "registeredBusinessName", "businessType", "garageAddress", "dispatchPhone", "companyEmail"] },
+  { label: "Representative", fields: ["repFullName", "repPosition", "repMobile", "repGovernmentId"] },
+  { label: "Documents", fields: ["registrationDocument", "businessPermit", "birCertificate", "tin"] },
+  { label: "Agreement", fields: ["acceptTerms"] },
+] as const satisfies ReadonlyArray<{ label: string; fields: ReadonlyArray<keyof FleetFormInput> }>;
+
+function getActiveSection(container: HTMLDivElement) {
+  // The final section can be too short to reach the usual scroll threshold.
+  if (container.scrollTop + container.clientHeight >= container.scrollHeight - 8) {
+    return sections.length;
+  }
+
+  const threshold = container.getBoundingClientRect().top + 100;
+  const sectionElements = [...container.querySelectorAll(".fleet-section")];
+  const nextSection = sectionElements.findIndex((section) => section.getBoundingClientRect().top > threshold);
+  return nextSection === -1 ? sectionElements.length : Math.max(1, nextSection);
+}
+
 function FormSection({
   title,
   number,
@@ -57,11 +76,15 @@ function FormSection({
   description: string;
   children: ReactNode;
 }>) {
+  const id = `fleet-section-${number}`;
   return (
-    <FieldSet id={`fleet-section-${number}`} className="fleet-section">
+    <FieldSet id={id} aria-describedby={`${id}-description`} className="fleet-section">
       <FieldLegend className="sr-only">{title}</FieldLegend>
-      <div className="fleet-section-heading" aria-hidden="true">
-        <div><h3>{title}</h3><p>{description}</p></div>
+      <div className="fleet-section-heading">
+        <div>
+          <h3 aria-hidden="true">{title}</h3>
+          <p id={`${id}-description`}>{description}</p>
+        </div>
       </div>
       <FieldGroup className="fleet-section-fields">{children}</FieldGroup>
     </FieldSet>
@@ -83,13 +106,10 @@ export default function CompanyRegistrationForm({
   });
   const { isSubmitting, isDirty, errors } = form.formState;
   const values = useWatch({ control: form.control });
-  const sectionFields: (keyof FleetFormInput)[][] = [
-    ["logo", "companyName", "registeredBusinessName", "businessType", "garageAddress", "dispatchPhone", "companyEmail"],
-    ["repFullName", "repPosition", "repMobile", "repGovernmentId"],
-    ["registrationDocument", "businessPermit", "birCertificate", "tin"],
-    ["acceptTerms"],
-  ];
-  const completed = sectionFields.map((names) => names.every((name) => fleetApplicationFormSchema.shape[name].safeParse(values[name]).success));
+  // Preview section completion without triggering visible errors on untouched fields.
+  const completed = sections.map(({ fields }) =>
+    fields.every((name) => fleetApplicationFormSchema.shape[name].safeParse(values[name]).success),
+  );
   const selectedFiles = useWatch({ control: form.control, name: [...fleetFileFields] });
   const [activeSection, setActiveSection] = useState(1);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -122,6 +142,7 @@ export default function CompanyRegistrationForm({
     return () => observer.disconnect();
   }, [success]);
   useLayoutEffect(() => {
+    // Track files separately because React Hook Form's dirty check can miss File objects.
     onDirtyChange(!success && (isDirty || selectedFiles.some(Boolean)));
   }, [isDirty, onDirtyChange, selectedFiles, success]);
   useEffect(() => {
@@ -133,30 +154,36 @@ export default function CompanyRegistrationForm({
   useEffect(() => {
     const container = scrollRef.current;
     if (!container || success) return;
-    const update = () => {
-      const top = container.getBoundingClientRect().top;
-      const sections = [...container.querySelectorAll<HTMLElement>(".fleet-section")];
-      const current = sections.filter((section) => section.getBoundingClientRect().top <= top + 100).at(-1);
-      setActiveSection(container.scrollTop + container.clientHeight >= container.scrollHeight - 8 ? 4 : current ? Number(current.id.split("-").at(-1)) : 1);
-    };
+    const update = () => setActiveSection(getActiveSection(container));
     container.addEventListener("scroll", update, { passive: true });
     return () => container.removeEventListener("scroll", update);
   }, [success]);
   function jumpToSection(number: number) {
-    const section = document.getElementById(`fleet-section-${number}`);
-    if (!section || !scrollRef.current) return;
-    scrollRef.current.scrollTop += section.getBoundingClientRect().top - scrollRef.current.getBoundingClientRect().top - 24;
+    const container = scrollRef.current;
+    const section = container?.querySelector(`#fleet-section-${number}`);
+    if (!container || !section) return;
+    container.scrollTop += section.getBoundingClientRect().top - container.getBoundingClientRect().top - 24;
     section.querySelector<HTMLElement>("input, select, button")?.focus({ preventScroll: true });
     setActiveSection(number);
   }
-  async function submit(values: FleetFormOutput) {
+  async function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault();
+    // Guard before validation so a second submit cannot clear the first one's busy state.
     if (submitting.current) return;
+
+    submitting.current = true;
+    try {
+      await form.handleSubmit(submit)(event);
+    } finally {
+      submitting.current = false;
+    }
+  }
+  async function submit(values: FleetFormOutput) {
     if (!captcha) {
       setCaptchaError("Complete the CAPTCHA before submitting.");
       captchaSection.current?.scrollIntoView({block: "nearest"});
       return;
     }
-    submitting.current = true;
     setRateLimitMessage(null);
     form.clearErrors("root");
     try {
@@ -178,26 +205,34 @@ export default function CompanyRegistrationForm({
         form.setError(name, { type: "server", message });
       }
       const firstError = result.fieldErrors[0];
+      // Wait for the disabled fieldset to re-enable before focusing the rejected field.
       if (firstError) requestAnimationFrame(() => form.setFocus(firstError.name));
     } finally {
-      submitting.current = false;
+      // reCAPTCHA tokens are single-use, including when an application needs a retry.
       captchaRef.current?.reset();
       setCaptcha(null);
     }
   }
   if (success)
     return (
-      <section className="fleet-success" role="status">
+      <section className="fleet-success">
         <div className="fleet-success-check"><Check aria-hidden="true" /></div>
-        <h2 ref={successRef} tabIndex={-1}>Application received</h2>
-        <p>We’ve received the application for <strong>{form.getValues("registeredBusinessName")}</strong>.
-          A FastMet admin will review it. Once approved, we’ll email your login details to <strong>{form.getValues("companyEmail")}</strong>.</p>
+        {/* Link the result to the heading so it can be read when focus moves here. */}
+        <h2 ref={successRef} tabIndex={-1} aria-describedby="fleet-application-result">
+          Application received
+        </h2>
+        <p>
+          <output id="fleet-application-result">
+            We’ve received the application for <strong>{form.getValues("registeredBusinessName")}</strong>.
+            A FastMet admin will review it and email the decision to <strong>{form.getValues("companyEmail")}</strong>.
+          </output>
+        </p>
         <div className="fleet-next-card">
           <h3>What happens next</h3>
           {[
-            ["We review your documents", "If something needs fixing, we’ll tell you what to update."],
-            ["We create your company account", "Your login details arrive by email. You don’t need to set a password."],
-            ["You add vehicles and drivers", "Vehicles are verified by FastMet admin. Drivers register through the FastMet Driver app."],
+            ["We review your documents", "If corrections are required, you’ll sign in to view feedback and upload replacements."],
+            ["We email your sign-in details", "You’ll receive an initial password if your application is approved or corrections are required."],
+            ["You get full Fleet access", "The dashboard opens when FastMet approves your application."],
           ].map(([title, description], i) => <div key={title} className="fleet-next-item"><span>{i + 1}</span><div><h4>{title}</h4><p>{description}</p></div></div>)}
         </div>
         <Button type="button" onClick={onClose} className="fleet-submit fleet-done">Done</Button>
@@ -206,12 +241,26 @@ export default function CompanyRegistrationForm({
   return (
     <FormProvider {...form}>
       <nav className="fleet-section-nav" aria-label="Application sections">
-        {["Company", "Representative", "Documents", "Agreement"].map((label, index) => (
-          <button key={label} type="button" aria-current={activeSection === index + 1 ? "step" : undefined}
-            onClick={() => jumpToSection(index + 1)} className={`${activeSection === index + 1 ? "is-active" : ""} ${completed[index] ? "is-complete" : ""}`}>
-            <span>{completed[index] && activeSection !== index + 1 ? <Check aria-hidden="true" /> : index + 1}</span>{label}
-          </button>
-        ))}
+        {sections.map(({ label }, index) => {
+          const number = index + 1;
+          const active = activeSection === number;
+          const complete = completed[index];
+
+          return (
+            <button
+              key={label}
+              type="button"
+              aria-current={active ? "step" : undefined}
+              aria-controls={`fleet-section-${number}`}
+              onClick={() => jumpToSection(number)}
+              className={`${active ? "is-active" : ""} ${complete ? "is-complete" : ""}`}
+            >
+              <span aria-hidden="true">{complete && !active ? <Check /> : number}</span>
+              {label}
+              {complete && <span className="sr-only"> (complete)</span>}
+            </button>
+          );
+        })}
       </nav>
       <form
         id="fleet-company-application"
@@ -219,7 +268,7 @@ export default function CompanyRegistrationForm({
         action={fleetApplicationsUrl}
         encType="multipart/form-data"
         noValidate
-        onSubmit={form.handleSubmit(submit)}
+        onSubmit={handleSubmit}
         aria-busy={isSubmitting}
         aria-label="Company application"
         className="flex min-h-0 flex-1 flex-col overflow-hidden"
@@ -257,7 +306,7 @@ export default function CompanyRegistrationForm({
                 label="Company email"
                 type="email"
                 autoComplete="section-company email"
-                hint="Login details will be sent here after admin approval."
+                hint="Application decisions and sign-in details go to this address."
               />
             </FormSection>
             <FormSection
@@ -306,7 +355,7 @@ export default function CompanyRegistrationForm({
               description="Please read the terms and privacy policy before submitting."
             >
               <AgreementField />
-              <p className="fleet-agreement-note">Once approved, your company login details will arrive by email.</p>
+              <p className="fleet-agreement-note">Check your company email for the review decision and next steps.</p>
               <div ref={captchaSection} className="col-span-full min-w-0">
                 {captchaSize && <ReCAPTCHA
                   key={captchaSize}
@@ -367,7 +416,7 @@ export default function CompanyRegistrationForm({
                   if (document.activeElement === document.body) submitButton.current?.focus();
                 }}
                 onInteractOutside={(event) => event.preventDefault()}
-                className="z-[60] w-72 max-w-[calc(100vw-32px)] rounded-lg border bg-background p-4 text-sm shadow-lg">
+                className="z-60 w-72 max-w-[calc(100vw-32px)] rounded-lg border bg-background p-4 text-sm shadow-lg">
                 <div role="alert">
                   <p className="font-semibold">Too many application attempts</p>
                   <p className="mt-1 text-muted-foreground">{rateLimitMessage}</p>

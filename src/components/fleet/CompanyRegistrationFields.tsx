@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { Field, FieldLabel, FieldDescription, FieldError } from "@/components/ui/field";
+import { cn } from "@/lib/utils";
 import {
   fleetApplicationFormSchema,
   fleetBusinessTypes,
@@ -19,8 +20,6 @@ type TextName = Exclude<keyof FleetFormInput, FleetFileField | "acceptTerms" | "
 const placeholders = { companyName: "e.g. Bayani Trucking Services", registeredBusinessName: "As shown on your DTI or SEC papers",
   garageAddress: "Street, barangay, city", dispatchPhone: "0917 555 0142", companyEmail: "dispatch@yourcompany.com",
   repFullName: "Full name of your representative", repPosition: "e.g. Owner or Operations Manager", repMobile: "0917 555 0142", tin: "000-000-000" };
-const controlClass =
-  "fleet-control";
 function describedBy(name: string, hasHint: boolean, invalid: boolean) {
   const ids = [];
   if (hasHint) ids.push(`${name}-help`);
@@ -45,14 +44,15 @@ export function TextField({
   pattern?: string;
   inputMode?: "numeric" | "tel";
 }>) {
-  const { control, clearErrors } = useFormContext<FleetFormInput, unknown, FleetFormOutput>();
-  const { field, fieldState } = useController({ control, name });
+  const { control, clearErrors, trigger } = useFormContext<FleetFormInput, unknown, FleetFormOutput>();
+  const { field, fieldState, formState } = useController({ control, name });
+  const isIdentifier = type === "email" || name === "tin";
   return (
     <Field data-name={name} data-invalid={fieldState.invalid} className="fleet-field">
       <FieldLabel htmlFor={name}>
         {label} <span aria-hidden="true">*</span>
       </FieldLabel>
-      <div className="fleet-input-wrap">
+      {hint && <FieldDescription id={`${name}-help`}>{hint}</FieldDescription>}
       <Input
         {...field}
         id={name}
@@ -63,12 +63,17 @@ export function TextField({
         pattern={pattern}
         autoComplete={autoComplete}
         maxLength={name === "companyEmail" ? 254 : 250}
-        autoCapitalize={type === "email" ? "none" : undefined}
-        autoCorrect={type === "email" || name === "tin" ? "off" : undefined}
-        spellCheck={type === "email" || name === "tin" ? false : undefined}
-        className={controlClass}
+        autoCapitalize={isIdentifier ? "none" : undefined}
+        autoCorrect={isIdentifier ? "off" : undefined}
+        spellCheck={isIdentifier ? false : undefined}
+        className="fleet-control"
         aria-invalid={fieldState.invalid}
         aria-describedby={describedBy(name, Boolean(hint), fieldState.invalid)}
+        onBlur={() => {
+          field.onBlur();
+          // After submission, the form's reValidateMode already handles blur.
+          if (!formState.isSubmitted && fieldState.isDirty) void trigger(name);
+        }}
         onChange={(event) => {
           field.onChange(event);
           if (
@@ -78,8 +83,6 @@ export function TextField({
             clearErrors(name);
         }}
       />
-      </div>
-      {hint && <FieldDescription id={`${name}-help`}>{hint}</FieldDescription>}
       {fieldState.error && (
         <FieldError id={`${name}-error`} role="alert" errors={[fieldState.error]} />
       )}
@@ -87,56 +90,128 @@ export function TextField({
   );
 }
 
-export function FileField({ name, label }: Readonly<{ name: FleetFileField; label: string }>) {
-  const { control, trigger } = useFormContext<FleetFormInput, unknown, FleetFormOutput>();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { field, fieldState } = useController({ control, name });
-  const logo = name === "logo" && !fieldState.invalid ? field.value : undefined;
+function CompanyLogoPreview({ file }: Readonly<{ file?: File }>) {
   const [preview, setPreview] = useState("");
   useEffect(() => {
-    if (!logo) {
+    if (!file) {
       setPreview("");
       return;
     }
-    const url = URL.createObjectURL(logo);
+    // Preview the local file and release its URL when the selection changes.
+    const url = URL.createObjectURL(file);
     setPreview(url);
     return () => URL.revokeObjectURL(url);
-  }, [logo]);
+  }, [file]);
+
+  return (
+    <div className="fleet-logo-preview">
+      {preview ? <img src={preview} alt="Selected company logo" /> : <Building2 aria-hidden="true" />}
+    </div>
+  );
+}
+
+function UploadDetails({ file, ready, help }: Readonly<{ file?: File; ready: boolean; help: string }>) {
+  const Icon = ready ? Check : FileText;
+  const status = ready ? "Ready to submit" : "Check this file";
+  const details = file ? `${(file.size / 1024 / 1024).toFixed(1)} MB · ${status}` : help;
+
+  return (
+    <>
+      <span className="fleet-upload-icon"><Icon aria-hidden="true" /></span>
+      <div className="fleet-upload-copy">
+        <strong>{file?.name ?? "Drag a file here, or browse"}</strong>
+        <span>{details}</span>
+      </div>
+    </>
+  );
+}
+
+export function FileField({ name, label }: Readonly<{ name: FleetFileField; label: string }>) {
+  const { control, trigger } = useFormContext<FleetFormInput, unknown, FleetFormOutput>();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const chooseButtonRef = useRef<HTMLButtonElement>(null);
+  const { field, fieldState } = useController({ control, name });
   const [dragging, setDragging] = useState(false);
+  const selected = field.value;
+  const ready = Boolean(selected) && !fieldState.invalid;
+  const isLogo = name === "logo";
+  const uploadLabel = isLogo ? "Upload image" : "Choose file";
+  const help = isLogo
+    ? "JPG or PNG · up to 10 MB. Your company logo will be public."
+    : "JPG, PNG or PDF · up to 10 MB";
+
   function selectFile(file: File | undefined) {
     field.onChange(file);
     void trigger(name);
   }
-  const selected = field.value;
-  const ready = selected && !fieldState.invalid;
-  const help = name === "logo" ? "JPG or PNG · up to 10 MB. Your company logo will be public." : "JPG, PNG or PDF · up to 10 MB";
-  const chooser = <input type="file" name={field.name} id={name}
-    ref={(element) => { inputRef.current = element; field.ref(element); }}
-    onBlur={field.onBlur} required
-    accept={name === "logo" ? "image/jpeg,image/png" : "image/jpeg,image/png,application/pdf"}
-    className="fleet-file-input" aria-invalid={fieldState.invalid}
-    aria-describedby={describedBy(name, true, fieldState.invalid)}
-    onChange={(event) => selectFile(event.target.files?.[0])} />;
+
+  function removeFile() {
+    selectFile(undefined);
+    // Reset the picker so the same file can be selected again.
+    if (inputRef.current) inputRef.current.value = "";
+    // The Remove button disappears, so return keyboard focus to the picker button.
+    chooseButtonRef.current?.focus();
+  }
+
   return (
-    <Field data-name={name} data-invalid={fieldState.invalid} className={`fleet-field fleet-file-field ${name === "logo" ? "fleet-logo-field" : ""}`}>
-      {name === "logo" && <div className="fleet-logo-preview">{preview ? <img src={preview} alt="Selected company logo" /> : <Building2 aria-hidden="true" />}</div>}
+    <Field
+      data-name={name}
+      data-invalid={fieldState.invalid}
+      className={cn("fleet-field fleet-file-field", isLogo && "fleet-logo-field")}
+    >
+      {isLogo && <CompanyLogoPreview file={ready ? selected : undefined} />}
       <div className="fleet-file-content">
         <FieldLabel htmlFor={name}>{label} <span aria-hidden="true">*</span></FieldLabel>
-        <div className={`fleet-upload ${ready ? "is-ready" : ""} ${dragging ? "is-dragging" : ""}`}
-          onDragOver={(event) => { event.preventDefault(); if (!event.currentTarget.closest("fieldset:disabled")) setDragging(true); }}
+        <div
+          className={cn("fleet-upload", ready && "is-ready", dragging && "is-dragging")}
+          onDragOver={(event) => {
+            event.preventDefault();
+            if (event.dataTransfer.types.includes("Files") && !event.currentTarget.closest("fieldset:disabled")) {
+              setDragging(true);
+            }
+          }}
           onDragLeave={() => setDragging(false)}
-          onDrop={(event) => { event.preventDefault(); setDragging(false); if (!event.currentTarget.closest("fieldset:disabled")) selectFile(event.dataTransfer.files[0]); }}>
-          {chooser}
-          {name !== "logo" && <span className="fleet-upload-icon">{ready ? <Check aria-hidden="true" /> : <FileText aria-hidden="true" />}</span>}
-          {name !== "logo" && <div className="fleet-upload-copy"><strong>{selected ? selected.name : "Drag a file here, or browse"}</strong><span>{selected ? `${(selected.size / 1024 / 1024).toFixed(1)} MB · ${ready ? "Ready to submit" : "Check this file"}` : help}</span></div>}
-          <Button type="button" variant="outline" className="fleet-file-choose" onClick={() => inputRef.current?.click()}>
-            {selected ? "Replace" : name === "logo" ? "Upload image" : "Choose file"}
+          onDrop={(event) => {
+            event.preventDefault();
+            setDragging(false);
+            const file = event.dataTransfer.files[0];
+            // Check the fieldset explicitly because divs still receive drops during submission.
+            if (file && !event.currentTarget.closest("fieldset:disabled")) selectFile(file);
+          }}
+        >
+          <input
+            type="file"
+            name={field.name}
+            id={name}
+            ref={(element) => {
+              inputRef.current = element;
+              field.ref(element);
+            }}
+            onBlur={field.onBlur}
+            required
+            accept={isLogo ? "image/jpeg,image/png" : "image/jpeg,image/png,application/pdf"}
+            className="fleet-file-input"
+            aria-invalid={fieldState.invalid}
+            aria-describedby={describedBy(name, true, fieldState.invalid)}
+            onChange={(event) => selectFile(event.target.files?.[0])}
+          />
+          {!isLogo && <UploadDetails file={selected} ready={ready} help={help} />}
+          <Button ref={chooseButtonRef} type="button" variant="outline" className="fleet-file-choose" onClick={() => inputRef.current?.click()}>
+            {selected ? "Replace" : uploadLabel}
           </Button>
-          {selected && <Button type="button" variant="outline" className="fleet-file-remove" aria-label={`Remove ${label}`}
-            onClick={() => { selectFile(undefined); if (inputRef.current) inputRef.current.value = ""; }}><X aria-hidden="true" /></Button>}
+          {selected && (
+            <Button type="button" variant="outline" className="fleet-file-remove" aria-label={`Remove ${label}`} onClick={removeFile}>
+              <X aria-hidden="true" />
+            </Button>
+          )}
         </div>
-        <FieldDescription id={`${name}-help`} className={name === "logo" ? "" : "sr-only"}>{help}</FieldDescription>
-        {fieldState.error && <div className="fleet-file-error"><CircleAlert aria-hidden="true" /><FieldError id={`${name}-error`} role="alert" errors={[fieldState.error]} /></div>}
+        <FieldDescription id={`${name}-help`} className={isLogo ? undefined : "sr-only"}>{help}</FieldDescription>
+        {fieldState.error && (
+          <div className="fleet-file-error">
+            <CircleAlert aria-hidden="true" />
+            <FieldError id={`${name}-error`} errors={[fieldState.error]} />
+          </div>
+        )}
       </div>
     </Field>
   );
@@ -155,12 +230,12 @@ export function BusinessTypeField() {
         {...field}
         id="businessType"
         required
-        className={controlClass}
+        className="fleet-control"
         aria-invalid={fieldState.invalid}
         aria-describedby={fieldState.error ? "businessType-error" : undefined}
         onChange={(event) => {
           field.onChange(event);
-          clearErrors("businessType");
+          if (event.target.value) clearErrors("businessType");
         }}
       >
         <NativeSelectOption value="">Choose business type</NativeSelectOption>
